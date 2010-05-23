@@ -1,0 +1,91 @@
+#container {
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 3em;
+}
+
+#footer ul {
+	border-top: 1px solid #444;
+	margin-top: 1em;
+	padding-top: 1em;
+}
+#footer ul li {
+	display: inline;
+}
+ul {
+	padding-left: 1em;
+	list-style-type: circle;
+}
+#sidebar ul, form ul, #footer ul  {
+	padding-left: 0;
+}
+#sidebar ul li {
+	padding-bottom: 1.5em;
+}
+form ul li, #sidebar ul li {
+	list-style-type: none;
+}
+label {
+	display: block;
+	clear: left;
+}
+textarea {
+	height: 8em;
+}
+#messages {
+	padding: 1.5em;
+	padding-bottom: 0;
+	background-color: #ffffcc;
+}
+#messages li {
+	padding-left: 1.5em;
+}
+#id_date {
+	width: 90px;
+	margin-right: 10px;
+}
+#time {
+	width: 48px;
+}
+#date-help {
+	float: left;
+}
+#time-help {
+	float: left;
+	margin-left: 40px;
+}
+.not-satisfied {
+	color: #660000;
+}
+
+.meta {
+	color: #888;
+}
+
+#event_cal td, #event_cal th {
+	border-bottom: 1px solid #444;
+	height: 4.5em;
+	vertical-align: top;
+	text-align: center;
+}
+#event_cal th {
+	border-bottom-width: 2px;
+	height: 1.5em;
+}
+.cal_not_in_month {
+	color: #888;
+}
+#event_cal tfoot {
+	font-weight: normal;
+	font-style: normal;
+}
+#event_cal tfoot td {
+	border-top: 1px solid #444;
+	border-bottom: 0;
+}
+.cal_nav a.previous {
+	float: left;
+}
+.cal_nav a.next {
+	float: right;
+}

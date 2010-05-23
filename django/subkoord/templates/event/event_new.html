@@ -1,0 +1,23 @@
+{% extends "event/event_form.html" %}
+{% load i18n %}
+
+{% block heading %}
+{% trans "New event" %}
+{% endblock heading %}
+
+{% block navigation %}
+	<ul>
+		<li><a href="{% url event_index %}">{% trans "view events" %}</a></li>
+	</ul>
+{% endblock navigation %}
+
+{% block content %}
+<form action="{% url event_new %}" method="post">
+{# % csrf_token % #}
+<ul>
+{{ form.as_ul }}
+</ul>
+
+<input type="submit" />
+</form>
+{% endblock content %}

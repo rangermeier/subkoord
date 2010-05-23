@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block heading %}
+{{ usr.username }}
+{% endblock heading %}
+
+{% block content %}
+	<ul>
+	{% for job in usr.job_set.all %}
+		<li>{{ job.event.date|date:"D, j. n. Y" }}
+		<a href="{% url event job.event.id %}">{{ job.event.title }}</a>
+		</li>
+	{% endfor %}
+	</ul>
+{% endblock content %}
+
+{% block navigation %}
+	<ul>
+		<li><a href="{% url user_list %}">{% trans "list all users" %}</a></li>
+	{% ifnotequal usr.id user.id %}
+		<li><a href="{% url user_view user.id %}">{% trans "view my profile" %}</a></li>
+	{% endifnotequal %}
+		<li><a href="{% url user_change_password %}">{% trans "change my password" %}</a></li>
+		<li><a href="{% url event_index %}">{% trans "view events" %}</a></li>
+</ul>
+{% endblock navigation %}

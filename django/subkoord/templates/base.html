@@ -1,0 +1,77 @@
+{% load i18n %}
+{% load in_list %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>{% block title %}Sub-Koordinator{% endblock title %}</title>
+	<!-- Favicon -->
+	<link rel="shortcut icon" href="{{ MEDIA_URL }}favicon.ico" />
+
+	<!-- CSS -->
+	<link rel="stylesheet" type="text/css" media="screen" title="default" href="{{ MEDIA_URL }}style/blueprint/screen.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="{{ MEDIA_URL }}style/blueprint/screen.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="{{ MEDIA_URL }}js/jquery/smoothness/jquery-ui-1.8.1.custom.css" >
+	<!--[if lt IE 8]><link rel="stylesheet" href="{{ MEDIA_URL }}style/blueprint/ie.css" type="text/css" media="screen, projection"><![endif]-->
+	<link rel="stylesheet" type="text/css" media="screen" title="default" href="{{ MEDIA_URL }}style/style.css" />
+
+	<!-- JavaScript -->
+	<script type="text/javascript" src="{{ MEDIA_URL }}js/jquery/jquery-1.4.2.min.js"></script>
+	<script type="text/javascript">
+	$(document).ready(function() {
+		$("#messages").delay(5000).fadeOut("slow");
+	});
+	</script>
+	{%block javascript %}{%endblock javascript %}
+
+</head>
+
+<body>
+<div class="container">  <!-- showgrid -->
+<div id="headmast" class="prepend-6 span-18 last">
+	<h1>{% trans "Sub-Koordinator" %}</h1>
+</div>
+<div id="heading" class="prepend-6 span-18 last">
+	<h2>{% block heading %}{% endblock heading %}</h2>
+</div>
+
+<div id="sidebar" class="span-5 prepend-1">
+
+	{% block navigation %}
+	<p></p>
+	{% endblock navigation %}
+
+	{% block message %}
+	{% if messages %}
+	<ul id="messages">
+		{% for message in messages %}
+		<li>{{ message }}</li>
+		{% endfor %}
+	</ul>
+	{% endif %}
+	{% endblock message %}
+
+</div><!-- /sidebar -->
+
+<div id="content" class="span-18 last">
+
+	{% block content %}{% endblock content %}
+</div> <!-- /content -->
+<div id="footer" class="prepend-1 span-23 last">
+	{% block footer %}
+	<ul>
+		<li><a href="{% url home %}">{% trans "home" %}</a></li>
+		{% if user.is_authenticated %}
+		{% if perms.event and user.is_staff %}<li><a href="/admin">{% trans "admin" %}</a></li>{% endif %}
+		<li>{% trans "logged in as" %} <a href="{% url user_view user.id %}">{{ user }}</a> - <a href="{% url logout %}">{% trans "logout" %}</a></li>
+		{% else %}
+		<li><a href="{% url login %}">{% trans "login" %}</a></li>
+		{% endif %}
+
+	</ul>
+	{% endblock footer %}
+ </div><!-- /footer -->
+</div> <!-- /container -->
+</body>
+</html>

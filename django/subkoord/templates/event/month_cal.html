@@ -1,0 +1,33 @@
+{% load i18n %}
+	<h3 class="cal_head">{{ controls.this_month|date:"M Y"}}</h3>
+	<table class="cal_month_calendar">
+	<thead>
+		<tr>
+		{% for day in headers %}
+			<th class="">{{ day|date:"D"|slice:":2" }}</th>
+		{% endfor %}
+		</tr>
+	</thead>
+	<tbody>
+	{% for week in calendar %}
+		<tr>
+		{% for day in week %}
+			<td{% if not day.in_month %} class="cal_not_in_month"{% endif %}>
+				{% if day.event %}{{ day.day|date:"j" }}
+				{% for event in day.events %}<br />
+					<a href="{% url event event.id %}" title="{{ event.title }}" class="{% if event.all_tasks_satisfied %}{% else %}not-satisfied{% endif %}">{{ event.title|slice:":10" }}</a>
+				{% endfor %}
+				{% else %}{{ day.day|date:"j" }}{% endif %}
+			</td>
+		{% endfor %}
+		</tr>
+	{% endfor %}
+	</tbody>
+	<tfoot>
+		<tr class="cal_nav">
+			<td colspan="3"><a class="previous" href="{% url event_cal controls.previous_year, controls.previous_month %}">{% trans "previous month" %}</a></td>
+			<td></td>
+			<td colspan="3"><a class="next" href="{% url event_cal controls.next_year, controls.next_month %}">{% trans "next month" %}</a></td>
+		</tr>
+	</tfoot>
+	</table>

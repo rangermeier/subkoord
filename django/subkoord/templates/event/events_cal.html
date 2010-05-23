@@ -1,0 +1,10 @@
+{% extends "event/events.html" %}
+{% load i18n %}
+{% load calendar %}
+
+{% block content %}
+	<div id="event_cal" class="span-16">
+	{% month_cal year month%}
+	</div>
+{% endblock content %}
+

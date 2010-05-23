@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block heading %}
+{{ user.username }} - {% trans "change password"%}
+{% endblock heading %}
+
+{% block content %}
+	<form action="{% url user_change_password %}" method="POST">
+	<ul>
+		{{ form.as_ul}}
+	</ul>
+	<input type="submit" />
+</form>
+{% endblock content %}
+
+{% block navigation %}
+	<ul>
+		<li><a href="{% url user_list %}">{% trans "list all users" %}</a></li>
+		<li><a href="{% url user_view user.id %}">{% trans "view my profile" %}</a></li>
+		<li><a href="{% url event_index %}">{% trans "view events" %}</a></li>
+</ul>
+{% endblock navigation %}

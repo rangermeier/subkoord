@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load calendar %}
+
+{% block heading %}
+{% trans "Users" %}
+{% endblock heading %}
+
+{% block content %}
+	<ul>
+	{% for usr in user_list %}
+		<li>
+		<a href="{% url user_view usr.id %}">{{ usr.username }}</a>
+		</li>
+	{% endfor %}
+	</ul>
+{% endblock content %}
+
+
+{% block navigation %}
+	<ul>
+	{% ifnotequal usr.id user.id %}
+		<li><a href="{% url user_view user.id %}">{% trans "view my profile" %}</a></li>
+	{% endifnotequal %}
+		<li><a href="{% url user_change_password %}">{% trans "change my password" %}</a></li>
+		<li><a href="{% url event_index %}">{% trans "view events" %}</a></li>
+</ul>
+{% endblock navigation %}

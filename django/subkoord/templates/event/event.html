@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load in_list %}
+
+{% block heading %}
+{{ event.title }}
+{% endblock heading %}
+
+{% block navigation %}
+	<ul>
+		<li><a href="{% url event_edit event.id %}">{% trans "edit" %}</a></li>
+		<li><a href="{% url event_index %}">{% trans "view events" %}</a></li>
+	</ul>
+{% endblock navigation %}
+
+{% block content %}
+
+<p>{% trans "Type" %}: {{ event.type }}</p>
+<p>{{ event.date|date:"D, j. n. Y, H:i" }}</p>
+{% if event.info %}
+<h3>{% trans "Info" %}</h3>
+<p>{{ event.info }}</p>
+{% endif %}
+
+<div class="span-9">
+<h3>{% trans "Tasks" %}</h3>
+<ul class="tasks">
+{% for task in event.tasks %}
+	<li><span class="{% if not task.satisfied %}not-satisfied{% endif %}">{{ task.name }}</span>:
+	{% for job in event.jobs %}
+		{% ifequal task job.task %}
+			{{ job.user }}{% ifequal user job.user %}
+				<a href="{% url job_delete event.id job.id %}">{% trans "remove me" %}</a>
+			{% endifequal %}
+		{% endifequal %}
+	{% endfor %}
+	{# % if not task.id in user_tasks % #}
+	{% if task.id|in_list:user_tasks %}
+	{% else %}
+		{% if not task.maxed_out %}
+		<a href="{% url job_add event.id, task.id %}">{% trans "add me" %}</a>
+		{% endif %}
+	{% endif %}
+	</li>
+{% endfor %}
+</ul>
+</div>
+
+<div class="span-9 last">
+<h3>{% trans "Notes" %}</h3>
+{% if event.notes %}
+<ul class="notes">
+{% for note in event.notes.all %}
+	<li>{{ note.note }}<br />
+	<span class="meta">{{ note.user }}, {{ note.date|date:"j. n. Y, H:i" }}</span>
+	</li>
+{% endfor %}
+</ul>
+{% endif %}
+<form action="{% url note_add event.id %}" method="post">
+	<input type="text" id="note" name="note" />
+	<input type="submit" value="{% trans "add note" %}"/>
+</form>
+</div>
+
+{% endblock content %}

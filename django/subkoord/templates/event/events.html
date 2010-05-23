@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load calendar %}
+
+{% block heading %}
+{% trans "Events" %}
+{% endblock heading %}
+
+{% block content %}
+	<ul>
+	{% for event in event_list %}
+		<li>{{ event.date|date:"D, j. n. Y, H:i" }}
+		<a href="{% url event event.id %}">{{ event.title }}</a>
+		</li>
+	{% endfor %}
+	</ul>
+{% endblock content %}
+
+{% block navigation %}
+	<ul>
+		<li><a href="{% url event_new %}">{% trans "add another event" %}</a></li>
+{% if archive %}
+		<li><a href="{% url event_index %}">{% trans "view upcomming events" %}</a></li>
+{% else %}
+		<li><a href="{% url event_archive %}">{% trans "view archive" %}</a></li>
+{% endif %}
+</ul>
+{% endblock navigation %}

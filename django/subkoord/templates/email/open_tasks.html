@@ -1,0 +1,12 @@
+{% load i18n %}
+{% trans "Hello!" %}
+{% trans "There are open tasks:" %}
+
+{% for event in events %}
+	* {{ event.date|date:"D, j. n. Y, H:i" }} - {{ event.title }}
+		{{ event.opentasks|join:", " }}
+		{{ site_url }}{% url event event.id %}
+{% endfor %}
+
+{% trans "Thanks for your kind attention :)" %}
+
