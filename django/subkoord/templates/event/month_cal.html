@@ -12,7 +12,7 @@
 	{% for week in calendar %}
 		<tr>
 		{% for day in week %}
-			<td{% if not day.in_month %} class="cal_not_in_month"{% endif %}>
+			<td class="{% if not day.in_month %}cal_not_in_month {% endif %}{% if day.today%}today{% endif %}">
 				{% if day.event %}{{ day.day|date:"j" }}
 				{% for event in day.events %}<br />
 					<a href="{% url event event.id %}" title="{{ event.title }}" class="{% if event.all_tasks_satisfied %}{% else %}not-satisfied{% endif %}">{{ event.title|slice:":10" }}</a>
