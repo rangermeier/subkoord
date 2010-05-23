@@ -108,6 +108,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'subkoord.event',
     'subkoord.users',
+    'django.contrib.markup',
     # Django 1.2 Settings
     #'django.contrib.messages',
 )
