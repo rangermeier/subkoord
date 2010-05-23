@@ -55,7 +55,7 @@ textarea {
 	margin-left: 40px;
 }
 .not-satisfied {
-	color: #660000;
+	color: #600;
 }
 
 .meta {
@@ -88,4 +88,8 @@ textarea {
 }
 .cal_nav a.next {
 	float: right;
+}
+#event_cal .today {
+  color: #600;
+  font-weight: bold;
 }
