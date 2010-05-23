@@ -11,6 +11,7 @@
 			$("#time").after('<div class="meta"><span id="date-help">JJJJ-MM-JJ</span> <span id="time-help">hh:mm</span></div>');
 			if($("#id_date").val() != "") {
 				var date_time = $("#id_date").val().split(" ");
+				$("#id_date").val(date_time[0]);
 				var time = date_time[1].split(":");
 				$("#time").val(time[0] + ":" + time[1]);
 			}
