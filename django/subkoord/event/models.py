@@ -9,12 +9,14 @@ class Task(models.Model):
 	info = models.TextField(blank=True)
 	min_persons = models.IntegerField(blank=True, null=True)
 	max_persons = models.IntegerField(blank=True, null=True)
-	@property
-	def maxed_out(self):
-		return len(self.job_set.all()) >= int(self.max_persons)
-	@property
-	def satisfied(self):
-		return len(self.job_set.all()) >= int(self.min_persons)
+	def maxed_out(self, event):
+		if type(self.max_persons) != type(1L):
+			return False
+		return len(self.job_set.filter(event=event.id)) >= self.max_persons
+	def satisfied(self, event):
+		if type(self.min_persons) != type(1L):
+			return True
+		return len(self.job_set.filter(event=event.id)) >= self.min_persons
 	def __unicode__(self):
 		return self.name
 
@@ -38,15 +40,15 @@ class Event(models.Model):
 	def tasks(self):
 		return self.type.tasks.select_related().all()
 	@property
-	def opentasks(self):
-		opentasks = []
+	def open_tasks(self):
+		open_tasks = []
 		for task in self.tasks:
-			if not task.satisfied:
-				opentasks.append(task)
-		return opentasks
+			if not task.satisfied(self):
+				open_tasks.append(task)
+		return open_tasks
 	@property
 	def all_tasks_satisfied(self):
-		return (len(self.opentasks) == 0)
+		return (len(self.open_tasks) == 0)
 	@property
 	def jobs(self):
 		return self.job_set.all()
