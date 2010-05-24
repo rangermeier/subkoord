@@ -25,8 +25,12 @@ ul {
 form ul li, #sidebar ul li {
 	list-style-type: none;
 }
+.event-form ul li {
+	color: #888;
+}
 label {
 	display: block;
+	color: #000;
 	clear: left;
 }
 textarea {
@@ -41,18 +45,25 @@ textarea {
 	padding-left: 1.5em;
 }
 #id_date {
-	width: 90px;
+	width: 88px;
 	margin-right: 10px;
 }
 #time {
 	width: 48px;
 }
 #date-help {
-	float: left;
+	/*float: left;*/
+	position: absolute;
 }
 #time-help {
-	float: left;
-	margin-left: 40px;
+	position: absolute;
+	margin-left: 100px;
+}
+.form-help {
+	height: 1.5em;
+}
+.event-form textarea, .event-form select {
+	display: block;
 }
 .not-satisfied {
 	color: #600;
