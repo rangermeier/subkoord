@@ -12,8 +12,8 @@
 {% endblock navigation %}
 
 {% block content %}
-<form action="{% url event_new %}" method="post">
-{# % csrf_token % #}
+<form action="{% url event_new %}" method="post" class="event-form">
+{# csrf_token #}
 <ul>
 {{ form.as_ul }}
 </ul>

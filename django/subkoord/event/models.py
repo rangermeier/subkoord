@@ -27,10 +27,12 @@ class EventType(models.Model):
 		return self.name
 
 class Event(models.Model):
-	title = models.CharField(max_length=200)
-	date = models.DateTimeField()
-	info = models.TextField(blank=True)
-	type = models.ForeignKey(EventType)
+	title = models.CharField(verbose_name=_("Title"), max_length=200)
+	date = models.DateTimeField(verbose_name=_("Date and Time"))
+	type = models.ForeignKey(EventType, verbose_name=_("Type"),
+		help_text=_("Depending on the type of the event different tasks will be available."))
+	info = models.TextField(verbose_name=_("Information"), blank=True,
+		help_text=_("You can use Textile to format your text. Need <a href=\"http://subkoord.powidl.org/hilfe/textile/\" target=\"_blank\">help</a>?"))
 	cron = models.DateTimeField(blank=True, null=True, editable=False)
 	@property
 	def tasks(self):

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-23 15:42+0200\n"
+"POT-Creation-Date: 2010-05-24 15:44+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,10 +16,37 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: event/cron.py:19
+#: event/cron.py:21
 #, fuzzy
 msgid "Open Tasks"
 msgstr "Dienste"
+
+#: event/models.py:30
+msgid "Title"
+msgstr "Titel"
+
+#: event/models.py:31
+msgid "Date and Time"
+msgstr "Datum und Zeit"
+
+#: event/models.py:32 templates/event/event.html:19
+msgid "Type"
+msgstr "Typ"
+
+#: event/models.py:33
+msgid "Depending on the type of the event different tasks will be available."
+msgstr "Durch den Typ der Veranstaltung ergeben sich die Dienste."
+
+#: event/models.py:34
+msgid "Information"
+msgstr "Information"
+
+#: event/models.py:35
+msgid ""
+"You can use Textile to format your text. Need <a href=\"http://subkoord."
+"powidl.org/hilfe/textile/\" target=\"_blank\">help</a>?"
+msgstr "Du kannst Textile zum formatieren verwenden. Brauchst du "
+"<a href=\"http://subkoord.powidl.org/hilfe/textile/\" target=\"_blank\">Hilfe</a>?"
 
 #: templates/base.html:33
 msgid "Sub-Koordinator"
@@ -57,41 +84,37 @@ msgstr "Es gibt offene Dienste:"
 msgid "Thanks for your kind attention :)"
 msgstr "Vielen Danke für Deine Aufmerksamkeit :)"
 
-#: templates/event/event.html:11
+#: templates/event/event.html:12
 msgid "edit"
 msgstr "bearbeiten"
 
-#: templates/event/event.html:12 templates/event/event_edit.html:11
+#: templates/event/event.html:13 templates/event/event_edit.html:11
 #: templates/event/event_new.html:10 templates/users/user.html:25
 #: templates/users/user_edit.html:21 templates/users/user_list.html:26
 msgid "view events"
 msgstr "Termine"
 
-#: templates/event/event.html:18
-msgid "Type"
-msgstr "Typ"
-
-#: templates/event/event.html:21
+#: templates/event/event.html:22
 msgid "Info"
 msgstr "Info"
 
-#: templates/event/event.html:26
+#: templates/event/event.html:27
 msgid "Tasks"
 msgstr "Dienste"
 
-#: templates/event/event.html:33
+#: templates/event/event.html:34
 msgid "remove me"
 msgstr "mich entfernen"
 
-#: templates/event/event.html:41
+#: templates/event/event.html:42
 msgid "add me"
 msgstr "mich hinzufügen"
 
-#: templates/event/event.html:50
+#: templates/event/event.html:51
 msgid "Notes"
 msgstr "Anmerkungen"
 
-#: templates/event/event.html:62
+#: templates/event/event.html:63
 msgid "add note"
 msgstr "Anmerkung hinzufügen"
 
@@ -151,9 +174,6 @@ msgstr "Passwort ändern"
 #: templates/users/user_list.html:6
 msgid "Users"
 msgstr "NutzerInnen"
-
-#~ msgid "Title"
-#~ msgstr "Titel"
 
 #~ msgid "Date"
 #~ msgstr "Datum"

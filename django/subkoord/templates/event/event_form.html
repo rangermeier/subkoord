@@ -8,7 +8,7 @@
 		if($("#id_date").length > 0) {
 			$("#id_date").datepicker({ dateFormat: 'yy-mm-dd' });
 			$("#id_date").after('<input id="time" type="text" />');
-			$("#time").after('<div class="meta"><span id="date-help">JJJJ-MM-JJ</span> <span id="time-help">hh:mm</span></div>');
+			$("#time").parent().append('<div class="form-help"><span id="date-help">JJJJ-MM-JJ</span> <span id="time-help">hh:mm</span></div>');
 			if($("#id_date").val() != "") {
 				var date_time = $("#id_date").val().split(" ");
 				$("#id_date").val(date_time[0]);
@@ -16,7 +16,9 @@
 				$("#time").val(time[0] + ":" + time[1]);
 			}
 			$("#time").closest("form").submit(function() {
-				$("#id_date").val($("#id_date").val() + " " + $("#time").val()).css("width", "150px");
+				var time = $("#time").val();
+				if(time == "") { time = "12:00"; }
+				$("#id_date").val($("#id_date").val() + " " + time).css("width", "150px");
 				$("#time").remove();
 			});
 		}
