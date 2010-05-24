@@ -85,6 +85,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
 
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
     # Django 1.2
     #'django.middleware.csrf.CsrfViewMiddleware',
     #'django.contrib.messages.middleware.MessageMiddleware',
@@ -104,11 +105,11 @@ INSTALLED_APPS = (
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.sites',
-    # Uncomment the next line to enable the admin:
+    'django.contrib.markup',
+    'django.contrib.flatpages',
     'django.contrib.admin',
     'subkoord.event',
     'subkoord.users',
-    'django.contrib.markup',
     # Django 1.2 Settings
     #'django.contrib.messages',
 )
