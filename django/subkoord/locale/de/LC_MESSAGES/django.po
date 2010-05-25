@@ -17,7 +17,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: event/cron.py:21
-#, fuzzy
 msgid "Open Tasks"
 msgstr "Dienste"
 
