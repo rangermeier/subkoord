@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-24 15:44+0200\n"
+"POT-Creation-Date: 2010-05-30 11:34+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,32 +20,33 @@ msgstr ""
 msgid "Open Tasks"
 msgstr "Dienste"
 
-#: event/models.py:30
+#: event/models.py:32
 msgid "Title"
 msgstr "Titel"
 
-#: event/models.py:31
+#: event/models.py:33
 msgid "Date and Time"
 msgstr "Datum und Zeit"
 
-#: event/models.py:32 templates/event/event.html:19
+#: event/models.py:34 templates/event/event.html:19
 msgid "Type"
 msgstr "Typ"
 
-#: event/models.py:33
+#: event/models.py:35
 msgid "Depending on the type of the event different tasks will be available."
 msgstr "Durch den Typ der Veranstaltung ergeben sich die Dienste."
 
-#: event/models.py:34
+#: event/models.py:36
 msgid "Information"
 msgstr "Information"
 
-#: event/models.py:35
+#: event/models.py:37
 msgid ""
 "You can use Textile to format your text. Need <a href=\"http://subkoord."
 "powidl.org/hilfe/textile/\" target=\"_blank\">help</a>?"
-msgstr "Du kannst Textile zum formatieren verwenden. Brauchst du "
-"<a href=\"http://subkoord.powidl.org/hilfe/textile/\" target=\"_blank\">Hilfe</a>?"
+msgstr ""
+"Du kannst Textile zum formatieren verwenden. Brauchst du <a href=\"http://"
+"subkoord.powidl.org/hilfe/textile/\" target=\"_blank\">Hilfe</a>?"
 
 #: templates/base.html:33
 msgid "Sub-Koordinator"
@@ -97,23 +98,27 @@ msgstr "Termine"
 msgid "Info"
 msgstr "Info"
 
-#: templates/event/event.html:27
+#: templates/event/event.html:28
 msgid "Tasks"
 msgstr "Dienste"
 
-#: templates/event/event.html:34
+#: templates/event/event.html:36
 msgid "remove me"
 msgstr "mich entfernen"
 
-#: templates/event/event.html:42
+#: templates/event/event.html:43
 msgid "add me"
 msgstr "mich hinzufügen"
 
-#: templates/event/event.html:51
+#: templates/event/event.html:50
+msgid "No tasks"
+msgstr "Keine Dienste"
+
+#: templates/event/event.html:55
 msgid "Notes"
 msgstr "Anmerkungen"
 
-#: templates/event/event.html:63
+#: templates/event/event.html:67
 msgid "add note"
 msgstr "Anmerkung hinzufügen"
 

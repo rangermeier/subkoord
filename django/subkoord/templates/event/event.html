@@ -24,6 +24,7 @@
 {% endif %}
 
 <div class="span-9">
+{% if event.tasks %}
 <h3>{% trans "Tasks" %}</h3>
 <ul class="tasks">
 {% for task in event.tasks %}
@@ -45,6 +46,9 @@
 	</li>
 {% endfor %}
 </ul>
+{% else %}
+{% trans "No tasks"%}
+{% endif %}
 </div>
 
 <div class="span-9 last">

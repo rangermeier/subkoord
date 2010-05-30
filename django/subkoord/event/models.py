@@ -24,7 +24,7 @@ class Task(models.Model):
 class EventType(models.Model):
 	name = models.CharField(max_length=200)
 	info = models.TextField(blank=True)
-	tasks = models.ManyToManyField(Task, related_name='types')
+	tasks = models.ManyToManyField(Task, blank=True, related_name='types')
 	def __unicode__(self):
 		return self.name
 
