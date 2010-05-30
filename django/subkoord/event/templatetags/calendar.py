@@ -48,6 +48,7 @@ def month_cal(year, month):
         else:
             cal_day['in_month'] = False
         cal_day['today'] = day == date.today()
+        cal_day['future'] = day >= date.today()
         week.append(cal_day)
         if day.weekday() == 6:
             month_cal.append(week)
