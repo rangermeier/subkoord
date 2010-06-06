@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-30 11:34+0200\n"
+"POT-Creation-Date: 2010-06-06 13:15+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -32,7 +32,7 @@ msgstr "Datum und Zeit"
 msgid "Type"
 msgstr "Typ"
 
-#: event/models.py:35
+#: event/models.py:35 templates/event/event_form.html:42
 msgid "Depending on the type of the event different tasks will be available."
 msgstr "Durch den Typ der Veranstaltung ergeben sich die Dienste."
 
@@ -41,12 +41,8 @@ msgid "Information"
 msgstr "Information"
 
 #: event/models.py:37
-msgid ""
-"You can use Textile to format your text. Need <a href=\"http://subkoord."
-"powidl.org/hilfe/textile/\" target=\"_blank\">help</a>?"
-msgstr ""
-"Du kannst Textile zum formatieren verwenden. Brauchst du <a href=\"http://"
-"subkoord.powidl.org/hilfe/textile/\" target=\"_blank\">Hilfe</a>?"
+msgid "You can use Textile to format your text."
+msgstr "Du kannst den Text mittels Textile formatieren."
 
 #: templates/base.html:33
 msgid "Sub-Koordinator"
@@ -130,6 +126,14 @@ msgstr "Termin bearbeiten"
 msgid "back"
 msgstr "zurück"
 
+#: templates/event/event_form.html:40
+msgid "Help for Event Types"
+msgstr "Hilfe zu den Veranstaltungs-Typen"
+
+#: templates/event/event_form.html:64
+msgid "Help for Textile"
+msgstr "Hilfe zu Textile"
+
 #: templates/event/event_new.html:5
 msgid "New event"
 msgstr "Neuer Termine"
@@ -178,6 +182,17 @@ msgstr "Passwort ändern"
 #: templates/users/user_list.html:6
 msgid "Users"
 msgstr "NutzerInnen"
+
+#~ msgid ""
+#~ "The event type defines which tasks are available/requeired for this event."
+#~ msgstr "Durch den Typ der Veranstaltung ergeben sich die Dienste."
+
+#~ msgid ""
+#~ "You can use Textile to format your text. Need <a href=\"http://subkoord."
+#~ "powidl.org/hilfe/textile/\" target=\"_blank\">help</a>?"
+#~ msgstr ""
+#~ "Du kannst Textile zum formatieren verwenden. Brauchst du <a href=\"http://"
+#~ "subkoord.powidl.org/hilfe/textile/\" target=\"_blank\">Hilfe</a>?"
 
 #~ msgid "Date"
 #~ msgstr "Datum"

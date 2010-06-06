@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 #from django.contrib import messages # Django 1.2
 from datetime import date, datetime
-from models import Event, EventForm, Job, Task, Note, NoteForm
+from models import Event, EventForm, EventType, Job, Task, Note, NoteForm
 
 @login_required
 def event_index(request, **kwargs):
@@ -43,6 +43,7 @@ def event(request, event_id):
 @login_required
 def event_edit(request, event_id):
 	event = get_object_or_404(Event, pk=event_id)
+	event_types = EventType.objects.all()
 
 	if request.method == 'POST':
 		form = EventForm(request.POST, instance=event)
@@ -55,12 +56,14 @@ def event_edit(request, event_id):
 	return render_to_response('event/event_edit.html', {
 		'form': form,
 		'event': event,
+		'event_types': event_types,
 		},
 		context_instance=RequestContext(request),
 	)
 
 @login_required
 def event_new(request):
+	event_types = EventType.objects.all()
 	if request.method == 'POST':
 		form = EventForm(request.POST)
 		if form.is_valid():
@@ -71,6 +74,7 @@ def event_new(request):
 		form = EventForm()
 	return render_to_response('event/event_new.html', {
 		'form': form,
+		'event_types': event_types,
 		},
 		context_instance=RequestContext(request),
 	)

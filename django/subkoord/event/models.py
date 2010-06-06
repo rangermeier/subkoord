@@ -34,7 +34,7 @@ class Event(models.Model):
 	type = models.ForeignKey(EventType, verbose_name=_("Type"),
 		help_text=_("Depending on the type of the event different tasks will be available."))
 	info = models.TextField(verbose_name=_("Information"), blank=True,
-		help_text=_("You can use Textile to format your text. Need <a href=\"http://subkoord.powidl.org/hilfe/textile/\" target=\"_blank\">help</a>?"))
+		help_text=_("You can use Textile to format your text."))
 	cron = models.DateTimeField(blank=True, null=True, editable=False)
 	@property
 	def tasks(self):
