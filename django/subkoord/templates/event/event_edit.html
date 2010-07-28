@@ -14,7 +14,7 @@
 
 {% block content %}
 <form action="{% url event_edit event.id%}" method="post" class="event-form">
-{#  csrf_token  #}
+{%  csrf_token  %}
 <ul>
 {{ form.as_ul }}
 </ul>

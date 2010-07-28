@@ -4,7 +4,8 @@ from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-#from django.contrib import messages # Django 1.2
+from django.contrib import messages
+from django.utils.translation import ugettext as _
 from datetime import date, datetime
 from models import Event, EventForm, EventType, Job, Task, Note, NoteForm
 
@@ -49,7 +50,7 @@ def event_edit(request, event_id):
 		form = EventForm(request.POST, instance=event)
 		if form.is_valid():
 			form.save()
-			request.user.message_set.create(message="Saved changes") # Django 1.1
+			messages.success(request, _("Saved changes"))
 			return HttpResponseRedirect(reverse('event', args=[event.id]))
 	else:
 		form = EventForm(instance=event)
@@ -68,7 +69,7 @@ def event_new(request):
 		form = EventForm(request.POST)
 		if form.is_valid():
 			form.save()
-			request.user.message_set.create(message="Created new event") # Django 1.1
+			messages.success(request, _("Created new event"))
 			return HttpResponseRedirect(reverse('event_index'))
 	else:
 		form = EventForm()
@@ -89,8 +90,7 @@ def job_add(request, event_id, task_id):
 	#	return HttpResponseNotAllowed('<h1>Must not add other users!</h1>')
 	job = Job(event=event, task = task, user = request.user)
 	job.save()
-	# Django 1.1 messages.add_message(request, messages.INFO, 'Added user')
-	request.user.message_set.create(message="Took job") # Django 1.1
+	messages.success(request, _("Took job"))
 	return HttpResponseRedirect(reverse('event', args=[event.id]))
 
 @login_required
@@ -100,8 +100,7 @@ def job_delete(request, event_id, job_id):
 	#if job.user != user:
 	#	return HttpResponseNotAllowed('<h1>Must not delete other users\' jobs!</h1>')
 	job.delete()
-	# Django 1.2: messages.add_message(request, messages.INFO, 'Deleted job')
-	request.user.message_set.create(message="Deleted job") # Django 1.1
+	messages.success(request, _("Deleted job"))
 	return HttpResponseRedirect(reverse('event', args=[event_id]))
 
 @login_required
@@ -112,5 +111,5 @@ def note_add(request, event_id):
 		if form.is_valid(): # All validation rules pass
 			note = Note(event=event, user=request.user, note = form.cleaned_data['note'])
 			note.save()
-			request.user.message_set.create(message="Saved note") # Django 1.1
+			messages.success(request, _("Saved note"))
 	return HttpResponseRedirect(reverse('event', args=[event.id]))

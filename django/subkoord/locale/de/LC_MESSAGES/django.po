@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-06 13:15+0200\n"
+"POT-Creation-Date: 2010-07-28 15:41+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -28,7 +28,7 @@ msgstr "Titel"
 msgid "Date and Time"
 msgstr "Datum und Zeit"
 
-#: event/models.py:34 templates/event/event.html:19
+#: event/models.py:34 templates/event/event.html:18
 msgid "Type"
 msgstr "Typ"
 
@@ -44,27 +44,47 @@ msgstr "Information"
 msgid "You can use Textile to format your text."
 msgstr "Du kannst den Text mittels Textile formatieren."
 
-#: templates/base.html:33
+#: event/views.py:53
+msgid "Saved changes"
+msgstr "Änderungen gespeichert"
+
+#: event/views.py:72
+msgid "Created new event"
+msgstr "neuen Termin gespeichert"
+
+#: event/views.py:93
+msgid "Took job"
+msgstr "Dienst übernommen"
+
+#: event/views.py:103
+msgid "Deleted job"
+msgstr "Dienst entfernt"
+
+#: event/views.py:114
+msgid "Saved note"
+msgstr "Anmerkung gespeichert"
+
+#: templates/base.html:32
 msgid "Sub-Koordinator"
 msgstr "Sub-Koordinator"
 
-#: templates/base.html:64
+#: templates/base.html:63
 msgid "home"
 msgstr "start"
 
-#: templates/base.html:66
+#: templates/base.html:65
 msgid "admin"
 msgstr "admin"
 
-#: templates/base.html:67
+#: templates/base.html:66
 msgid "logged in as"
 msgstr "angemeldet als"
 
-#: templates/base.html:67
+#: templates/base.html:66
 msgid "logout"
 msgstr "abmelden"
 
-#: templates/base.html:69
+#: templates/base.html:68
 msgid "login"
 msgstr "anmelden"
 
@@ -78,43 +98,43 @@ msgstr "Es gibt offene Dienste:"
 
 #: templates/email/open_tasks.html:11
 msgid "Thanks for your kind attention :)"
-msgstr "Vielen Danke für Deine Aufmerksamkeit :)"
+msgstr "Vielen Dank für Deine Aufmerksamkeit :)"
 
-#: templates/event/event.html:12
+#: templates/event/event.html:11
 msgid "edit"
 msgstr "bearbeiten"
 
-#: templates/event/event.html:13 templates/event/event_edit.html:11
+#: templates/event/event.html:12 templates/event/event_edit.html:11
 #: templates/event/event_new.html:10 templates/users/user.html:25
 #: templates/users/user_edit.html:21 templates/users/user_list.html:26
 msgid "view events"
 msgstr "Termine"
 
-#: templates/event/event.html:22
+#: templates/event/event.html:21
 msgid "Info"
 msgstr "Info"
 
-#: templates/event/event.html:28
+#: templates/event/event.html:27
 msgid "Tasks"
 msgstr "Dienste"
 
-#: templates/event/event.html:36
+#: templates/event/event.html:35
 msgid "remove me"
 msgstr "mich entfernen"
 
-#: templates/event/event.html:43
+#: templates/event/event.html:41
 msgid "add me"
 msgstr "mich hinzufügen"
 
-#: templates/event/event.html:50
+#: templates/event/event.html:48
 msgid "No tasks"
 msgstr "Keine Dienste"
 
-#: templates/event/event.html:55
+#: templates/event/event.html:53
 msgid "Notes"
 msgstr "Anmerkungen"
 
-#: templates/event/event.html:67
+#: templates/event/event.html:66
 msgid "add note"
 msgstr "Anmerkung hinzufügen"
 
