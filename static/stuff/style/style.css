@@ -46,10 +46,12 @@ textarea {
 #messages {
 	padding: 1.5em;
 	padding-bottom: 0;
-	background-color: #ffffcc;
 }
 #messages li {
 	padding-left: 1.5em;
+}
+#messages .info {
+	background-color: #ffffcc;
 }
 #id_date {
 	width: 88px;
