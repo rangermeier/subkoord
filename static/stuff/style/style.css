@@ -94,15 +94,27 @@ textarea {
 	color: #888;
 }
 
+#event_cal table {
+	table-layout: fixed;
+}
+
 #event_cal td, #event_cal th {
 	border-bottom: 1px solid #444;
 	height: 4.5em;
 	vertical-align: top;
 	text-align: center;
+	overflow: hidden;
 }
 #event_cal th {
 	border-bottom-width: 2px;
 	height: 1.5em;
+}
+#event_cal .show_full_title {
+	overflow: visible !important;
+}
+#event_cal .show_full_title a {
+	background: #fff;
+	position: relative;
 }
 .cal_not_in_month {
 	color: #888;
