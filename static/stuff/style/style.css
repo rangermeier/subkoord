@@ -109,10 +109,10 @@ textarea {
 	border-bottom-width: 2px;
 	height: 1.5em;
 }
-#event_cal .show_full_title {
+#event_cal td:hover {
 	overflow: visible !important;
 }
-#event_cal .show_full_title a {
+#event_cal td:hover a {
 	background: #fff;
 	position: relative;
 }
