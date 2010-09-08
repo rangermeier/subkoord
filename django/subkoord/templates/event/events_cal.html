@@ -2,6 +2,19 @@
 {% load i18n %}
 {% load calendar %}
 
+{%block javascript %}
+	<script type="text/javascript">
+	$(document).ready(function() {
+		$("#event_cal .days").mouseenter(function() {
+			$(this).addClass('show_full_title');
+		});
+		$("#event_cal .days").mouseleave(function() {
+			$(this).removeClass('show_full_title');
+		});
+	});
+	</script>
+{%endblock javascript %}
+
 {% block content %}
 	<div id="event_cal" class="span-16">
 	{% month_cal year month%}

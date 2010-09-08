@@ -12,10 +12,10 @@
 	{% for week in calendar %}
 		<tr>
 		{% for day in week %}
-			<td class="{% if not day.in_month %}cal_not_in_month {% endif %}{% if day.today%}today{% endif %}">
+			<td class="days {% if not day.in_month %}cal_not_in_month {% endif %}{% if day.today%}today{% endif %}">
 				{% if day.event %}{{ day.day|date:"j" }}
 				{% for event in day.events %}<br />
-					<a href="{% url event event.id %}" title="{{ event.title }}" class="{% if event.all_tasks_satisfied %}{% else %}{% if day.future %}not-satisfied{% endif %}{% endif %}">{{ event.title|slice:":10" }}</a>
+					<a href="{% url event event.id %}" title="{{ event.title }}" class="{% if event.all_tasks_satisfied %}{% else %}{% if day.future %}not-satisfied{% endif %}{% endif %}">{{ event.title }}</a>
 				{% endfor %}
 				{% else %}{{ day.day|date:"j" }}{% endif %}
 			</td>

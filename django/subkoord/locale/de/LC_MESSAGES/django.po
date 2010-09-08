@@ -50,7 +50,7 @@ msgstr "Änderungen gespeichert"
 
 #: event/views.py:72
 msgid "Created new event"
-msgstr "neuen Termin gespeichert"
+msgstr "neuer Termin gespeichert"
 
 #: event/views.py:93
 msgid "Took job"
