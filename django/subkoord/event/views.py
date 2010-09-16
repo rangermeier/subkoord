@@ -12,12 +12,13 @@ from models import Event, EventForm, EventType, Job, Task, Note, NoteForm
 @login_required
 def event_index(request, **kwargs):
 	if 'archive' in kwargs.keys():
-		event_list = Event.objects.filter(date__lte=datetime.now())
+		event_list = Event.objects.filter(date__lte=datetime.now()).order_by('-date')
 	else:
-		event_list = Event.objects.filter(date__gte=datetime.now())
+		event_list = Event.objects.filter(date__gte=datetime.now()).order_by('date')
 	return render_to_response('event/events.html',
 		{'event_list': event_list,
-		'archive': 'archive' in kwargs.keys(), },
+		'archive': 'archive' in kwargs.keys(),
+		'date': datetime.today(), },
 		context_instance=RequestContext(request),)
 
 @login_required
@@ -27,7 +28,8 @@ def event_cal(request, year = False, month = False):
 		month = date.today().month
 	return render_to_response('event/events_cal.html',
 		{'year': int(year),
-		'month': int(month) },
+		'month': int(month),
+		'date': datetime.today(), },
 		context_instance=RequestContext(request),)
 
 @login_required

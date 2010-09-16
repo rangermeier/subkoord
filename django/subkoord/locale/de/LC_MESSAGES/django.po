@@ -8,10 +8,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-07-28 15:41+0200\n"
+"POT-Creation-Date: 2010-09-16 11:05+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -44,23 +45,23 @@ msgstr "Information"
 msgid "You can use Textile to format your text."
 msgstr "Du kannst den Text mittels Textile formatieren."
 
-#: event/views.py:53
+#: event/views.py:55
 msgid "Saved changes"
 msgstr "Änderungen gespeichert"
 
-#: event/views.py:72
+#: event/views.py:74
 msgid "Created new event"
 msgstr "neuer Termin gespeichert"
 
-#: event/views.py:93
+#: event/views.py:95
 msgid "Took job"
 msgstr "Dienst übernommen"
 
-#: event/views.py:103
+#: event/views.py:105
 msgid "Deleted job"
 msgstr "Dienst entfernt"
 
-#: event/views.py:114
+#: event/views.py:116
 msgid "Saved note"
 msgstr "Anmerkung gespeichert"
 
@@ -108,7 +109,7 @@ msgstr "bearbeiten"
 #: templates/event/event_new.html:10 templates/users/user.html:25
 #: templates/users/user_edit.html:21 templates/users/user_list.html:26
 msgid "view events"
-msgstr "Termine"
+msgstr "zum Kalender"
 
 #: templates/event/event.html:21
 msgid "Info"
@@ -170,7 +171,11 @@ msgstr "neuen Termin anlegen"
 msgid "view upcomming events"
 msgstr "aktuelle Termine"
 
-#: templates/event/events.html:25
+#: templates/event/events.html:26
+msgid "view current month"
+msgstr "zum aktuellen Datum"
+
+#: templates/event/events.html:28
 msgid "view archive"
 msgstr "Termin-Archiv"
 
@@ -184,7 +189,7 @@ msgstr "nächstes Monat"
 
 #: templates/users/user.html:20 templates/users/user_edit.html:19
 msgid "list all users"
-msgstr "Alle anzeigen"
+msgstr "Alle NutzerInnen anzeigen"
 
 #: templates/users/user.html:22 templates/users/user_edit.html:20
 #: templates/users/user_list.html:23

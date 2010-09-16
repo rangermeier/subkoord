@@ -9,7 +9,7 @@
 {% block navigation %}
 	<ul>
 		<li><a href="{% url event_edit event.id %}">{% trans "edit" %}</a></li>
-		<li><a href="{% url event_index %}">{% trans "view events" %}</a></li>
+		<li><a href="{% url event_cal event.date.year event.date.month %}">{% trans "view events" %}</a></li>
 	</ul>
 {% endblock navigation %}
 

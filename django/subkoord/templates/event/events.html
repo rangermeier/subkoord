@@ -9,7 +9,7 @@
 {% block content %}
 	<ul>
 	{% for event in event_list %}
-		<li>{{ event.date|date:"D, j. n. Y, H:i" }}
+		<li>{{ event.date|date:"D, j. n. Y" }}
 		<a href="{% url event event.id %}">{{ event.title }}</a>
 		</li>
 	{% endfor %}
@@ -22,6 +22,9 @@
 {% if archive %}
 		<li><a href="{% url event_index %}">{% trans "view upcomming events" %}</a></li>
 {% else %}
+	{% if month != date.month %}
+		<li><a href="{% url event_index %}">{% trans "view current month" %}</a></li>
+	{% endif %}
 		<li><a href="{% url event_archive %}">{% trans "view archive" %}</a></li>
 {% endif %}
 </ul>
