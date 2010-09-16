@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-09-16 11:05+0200\n"
+"POT-Creation-Date: 2010-09-16 12:01+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -151,7 +151,18 @@ msgstr "zurück"
 msgid "Help for Event Types"
 msgstr "Hilfe zu den Veranstaltungs-Typen"
 
+#: templates/event/event_form.html:53
+msgid "no staff requirements"
+msgstr "keine Dienste"
+
+#: templates/event/event_form.html:57 templates/event/event_form.html.py:61
 #: templates/event/event_form.html:64
+msgid "one person"
+msgid_plural "%(persons)s persons"
+msgstr[0] "eine Person"
+msgstr[1] " %(persons)s Personen"
+
+#: templates/event/event_form.html:76
 msgid "Help for Textile"
 msgstr "Hilfe zu Textile"
 

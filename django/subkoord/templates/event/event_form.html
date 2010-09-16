@@ -49,10 +49,21 @@
 		{% for task in type.tasks.all %}
 			<li><em>{{ task.name }}:</em>
 				{% if task.info %}{{ task.info }}{% endif %}
-				{% ifequal task.min_persons task.max_persons %}<br />{{ task.min_persons }} Person{{ task.min_persons|pluralize }}{% else %}
-					{% if task.min_persons %}<br />min. {{ task.min_persons }} Person{{ task.min_persons|pluralize }}{% endif %}
-					{% if task.max_persons %}<br />max. {{ task.max_persons }} Person{{ task.max_persons|pluralize }}{% endif %}
-				{% endifequal %}
+				{% if not task.min_persons and not task.max_persons %}
+					<br />{% trans "no staff requirements" %}
+				{% else %}
+					{% if task.min_persons == task.max_persons %}
+						<br />
+						{% blocktrans count task.min_persons as persons %}one person{% plural %}{{ persons }} persons{% endblocktrans %}
+					{% else %}
+						{% if task.min_persons %}<br />min.
+							{% blocktrans count task.min_persons as persons %}one person{% plural %}{{ persons }} persons{% endblocktrans %}
+						{% endif %}
+						{% if task.max_persons %}<br />max.
+							{% blocktrans count task.max_persons as persons %}one person{% plural %}{{ persons }} persons{% endblocktrans %}
+						{% endif %}
+					{% endif %}
+				{% endif %}
 			</li>
 		{% endfor %}
 		</ul>
