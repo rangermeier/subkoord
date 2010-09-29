@@ -26,7 +26,13 @@
 	<tfoot>
 		<tr class="cal_nav">
 			<td colspan="3"><a class="previous" href="{% url event_cal controls.previous_year, controls.previous_month %}">{% trans "previous month" %}</a></td>
-			<td></td>
+			<td>
+				<select id="jumptomonth">
+				{% for jt in controls.jumpto %}
+					<option value="{% url event_cal jt.year, jt.month %}"{% if controls.this_month.month == jt.month %} selected="selected"{% endif %}>{{ jt.year }} - {{ jt.month }}</option>
+				{% endfor %}
+				</select>
+			</td>
 			<td colspan="3"><a class="next" href="{% url event_cal controls.next_year, controls.next_month %}">{% trans "next month" %}</a></td>
 		</tr>
 	</tfoot>
