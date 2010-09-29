@@ -7,10 +7,16 @@
 
 {% block content %}
 	<ul>
-	{% for job in usr.job_set.all %}
-		<li>{{ job.event.date|date:"D, j. n. Y" }}
-		<a href="{% url event job.event.id %}">{{ job.event.title }}</a>
+	{% regroup usr.job_set.all|dictsortreversed:"event.date" by event as job_list %}
+	{% for event in job_list %}
+		<li>{{ event.grouper.date|date:"D, j. n. Y" }}
+		<a href="{% url event event.grouper.id %}">{{ event.grouper.title }}</a>:
+		{% for job in event.list %}
+			{{ job.task }}{% if not forloop.last %},{% endif %}
+		{% endfor %}
 		</li>
+	{% empty %}
+		<li>{%trans "No jobs yet..." %}</li>
 	{% endfor %}
 	</ul>
 {% endblock content %}
