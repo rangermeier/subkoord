@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-09-16 12:01+0200\n"
+"POT-Creation-Date: 2010-09-29 20:40+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -106,7 +106,7 @@ msgid "edit"
 msgstr "bearbeiten"
 
 #: templates/event/event.html:12 templates/event/event_edit.html:11
-#: templates/event/event_new.html:10 templates/users/user.html:25
+#: templates/event/event_new.html:10 templates/users/user.html:31
 #: templates/users/user_edit.html:21 templates/users/user_list.html:26
 msgid "view events"
 msgstr "zum Kalender"
@@ -155,14 +155,15 @@ msgstr "Hilfe zu den Veranstaltungs-Typen"
 msgid "no staff requirements"
 msgstr "keine Dienste"
 
-#: templates/event/event_form.html:57 templates/event/event_form.html.py:61
-#: templates/event/event_form.html:64
+#: templates/event/event_form.html:57 templates/event/event_form.html.py:60
+#: templates/event/event_form.html:63
+#, python-format
 msgid "one person"
 msgid_plural "%(persons)s persons"
 msgstr[0] "eine Person"
 msgstr[1] " %(persons)s Personen"
 
-#: templates/event/event_form.html:76
+#: templates/event/event_form.html:75
 msgid "Help for Textile"
 msgstr "Hilfe zu Textile"
 
@@ -194,20 +195,24 @@ msgstr "Termin-Archiv"
 msgid "previous month"
 msgstr "voriges Monat"
 
-#: templates/event/month_cal.html:30
+#: templates/event/month_cal.html:36
 msgid "next month"
 msgstr "nächstes Monat"
 
-#: templates/users/user.html:20 templates/users/user_edit.html:19
+#: templates/users/user.html:19
+msgid "No jobs yet..."
+msgstr "Bislang noch keine Dienste..."
+
+#: templates/users/user.html:26 templates/users/user_edit.html:19
 msgid "list all users"
 msgstr "Alle NutzerInnen anzeigen"
 
-#: templates/users/user.html:22 templates/users/user_edit.html:20
+#: templates/users/user.html:28 templates/users/user_edit.html:20
 #: templates/users/user_list.html:23
 msgid "view my profile"
 msgstr "mein Profil anzeigen"
 
-#: templates/users/user.html:24 templates/users/user_list.html:25
+#: templates/users/user.html:30 templates/users/user_list.html:25
 msgid "change my password"
 msgstr "mein Passwort ändern"
 
