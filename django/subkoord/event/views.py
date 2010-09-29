@@ -70,9 +70,9 @@ def event_new(request):
 	if request.method == 'POST':
 		form = EventForm(request.POST)
 		if form.is_valid():
-			form.save()
+			event = form.save()
 			messages.success(request, _("Created new event"))
-			return HttpResponseRedirect(reverse('event_index'))
+			return HttpResponseRedirect(reverse('event', args=[event.id]))
 	else:
 		form = EventForm()
 	return render_to_response('event/event_new.html', {
