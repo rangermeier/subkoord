@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-09-29 20:40+0200\n"
+"POT-Creation-Date: 2010-10-01 10:27+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -191,11 +191,15 @@ msgstr "zum aktuellen Datum"
 msgid "view archive"
 msgstr "Termin-Archiv"
 
-#: templates/event/month_cal.html:28
+#: templates/event/month_cal.html:16
+msgid "add event with this date"
+msgstr "Veranstaltung für dieses Datum anlegen"
+
+#: templates/event/month_cal.html:31
 msgid "previous month"
 msgstr "voriges Monat"
 
-#: templates/event/month_cal.html:36
+#: templates/event/month_cal.html:39
 msgid "next month"
 msgstr "nächstes Monat"
 

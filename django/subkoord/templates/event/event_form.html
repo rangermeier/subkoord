@@ -9,7 +9,7 @@
 			$("#id_date").datepicker({ dateFormat: 'yy-mm-dd' });
 			$("#id_date").after('<input id="time" type="text" />');
 			$("#time").parent().append('<div class="form-help"><span id="date-help">JJJJ-MM-JJ</span> <span id="time-help">hh:mm</span></div>');
-			if($("#id_date").val() != "") {
+			if($("#id_date").val().match(/\b/)) {
 				var date_time = $("#id_date").val().split(" ");
 				$("#id_date").val(date_time[0]);
 				var time = date_time[1].split(":");

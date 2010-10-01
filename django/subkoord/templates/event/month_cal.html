@@ -13,11 +13,14 @@
 		<tr>
 		{% for day in week %}
 			<td class="{% if not day.in_month %}cal_not_in_month {% endif %}{% if day.today%}today{% endif %}">
-				{% if day.event %}{{ day.day|date:"j" }}
+				{% if day.future %}<a href="{% url event_new %}?date={{ day.day|date:"Y-m-d" }}" class="day_new_event" title="{% trans "add event with this date" %}">{{ day.day|date:"j" }}</a>
+				{% else %}{{ day.day|date:"j" }}
+				{% endif %}
+				{% if day.event %}
 				{% for event in day.events %}<br />
 					<a href="{% url event event.id %}" title="{{ event.title }}" class="{% if event.all_tasks_satisfied %}{% else %}{% if day.future %}not-satisfied{% endif %}{% endif %}">{{ event.title }}</a>
 				{% endfor %}
-				{% else %}{{ day.day|date:"j" }}{% endif %}
+				{% endif %}
 			</td>
 		{% endfor %}
 		</tr>
