@@ -119,6 +119,11 @@ textarea {
 .cal_not_in_month {
 	color: #888;
 }
+a.day_new_event {
+	color: #000;
+	text-decoration:none;
+	width: 100%;
+}
 #event_cal tfoot {
 	font-weight: normal;
 	font-style: normal;
