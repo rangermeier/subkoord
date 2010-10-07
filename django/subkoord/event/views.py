@@ -73,8 +73,10 @@ def event_new(request):
 			event = form.save()
 			messages.success(request, _("Created new event"))
 			return HttpResponseRedirect(reverse('event', args=[event.id]))
-	else:
+	elif 'date' in request.GET:
 		form = EventForm(initial={'date': request.GET['date']})
+	else:
+		form = EventForm()
 	return render_to_response('event/event_new.html', {
 		'form': form,
 		'event_types': event_types,
