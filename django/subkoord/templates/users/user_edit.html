@@ -7,6 +7,7 @@
 
 {% block content %}
 	<form action="{% url user_change_password %}" method="POST">
+	{%  csrf_token  %}
 	<ul>
 		{{ form.as_ul}}
 	</ul>
