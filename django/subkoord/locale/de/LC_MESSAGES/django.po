@@ -169,7 +169,7 @@ msgstr "Hilfe zu Textile"
 
 #: templates/event/event_new.html:5
 msgid "New event"
-msgstr "Neuer Termine"
+msgstr "Neuer Termin"
 
 #: templates/event/events.html:6
 msgid "Events"
