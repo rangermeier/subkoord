@@ -1,5 +1,11 @@
 {% extends "base.html" %}
 
+{%block javascript %}
+	<script type="text/javascript">
+	if (top.location != self.location) { top.location = self.location.href; }
+	</script>
+{%endblock javascript %}
+
 {% block content %}
 
 {% if form.errors %}
