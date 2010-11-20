@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load wikitags %}
+{% load i18n %}
+
+{% block heading %}
+{%if page.title %}
+	{% trans "Editing" %} {{ page.title|wikifytitle }}
+{% else %}
+	{% trans "new page" %}
+{% endif %}
+{% endblock heading %}
+
+{%block jquery %}
+		$('#ask-delete').hide();
+		$('#wiki-delete').submit(function() {
+			if($('input[name="really_sure"]').is(':checked')) {} else {
+				$('#ask-delete').show();
+				return false;
+			}
+		});
+{%endblock jquery %}
+
+{% block navigation %}
+	<ul>
+		{%if page.title %}
+		<li><a href="{% url wiki_page page.title %}">{% trans "back" %}</a></li>
+		{% endif %}
+		<li><a href="{% url wiki_index %}">{% trans "Wiki Index" %}</a></li>
+		<li><a href="{% url event_index %}">{% trans "view events" %}</a></li>
+	</ul>
+{% endblock navigation %}
+
+{% block content %}
+	<form action="{% url wiki_edit page.title %}" class="wiki-form" method="POST">
+		<ul>
+		{{ form.as_ul }}
+		</ul>
+		{% csrf_token %}
+		<input type="submit" value="{% trans "Save" %}" />
+	</form>
+	<form action="{% url wiki_delete page.title %}" method="POST" id="wiki-delete">
+		{% csrf_token %}
+		<input type="submit" value="{% trans "Delete" %}" />
+		<span id="ask-delete">{% trans "Are you really sure?"%} <input type="checkbox" value="yes" name="really_sure" id="really_sure"/><label for="really_sure">{% trans "Yes!"%}</label></span>
+	</form>
+{% endblock %}

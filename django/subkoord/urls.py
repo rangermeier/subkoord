@@ -7,6 +7,7 @@ admin.autodiscover()
 urlpatterns = patterns('',
 	(r'^event/', include('subkoord.event.urls')),
 	(r'^user/', include('subkoord.users.urls')),
+	(r'^wiki/', include('subkoord.wiki.urls')),
 	(r'^admin/', include(admin.site.urls)),
 	url(r'^$', 'subkoord.event.views.event_cal', name="home"),
 	url(r'^accounts/$',

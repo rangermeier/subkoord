@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load wikitags %}
+{% load i18n %}
+{% load markup %}
+
+{% block heading %}
+{{ page.title|wikifytitle }}
+{% endblock heading %}
+
+{% block navigation %}
+	<ul>
+		<li><a href="{% url wiki_edit page.title %}">{% trans "edit" %}</a></li>
+		<li><a href="{% url wiki_index %}">{% trans "Wiki Index" %}</a></li>
+		<li><a href="{% url event_index %}">{% trans "view events" %}</a></li>
+	</ul>
+{% endblock navigation %}
+
+{% block content %}
+	<div id="wiki">
+		<div id="wiki-content" class="span-12">
+		{{ page.content_html|safe }}
+		</div>
+		<div id="wiki-meta" class="span-6 last">
+		{% blocktrans with page.author as author and page.last_changed|date:"D, j. n. Y, H:i" as last_changed%}
+		last edited by {{ author }}, <br /> {{ last_changed }}.
+		{% endblocktrans %}
+		</div>
+	</div>
+
+{% endblock %}
