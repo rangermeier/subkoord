@@ -29,10 +29,10 @@ ul {
 form ul li, #sidebar ul li {
 	list-style-type: none;
 }
-.event-form .errorlist li {
+.event-form .errorlist li, .wiki-form .errorlist li {
 	color: #600;
 }
-.event-form ul li {
+.event-form ul li, .wiki-form ul li {
 	color: #888;
 }
 label {
@@ -141,4 +141,27 @@ a.day_new_event {
 #event_cal .today {
   color: #600;
   font-weight: bold;
+}
+
+
+#wiki-index {
+	padding-left: 0px;
+}
+#wiki-index > li {
+	margin-top: 1em;
+	list-style-type: none;
+}
+a.new_page {
+	color: #600;
+}
+
+#wiki-delete {
+	text-align: right;
+	margin-right: 1.5em;
+}
+#ask-delete label {
+	display:inline;
+}
+.wiki-form ul li {
+	color: #888;
 }
