@@ -38,7 +38,6 @@ def edit(request, title = None):
 	except Wikipage.DoesNotExist:
 		# Must be a new one; let's create it
 		page = Wikipage(title=title, author=request.user)
-	print u"page.title %s" % page.title
 	if request.POST:
 		form = WikipageForm(request.POST, instance=page)
 		if form.is_valid():
