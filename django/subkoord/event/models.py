@@ -12,6 +12,9 @@ class Task(models.Model):
 	def maxed_out(self, event):
 		try:
 			self._maxed_out[event.id]
+		except AttributeError:
+			self._maxed_out = {}
+			return self.maxed_out(event)
 		except KeyError:
 			if type(self.max_persons) != type(1L):
 				self._maxed_out[event.id] = False
@@ -21,6 +24,9 @@ class Task(models.Model):
 	def satisfied(self, event):
 		try:
 			self._satisfied[event.id]
+		except AttributeError:
+			self._satisfied = {}
+			return self.satisfied(event)
 		except KeyError:
 			if type(self.min_persons) != type(1L):
 				self._satisfied[event.id] = True
