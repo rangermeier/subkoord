@@ -10,13 +10,23 @@ class Task(models.Model):
 	min_persons = models.IntegerField(blank=True, null=True)
 	max_persons = models.IntegerField(blank=True, null=True)
 	def maxed_out(self, event):
-		if type(self.max_persons) != type(1L):
-			return False
-		return len(self.job_set.filter(event=event.id)) >= self.max_persons
+		try:
+			self._maxed_out[event.id]
+		except KeyError:
+			if type(self.max_persons) != type(1L):
+				self._maxed_out[event.id] = False
+			else:
+				self._maxed_out[event.id] = self.job_set.filter(event=event.id).count() >= self.max_persons
+		return self._maxed_out[event.id]
 	def satisfied(self, event):
-		if type(self.min_persons) != type(1L):
-			return True
-		return len(self.job_set.filter(event=event.id)) >= self.min_persons
+		try:
+			self._satisfied[event.id]
+		except KeyError:
+			if type(self.min_persons) != type(1L):
+				self._satisfied[event.id] = True
+			else:
+				self._satisfied[event.id] = self.job_set.filter(event=event.id).count() >= self.min_persons
+		return self._satisfied[event.id]
 	def __unicode__(self):
 		return self.name
 
@@ -38,14 +48,21 @@ class Event(models.Model):
 	cron = models.DateTimeField(blank=True, null=True, editable=False)
 	@property
 	def tasks(self):
-		return self.type.tasks.select_related().all()
+		try:
+			self._tasks
+		except AttributeError:
+			self._tasks = self.type.tasks.select_related().all()
+		return self._tasks
 	@property
 	def open_tasks(self):
-		open_tasks = []
-		for task in self.tasks:
-			if not task.satisfied(self):
-				open_tasks.append(task)
-		return open_tasks
+		try:
+			self._open_tasks
+		except AttributeError:
+			self._open_tasks = []
+			for task in self.tasks:
+				if not task.satisfied(self):
+					self._open_tasks.append(task)
+		return self._open_tasks
 	@property
 	def all_tasks_satisfied(self):
 		return (len(self.open_tasks) == 0)
@@ -76,4 +93,3 @@ class EventForm(ModelForm):
 
 class NoteForm(forms.Form):
     note = forms.CharField()
-
