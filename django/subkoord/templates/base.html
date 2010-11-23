@@ -1,4 +1,5 @@
 {% load i18n %}
+{% load cache %}
 
 <!DOCTYPE html>
 <html>
@@ -59,7 +60,7 @@
 </div><!-- /content -->
 {% endblock contentcontainer %}
 <div id="footer" class="prepend-1 span-23 last">
-	{% block footer %}
+	{% block footer %}{% cache 500 footer_user user.id %}
 	<ul>
 		<li><a href="{% url home %}">{% trans "home" %}</a></li>
 		{% if user.is_authenticated %}
@@ -70,7 +71,7 @@
 		{% endif %}
 
 	</ul>
-	{% endblock footer %}
+	{% endcache %}{% endblock footer %}
  </div><!-- /footer -->
 </div> <!-- /container -->
 </body>

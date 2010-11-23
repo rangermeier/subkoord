@@ -1,11 +1,13 @@
 {% extends "base.html" %}
 {% load i18n %}
+{% load cache %}
 
 {% block heading %}
 {{ usr.username }}
 {% endblock heading %}
 
 {% block content %}
+{% cache 500 users usr.id %}
 	<ul>
 	{% regroup usr.job_set.all|dictsortreversed:"event.date" by event as job_list %}
 	{% for event in job_list %}
@@ -19,6 +21,7 @@
 		<li>{%trans "No jobs yet..." %}</li>
 	{% endfor %}
 	</ul>
+{% endcache %}
 {% endblock content %}
 
 {% block navigation %}

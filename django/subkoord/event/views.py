@@ -8,6 +8,14 @@ from django.contrib import messages
 from django.utils.translation import ugettext as _
 from datetime import date, datetime
 from models import Event, EventForm, EventType, Job, Task, Note, NoteForm
+from django.db.models.signals import post_save, post_delete
+
+def clear_cache(sender, **kwargs):
+	from django.core.cache import cache
+	cache.clear()
+
+post_save.connect(clear_cache)
+post_delete.connect(clear_cache)
 
 @login_required
 def event_index(request, **kwargs):

@@ -1,5 +1,6 @@
 {% extends "event/events.html" %}
 {% load i18n %}
+{% load cache %}
 {% load calendar %}
 
 {%block javascript %}
@@ -13,8 +14,9 @@
 {%endblock javascript %}
 
 {% block content %}
+{% cache 500 calendar year month %}
 	<div id="event_cal" class="span-16">
 	{% month_cal year month%}
 	</div>
+{% endcache %}
 {% endblock content %}
-

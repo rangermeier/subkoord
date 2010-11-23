@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load i18n %}
+{% load cache %}
 {% load calendar %}
 
 {% block heading %}
@@ -7,6 +8,7 @@
 {% endblock heading %}
 
 {% block content %}
+{% cache 500 eventlist %}
 	<ul>
 	{% for event in event_list %}
 		<li>{{ event.date|date:"D, j. n. Y" }}
@@ -14,6 +16,7 @@
 		</li>
 	{% endfor %}
 	</ul>
+{% endcache %}
 {% endblock content %}
 
 {% block navigation %}

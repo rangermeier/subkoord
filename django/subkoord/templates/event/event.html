@@ -1,66 +1,72 @@
 {% extends "base.html" %}
 {% load i18n %}
+{% load cache %}
 {% load markup %}
 
 {% block heading %}
 {{ event.title }}
 {% endblock heading %}
 
-{% block navigation %}
+{% block navigation %}{% cache 500 event_nav event.date.year event.date.month %}
 	<ul>
 		<li><a href="{% url event_edit event.id %}">{% trans "edit" %}</a></li>
 		<li><a href="{% url event_cal event.date.year event.date.month %}">{% trans "view events" %}</a></li>
 		<li><a href="{% url wiki_index %}">{% trans "Wiki" %}</a></li>
 	</ul>
-{% endblock navigation %}
+{% endcache %}{% endblock navigation %}
 
 {% block content %}
+{% cache 500 event_info event.id %}
+	<p>{% trans "Type" %}: {{ event.type }}</p>
+	<p>{{ event.date|date:"D, j. n. Y, H:i" }}</p>
+	{% if event.info %}
+	<h3>{% trans "Info" %}</h3>
+	<p>{{ event.info|urlize|textile }}</p>
+	{% endif %}
+{% endcache %}
 
-<p>{% trans "Type" %}: {{ event.type }}</p>
-<p>{{ event.date|date:"D, j. n. Y, H:i" }}</p>
-{% if event.info %}
-<h3>{% trans "Info" %}</h3>
-<p>{{ event.info|urlize|textile }}</p>
-{% endif %}
-
-<div class="span-9">
-{% if event.tasks %}
-<h3>{% trans "Tasks" %}</h3>
-<ul class="tasks">
-{% for task in event.tasks %}
-	<li><span class="{% if task in event.open_tasks %}not-satisfied{% endif %}">{{ task.name }}</span>:
-	{% for job in event.jobs %}
-		{% if task == job.task %}
-			<a href="{% url user_view job.user.id %}">{{ job.user }}</a>
-			{% if user == job.user %}
-				&lt; <a href="{% url job_delete event.id job.id %}">{% trans "remove me" %}</a>
+{% cache 500 event_tasks event.id user.id%}
+	<div class="span-9">
+	{% if event.tasks %}
+	<h3>{% trans "Tasks" %}</h3>
+	<ul class="tasks">
+	{% for task in event.tasks %}
+		<li><span class="{% if task in event.open_tasks %}not-satisfied{% endif %}">{{ task.name }}</span>:
+		{% for job in event.jobs %}
+			{% if task == job.task %}
+				<a href="{% url user_view job.user.id %}">{{ job.user }}</a>
+				{% if user == job.user %}
+					&lt; <a href="{% url job_delete event.id job.id %}">{% trans "remove me" %}</a>
+				{% endif %}
+			{% endif %}
+		{% endfor %}
+		{%  if not task.id in user_tasks %}
+			{% if task in event.open_tasks or not task.max_persons %}
+			&gt; <a href="{% url job_add event.id, task.id %}">{% trans "add me" %}</a>
 			{% endif %}
 		{% endif %}
+		</li>
 	{% endfor %}
-	{%  if not task.id in user_tasks %}
-		{% if task in event.open_tasks or not task.max_persons %}
-		&gt; <a href="{% url job_add event.id, task.id %}">{% trans "add me" %}</a>
-		{% endif %}
+	</ul>
+	{% else %}
+	{% trans "No tasks"%}
 	{% endif %}
-	</li>
-{% endfor %}
-</ul>
-{% else %}
-{% trans "No tasks"%}
-{% endif %}
-</div>
+	</div>
+{% endcache %}
 
-<div class="span-9 last">
-<h3>{% trans "Notes" %}</h3>
-{% if event.notes %}
-<ul class="notes">
-{% for note in event.notes.all %}
-	<li>{{ note.note }}<br />
-	<span class="meta">{{ note.user }}, {{ note.date|date:"j. n. Y, H:i" }}</span>
-	</li>
-{% endfor %}
-</ul>
-{% endif %}
+{% cache 500 event_notes event.id %}
+	<div class="span-9 last">
+	<h3>{% trans "Notes" %}</h3>
+	{% if event.notes %}
+	<ul class="notes">
+	{% for note in event.notes.all %}
+		<li>{{ note.note }}<br />
+		<span class="meta">{{ note.user }}, {{ note.date|date:"j. n. Y, H:i" }}</span>
+		</li>
+	{% endfor %}
+	</ul>
+	{% endif %}
+{% endcache %}
 <form action="{% url note_add event.id %}" method="post">
 	{% csrf_token %}
 	<input type="text" id="note" name="note" />
