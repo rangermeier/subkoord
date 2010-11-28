@@ -2,6 +2,14 @@ em {
 	font-style:oblique; /* nur kursiv, nicht fett! */
 }
 
+pre, code {
+	background-color: #eee;
+	font-size: 0.8em;
+	line-height: 1.5em;
+	padding-top: 0.25em;
+	padding-bottom: 0.25em;
+}
+
 #container {
 	margin-left: auto;
 	margin-right: auto;
@@ -155,13 +163,13 @@ a.new_page {
 	color: #600;
 }
 
-#wiki-delete {
-	text-align: right;
-	margin-right: 1.5em;
-}
 #ask-delete label {
 	display:inline;
 }
 .wiki-form ul li {
 	color: #888;
+}
+.wiki-form textarea {
+	height: 300px;
+	width: 400px;
 }
