@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-11-28 14:25+0100\n"
+"POT-Creation-Date: 2010-11-28 14:59+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -97,7 +97,7 @@ msgstr "Hallo!"
 msgid "There are open tasks:"
 msgstr "Es gibt offene Dienste:"
 
-#: templates/email/open_tasks.html:11
+#: templates/email/open_tasks.html:13
 msgid "Thanks for your kind attention :)"
 msgstr "Vielen Dank für Deine Aufmerksamkeit :)"
 
@@ -269,7 +269,6 @@ msgid "Yes!"
 msgstr "Ja!"
 
 #: templates/wiki/page.html:23
-#, fuzzy, python-format
 msgid ""
 "\n"
 "\t\t\tlast edited by %(author)s, <br /> %(last_changed)s.\n"
@@ -282,7 +281,7 @@ msgstr ""
 #: templates/wiki/page.html:26
 #, python-format
 msgid "Wiki-link to this page: <code>[[%(title)s]]</code>"
-msgstr "Wiki-link zu dieser Seite: <code>[[%(title)s]]</code>"
+msgstr "Wiki-Link zu dieser Seite: <code>[[%(title)s]]</code>"
 
 #: wiki/models.py:19
 msgid "Page Title"
