@@ -4,6 +4,9 @@ from django.shortcuts import render_to_response
 from django.core.mail import send_mail
 from datetime import datetime, timedelta
 from django.utils.translation import ugettext as _
+from django.conf import settings
+import os
+import subprocess
 from models import Event
 
 def render_to_email(view,subject,to_emails,from_email,*args,**kwargs):
@@ -15,7 +18,18 @@ def render_to_email(view,subject,to_emails,from_email,*args,**kwargs):
 	body=loader.render_to_string(view,*args,**kwargs)
 	send_mail(subject,body,from_email,to_emails)
 
-def cron(request):
+
+def backup(request):
+	last_backup = datetime.fromtimestamp(os.path.getmtime(settings.BACKUP_DIR+"/backup.sql"))
+	if last_backup > datetime.now() - timedelta(hours=1):
+		return HttpResponse("only one backup per hour")
+	mysqldump = "mysqldump --add-drop-table -u " + settings.DATABASES['default']['USER'] + " -p" + settings.DATABASES['default']['PASSWORD'] + " " + settings.DATABASES['default']['NAME'] + " >  backup.sql"
+	subprocess.call(args=mysqldump, shell=True, cwd=settings.BACKUP_DIR)
+	subprocess.Popen(args="gzip -c backup.sql > backup.gz", shell=True, cwd=settings.BACKUP_DIR)
+	return HttpResponse("ceated DB backup")
+
+
+def reminder(request):
 	remind_window = timedelta(days=2) # when to start bragging
 	remind_pause = timedelta(days=1) # how often cron should run at max
 	subject = _("Open Tasks")

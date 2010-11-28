@@ -104,3 +104,5 @@ INSTALLED_APPS = (
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 CACHE_BACKEND = 'file:///var/.../cache'
+
+BACKUP_DIR = '/home/.../backup/'
