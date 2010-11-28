@@ -21,9 +21,9 @@ def render_to_email(view,subject,to_emails,from_email,*args,**kwargs):
 
 def backup(request):
 	last_backup = datetime.fromtimestamp(os.path.getmtime(settings.BACKUP_DIR+"/backup.sql"))
-	if last_backup > datetime.now() - timedelta(hours=1):
+	if last_backup > datetime.now() - timedelta(minutes=1):
 		return HttpResponse("only one backup per hour")
-	mysqldump = "mysqldump --add-drop-table -u " + settings.DATABASES['default']['USER'] + " -p" + settings.DATABASES['default']['PASSWORD'] + " " + settings.DATABASES['default']['NAME'] + " >  backup.sql"
+	mysqldump = "mysqldump --add-drop-table -u " + settings.DATABASES['default']['USER'] + " -p" + settings.DATABASES['default']['PASSWORD'] + " -h " + settings.DATABASES['default']['HOST'] + " " + settings.DATABASES['default']['NAME'] + " >  backup.sql"
 	subprocess.call(args=mysqldump, shell=True, cwd=settings.BACKUP_DIR)
 	subprocess.Popen(args="gzip -c backup.sql > backup.gz", shell=True, cwd=settings.BACKUP_DIR)
 	return HttpResponse("ceated DB backup")
