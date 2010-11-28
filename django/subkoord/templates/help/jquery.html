@@ -1,0 +1,6 @@
+		$('#help>div').hide();
+		$('#help h4').toggle(function() {
+			$(this).next().fadeIn('fast');
+		}, function() {
+			$(this).next().fadeOut('fast');
+		});

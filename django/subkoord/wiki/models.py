@@ -18,7 +18,8 @@ class Wikipage(models.Model):
 	"""Wiki page storage"""
 	title = models.SlugField(max_length=50, unique = True, name=_("Title"), verbose_name=_("Page Title"),
 		help_text=_("Only letters, numbers, underscores and hyphens."))
-	content = models.TextField(name=_("Content"), verbose_name=_("Content"))
+	content = models.TextField(name=_("Content"), verbose_name=_("Content"),
+		help_text=_("You can use Textile to format your text.")+"<br />"+_("Wiki-Link: <code>[[link_title]]</code>"))
 	content_html = models.TextField(name=_("Content"), editable=False)
 	last_changed = models.DateTimeField(auto_now=True, editable=False)
 	author = models.ForeignKey(User, editable=False)

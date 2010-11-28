@@ -22,12 +22,7 @@
 				$("#time").remove();
 			});
 		}
-		$('#help>div').hide();
-		$('#help h4').toggle(function() {
-			$(this).next().fadeIn('fast');
-		}, function() {
-			$(this).next().fadeOut('fast');
-		});
+{% include "help/jquery.html" %}
 	});
 	</script>
 {% endblock javascript %}
@@ -72,20 +67,7 @@
 	{% endfor %}
 	</div>
 
-	<h4>{% trans "Help for Textile" %}</h4>
-	<div id="help-event-textile">
-	<ul>
-		<li><pre>_kursiv_</pre></li>
-		<li><pre>*fett*</pre></li>
-		<li>Aufzählung: <pre> # erstens
- # zweitens </pre></li>
-		<li>Auflistung: <pre> * dies
- * das</pre></li>
-		<li>Link: <pre>"linktext":http://url</pre></li>
-		<li>Bild: <pre>!http://imageurl!</pre></li>
-	</ul>
-	<a href="/hilfe/textile" target="_blank">mehr Erklärungen</a>
-	</div>
+{% include "help/textile.html" %}
 
 </div><!-- /content -->
 {% endblock contentcontainer %}

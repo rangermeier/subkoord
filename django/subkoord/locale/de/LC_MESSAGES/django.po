@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-11-20 14:02+0100\n"
+"POT-Creation-Date: 2010-11-28 14:25+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,71 +21,71 @@ msgstr ""
 msgid "Open Tasks"
 msgstr "Dienste"
 
-#: event/models.py:32 wiki/models.py:19
+#: event/models.py:48 wiki/models.py:19
 msgid "Title"
 msgstr "Titel"
 
-#: event/models.py:33
+#: event/models.py:49
 msgid "Date and Time"
 msgstr "Datum und Zeit"
 
-#: event/models.py:34 templates/event/event.html:19
+#: event/models.py:50 templates/event/event.html:20
 msgid "Type"
 msgstr "Typ"
 
-#: event/models.py:35 templates/event/event_form.html:42
+#: event/models.py:51 templates/event/event_form.html:37
 msgid "Depending on the type of the event different tasks will be available."
 msgstr "Durch den Typ der Veranstaltung ergeben sich die Dienste."
 
-#: event/models.py:36
+#: event/models.py:52
 msgid "Information"
 msgstr "Information"
 
-#: event/models.py:37
+#: event/models.py:53 wiki/models.py:22
 msgid "You can use Textile to format your text."
 msgstr "Du kannst den Text mittels Textile formatieren."
 
-#: event/views.py:55
+#: event/views.py:63
 msgid "Saved changes"
 msgstr "Änderungen gespeichert"
 
-#: event/views.py:74
+#: event/views.py:82
 msgid "Created new event"
 msgstr "neuer Termin gespeichert"
 
-#: event/views.py:97
+#: event/views.py:105
 msgid "Took job"
 msgstr "Dienst übernommen"
 
-#: event/views.py:107
+#: event/views.py:115
 msgid "Deleted job"
 msgstr "Dienst entfernt"
 
-#: event/views.py:118
+#: event/views.py:126
 msgid "Saved note"
 msgstr "Anmerkung gespeichert"
 
-#: templates/base.html:33
+#: templates/base.html:34
 msgid "Sub-Koordinator"
 msgstr "Sub-Koordinator"
 
-#: templates/base.html:64
+#: templates/base.html:65
 msgid "home"
 msgstr "start"
 
-#: templates/base.html:66
+#: templates/base.html:67
 msgid "admin"
 msgstr "admin"
 
-#: templates/base.html:67
+#: templates/base.html:68
 msgid "logged in as"
 msgstr "angemeldet als"
 
-#: templates/base.html:67
+#: templates/base.html:68
 msgid "logout"
 msgstr "abmelden"
 
-#: templates/base.html:69
+#: templates/base.html:70
 msgid "login"
 msgstr "anmelden"
 
@@ -101,48 +101,49 @@ msgstr "Es gibt offene Dienste:"
 msgid "Thanks for your kind attention :)"
 msgstr "Vielen Dank für Deine Aufmerksamkeit :)"
 
-#: templates/event/event.html:11 templates/wiki/page.html:12
+#: templates/event/event.html:12 templates/wiki/page.html:11
+#: templates/wiki/page.html.py:27
 msgid "edit"
 msgstr "bearbeiten"
 
-#: templates/event/event.html:12 templates/event/event_edit.html:11
-#: templates/event/event_new.html:10 templates/users/user.html:31
-#: templates/users/user_edit.html:22 templates/users/user_list.html:26
-#: templates/wiki/edit.html:29 templates/wiki/home.html:12
-#: templates/wiki/page.html:14
+#: templates/event/event.html:13 templates/event/event_edit.html:11
+#: templates/event/event_new.html:10 templates/users/user.html:34
+#: templates/users/user_edit.html:22 templates/users/user_list.html:28
+#: templates/wiki/edit.html:30 templates/wiki/home.html:12
+#: templates/wiki/page.html:13
 msgid "view events"
 msgstr "zum Kalender"
 
-#: templates/event/event.html:13 templates/event/events.html:30
-#: templates/users/user.html:32 templates/wiki/home.html:6
+#: templates/event/event.html:14 templates/event/events.html:33
+#: templates/users/user.html:35 templates/wiki/home.html:6
 msgid "Wiki"
-msgstr ""
+msgstr "Wiki"
 
-#: templates/event/event.html:22
+#: templates/event/event.html:23
 msgid "Info"
 msgstr "Info"
 
-#: templates/event/event.html:28
+#: templates/event/event.html:31
 msgid "Tasks"
 msgstr "Dienste"
 
-#: templates/event/event.html:36
+#: templates/event/event.html:39
 msgid "remove me"
 msgstr "mich entfernen"
 
-#: templates/event/event.html:42
+#: templates/event/event.html:45
 msgid "add me"
 msgstr "mich hinzufügen"
 
-#: templates/event/event.html:49
+#: templates/event/event.html:52
 msgid "No tasks"
 msgstr "Keine Dienste"
 
-#: templates/event/event.html:54
+#: templates/event/event.html:59
 msgid "Notes"
 msgstr "Anmerkungen"
 
-#: templates/event/event.html:67
+#: templates/event/event.html:73
 msgid "add note"
 msgstr "Anmerkung hinzufügen"
 
@@ -150,51 +151,47 @@ msgstr "Anmerkung hinzufügen"
 msgid "Edit event"
 msgstr "Termin bearbeiten"
 
-#: templates/event/event_edit.html:10 templates/wiki/edit.html:26
+#: templates/event/event_edit.html:10 templates/wiki/edit.html:27
 msgid "back"
 msgstr "zurück"
 
-#: templates/event/event_form.html:40
+#: templates/event/event_form.html:35
 msgid "Help for Event Types"
 msgstr "Hilfe zu den Veranstaltungs-Typen"
 
-#: templates/event/event_form.html:53
+#: templates/event/event_form.html:48
 msgid "no staff requirements"
 msgstr "keine Dienste"
 
-#: templates/event/event_form.html:57 templates/event/event_form.html.py:60
-#: templates/event/event_form.html:63
+#: templates/event/event_form.html:52 templates/event/event_form.html.py:55
+#: templates/event/event_form.html:58
 #, python-format
 msgid "one person"
 msgid_plural "%(persons)s persons"
 msgstr[0] "eine Person"
 msgstr[1] " %(persons)s Personen"
 
-#: templates/event/event_form.html:75
-msgid "Help for Textile"
-msgstr "Hilfe zu Textile"
-
 #: templates/event/event_new.html:5
 msgid "New event"
 msgstr "Neuer Termin"
 
-#: templates/event/events.html:6
+#: templates/event/events.html:7
 msgid "Events"
 msgstr "Termine"
 
-#: templates/event/events.html:21
+#: templates/event/events.html:24
 msgid "add another event"
 msgstr "neuen Termin anlegen"
 
-#: templates/event/events.html:23
+#: templates/event/events.html:26
 msgid "view upcomming events"
 msgstr "aktuelle Termine"
 
-#: templates/event/events.html:26
+#: templates/event/events.html:29
 msgid "view current month"
 msgstr "zum aktuellen Datum"
 
-#: templates/event/events.html:28
+#: templates/event/events.html:31
 msgid "view archive"
 msgstr "Termin-Archiv"
 
@@ -210,20 +207,24 @@ msgstr "voriges Monat"
 msgid "next month"
 msgstr "nächstes Monat"
 
-#: templates/users/user.html:19
+#: templates/help/textile.html:3
+msgid "Help for Textile"
+msgstr "Hilfe zu Textile"
+
+#: templates/users/user.html:21
 msgid "No jobs yet..."
 msgstr "Bislang noch keine Dienste..."
 
-#: templates/users/user.html:26 templates/users/user_edit.html:20
+#: templates/users/user.html:29 templates/users/user_edit.html:20
 msgid "list all users"
 msgstr "Alle NutzerInnen anzeigen"
 
-#: templates/users/user.html:28 templates/users/user_edit.html:21
-#: templates/users/user_list.html:23
+#: templates/users/user.html:31 templates/users/user_edit.html:21
+#: templates/users/user_list.html:25
 msgid "view my profile"
 msgstr "mein Profil anzeigen"
 
-#: templates/users/user.html:30 templates/users/user_list.html:25
+#: templates/users/user.html:33 templates/users/user_list.html:27
 msgid "change my password"
 msgstr "mein Passwort ändern"
 
@@ -243,36 +244,45 @@ msgstr "Bearbeiten"
 msgid "new page"
 msgstr "neue Seite"
 
-#: templates/wiki/edit.html:28 templates/wiki/page.html:13
+#: templates/wiki/edit.html:29 templates/wiki/page.html:12
 msgid "Wiki Index"
 msgstr "Artikelverzeichnis"
 
-#: templates/wiki/edit.html:39
+#: templates/wiki/edit.html:41
 msgid "Save"
 msgstr "Speichern"
 
-#: templates/wiki/edit.html:43
+#: templates/wiki/edit.html:48
+msgid "Delete this Page"
+msgstr ""
+
+#: templates/wiki/edit.html:52
 msgid "Delete"
 msgstr "Löschen"
 
-#: templates/wiki/edit.html:44
+#: templates/wiki/edit.html:53
 msgid "Are you really sure?"
 msgstr "Sicher?"
 
-#: templates/wiki/edit.html:44
+#: templates/wiki/edit.html:53
 msgid "Yes!"
 msgstr "Ja!"
 
-#: templates/wiki/page.html:24
-#, python-format
+#: templates/wiki/page.html:23
+#, fuzzy, python-format
 msgid ""
 "\n"
-"\t\tlast edited by %(author)s, <br /> %(last_changed)s.\n"
-"\t\t"
+"\t\t\tlast edited by %(author)s, <br /> %(last_changed)s.\n"
+"\t\t\t"
 msgstr ""
 "\n"
 "\t\tzuletzt bearbeitet von %(author)s, <br /> %(last_changed)s.\n"
 "\t\t"
+
+#: templates/wiki/page.html:26
+#, python-format
+msgid "Wiki-link to this page: <code>[[%(title)s]]</code>"
+msgstr "Wiki-link zu dieser Seite: <code>[[%(title)s]]</code>"
 
 #: wiki/models.py:19
 msgid "Page Title"
@@ -282,24 +292,14 @@ msgstr "Seitentitel"
 msgid "Only letters, numbers, underscores and hyphens."
 msgstr "Nur Buchstaben, Zahlen, Binde- und Unterstrich"
 
-#: wiki/models.py:21 wiki/models.py:22
+#: wiki/models.py:21 wiki/models.py:23
 msgid "Content"
 msgstr "Text"
 
-#: wiki/models.py:25
+#: wiki/models.py:22
+msgid "Wiki-Link: <code>[[link_title]]</code>"
+msgstr "Wiki-Link: <code>[[Titel_der_Seite]]</code>"
+
+#: wiki/models.py:26
 msgid "Category"
 msgstr "Kategorie"
-
-#~ msgid ""
-#~ "The event type defines which tasks are available/requeired for this event."
-#~ msgstr "Durch den Typ der Veranstaltung ergeben sich die Dienste."
-
-#~ msgid ""
-#~ "You can use Textile to format your text. Need <a href=\"http://subkoord."
-#~ "powidl.org/hilfe/textile/\" target=\"_blank\">help</a>?"
-#~ msgstr ""
-#~ "Du kannst Textile zum formatieren verwenden. Brauchst du <a href=\"http://"
-#~ "subkoord.powidl.org/hilfe/textile/\" target=\"_blank\">Hilfe</a>?"
-
-#~ msgid "Date"
-#~ msgstr "Datum"

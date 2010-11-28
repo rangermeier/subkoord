@@ -20,9 +20,11 @@
 		{{ page.content_html|safe }}
 		</div>
 		<div id="wiki-meta" class="span-6 last">
-		{% blocktrans with page.author as author and page.last_changed|date:"D, j. n. Y, H:i" as last_changed%}
-		last edited by {{ author }}, <br /> {{ last_changed }}.
-		{% endblocktrans %}
+			<p>{% blocktrans with page.author as author and page.last_changed|date:"D, j. n. Y, H:i" as last_changed%}
+			last edited by {{ author }}, <br /> {{ last_changed }}.
+			{% endblocktrans %}</p>
+			<p>{% blocktrans with page.title as title%}Wiki-link to this page: <code>[[{{ title }}]]</code>{% endblocktrans %}</p>
+			<p><a href="{% url wiki_edit page.title %}">{% trans "edit" %}</a></p>
 		</div>
 	</div>
 

@@ -18,6 +18,7 @@
 				return false;
 			}
 		});
+{% include "help/jquery.html" %}
 {%endblock jquery %}
 
 {% block navigation %}
@@ -30,7 +31,8 @@
 	</ul>
 {% endblock navigation %}
 
-{% block content %}
+{% block contentcontainer %}
+<div id="content" class="span-11">
 	<form action="{% url wiki_edit page.title %}" class="wiki-form" method="POST">
 		<ul>
 		{{ form.as_ul }}
@@ -38,9 +40,18 @@
 		{% csrf_token %}
 		<input type="submit" value="{% trans "Save" %}" />
 	</form>
+</div>
+
+<div id="help" class="span-7 last">
+	{% include "help/textile.html" %}
+
+	<h4>{% trans "Delete this Page" %}</h4>
+	<div id="help-event-textile">
 	<form action="{% url wiki_delete page.title %}" method="POST" id="wiki-delete">
 		{% csrf_token %}
 		<input type="submit" value="{% trans "Delete" %}" />
 		<span id="ask-delete">{% trans "Are you really sure?"%} <input type="checkbox" value="yes" name="really_sure" id="really_sure"/><label for="really_sure">{% trans "Yes!"%}</label></span>
 	</form>
+	</div>
+</div>
 {% endblock %}
