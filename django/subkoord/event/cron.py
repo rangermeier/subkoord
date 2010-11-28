@@ -36,7 +36,6 @@ def cron(request):
 		#for user in users:
 		#	adressbook.append(user.email)
 		adressbook = ["subterrarium@googlegroups.com"]
-		#adressbook = ["r@powidl.org"]
 		render_to_email("email/open_tasks.html",
 			subject,
 			adressbook,
