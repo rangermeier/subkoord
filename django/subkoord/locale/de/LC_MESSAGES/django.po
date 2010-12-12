@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-12 14:01+0100\n"
+"POT-Creation-Date: 2010-12-12 20:07+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -65,59 +65,71 @@ msgstr "Dienst entfernt"
 msgid "Saved note"
 msgstr "Anmerkung gespeichert"
 
-#: newsletter/models.py:18
+#: newsletter/models.py:14
+msgid "praefix for subject [...]"
+msgstr ""
+
+#: newsletter/models.py:15
+msgid "Footer plain text"
+msgstr ""
+
+#: newsletter/models.py:16
+msgid "Footer HTML"
+msgstr ""
+
+#: newsletter/models.py:21
 msgid "Name"
 msgstr "Name"
 
-#: newsletter/models.py:19
+#: newsletter/models.py:22
 msgid "e-Mail Address"
 msgstr "e-Mail Addresse"
 
-#: newsletter/models.py:20
+#: newsletter/models.py:23
 msgid "Subscription"
 msgstr "Abo"
 
-#: newsletter/models.py:22
+#: newsletter/models.py:25
 msgid "confirmed"
 msgstr "bestätigt"
 
-#: newsletter/models.py:33
+#: newsletter/models.py:36
 msgid "Plain Text"
 msgstr "einfacher Text"
 
-#: newsletter/models.py:34
+#: newsletter/models.py:37
 msgid "HTML"
 msgstr "HTML"
 
-#: newsletter/models.py:35
+#: newsletter/models.py:38
 msgid "Textile"
 msgstr "Textile"
 
-#: newsletter/models.py:37 templates/newsletter/message_preview.html:4
+#: newsletter/models.py:40 templates/newsletter/message_preview.html:4
 msgid "Subject"
 msgstr "Betreff"
 
-#: newsletter/models.py:38
+#: newsletter/models.py:41
 msgid "Text"
 msgstr "Text"
 
-#: newsletter/models.py:39
+#: newsletter/models.py:42
 msgid "Text format"
 msgstr "Eingabeformat"
 
-#: newsletter/models.py:41
+#: newsletter/models.py:44
 msgid "locked"
 msgstr "gesperrt"
 
-#: newsletter/models.py:58
+#: newsletter/models.py:61
 msgid "File"
 msgstr "Datei"
 
-#: newsletter/models.py:59 newsletter/models.py:64
+#: newsletter/models.py:62 newsletter/models.py:67
 msgid "Message"
 msgstr "Nachrichten"
 
-#: newsletter/models.py:65
+#: newsletter/models.py:68
 msgid "to List"
 msgstr "an Liste"
 
@@ -141,18 +153,22 @@ msgid "<h1>Couldn't confirm - token mismatch</h1>"
 msgstr ""
 
 #: newsletter/views.py:117
+msgid "<h1>Subscribtion doesn't exist (anymore?)</h1>"
+msgstr ""
+
+#: newsletter/views.py:120
 msgid "<h1>Subscribtion cancelled</h1>"
 msgstr ""
 
-#: newsletter/views.py:118
+#: newsletter/views.py:121
 msgid "<h1>Couldn't cancel - token mismatch</h1>"
 msgstr ""
 
-#: newsletter/views.py:144
+#: newsletter/views.py:147
 msgid "Saved new subscribers"
 msgstr "Neue Abonenten gespeichert"
 
-#: newsletter/views.py:183
+#: newsletter/views.py:186
 #, python-format
 msgid "Queued %s Newsletters for delivery."
 msgstr "%s e-mails warten auf den Versand"
@@ -161,23 +177,58 @@ msgstr "%s e-mails warten auf den Versand"
 msgid "Sub-Koordinator"
 msgstr "Sub-Koordinator"
 
-#: templates/base.html:65
+#: templates/base.html:44 templates/event/event.html:13
+#: templates/event/event_edit.html:11 templates/event/event_new.html:10
+#: templates/newsletter/index.html:64 templates/newsletter/job.html:14
+#: templates/newsletter/job_new.html:12 templates/newsletter/jobs.html:12
+#: templates/newsletter/message.html:16 templates/newsletter/messages.html:14
+#: templates/newsletter/subscriber.html:12
+#: templates/newsletter/subscribers.html:12
+#: templates/newsletter/subscribers_add.html:12 templates/users/user.html:34
+#: templates/users/user_edit.html:22 templates/users/user_list.html:28
+#: templates/wiki/edit.html:30 templates/wiki/home.html:12
+#: templates/wiki/page.html:13
+msgid "view events"
+msgstr "Kalender"
+
+#: templates/base.html:45 templates/event/event.html:14
+#: templates/event/events.html:33 templates/newsletter/index.html:65
+#: templates/newsletter/job.html:15 templates/newsletter/job_new.html:13
+#: templates/newsletter/message.html:17 templates/newsletter/messages.html:15
+#: templates/newsletter/subscribers.html:13
+#: templates/newsletter/subscribers_add.html:13 templates/users/user.html:35
+#: templates/wiki/home.html:6
+msgid "Wiki"
+msgstr "Wiki"
+
+#: templates/base.html:47 templates/event/events.html:35
+#: templates/newsletter/index.html:5 templates/newsletter/job.html:13
+#: templates/newsletter/job_new.html:11 templates/newsletter/jobs.html:11
+#: templates/newsletter/messages.html:13
+#: templates/newsletter/subscriber.html:11
+#: templates/newsletter/subscribers.html:11
+#: templates/newsletter/subscribers_add.html:11 templates/wiki/home.html:14
+#: templates/wiki/page.html:15
+msgid "Newsletter"
+msgstr "Newsletter"
+
+#: templates/base.html:71
 msgid "home"
 msgstr "start"
 
-#: templates/base.html:67
+#: templates/base.html:73
 msgid "admin"
 msgstr "admin"
 
-#: templates/base.html:68
+#: templates/base.html:74
 msgid "logged in as"
 msgstr "angemeldet als"
 
-#: templates/base.html:68
+#: templates/base.html:74
 msgid "logout"
 msgstr "abmelden"
 
-#: templates/base.html:70
+#: templates/base.html:76
 msgid "login"
 msgstr "anmelden"
 
@@ -214,30 +265,10 @@ msgstr "Es gibt offene Dienste:"
 msgid "Thanks for your kind attention :)"
 msgstr "Vielen Dank für Deine Aufmerksamkeit :)"
 
-#: templates/event/event.html:12 templates/newsletter/subscribers.html:21
-#: templates/wiki/page.html:11 templates/wiki/page.html.py:27
+#: templates/event/event.html:12 templates/newsletter/subscribers.html:26
+#: templates/wiki/page.html:11 templates/wiki/page.html.py:30
 msgid "edit"
 msgstr "bearbeiten"
-
-#: templates/event/event.html:13 templates/event/event_edit.html:11
-#: templates/event/event_new.html:10 templates/newsletter/index.html:64
-#: templates/newsletter/job.html:12 templates/newsletter/job_new.html:11
-#: templates/newsletter/jobs.html:12 templates/newsletter/message.html:12
-#: templates/newsletter/messages.html:12
-#: templates/newsletter/subscriber.html:12
-#: templates/newsletter/subscribers.html:11
-#: templates/newsletter/subscribers_add.html:11 templates/users/user.html:34
-#: templates/users/user_edit.html:22 templates/users/user_list.html:28
-#: templates/wiki/edit.html:30 templates/wiki/home.html:12
-#: templates/wiki/page.html:13
-msgid "view events"
-msgstr "Kalender"
-
-#: templates/event/event.html:14 templates/event/events.html:33
-#: templates/newsletter/index.html:65 templates/users/user.html:35
-#: templates/wiki/home.html:6
-msgid "Wiki"
-msgstr "Wiki"
 
 #: templates/event/event.html:23
 msgid "Info"
@@ -271,8 +302,7 @@ msgstr "Anmerkung hinzufügen"
 msgid "Edit event"
 msgstr "Termin bearbeiten"
 
-#: templates/event/event_edit.html:10
-#: templates/newsletter/subscribers_add.html:10 templates/wiki/edit.html:27
+#: templates/event/event_edit.html:10 templates/wiki/edit.html:27
 msgid "back"
 msgstr "zurück"
 
@@ -316,14 +346,6 @@ msgstr "zum aktuellen Datum"
 msgid "view archive"
 msgstr "Termin-Archiv"
 
-#: templates/event/events.html:35 templates/newsletter/index.html:5
-#: templates/newsletter/job.html:11 templates/newsletter/job_new.html:10
-#: templates/newsletter/jobs.html:11 templates/newsletter/messages.html:11
-#: templates/newsletter/subscriber.html:11
-#: templates/newsletter/subscribers.html:10
-msgid "Newsletter"
-msgstr "Newsletter"
-
 #: templates/event/month_cal.html:16
 msgid "add event with this date"
 msgstr "Veranstaltung für dieses Datum anlegen"
@@ -353,6 +375,8 @@ msgid "view sent messages"
 msgstr "bereits versendete Nachrichten ansehen"
 
 #: templates/newsletter/index.html:22 templates/newsletter/index.html.py:62
+#: templates/newsletter/job.html:11 templates/newsletter/job_new.html:10
+#: templates/newsletter/message.html:12 templates/newsletter/messages.html:11
 msgid "compose message"
 msgstr "Nachricht erstellen"
 
@@ -369,6 +393,8 @@ msgid "view finished jobs"
 msgstr "abgeschlossene Aufträge ansehen"
 
 #: templates/newsletter/index.html:35 templates/newsletter/index.html.py:63
+#: templates/newsletter/job.html:12 templates/newsletter/message.html:14
+#: templates/newsletter/messages.html:12
 msgid "send message"
 msgstr "Nachricht absenden"
 
@@ -377,11 +403,12 @@ msgid "Mailinglists"
 msgstr "Mailinglisten"
 
 #: templates/newsletter/index.html:44
+#: templates/newsletter/subscribers_add.html:10
 msgid "view subscribers"
 msgstr "Abonenten ansehen"
 
-#: templates/newsletter/index.html:45 templates/newsletter/subscribers.html:16
-#: templates/newsletter/subscribers.html:26
+#: templates/newsletter/index.html:45 templates/newsletter/subscribers.html:10
+#: templates/newsletter/subscribers.html:20
 msgid "add subscribers"
 msgstr "Abonenten hinzufügen"
 
@@ -393,27 +420,27 @@ msgstr "neue Abonenten"
 msgid "Sending"
 msgstr "Sende"
 
-#: templates/newsletter/job.html:18
+#: templates/newsletter/job.html:21
 msgid "e-Mail"
 msgstr "e-Mail"
 
-#: templates/newsletter/job.html:19
+#: templates/newsletter/job.html:22
 msgid "To list"
 msgstr "an Liste"
 
-#: templates/newsletter/job.html:20
+#: templates/newsletter/job.html:23
 msgid "Date"
 msgstr "Datum"
 
-#: templates/newsletter/job.html:21
+#: templates/newsletter/job.html:24
 msgid "e-mails sent"
 msgstr "e-mails versendet"
 
-#: templates/newsletter/job.html:25
+#: templates/newsletter/job.html:28
 msgid "still to send"
 msgstr "noch zu senden"
 
-#: templates/newsletter/job.html:32
+#: templates/newsletter/job.html:35
 msgid "still sending to"
 msgstr "noch zu senden an"
 
@@ -425,16 +452,16 @@ msgstr "Auftrags-Archiv"
 msgid "Compose a Message"
 msgstr "Nachricht erstellen"
 
-#: templates/newsletter/message.html:11
+#: templates/newsletter/message.html:15
 msgid "Newlsetter"
 msgstr "Newlsetter"
 
-#: templates/newsletter/message.html:25
+#: templates/newsletter/message.html:30
 #: templates/newsletter/message_preview.html:10
 msgid "Attachements"
 msgstr "Anhänge"
 
-#: templates/newsletter/message.html:47
+#: templates/newsletter/message.html:52
 msgid "Preview"
 msgstr "Vorschau"
 
@@ -455,21 +482,31 @@ msgid "Subscriber list"
 msgstr "Mailingliste"
 
 #: templates/newsletter/subscriber.html:26
-#: templates/newsletter/subscribers.html:22
+#: templates/newsletter/subscribers.html:27
 msgid "delete"
 msgstr "Löschen"
 
 #: templates/newsletter/subscribers.html:5
+#: templates/newsletter/subscribers.html:19
 msgid "Subscribers"
 msgstr "Abonenten"
 
-#: templates/newsletter/subscribers.html:27
+#: templates/newsletter/subscribers.html:21
 msgid "public subscription form"
 msgstr "öffentliches Abo-Formular"
 
 #: templates/newsletter/subscribers_add.html:5
-msgid "Add subscribers"
-msgstr "Abonenten hinzufügen"
+#, python-format
+msgid "Add subscribers to %(name)s"
+msgstr "Abonenten zu %(name)s hinzufügen"
+
+#: templates/newsletter/subscribers_add.html:23
+msgid "e-mail"
+msgstr "e-Mail"
+
+#: templates/newsletter/subscribers_add.html:24
+msgid "Name (optional)"
+msgstr "Name (optional)"
 
 #: templates/users/user.html:21
 msgid "No jobs yet..."
@@ -528,7 +565,7 @@ msgstr "Sicher?"
 msgid "Yes!"
 msgstr "Ja!"
 
-#: templates/wiki/page.html:23
+#: templates/wiki/page.html:26
 #, python-format
 msgid ""
 "\n"
@@ -539,7 +576,7 @@ msgstr ""
 "\t\tzuletzt bearbeitet von %(author)s, <br /> %(last_changed)s.\n"
 "\t\t"
 
-#: templates/wiki/page.html:26
+#: templates/wiki/page.html:29
 #, python-format
 msgid "Wiki-link to this page: <code>[[%(title)s]]</code>"
 msgstr "Wiki-Link zu dieser Seite: <code>[[%(title)s]]</code>"

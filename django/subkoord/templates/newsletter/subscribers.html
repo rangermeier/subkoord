@@ -15,7 +15,9 @@
 {% endblock navigation %}
 
 {% block content %}
-<p><a href="{% url subscribers_add list.id %}">{% trans "add subscribers"%}</a><br />
+<p>
+{{ subscribers|length }} {% trans "Subscribers" %}<br />
+<a href="{% url subscribers_add list.id %}">{% trans "add subscribers"%}</a><br />
 <a href="{% url subscriber_add list.id %}">{% trans "public subscription form" %}</a></p>
 <ul>
 {% for subscriber in subscribers %}

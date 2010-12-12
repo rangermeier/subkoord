@@ -2,7 +2,7 @@
 {% load i18n %}
 
 {% block heading %}
-{% trans "Add subscribers" %}
+{% blocktrans with list.name as name%}Add subscribers to {{ name }}{% endblocktrans %}
 {% endblock heading %}
 
 {% block navigation %}
@@ -15,15 +15,24 @@
 {% endblock navigation %}
 
 {% block content %}
-<form action="{% url subscribers_add list.id %}" method="post" class="event-form">
+<form action="{% url subscribers_add list.id %}" method="post" class="subscribers-form">
 {%  csrf_token  %}
 {{ formset.management_form }}
+<table>
+	<tr>
+		<th class="span-5">{% trans "e-mail" %}</th>
+		<td class="span-5">{% trans "Name (optional)" %}</td>
+	</tr>
 {% for form in formset.forms %}
-<ul>
-	{{ form.as_ul }}
-</ul>
+	<tr>
+		<td class="span-5 required">{{ form.email }}</td>
+		<td class="span-5">{{ form.name }}
+		<div class="hidden">{{ form.confirmed }}</div>
+		</td>
+	</tr>
 {% endfor %}
-</div>
+</table>
+
 
 <input type="submit" />
 </form>

@@ -195,3 +195,19 @@ white-space: -pre-wrap; /* Opera 4-6 */
 white-space: -o-pre-wrap; /* Opera 7 */
 word-wrap: break-word; /* Internet Explorer 5.5+ */
 }
+
+.subscribers-form td, .subscribers-form th {
+	margin: 0;
+	border-bottom: 1px solid #888;
+}
+.subscribers-form input[type="text"] {
+	width: 90%;
+}
+
+.subscribers-form .required input {
+	border: 1px solid #000;
+}
+
+.hidden {
+	display: none;
+}
