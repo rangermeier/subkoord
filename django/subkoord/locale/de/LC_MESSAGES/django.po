@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-12 20:07+0100\n"
+"POT-Creation-Date: 2010-12-12 20:42+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -233,29 +233,26 @@ msgid "login"
 msgstr "anmelden"
 
 #: templates/email/newsletter_confirm.html:3
-#, python-format
-msgid ""
-"\n"
-"Hello %(name)s!\n"
+#, fuzzy, python-format
+msgid "Hello %(name)s!"
 msgstr ""
 "\n"
 "Hallo %(name)s!\n"
 
-#: templates/email/newsletter_confirm.html:7 templates/email/open_tasks.html:2
+#: templates/email/newsletter_confirm.html:4 templates/email/open_tasks.html:2
 msgid "Hello!"
 msgstr "Hallo!"
 
-#: templates/email/newsletter_confirm.html:10
-msgid ""
-"\n"
-"Please click the following link to confirm your subscription:\n"
-msgstr ""
-"\n"
-"Bitte den folgenden Link anklicken, um das Newsletter-Abo zu bestätigen:\n"
+#: templates/email/newsletter_confirm.html:5
+msgid "Please click the following link to confirm your subscription:"
+msgstr "Bitte den folgenden Link anklicken, um das Newsletter-Abo zu bestätigen:"
 
-#: templates/email/newsletter_confirm.html:16
+#: templates/email/newsletter_confirm.html:8
 msgid "Thanks for subscribing!"
-msgstr "Danke fürs einschreiben"
+msgstr ""
+"Danke für Dein Interesse!\n"
+"\n"
+"Ergebenst, das Subterrarium-Kompetenzteam"
 
 #: templates/email/open_tasks.html:3
 msgid "There are open tasks:"

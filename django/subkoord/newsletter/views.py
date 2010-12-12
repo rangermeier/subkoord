@@ -172,18 +172,17 @@ def job_new(request):
 	if request.method == "POST":
 		form = JobForm(request.POST)
 		if form.is_valid():
-			letters = 0
 			job = Job(message = form.cleaned_data['message'],
 				to = form.cleaned_data['to'],
 				sender = request.user, )
 			job.save()
 			job.message.locked = True
 			job.message.save()
-			for recipient in job.to.recipients.filter(confirmed=True):
+			recipients = job.to.recipients.filter(confirmed=True)
+			for recipient in recipients:
 				letter = Letter(job=job, recipient=recipient)
 				letter.save()
-				letters += 1
-			messages.success(request, _("Queued %s Newsletters for delivery." % (letters)))
+			messages.success(request, _("Queued %s Newsletters for delivery." % (recipients.count())))
 			return HttpResponseRedirect(reverse('job', args=[job.id]))
 	else:
 		form = JobForm()
