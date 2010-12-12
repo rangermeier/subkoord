@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-12 21:21+0100\n"
+"POT-Creation-Date: 2010-12-12 23:17+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -133,7 +133,7 @@ msgstr "Nachricht"
 msgid "to List"
 msgstr "an Liste"
 
-#: newsletter/models.py:107 templates/newsletter/job.html:22
+#: newsletter/models.py:110 templates/newsletter/job.html:22
 msgid "To list"
 msgstr "an Liste"
 
@@ -237,6 +237,7 @@ msgid "login"
 msgstr "anmelden"
 
 #: templates/email/newsletter_confirm.html:3
+#, python-format
 msgid "Hello %(name)s!"
 msgstr "Hallo %(name)s!"
 
@@ -424,18 +425,22 @@ msgid "e-Mail"
 msgstr "e-Mail"
 
 #: templates/newsletter/job.html:23
+msgid "Sent by"
+msgstr "Auftrag erstellt von"
+
+#: templates/newsletter/job.html:24
 msgid "Date"
 msgstr "Datum"
 
-#: templates/newsletter/job.html:24
+#: templates/newsletter/job.html:25
 msgid "e-mails sent"
 msgstr "e-mails versendet"
 
-#: templates/newsletter/job.html:28
+#: templates/newsletter/job.html:29
 msgid "still to send"
 msgstr "noch zu senden"
 
-#: templates/newsletter/job.html:35
+#: templates/newsletter/job.html:36
 msgid "still sending to"
 msgstr "noch zu senden an"
 

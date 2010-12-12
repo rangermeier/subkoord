@@ -20,6 +20,7 @@
 <div class="newsletter">
 <h3>{% trans "e-Mail" %}</h3>
 <dt>{% trans "To list" %}</dt> <dd>{{ job.to.name }}</dd>
+<dt>{% trans "Sent by" %}</dt> <dd>{{ job.sender }}</dd>
 <dt>{% trans "Date" %}</dt> <dd>{{ job.date }}</dd>
 <dt>Status</dt><dd>{{ job.letters_sent }} {% trans "e-mails sent" %}<br />
 {% if not job.active %}

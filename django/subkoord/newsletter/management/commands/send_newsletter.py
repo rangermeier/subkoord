@@ -8,11 +8,9 @@ from subkoord.newsletter.models import Letter, Message, Subscriber
 
 class Command(NoArgsCommand):
 	help = 'Send the newsletter queued in Letters'
-
-	jobs = {}
-
 	def handle_noargs(self, **options):
 		letters = Letter.objects.all()[:settings.NEWSLETTER_QUOTA]
+		jobs = {}
 		for letter in letters:
 			footer_text = Template(letter.job.to.footer_text)
 			footer_html = Template(letter.job.to.footer_html)
@@ -33,12 +31,12 @@ class Command(NoArgsCommand):
 				mail.attach_alternative(text_html, "text/html")
 			mail.send()
 			try:
-				job = self.jobs[letter.job.id]
+				job = jobs[letter.job.id]
 			except KeyError:
 				job = letter.job
-				self.jobs[letter.job.id] = job
+				jobs[letter.job.id] = job
 			job.letters_sent += 1
 			letter.delete()
-		for job_id, job in self.jobs.items():
+		for job_id, job in jobs.items():
 			job.last_delivery = datetime.now()
 			job.save()
