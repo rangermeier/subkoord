@@ -174,7 +174,7 @@ def job_new(request):
 		if form.is_valid():
 			job = Job(message = form.cleaned_data['message'],
 				to = form.cleaned_data['to'],
-				sender = request.user, )
+				sender = request.user, letters_sent = 0)
 			job.save()
 			job.message.locked = True
 			job.message.save()

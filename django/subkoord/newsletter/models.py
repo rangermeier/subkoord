@@ -67,9 +67,9 @@ class Job(models.Model):
 	message = models.ForeignKey(Message, verbose_name=_("Message"))
 	to = models.ForeignKey(List, verbose_name=_("to List"))
 	date = models.DateTimeField(auto_now_add=True, editable=False)
-	sender = models.ForeignKey(User, editable=False, related_name="mailjobs")
+	sender = models.ForeignKey(User, related_name="mailjobs")
 	last_delivery = models.DateTimeField(editable=False, blank=True)
-	letters_sent = models.IntegerField(default=0, editable=False)
+	letters_sent = models.IntegerField(default=0, editable=False, blank=True)
 	@property
 	def active(self):
 		return (self.letters.count() > 0)
@@ -101,7 +101,11 @@ class MessageForm(ModelForm):
 		fields = ('subject', 'text', 'text_format')
 
 class JobForm(forms.Form):
-	message = FeaturedModelChoiceField(queryset=Message.objects.all(),
-		featured_queryset=Message.objects.filter(locked=False),
-		label=_('Message'))
-	to = ModelChoiceField(queryset=List.objects.all(), empty_label=None, label=_('To list'))
+	message = FeaturedModelChoiceField(queryset = Message.objects.all(),
+		featured_queryset = Message.objects.filter(locked=False),
+		label = _('Message'),
+	)
+	to = ModelChoiceField(queryset = List.objects.all(),
+		empty_label = None,
+		label = _('To list'),
+	)
