@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load thumbnail %}
+
+{% block heading %}
+{% trans "Compose a Message" %}
+{% endblock heading %}
+
+{% block navigation %}
+	<ul>
+	{% if message %}
+		<li><a href="{% url message_new %}">{% trans "compose message" %}</a></li>
+	{% endif %}
+		<li><a href="{% url job_new %}">{% trans "send message" %}</a></li>
+		<li><a href="{% url newsletter_index %}">{% trans "Newlsetter" %}</a></li>
+		<li><a href="{% url event_index %}">{% trans "view events" %}</a></li>
+		<li><a href="{% url wiki_index %}">{% trans "Wiki" %}</a></li>
+	</ul>
+{% endblock navigation %}
+
+{% block content %}
+<div class="newsletter">
+{% if not message.locked %}
+<form action={% if message %}"{% url message message.id%}" enctype="multipart/form-data"{% else %}"{% url message_new %}"{% endif %} method="post" class="newsletter-form">
+{%  csrf_token  %}
+	<ul>
+		{{ message_form.as_ul }}
+	</ul>
+{% if message_formset %}
+	<h3>{% trans "Attachements"%}</h3>
+	{{ message_formset.management_form }}
+	{% for form in message_formset.forms %}
+		<fieldset class="span-12">
+		{% if form.instance.file %}
+		<legend>{{ form.instance.file }}</legend>
+		<div class="span-4"><img src="{{ form.instance.file|thumbnail }}" alt="" />
+		</div>
+		{% endif %}
+		<div class="span-8 last">
+			{{ form.as_p }}
+		</div>
+		</fieldset>
+		{% endfor %}
+{% endif %}
+<p class="span-18 last"><input type="submit" /></p>
+
+</form>
+{% endif %}
+
+{% if message %}
+	<div class="span-18 last">
+	<h3>{% trans "Preview" %}</h3>
+	<div>
+	{% include "newsletter/message_preview.html" %}
+	</div>
+{% endif %}
+</div>
+{% endblock content %}

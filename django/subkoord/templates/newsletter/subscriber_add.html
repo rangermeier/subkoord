@@ -1,0 +1,11 @@
+<html><head><title>Newsletter</title></head>
+<body>
+<h1>Newsletter {{list.name}}</h1>
+<form action="{% url subscriber_add list.id %}" method="post">
+{%  csrf_token  %}
+{{ form.as_p }}
+<input type="submit" />
+</form>
+
+</body>
+</html>

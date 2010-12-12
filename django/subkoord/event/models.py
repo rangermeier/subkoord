@@ -81,7 +81,7 @@ class Event(models.Model):
 class Job(models.Model):
 	event = models.ForeignKey(Event)
 	task = models.ForeignKey(Task)
-	user = models.ForeignKey(User)
+	user = models.ForeignKey(User, related_name="jobs")
 	def __unicode__(self):
 		return u'%s - %s: %s' % (self.event.title, self.task.name, self.user.username)
 

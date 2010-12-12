@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block heading %}
+{{ subscriber.email }}
+{% endblock heading %}
+
+{% block navigation %}
+	<ul>
+		<li><a href="{% url subscribers_list subscriber.subscription.id %}">{% trans "Subscriber list" %}</a></li>
+		<li><a href="{% url newsletter_index %}">{% trans "Newsletter" %}</a></li>
+		<li><a href="{% url event_index %}">{% trans "view events" %}</a></li>
+	</ul>
+{% endblock navigation %}
+
+{% block content %}
+<form action="{% url subscriber subscriber.id %}" method="post" class="event-form">
+{%  csrf_token  %}
+<ul>
+	{{ form.as_ul }}
+</ul>
+
+<input type="submit" />
+</form>
+
+<p><a href="{% url subscriber_delete subscriber.id %}">{% trans "delete" %}</a></p>
+<p>Token: {{ subscriber.token }}</p>
+{% endblock content %}

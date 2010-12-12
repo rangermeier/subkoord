@@ -10,6 +10,9 @@
 	<ul>
 		<li><a href="{% url wiki_new  %}">{% trans "new page" %}</a></li>
 		<li><a href="{% url event_index %}">{% trans "view events" %}</a></li>
+{% if perms.newsletter.add_subscriber %}
+		<li><a href="{% url newsletter_index %}">{% trans "Newsletter" %}</a></li>
+{% endif%}
 	</ul>
 {% endblock navigation %}
 

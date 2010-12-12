@@ -31,5 +31,8 @@
 		<li><a href="{% url event_archive %}">{% trans "view archive" %}</a></li>
 {% endif %}
 		<li><a href="{% url wiki_index %}">{% trans "Wiki" %}</a></li>
+{% if perms.newsletter.add_subscriber %}
+		<li><a href="{% url newsletter_index %}">{% trans "Newsletter" %}</a></li>
+{% endif%}
 </ul>
 {% endblock navigation %}

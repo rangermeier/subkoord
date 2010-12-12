@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block heading %}
+{% trans "Add subscribers" %}
+{% endblock heading %}
+
+{% block navigation %}
+	<ul>
+		<li><a href="{% url subscribers_list list.id %}">{% trans "view subscribers" %}</a></li>
+		<li><a href="{% url newsletter_index %}">{% trans "Newsletter" %}</a></li>
+		<li><a href="{% url event_index %}">{% trans "view events" %}</a></li>
+		<li><a href="{% url wiki_index %}">{% trans "Wiki" %}</a></li>
+	</ul>
+{% endblock navigation %}
+
+{% block content %}
+<form action="{% url subscribers_add list.id %}" method="post" class="event-form">
+{%  csrf_token  %}
+{{ formset.management_form }}
+{% for form in formset.forms %}
+<ul>
+	{{ form.as_ul }}
+</ul>
+{% endfor %}
+</div>
+
+<input type="submit" />
+</form>
+{% endblock content %}
