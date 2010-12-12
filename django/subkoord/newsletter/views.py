@@ -183,8 +183,8 @@ def job_new(request):
 				letter = Letter(job=job, recipient=recipient)
 				letter.save()
 				letters += 1
-		messages.success(request, _("Queued %s Newsletters for delivery." % (letters)))
-		return HttpResponseRedirect(reverse('job', args=[job.id]))
+			messages.success(request, _("Queued %s Newsletters for delivery." % (letters)))
+			return HttpResponseRedirect(reverse('job', args=[job.id]))
 	else:
 		form = JobForm()
 	return render_to_response('newsletter/job_new.html',
