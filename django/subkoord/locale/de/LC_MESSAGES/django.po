@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-12 20:42+0100\n"
+"POT-Creation-Date: 2010-12-12 21:21+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -125,12 +125,16 @@ msgstr "gesperrt"
 msgid "File"
 msgstr "Datei"
 
-#: newsletter/models.py:62 newsletter/models.py:67
+#: newsletter/models.py:62 newsletter/models.py:67 newsletter/models.py:106
 msgid "Message"
-msgstr "Nachrichten"
+msgstr "Nachricht"
 
 #: newsletter/models.py:68
 msgid "to List"
+msgstr "an Liste"
+
+#: newsletter/models.py:107 templates/newsletter/job.html:22
+msgid "To list"
 msgstr "an Liste"
 
 #: newsletter/views.py:96
@@ -168,7 +172,7 @@ msgstr ""
 msgid "Saved new subscribers"
 msgstr "Neue Abonenten gespeichert"
 
-#: newsletter/views.py:186
+#: newsletter/views.py:185
 #, python-format
 msgid "Queued %s Newsletters for delivery."
 msgstr "%s e-mails warten auf den Versand"
@@ -233,11 +237,8 @@ msgid "login"
 msgstr "anmelden"
 
 #: templates/email/newsletter_confirm.html:3
-#, fuzzy, python-format
 msgid "Hello %(name)s!"
-msgstr ""
-"\n"
-"Hallo %(name)s!\n"
+msgstr "Hallo %(name)s!"
 
 #: templates/email/newsletter_confirm.html:4 templates/email/open_tasks.html:2
 msgid "Hello!"
@@ -245,7 +246,8 @@ msgstr "Hallo!"
 
 #: templates/email/newsletter_confirm.html:5
 msgid "Please click the following link to confirm your subscription:"
-msgstr "Bitte den folgenden Link anklicken, um das Newsletter-Abo zu bestätigen:"
+msgstr ""
+"Bitte den folgenden Link anklicken, um das Newsletter-Abo zu bestätigen:"
 
 #: templates/email/newsletter_confirm.html:8
 msgid "Thanks for subscribing!"
@@ -420,10 +422,6 @@ msgstr "Sende"
 #: templates/newsletter/job.html:21
 msgid "e-Mail"
 msgstr "e-Mail"
-
-#: templates/newsletter/job.html:22
-msgid "To list"
-msgstr "an Liste"
 
 #: templates/newsletter/job.html:23
 msgid "Date"

@@ -102,5 +102,6 @@ class MessageForm(ModelForm):
 
 class JobForm(forms.Form):
 	message = FeaturedModelChoiceField(queryset=Message.objects.all(),
-		featured_queryset=Message.objects.filter(locked=False))
-	to = ModelChoiceField(queryset=List.objects.all(), empty_label=None)
+		featured_queryset=Message.objects.filter(locked=False),
+		label=_('Message'))
+	to = ModelChoiceField(queryset=List.objects.all(), empty_label=None, label=_('To list'))
