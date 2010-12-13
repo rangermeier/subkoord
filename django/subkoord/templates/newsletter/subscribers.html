@@ -1,9 +1,24 @@
 {% extends "base.html" %}
 {% load i18n %}
 
+
 {% block heading %}
 {{ list.name }} - {% trans "Subscribers" %}
 {% endblock heading %}
+
+{% block javascript %}
+	<script type="text/javascript" src="{{ MEDIA_URL }}js/jquery/jquery.uitablefilter.js"></script>
+{% endblock javascript %}
+
+{% block jquery %}
+	$("#filter").keyup(function() {
+		$.uiTableFilter( $("#subscribers-table"), this.value);
+		$("#subscribers-table th").parent("tr").show();
+	});
+	$("a.delete").click(function() {
+		return confirm("{% trans "really?" %}");
+	});
+{% endblock jquery%}
 
 {% block navigation %}
 	<ul>
@@ -18,15 +33,25 @@
 <p>
 {{ subscribers|length }} {% trans "Subscribers" %}<br />
 <a href="{% url subscribers_add list.id %}">{% trans "add subscribers"%}</a><br />
-<a href="{% url subscriber_add list.id %}">{% trans "public subscription form" %}</a></p>
-<ul>
+<a href="{% url subscriber_add list.id %}">{% trans "public subscription form" %}</a><br>
+{% trans "Filter" %}: <input type="text" id="filter" /></p>
+<table id="subscribers-table">
+	<tr>
+		<th>{% trans "e-mail"%}</th>
+		<th>{% trans "Name"%}</th>
+		<th>{% trans "Date"%}</th>
+		<th>{% trans "edit"%}</th>
+		<th>{% trans "delete"%}</th>
+	</tr>
 {% for subscriber in subscribers %}
-	<li>
-		{{ subscriber.email }}, {{subscriber.name }}, {{subscriber.date }},
-		<a href="{% url subscriber subscriber.id %}">{% trans "edit" %}</a>,
-		<a href="{% url subscriber_delete subscriber.id %}">{% trans "delete" %}</a>
+	<tr>
+		<td>{{ subscriber.email }}</td>
+		<td>{{subscriber.name }}</td>
+		<td>{{subscriber.date }}
+		<td><a href="{% url subscriber subscriber.id %}">+</a></td>
+		<td><a href="{% url subscriber_delete subscriber.id %}" class="delete">-</a></td>
 	</li>
 {% endfor %}
-</ul>
+</table>
 
 {% endblock content %}
