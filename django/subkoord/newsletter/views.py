@@ -15,13 +15,11 @@ from models import *
 
 @permission_required('newsletter.add_subscriber')
 def index(request):
-	job_list = Job.objects.all().order_by('-date')[:3]
-	unsent_messages = Message.objects.filter(locked=False)
+	message_list = Message.objects.order_by('-date')[:7]
 	subscribers = Subscriber.objects.all().order_by('-date')[:10]
 	lists = List.objects.all()
 	return render_to_response('newsletter/index.html',
-		{'job_list': job_list,
-		'unsent_messages': unsent_messages,
+		{'message_list': message_list,
 		'lists': lists,
 		'subscribers': subscribers,},
 		context_instance=RequestContext(request),)
@@ -43,6 +41,7 @@ def message_new(request):
 def message(request, message_id):
 	MessageFormSet = inlineformset_factory(Message, Attachement, extra=1)
 	message = get_object_or_404(Message, pk=message_id)
+	job_form = JobMessageForm(initial = {'message': message.id,})
 	if not message.locked and request.method == "POST":
 		message_form = MessageForm(request.POST, instance=message)
 		message_formset = MessageFormSet(request.POST, request.FILES, instance=message)
@@ -56,7 +55,8 @@ def message(request, message_id):
 	return render_to_response('newsletter/message.html',
 		{'message': message,
 		'message_form': message_form,
-		'message_formset': message_formset, },
+		'message_formset': message_formset,
+		'job_form': job_form,},
 		context_instance=RequestContext(request),)
 
 @permission_required('newsletter.add_message')
@@ -64,6 +64,30 @@ def message_archive(request):
 	message_list = Message.objects.all().order_by("-date")
 	return render_to_response('newsletter/messages.html',
 		{'message_list': message_list,},
+		context_instance=RequestContext(request),)
+
+@permission_required('newsletter.add_job')
+def job(request, job_id):
+	job = get_object_or_404(Job, pk=job_id)
+	return render_to_response('newsletter/job.html',
+		{'job': job, },
+		context_instance=RequestContext(request),)
+
+@permission_required('newsletter.add_job')
+def job_new(request):
+	if request.method == "POST":
+		form = JobForm(request.POST)
+		if form.is_valid():
+			job = Job(message = form.cleaned_data['message'],
+				to = form.cleaned_data['to'],
+				sender = request.user, letters_sent = 0)
+			job.save()
+			messages.success(request, _("Queued %s Newsletters for delivery." % (job.letters_total-job.letters_sent)))
+			return HttpResponseRedirect(reverse('job', args=[job.id]))
+	else:
+		form = JobForm()
+	return render_to_response('newsletter/job_new.html',
+		{'form': form, },
 		context_instance=RequestContext(request),)
 
 @permission_required('newsletter.add_subscriber')
@@ -149,43 +173,4 @@ def subscribers_add(request, list_id):
 	return render_to_response('newsletter/subscribers_add.html',
 		{'formset': formset,
 		'list': list, },
-		context_instance=RequestContext(request),)
-
-@permission_required('newsletter.add_job')
-def job(request, job_id):
-	job = get_object_or_404(Job, pk=job_id)
-	letters = Letter.objects.filter(job=job)
-	return render_to_response('newsletter/job.html',
-		{'job': job,
-		'letters': letters, },
-		context_instance=RequestContext(request),)
-
-@permission_required('newsletter.add_job')
-def job_archive(request):
-	jobs = Job.objects.all().order_by("-date")
-	return render_to_response('newsletter/jobs.html',
-		{'jobs': jobs,},
-		context_instance=RequestContext(request),)
-
-@permission_required('newsletter.add_job')
-def job_new(request):
-	if request.method == "POST":
-		form = JobForm(request.POST)
-		if form.is_valid():
-			job = Job(message = form.cleaned_data['message'],
-				to = form.cleaned_data['to'],
-				sender = request.user, letters_sent = 0)
-			job.save()
-			job.message.locked = True
-			job.message.save()
-			recipients = job.to.recipients.filter(confirmed=True)
-			for recipient in recipients:
-				letter = Letter(job=job, recipient=recipient)
-				letter.save()
-			messages.success(request, _("Queued %s Newsletters for delivery." % (recipients.count())))
-			return HttpResponseRedirect(reverse('job', args=[job.id]))
-	else:
-		form = JobForm()
-	return render_to_response('newsletter/job_new.html',
-		{'form': form, },
 		context_instance=RequestContext(request),)

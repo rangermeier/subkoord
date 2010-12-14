@@ -2,10 +2,10 @@
 {% load thumbnail %}
 
 <dt>{% trans "Subject" %}</dt> <dd>{{ message.subject }}</dd>
-<dt>{% trans "Text plain" %}</dt> <dd><pre>{{ message.text_as_plain }}</pre></dd>
 {% if message.text_format != "plain" %}
 <dt>{% trans "Text (HTML)" %}</dt> <dd>{{ message.text_as_html }}</dd>
 {% endif %}
+<dt>{% trans "Text plain" %}</dt> <dd><pre>{{ message.text_as_plain }}</pre></dd>
 {% if message.attachements %}
 <dt>{% trans "Attachements" %}</dt> <dd>
 	{% for file in message.attachements.all %}

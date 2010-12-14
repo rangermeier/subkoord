@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext as _
 from django.forms import ModelForm
+from django.forms.fields import IntegerField
 from django import forms
 from django.forms.models import ModelChoiceField
 from django.contrib.markup.templatetags.markup import textile
@@ -43,6 +44,28 @@ class Message(models.Model):
 	date= models.DateField(auto_now_add=True, editable=False)
 	locked = models.BooleanField(default=False, verbose_name=_("locked"))
 	@property
+	def active_jobs(self):
+		try:
+			self._active_jobs
+		except AttributeError:
+			self._active_jobs = [job for job in self.jobs.all()
+				if job.active]
+		return self._active_jobs
+	@property
+	def finished_jobs(self):
+		try:
+			self._finished_jobs
+		except AttributeError:
+			self._finished_jobs = [job for job in self.jobs.all()
+				if not job.active]
+		return self._finished_jobs
+	@property
+	def in_delivery(self):
+		for job in self.jobs.all():
+			if job.active:
+				return True
+		return False
+	@property
 	def text_as_html(self):
 		if self.text_format == 'plain':
 			return u'<pre>%s</pre>' % self.text
@@ -64,15 +87,44 @@ class Attachement(models.Model):
 		return self.file.name
 
 class Job(models.Model):
-	message = models.ForeignKey(Message, verbose_name=_("Message"))
+	message = models.ForeignKey(Message, related_name="jobs", verbose_name=_("Message"))
 	to = models.ForeignKey(List, verbose_name=_("to List"))
 	date = models.DateTimeField(auto_now_add=True, editable=False)
 	sender = models.ForeignKey(User, related_name="mailjobs")
 	last_delivery = models.DateTimeField(editable=False, blank=True)
 	letters_sent = models.IntegerField(default=0, editable=False, blank=True)
 	@property
+	def letters_total(self):
+		try:
+			self._letters_total
+		except AttributeError:
+			self._letters_total = self.letters.count() + self.letters_sent
+		return self._letters_total
+	@property
+	def percent_sent(self):
+		if self.letters_total == 0 or not self.active:
+			return 100
+		try:
+			self._percent_sent
+		except AttributeError:
+			self._percent_sent = int((float(self.letters_sent)/self.letters_total)*100)
+		return self._percent_sent
+	@property
 	def active(self):
-		return (self.letters.count() > 0)
+		try:
+			self._active
+		except AttributeError:
+			self._active = (self.letters.count() > 0)
+		return self._active
+	def save(self, *args, **kwargs):
+		create_letters = not bool(self.__getattribute__('id'))
+		super(Job, self).save(*args, **kwargs) # Call the "real" save() method.
+		if create_letters:
+			for recipient in self.to.recipients.filter(confirmed=True):
+				letter = Letter(job=self, recipient=recipient)
+				letter.save()
+			self.message.locked = True
+			self.message.save()
 	def __unicode__(self):
 		return u'%s - %s' % (self.to.name, self.message.subject)
 
@@ -105,6 +157,13 @@ class JobForm(forms.Form):
 		featured_queryset = Message.objects.filter(locked=False),
 		label = _('Message'),
 	)
+	to = ModelChoiceField(queryset = List.objects.all(),
+		empty_label = None,
+		label = _('To list'),
+	)
+
+class JobMessageForm(forms.Form):
+	message = IntegerField(widget = forms.HiddenInput,)
 	to = ModelChoiceField(queryset = List.objects.all(),
 		empty_label = None,
 		label = _('To list'),
