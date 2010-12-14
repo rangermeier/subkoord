@@ -20,7 +20,7 @@
 	<div id="wiki" class="span-18">
 	{% regroup pages by category as category_list %}
 	{% for category in category_list %}
-	<div id="wiki" class="span-8">
+	<div id="wiki" class="span-8{% if forloop.counter0|divisibleby:"2" %} clear{% endif %}">
 		<h3>{{ category.grouper }}</h3>
 		<ul>
 			{% for page in category.list %}
