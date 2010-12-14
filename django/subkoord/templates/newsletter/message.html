@@ -29,8 +29,8 @@
 
 {% block content %}
 <div class="newsletter">
-{% if not message.locked %}
 <div class="span-12">
+{% if not message.locked %}
 <form action={% if message %}"{% url message message.id%}" enctype="multipart/form-data"{% else %}"{% url message_new %}"{% endif %} method="post" class="newsletter-form">
 {%  csrf_token  %}
 	<ul>
@@ -54,18 +54,18 @@
 	{% endif %}
 	<input type="submit"  value="{% trans "save Message" %}" />
 </form>
-</div>
 {% endif %}
 
 {% if message %}
-<div class="span-12">
+<p>
 	<h3>{% trans "Preview" %}</h3>
 	<dl>
 	{% include "newsletter/message_preview.html" %}
 	</dl>
+</p>
 </div>
 
-<div class="span-6 last">
+<div class="span-5 last">
 	{% if message.jobs.all %}
 	<h4>{% trans "Jobs" %}</h4>
 	<ul>
@@ -83,6 +83,8 @@
 	{%  csrf_token  %}
 	<input type="submit" value="{% trans "create Job" %}" />
 	</form>
+</div>
+{% else %}
 </div>
 {% endif %}
 </div>

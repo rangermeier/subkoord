@@ -183,13 +183,13 @@ a.new_page {
 }
 
 .newsletter-form input[type="text"] {
-	width: 32em;
+	width: 424px;
 }
 
 
 .newsletter-form textarea {
-	width: 32em;
-	height: 24em;
+	width: 424px;
+	height: 360px;
 }
 
 .newsletter pre {

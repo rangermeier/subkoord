@@ -47,9 +47,8 @@
 	<h3>{% trans "Latest Subscribers" %}</h3>
 	<ul class="subscribers">
 	{% for subscriber in subscribers %}
-		<li class="clear">
-		<a href="{% url subscriber subscriber.id %}">{% if subscriber.name %}{{ subscriber.name }}, {% endif %}
-		{{ subscriber.email }}</a>
+		<li class="clear">{% if subscriber.name %}{{ subscriber.name }},{% endif %}
+		<a href="{% url subscriber subscriber.id %}">{{ subscriber.email }}</a>
 		<span class="inline-right">{{ subscriber.date|date:"j. N, H:i" }}</span>
 		</li>
 	{% endfor %}
