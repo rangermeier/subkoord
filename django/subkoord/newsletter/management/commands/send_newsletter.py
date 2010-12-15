@@ -17,8 +17,8 @@ class Command(NoArgsCommand):
 			c = Context({
 				'unsubscribe_url': settings.SITE_URL+reverse('subscriber_public_delete', args=[letter.recipient.id, letter.recipient.token]),
 			})
-			text_plain = letter.message.text_as_plain + footer_text.render(c)
-			text_html = letter.message.text_as_html + footer_html.render(c)
+			text_plain = "\n".join([letter.message.text_as_plain, footer_text.render(c)])
+			text_html = "\n<br>\n".join([letter.message.text_as_html, footer_html.render(c)])
 			mail = EmailMultiAlternatives(
 				subject = u'%s %s' % (letter.job.to.praefix, letter.message.subject),
 				body = text_plain,
