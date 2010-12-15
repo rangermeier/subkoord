@@ -397,7 +397,7 @@ msgstr "Mailinglisten"
 #: templates/newsletter/index.html:41
 #: templates/newsletter/subscribers_add.html:10
 msgid "view subscribers"
-msgstr "Abonnenten anszeigen"
+msgstr "Abonnenten anzeigen"
 
 #: templates/newsletter/index.html:42 templates/newsletter/subscribers.html:25
 #: templates/newsletter/subscribers.html:35
