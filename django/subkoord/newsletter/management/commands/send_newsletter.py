@@ -12,6 +12,7 @@ class Command(NoArgsCommand):
 		letters = Letter.objects.all()[:settings.NEWSLETTER_QUOTA]
 		jobs = {}
 		for letter in letters:
+			# TODO: e-mail Versand sollte Methode der Letter-Klasse werden
 			footer_text = Template(letter.job.to.footer_text)
 			footer_html = Template(letter.job.to.footer_html)
 			c = Context({
@@ -24,6 +25,7 @@ class Command(NoArgsCommand):
 				body = text_plain,
 				from_email = settings.NEWSLETTER_FROM,
 				to = [letter.recipient.email],
+				headers = {'Return-Path': settings.NEWSLETTER_RETURN_PATH},
 			)
 			for attachement in letter.message.attachements.all():
 				mail.attach_file(attachement.file.file.name)

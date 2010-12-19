@@ -101,15 +101,29 @@ INSTALLED_APPS = (
     'subkoord.newsletter',
 )
 
-# testing.... TODO
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 CACHE_BACKEND = 'file:///var/.../cache'
 
 BACKUP_DIR = '/home/.../backup/'
 
+SITE_URL = 'http://127.0.0.1:8000'
+
+# when to start bragging about open tasks (hours)
+EVENT_REMINDER_WINDOW = 48
+# Pause between two reminders (hours)
+EVENT_REMINDER_PAUSE = 24
+# Subject for reminder e-mails
+EVENT_REMINDER_SUBJECT = "there's something to do"
+# List of e-mail addresses to send reminder to
+EVENT_REMINDER_ADDRESSBOOK = ["mailinglist@example.com",]
+# From:
+EVENT_REMINDER_FROM = "bar@example.com"
+
 # the newsletter should be invoked regularly by a cronjob
 # on each run it will send emails according to NEWSLETTER_QUOTA
 NEWSLETTER_QUOTA = 28
 
-NEWSLETTER_FROM = 'info@subterrarium.at'
+NEWSLETTER_FROM = 'foo@example.com'
+# Where error messaged caused by undeliverable e-mails should be send to
+NEWSLETTER_RETURN_PATH = "noreply@example.com"
