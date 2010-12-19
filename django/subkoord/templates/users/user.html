@@ -9,7 +9,7 @@
 {% block content %}
 {% cache 500 users usr.id %}
 	<ul>
-	{% regroup usr.job_set.all|dictsortreversed:"event.date" by event as job_list %}
+	{% regroup usr.jobs.all|dictsortreversed:"event.date" by event as job_list %}
 	{% for event in job_list %}
 		<li>{{ event.grouper.date|date:"D, j. n. Y" }}
 		<a href="{% url event event.grouper.id %}">{{ event.grouper.title }}</a>:
