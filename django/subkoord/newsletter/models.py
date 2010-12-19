@@ -91,7 +91,7 @@ class Job(models.Model):
 	to = models.ForeignKey(List, verbose_name=_("to List"))
 	date = models.DateTimeField(auto_now_add=True, editable=False)
 	sender = models.ForeignKey(User, related_name="mailjobs")
-	last_delivery = models.DateTimeField(editable=False, blank=True)
+	last_delivery = models.DateTimeField(editable=False, null=True)
 	letters_sent = models.IntegerField(default=0, editable=False, blank=True)
 	@property
 	def letters_total(self):
