@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-14 18:47+0100\n"
+"POT-Creation-Date: 2010-12-19 20:55+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -135,47 +135,47 @@ msgid "to List"
 msgstr "an Liste"
 
 #: newsletter/models.py:162 newsletter/models.py:169
-#: templates/newsletter/job.html:20
+#: templates/newsletter/job.html:21
 msgid "To list"
 msgstr "an Liste"
 
-#: newsletter/views.py:89
+#: newsletter/views.py:85
 #, python-format
 msgid "Queued %s Newsletters for delivery."
 msgstr "%s e-mails warten auf den Versand"
 
-#: newsletter/views.py:124
+#: newsletter/views.py:120
 msgid "Confirm subscription"
 msgstr ""
 
-#: newsletter/views.py:126
+#: newsletter/views.py:122
 #, python-format
 msgid ""
 "<h1>Thanks for subscribing</h1>An e-mail asking for confirmation willbe sent "
 "shortly to %s"
 msgstr ""
 
-#: newsletter/views.py:138
+#: newsletter/views.py:134
 msgid "<h1>Subscribtion confirmed</h1>"
 msgstr ""
 
-#: newsletter/views.py:139
+#: newsletter/views.py:135
 msgid "<h1>Couldn't confirm - token mismatch</h1>"
 msgstr ""
 
-#: newsletter/views.py:145
+#: newsletter/views.py:141
 msgid "<h1>Subscribtion doesn't exist (anymore?)</h1>"
 msgstr ""
 
-#: newsletter/views.py:148
+#: newsletter/views.py:144
 msgid "<h1>Subscribtion cancelled</h1>"
 msgstr ""
 
-#: newsletter/views.py:149
+#: newsletter/views.py:145
 msgid "<h1>Couldn't cancel - token mismatch</h1>"
 msgstr ""
 
-#: newsletter/views.py:175
+#: newsletter/views.py:171
 msgid "Saved new subscribers"
 msgstr "Neue Abonnenten gespeichert"
 
@@ -210,7 +210,7 @@ msgstr "Wiki"
 #: templates/base.html:47 templates/event/events.html:35
 #: templates/newsletter/index.html:5 templates/newsletter/job.html:11
 #: templates/newsletter/job_new.html:11 templates/newsletter/jobs.html:11
-#: templates/newsletter/messages.html:12
+#: templates/newsletter/message.html:24 templates/newsletter/messages.html:12
 #: templates/newsletter/subscriber.html:11
 #: templates/newsletter/subscribers.html:26
 #: templates/newsletter/subscribers_add.html:11 templates/wiki/home.html:14
@@ -372,6 +372,10 @@ msgstr "Nachrichten"
 msgid "now sending to"
 msgstr "wird momentan gesendet an"
 
+#: templates/newsletter/index.html:18 templates/newsletter/index.html.py:25
+msgid "and"
+msgstr ""
+
 #: templates/newsletter/index.html:19 templates/newsletter/message.html:75
 msgid "status"
 msgstr "Status"
@@ -380,31 +384,31 @@ msgstr "Status"
 msgid "already send to"
 msgstr "bereits gesendet an"
 
-#: templates/newsletter/index.html:31
+#: templates/newsletter/index.html:32
 msgid "view all messages"
 msgstr "alle Nachrichten anzeigen"
 
-#: templates/newsletter/index.html:32 templates/newsletter/index.html.py:61
+#: templates/newsletter/index.html:33 templates/newsletter/index.html.py:61
 #: templates/newsletter/job_new.html:10 templates/newsletter/message.html:22
 #: templates/newsletter/messages.html:11
 msgid "compose message"
 msgstr "Nachricht erstellen"
 
-#: templates/newsletter/index.html:37
+#: templates/newsletter/index.html:38
 msgid "Mailinglists"
 msgstr "Mailinglisten"
 
-#: templates/newsletter/index.html:41
+#: templates/newsletter/index.html:42
 #: templates/newsletter/subscribers_add.html:10
 msgid "view subscribers"
 msgstr "Abonnenten anzeigen"
 
-#: templates/newsletter/index.html:42 templates/newsletter/subscribers.html:25
+#: templates/newsletter/index.html:43 templates/newsletter/subscribers.html:25
 #: templates/newsletter/subscribers.html:35
 msgid "add subscribers"
 msgstr "Abonnenten hinzufügen"
 
-#: templates/newsletter/index.html:46
+#: templates/newsletter/index.html:47
 msgid "Latest Subscribers"
 msgstr "neue Abonnenten"
 
@@ -420,22 +424,23 @@ msgstr "an"
 msgid "e-Mail"
 msgstr "e-Mail"
 
-#: templates/newsletter/job.html:21
+#: templates/newsletter/job.html:22
 msgid "Sent by"
 msgstr "Auftrag erstellt von"
 
-#: templates/newsletter/job.html:22 templates/newsletter/subscribers.html:42
+#: templates/newsletter/job.html:23 templates/newsletter/subscribers.html:42
 msgid "Date"
 msgstr "Datum"
 
-#: templates/newsletter/job.html:26
+#: templates/newsletter/job.html:27
 msgid "e-mails sent"
 msgstr "e-mails versendet"
 
-#: templates/newsletter/job.html:28
+#: templates/newsletter/job.html:29
+#, fuzzy
 msgid ""
 "\n"
-"%(sent)s of %(total)s already sent (%(percentage)s %)"
+"\t%(sent)s of %(total)s already sent (%(percentage)s %)"
 msgstr ""
 "\n"
 "%(sent)s von %(total)s versendet (%(percentage)s %)"
@@ -454,11 +459,8 @@ msgid ""
 "and it will be send \\nout to everybody on the selected mailinglist."
 msgstr ""
 "Nachdem der Sendeauftrag erstellt wurde, kann an der \\nNachricht nichts "
-"mehr geändert werden und sie wird \\nsukzessive an die Personen auf der Mailingliste versendet."
-
-#: templates/newsletter/message.html:24
-msgid "Newlsetter"
-msgstr "Newlsetter"
+"mehr geändert werden und sie wird \\nsukzessive an die Personen auf der "
+"Mailingliste versendet."
 
 #: templates/newsletter/message.html:40
 #: templates/newsletter/message_preview.html:10
@@ -469,7 +471,7 @@ msgstr "Anhänge"
 msgid "save Message"
 msgstr "Nachricht speichern"
 
-#: templates/newsletter/message.html:62
+#: templates/newsletter/message.html:61
 msgid "Preview"
 msgstr "Vorschau"
 
