@@ -9,8 +9,10 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import permission_required
 from django.contrib import messages
 from django.utils.translation import ugettext as _
+from django.utils import simplejson
 from datetime import date, datetime
 from models import *
+from forms import *
 
 
 @permission_required('newsletter.add_subscriber')
@@ -42,6 +44,7 @@ def message(request, message_id):
 	MessageFormSet = inlineformset_factory(Message, Attachement, extra=1)
 	message = get_object_or_404(Message, pk=message_id)
 	job_form = JobMessageForm(initial = {'message': message.id,})
+	preview_form = PreviewMessageForm(initial = {'message': message.id,})
 	if not message.locked and request.method == "POST":
 		message_form = MessageForm(request.POST, instance=message)
 		message_formset = MessageFormSet(request.POST, request.FILES, instance=message)
@@ -54,10 +57,21 @@ def message(request, message_id):
 		message_formset = MessageFormSet(instance=message)
 	return render_to_response('newsletter/message.html',
 		{'message': message,
+		'preview_form': preview_form,
 		'message_form': message_form,
 		'message_formset': message_formset,
 		'job_form': job_form,},
 		context_instance=RequestContext(request),)
+
+#@permission_required('newsletter.add_message')
+#def message_preview(request, message_id):
+#	if request.method == "POST":
+#		message = get_object_or_404(Message, pk=message_id)
+#		form = PreviewMessageForm(request.POST)
+#		if form.is_valid():
+#			for recipient in form.cleaned_data["to"]:
+#				letter = Letter()
+#	return HttpResponseRedirect(reverse('message', args=[message_id]))
 
 @permission_required('newsletter.add_message')
 def message_archive(request):
@@ -74,7 +88,7 @@ def job(request, job_id):
 		context_instance=RequestContext(request),)
 
 @permission_required('newsletter.add_job')
-def job_new(request):
+def job_new(request, preview_send=False, **kwargs):
 	if request.method == "POST":
 		form = JobForm(request.POST)
 		if form.is_valid():
@@ -82,6 +96,17 @@ def job_new(request):
 				to = form.cleaned_data['to'],
 				sender = request.user, letters_sent = 0)
 			job.save()
+			if preview_send:
+				for letter in job.letters.all():
+					letter.send()
+					letter.delete()
+				print "job count: %s" % (job.message.jobs.count())
+				if job.message.jobs.count() == 1:
+					job.message.locked = False
+					job.message.save()
+				messages.success(request, _("Sent Preview to list %s." % (job.to.name)))
+				job.delete()
+				return HttpResponseRedirect(reverse('message', args=[form.cleaned_data['message'].id]))
 			messages.success(request, _("Queued %s Newsletters for delivery." % (job.letters_total-job.letters_sent)))
 			return HttpResponseRedirect(reverse('job', args=[job.id]))
 	else:
@@ -148,7 +173,11 @@ def subscriber_public_delete(request, subscriber_id, token):
 def subscriber_delete(request, subscriber_id):
 	subscriber = get_object_or_404(Subscriber, pk=subscriber_id)
 	list = subscriber.subscription.id
+	json = simplejson.dumps({'subscriber_id':subscriber_id,
+		'email': subscriber.email})
 	subscriber.delete()
+	if request.is_ajax():
+		return HttpResponse(json, mimetype='application/json',)
 	return HttpResponseRedirect(reverse('subscribers_list', args=[list]))
 
 @permission_required('newsletter.add_subscriber')
@@ -169,7 +198,8 @@ def subscribers_add(request, list_id):
 		if formset.is_valid():
 			formset.save()
 			messages.success(request, _("Saved new subscribers"))
-	formset = SubscriberFormSet()
+			formset = SubscriberFormSet()
+	else: formset = SubscriberFormSet()
 	return render_to_response('newsletter/subscribers_add.html',
 		{'formset': formset,
 		'list': list, },

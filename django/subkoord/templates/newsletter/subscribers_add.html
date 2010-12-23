@@ -5,6 +5,19 @@
 {% blocktrans with list.name as name%}Add subscribers to {{ name }}{% endblocktrans %}
 {% endblock heading %}
 
+{% block jquery %}
+	var name_input_visible = true;
+	$('#hide-name-column').click(function() {
+		if(name_input_visible){
+			$("td.name input").css("visibility", "hidden");
+		} else {
+			$("td.name input").css("visibility", "visible");
+		}
+		name_input_visible = !name_input_visible;
+		return false;
+	});
+{% endblock jquery %}
+
 {% block navigation %}
 	<ul>
 		<li><a href="{% url subscribers_list list.id %}">{% trans "view subscribers" %}</a></li>
@@ -21,12 +34,14 @@
 <table>
 	<tr>
 		<th class="span-5">{% trans "e-mail" %}</th>
-		<td class="span-5">{% trans "Name (optional)" %}</td>
+		<td class="span-5">{% trans "Name (optional)" %} <a href="" id="hide-name-column">{% trans "hide/show" %}</a></td>
 	</tr>
 {% for form in formset.forms %}
 	<tr>
-		<td class="span-5 required">{{ form.email }}</td>
-		<td class="span-5">{{ form.name }}
+		<td class="span-5 required">
+		{% if form.email.errors %}<div class="error">{{ form.email.errors }}</div>{% endif %}
+		{{ form.email }}</td>
+		<td class="span-5 name">{{ form.name }}
 		<div class="hidden">{{ form.confirmed }}</div>
 		</td>
 	</tr>

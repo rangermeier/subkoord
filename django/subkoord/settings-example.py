@@ -127,3 +127,5 @@ NEWSLETTER_QUOTA = 28
 NEWSLETTER_FROM = 'foo@example.com'
 # Where error messaged caused by undeliverable e-mails should be send to
 NEWSLETTER_RETURN_PATH = "noreply@example.com"
+# with how much recipients a list is still considered a "preview/testing"-list?
+NEWSLETTER_PREVIEW_LIST = 5

@@ -15,8 +15,15 @@
 		$.uiTableFilter( $("#subscribers-table"), this.value);
 		$("#subscribers-table th").parent("tr").show();
 	});
-	$("a.delete").click(function() {
-		return confirm("{% trans "really?" %}");
+	$("a.subscriber-delete").click(function() {
+		if(confirm("{% trans "really?" %}")) {
+			$.getJSON($(this).attr("href"), function(json) {
+				$("#subscriber-"+json.subscriber_id).remove();
+				$("#filter").val("").focus();
+				$("#subscribers-table tr").show();
+			});
+		}
+		return false;
 	});
 {% endblock jquery%}
 
@@ -44,13 +51,13 @@
 		<th>{% trans "delete"%}</th>
 	</tr>
 {% for subscriber in subscribers %}
-	<tr>
+	<tr id="subscriber-{{ subscriber.id}}">
 		<td>{{ subscriber.email }}</td>
-		<td>{{subscriber.name }}</td>
-		<td>{{subscriber.date }}
+		<td>{{ subscriber.name }}</td>
+		<td>{{ subscriber.date }}
 		<td><a href="{% url subscriber subscriber.id %}">+</a></td>
-		<td><a href="{% url subscriber_delete subscriber.id %}" class="delete">-</a></td>
-	</li>
+		<td><a href="{% url subscriber_delete subscriber.id %}" class="subscriber-delete" id="subscriber-delete-{{subscriber.id}}">-</a></td>
+	</tr>
 {% endfor %}
 </table>
 

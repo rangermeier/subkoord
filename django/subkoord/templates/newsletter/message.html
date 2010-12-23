@@ -11,8 +11,11 @@
 {% endblock heading %}
 
 {% block jquery %}
-	$("#job-form").submit(function () {
+	$('job-form').submit(function () {
 		return confirm("{% trans "Once you create a job for a message, \nyou can't change the message anymore and it will be send \nout to everybody on the selected mailinglist."%}");
+	});
+	$('#message-form :input').change(function() {
+		$('#preview-form :input, #job-form :input').attr("disabled", "disabled");
 	});
 {% endblock jquery %}
 
@@ -28,19 +31,44 @@
 {% endblock navigation %}
 
 {% block content %}
+{% if message and not message.locked %}
+<ol>
+	<li><a href="#preview">{% trans "Preview"%}</a></li>
+	<li><a href="#edit">{% trans "Edit"%}</a></li>
+	<li><a href="#send">{% trans "Send"%}</a></li>
+</ol>
+{% endif %}
 <div class="newsletter">
-<div class="span-12">
+{% if message %}
+<fieldset id="preview">
+	<legend>{% trans "Preview" %}</legend>
+	<dl>
+	{% include "newsletter/message_preview.html" %}
+	</dl>
+	<h4>{% trans "Test-send" %}</h4>
+	<form action="{% url message_preview message.id %}" method="post" id="preview-form">
+	{%  csrf_token  %}
+	<ul>
+	{{ preview_form }}
+	</ul>
+	<input type="submit" value="{% trans "send Preview" %}" />
+	</form>
+</fieldset>
+{% endif %}
+
 {% if not message.locked %}
-<form action={% if message %}"{% url message message.id%}" enctype="multipart/form-data"{% else %}"{% url message_new %}"{% endif %} method="post" class="newsletter-form">
+<fieldset id="edit">
+	<legend>{% trans "Edit" %}</legend>
+<form action={% if message %}"{% url message message.id%}" enctype="multipart/form-data"{% else %}"{% url message_new %}"{% endif %} method="post" class="newsletter-form" id="message-form">
 {%  csrf_token  %}
 	<ul>
 		{{ message_form.as_ul }}
 	</ul>
 	{% if message_formset %}
-		<h3>{% trans "Attachements"%}</h3>
+		<h4>{% trans "Attachements"%}</h4>
 		{{ message_formset.management_form }}
 		{% for form in message_formset.forms %}
-			<fieldset class="span-10">
+			<fieldset>
 			{% if form.instance.file %}
 			<legend>{{ form.instance.file }}</legend>
 			<div class="span-3"><img src="{{ form.instance.file|thumbnail }}" alt="" />
@@ -52,22 +80,15 @@
 			</fieldset>
 			{% endfor %}
 	{% endif %}
-	<input type="submit"  value="{% trans "save Message" %}" />
+	<input type="submit" class="clear" value="{% trans "save Message" %}" />
 </form>
+</fieldset>
 {% endif %}
 
 {% if message %}
-<p>
-	<h3>{% trans "Preview" %}</h3>
-	<dl>
-	{% include "newsletter/message_preview.html" %}
-	</dl>
-</p>
-</div>
-
-<div class="span-5 last">
+<fieldset id="send">
+	<legend>{% trans "Send" %}</legend>
 	{% if message.jobs.all %}
-	<h4>{% trans "Jobs" %}</h4>
 	<ul>
 		{% for job in message.jobs.all %}
 			<li>{{ job.to.name }} {{ job.percent_sent }} % {% trans "sent" %}
@@ -83,9 +104,8 @@
 	{%  csrf_token  %}
 	<input type="submit" value="{% trans "create Job" %}" />
 	</form>
-</div>
-{% else %}
-</div>
+</fieldset>
 {% endif %}
+
 </div>
 {% endblock content %}

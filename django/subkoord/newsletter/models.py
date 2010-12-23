@@ -1,14 +1,14 @@
 from django.db import models
+from django.core.mail import EmailMultiAlternatives
+from django.core.urlresolvers import reverse
+from django.template import Context, Template
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext as _
-from django.forms import ModelForm
-from django.forms.fields import IntegerField
-from django import forms
-from django.forms.models import ModelChoiceField
+from django.conf import settings
 from django.contrib.markup.templatetags.markup import textile
 from html2text import html2text
-from extraformfields import *
-from hashlib import md5
+import random, string
+from datetime import datetime
 
 class List(models.Model):
 	name = models.CharField(max_length=200)
@@ -20,14 +20,14 @@ class List(models.Model):
 
 class Subscriber(models.Model):
 	name = models.CharField(max_length=200,blank=True, verbose_name=_("Name"))
-	email = models.EmailField(verbose_name=_("e-Mail Address"))
+	email = models.EmailField(unique=True, verbose_name=_("e-Mail Address"))
 	subscription = models.ForeignKey(List, default=1, related_name="recipients", verbose_name=_("Subscription"))
 	date = models.DateTimeField(auto_now_add=True, editable=False)
 	confirmed = models.BooleanField(default=True, editable=True, verbose_name=_("confirmed"))
 	token = models.CharField(max_length=12, editable=False)
 	def save(self, *args, **kwargs):
-		m = md5('%s-%s' % (self.name, self.email))
-		self.token = m.hexdigest()[4:16]
+		alnum = string.letters + string.digits
+		self.token = ''.join(random.choice(alnum) for i in range(Subscriber._meta.get_field("token").max_length))
 		super(Subscriber, self).save(*args, **kwargs) # Call the "real" save() method.
 	def __unicode__(self):
 		return self.email
@@ -134,37 +134,28 @@ class Letter(models.Model):
 	@property
 	def message(self):
 		return self.job.message
+	def send(self):
+		footer_text = Template(self.job.to.footer_text)
+		footer_html = Template(self.job.to.footer_html)
+		c = Context({
+			'unsubscribe_url': settings.SITE_URL+reverse('subscriber_public_delete', args=[self.recipient.id, self.recipient.token]),
+		})
+		text_plain = "\n".join([self.message.text_as_plain, footer_text.render(c)])
+		text_html = "\n<br>\n".join([self.message.text_as_html, footer_html.render(c)])
+		mail = EmailMultiAlternatives(
+			subject = u'%s %s' % (self.job.to.praefix, self.message.subject),
+			body = text_plain,
+			from_email = settings.NEWSLETTER_FROM,
+			to = [self.recipient.email],
+			headers = {'Return-Path': settings.NEWSLETTER_RETURN_PATH},
+		)
+		for attachement in self.message.attachements.all():
+			mail.attach_file(attachement.file.file.name)
+		if self.message.text_format != "plain":
+			mail.attach_alternative(text_html, "text/html")
+		mail.send()
+		self.job.letters_sent += 1
+		self.job.last_delivery = datetime.now()
+		self.job.save()
 	def __unicode__(self):
 		return u'%s - %s' % (self.recipient.email, self.job.message.subject)
-
-
-class SubscriberForm(ModelForm):
-	class Meta:
-		model = Subscriber
-
-class SubscriberFormPublic(ModelForm):
-	class Meta:
-		model = Subscriber
-		fields = ('name', 'email')
-
-class MessageForm(ModelForm):
-	class Meta:
-		model = Message
-		fields = ('subject', 'text', 'text_format')
-
-class JobForm(forms.Form):
-	message = FeaturedModelChoiceField(queryset = Message.objects.all(),
-		featured_queryset = Message.objects.filter(locked=False),
-		label = _('Message'),
-	)
-	to = ModelChoiceField(queryset = List.objects.all(),
-		empty_label = None,
-		label = _('To list'),
-	)
-
-class JobMessageForm(forms.Form):
-	message = IntegerField(widget = forms.HiddenInput,)
-	to = ModelChoiceField(queryset = List.objects.all(),
-		empty_label = None,
-		label = _('To list'),
-	)
