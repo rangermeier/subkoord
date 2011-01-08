@@ -15,6 +15,9 @@ class List(models.Model):
 	praefix = models.CharField(max_length=20, verbose_name=_("praefix for subject [...]"))
 	footer_text = models.TextField(verbose_name=_("Footer plain text"), blank=True)
 	footer_html = models.TextField(verbose_name=_("Footer HTML"), blank=True)
+	from_address = models.EmailField(verbose_name=_("From e-mail address"))
+	from_bounce_address = models.EmailField(verbose_name=_("Technical From e-mail address (used for bounces)"))
+	reply_to_address = models.EmailField(verbose_name=_("Reply-to e-mail address"), blank=True)
 	def __unicode__(self):
 		return self.name
 
@@ -145,9 +148,10 @@ class Letter(models.Model):
 		mail = EmailMultiAlternatives(
 			subject = u'%s %s' % (self.job.to.praefix, self.message.subject),
 			body = text_plain,
-			from_email = settings.NEWSLETTER_FROM,
+			from_email = self.job.to.from_bounce_address,
 			to = [self.recipient.email],
-			headers = {'Return-Path': settings.NEWSLETTER_RETURN_PATH},
+			headers = {'Reply-To': self.job.to.reply_to_address,
+				'From': self.job.to.from_address},
 		)
 		for attachement in self.message.attachements.all():
 			mail.attach_file(attachement.file.file.name)
