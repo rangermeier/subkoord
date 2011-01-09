@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-19 20:55+0100\n"
+"POT-Creation-Date: 2011-01-09 14:43+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,10 +16,6 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-
-#: event/cron.py:35
-msgid "Open Tasks"
-msgstr "Dienste"
 
 #: event/models.py:48 wiki/models.py:19
 msgid "Title"
@@ -65,6 +61,24 @@ msgstr "Dienst entfernt"
 msgid "Saved note"
 msgstr "Anmerkung gespeichert"
 
+#: newsletter/forms.py:28 newsletter/models.py:88 newsletter/models.py:93
+#: templates/newsletter/message.html:7
+msgid "Message"
+msgstr "Nachricht"
+
+#: newsletter/forms.py:32 newsletter/forms.py:39 newsletter/forms.py:47
+#: templates/newsletter/job.html:21
+msgid "To list"
+msgstr "an Liste"
+
+#: newsletter/mailbox_utils.py:36
+msgid "Created from e-mail"
+msgstr ""
+
+#: newsletter/mailbox_utils.py:39 newsletter/mailbox_utils.py:43
+msgid "Unknown Sender"
+msgstr ""
+
 #: newsletter/models.py:15
 msgid "praefix for subject [...]"
 msgstr ""
@@ -77,107 +91,123 @@ msgstr ""
 msgid "Footer HTML"
 msgstr ""
 
-#: newsletter/models.py:22 templates/newsletter/subscribers.html:41
+#: newsletter/models.py:18
+msgid "From e-mail address"
+msgstr "From-e-Mail Adresse"
+
+#: newsletter/models.py:19
+msgid "Technical From e-mail address (used for bounces)"
+msgstr ""
+
+#: newsletter/models.py:20
+msgid "Reply-to e-mail address"
+msgstr "Reply-e-Mail Adresse"
+
+#: newsletter/models.py:25 templates/newsletter/subscribers.html:48
 msgid "Name"
 msgstr "Name"
 
-#: newsletter/models.py:23
+#: newsletter/models.py:26
 msgid "e-Mail Address"
-msgstr "e-Mail Addresse"
+msgstr "e-Mail Adresse"
 
-#: newsletter/models.py:24
+#: newsletter/models.py:27
 msgid "Subscription"
 msgstr "Abo"
 
-#: newsletter/models.py:26
+#: newsletter/models.py:29
 msgid "confirmed"
 msgstr "bestätigt"
 
-#: newsletter/models.py:37
+#: newsletter/models.py:40
 msgid "Plain Text"
 msgstr "einfacher Text"
 
-#: newsletter/models.py:38
+#: newsletter/models.py:41
 msgid "HTML"
 msgstr "HTML"
 
-#: newsletter/models.py:39
+#: newsletter/models.py:42
 msgid "Textile"
 msgstr "Textile"
 
-#: newsletter/models.py:41 templates/newsletter/message_preview.html:4
+#: newsletter/models.py:44 templates/newsletter/error_mailbox.html:57
+#: templates/newsletter/message_preview.html:4
 msgid "Subject"
 msgstr "Betreff"
 
-#: newsletter/models.py:42
+#: newsletter/models.py:45
 msgid "Text"
 msgstr "Text"
 
-#: newsletter/models.py:43
+#: newsletter/models.py:46
 msgid "Text format"
 msgstr "Eingabeformat"
 
-#: newsletter/models.py:45
+#: newsletter/models.py:48
 msgid "locked"
 msgstr "gesperrt"
 
-#: newsletter/models.py:84
+#: newsletter/models.py:87
 msgid "File"
 msgstr "Datei"
 
-#: newsletter/models.py:85 newsletter/models.py:90 newsletter/models.py:158
-#: templates/newsletter/message.html:7
-msgid "Message"
-msgstr "Nachricht"
-
-#: newsletter/models.py:91
+#: newsletter/models.py:94
 msgid "to List"
 msgstr "an Liste"
 
-#: newsletter/models.py:162 newsletter/models.py:169
-#: templates/newsletter/job.html:21
-msgid "To list"
-msgstr "an Liste"
+#: newsletter/views.py:107
+#, python-format
+msgid "Sent Preview to list %s."
+msgstr "Vorschau an die Liste %s geschickt"
 
-#: newsletter/views.py:85
+#: newsletter/views.py:110
 #, python-format
 msgid "Queued %s Newsletters for delivery."
 msgstr "%s e-mails warten auf den Versand"
 
-#: newsletter/views.py:120
+#: newsletter/views.py:145
 msgid "Confirm subscription"
 msgstr ""
 
-#: newsletter/views.py:122
+#: newsletter/views.py:147
 #, python-format
 msgid ""
 "<h1>Thanks for subscribing</h1>An e-mail asking for confirmation willbe sent "
 "shortly to %s"
 msgstr ""
 
-#: newsletter/views.py:134
+#: newsletter/views.py:159
 msgid "<h1>Subscribtion confirmed</h1>"
 msgstr ""
 
-#: newsletter/views.py:135
+#: newsletter/views.py:160
 msgid "<h1>Couldn't confirm - token mismatch</h1>"
 msgstr ""
 
-#: newsletter/views.py:141
+#: newsletter/views.py:166
 msgid "<h1>Subscribtion doesn't exist (anymore?)</h1>"
 msgstr ""
 
-#: newsletter/views.py:144
+#: newsletter/views.py:169
 msgid "<h1>Subscribtion cancelled</h1>"
 msgstr ""
 
-#: newsletter/views.py:145
+#: newsletter/views.py:170
 msgid "<h1>Couldn't cancel - token mismatch</h1>"
 msgstr ""
 
-#: newsletter/views.py:171
+#: newsletter/views.py:187
+msgid "Deleted %s subscribers"
+msgstr "%s Abonnenten gelöscht"
+
+#: newsletter/views.py:209
 msgid "Saved new subscribers"
 msgstr "Neue Abonnenten gespeichert"
+
+#: newsletter/views.py:225
+msgid "Removed all messages from error mailbox"
+msgstr ""
 
 #: templates/base.html:34
 msgid "Sub-Koordinator"
@@ -185,12 +215,13 @@ msgstr "Sub-Koordinator"
 
 #: templates/base.html:44 templates/event/event.html:13
 #: templates/event/event_edit.html:11 templates/event/event_new.html:10
-#: templates/newsletter/index.html:62 templates/newsletter/job.html:12
+#: templates/newsletter/error_mailbox.html:34
+#: templates/newsletter/index.html:63 templates/newsletter/job.html:12
 #: templates/newsletter/job_new.html:12 templates/newsletter/jobs.html:12
-#: templates/newsletter/message.html:25 templates/newsletter/messages.html:13
+#: templates/newsletter/message.html:28 templates/newsletter/messages.html:13
 #: templates/newsletter/subscriber.html:12
-#: templates/newsletter/subscribers.html:27
-#: templates/newsletter/subscribers_add.html:12 templates/users/user.html:34
+#: templates/newsletter/subscribers.html:34
+#: templates/newsletter/subscribers_add.html:25 templates/users/user.html:34
 #: templates/users/user_edit.html:22 templates/users/user_list.html:28
 #: templates/wiki/edit.html:30 templates/wiki/home.html:12
 #: templates/wiki/page.html:13
@@ -198,22 +229,24 @@ msgid "view events"
 msgstr "Kalender"
 
 #: templates/base.html:45 templates/event/event.html:14
-#: templates/event/events.html:33 templates/newsletter/index.html:63
-#: templates/newsletter/job.html:13 templates/newsletter/job_new.html:13
-#: templates/newsletter/message.html:26 templates/newsletter/messages.html:14
-#: templates/newsletter/subscribers.html:28
-#: templates/newsletter/subscribers_add.html:13 templates/users/user.html:35
+#: templates/event/events.html:33 templates/newsletter/error_mailbox.html:35
+#: templates/newsletter/index.html:64 templates/newsletter/job.html:13
+#: templates/newsletter/job_new.html:13 templates/newsletter/message.html:29
+#: templates/newsletter/messages.html:14
+#: templates/newsletter/subscribers.html:35
+#: templates/newsletter/subscribers_add.html:26 templates/users/user.html:35
 #: templates/wiki/home.html:6
 msgid "Wiki"
 msgstr "Wiki"
 
 #: templates/base.html:47 templates/event/events.html:35
+#: templates/newsletter/error_mailbox.html:33
 #: templates/newsletter/index.html:5 templates/newsletter/job.html:11
 #: templates/newsletter/job_new.html:11 templates/newsletter/jobs.html:11
-#: templates/newsletter/message.html:24 templates/newsletter/messages.html:12
+#: templates/newsletter/message.html:27 templates/newsletter/messages.html:12
 #: templates/newsletter/subscriber.html:11
-#: templates/newsletter/subscribers.html:26
-#: templates/newsletter/subscribers_add.html:11 templates/wiki/home.html:14
+#: templates/newsletter/subscribers.html:33
+#: templates/newsletter/subscribers_add.html:24 templates/wiki/home.html:14
 #: templates/wiki/page.html:15
 msgid "Newsletter"
 msgstr "Newsletter"
@@ -267,7 +300,7 @@ msgstr "Es gibt offene Dienste:"
 msgid "Thanks for your kind attention :)"
 msgstr "Vielen Dank für Deine Aufmerksamkeit :)"
 
-#: templates/event/event.html:12 templates/newsletter/subscribers.html:43
+#: templates/event/event.html:12 templates/newsletter/subscribers.html:50
 #: templates/wiki/page.html:11 templates/wiki/page.html.py:30
 msgid "edit"
 msgstr "bearbeiten"
@@ -364,6 +397,68 @@ msgstr "nächstes Monat"
 msgid "Help for Textile"
 msgstr "Hilfe zu Textile"
 
+#: templates/newsletter/error_mailbox.html:7
+#: templates/newsletter/subscribers.html:19
+msgid "really?"
+msgstr "wirklich?"
+
+#: templates/newsletter/error_mailbox.html:24
+msgid "Error Mailbox"
+msgstr "Error-Mailbox"
+
+#: templates/newsletter/error_mailbox.html:31
+#: templates/newsletter/index.html:33 templates/newsletter/index.html.py:62
+#: templates/newsletter/job_new.html:10 templates/newsletter/message.html:25
+#: templates/newsletter/messages.html:11
+msgid "compose message"
+msgstr "Nachricht erstellen"
+
+#: templates/newsletter/error_mailbox.html:43
+msgid "hide/show messages which are not matched by a subscriber"
+msgstr "zeige/verstecke Nachrichten, die keinem Abonnenten zugeordnet werden können"
+
+#: templates/newsletter/error_mailbox.html:44
+msgid "hide/show message bodies"
+msgstr "zeige/verstecke Nachrichten-Texte"
+
+#: templates/newsletter/error_mailbox.html:47
+msgid "delete all subscribers with bounced messages"
+msgstr "alle Abonnenten mit automatischen Fehlermeldungen löschen"
+
+#: templates/newsletter/error_mailbox.html:48
+msgid "(all matched subscriptions listed on this page)"
+msgstr "(alle Abonnentne die auf dieser Seite aufscheinen werden gelöscht)"
+
+#: templates/newsletter/error_mailbox.html:50
+msgid "empty error mailbox"
+msgstr "Error-Mailbox leeren"
+
+#: templates/newsletter/error_mailbox.html:58
+msgid "Sender"
+msgstr "Sender"
+
+#: templates/newsletter/error_mailbox.html:59
+msgid "Recipient"
+msgstr "Empfänger"
+
+#: templates/newsletter/error_mailbox.html:60
+msgid "Subscriber"
+msgstr "Abonnent"
+
+#: templates/newsletter/error_mailbox.html:61
+#: templates/newsletter/subscriber.html:26
+#: templates/newsletter/subscribers.html:51
+msgid "delete"
+msgstr "löschen"
+
+#: templates/newsletter/error_mailbox.html:63
+msgid "Body"
+msgstr "Text"
+
+#: templates/newsletter/error_mailbox.html:68
+msgid "nothing in error mailbox :)"
+msgstr "nichts in der Error-Mailbox :)"
+
 #: templates/newsletter/index.html:10
 msgid "Messages"
 msgstr "Nachrichten"
@@ -374,9 +469,9 @@ msgstr "wird momentan gesendet an"
 
 #: templates/newsletter/index.html:18 templates/newsletter/index.html.py:25
 msgid "and"
-msgstr ""
+msgstr "und"
 
-#: templates/newsletter/index.html:19 templates/newsletter/message.html:75
+#: templates/newsletter/index.html:19 templates/newsletter/message.html:96
 msgid "status"
 msgstr "Status"
 
@@ -388,27 +483,25 @@ msgstr "bereits gesendet an"
 msgid "view all messages"
 msgstr "alle Nachrichten anzeigen"
 
-#: templates/newsletter/index.html:33 templates/newsletter/index.html.py:61
-#: templates/newsletter/job_new.html:10 templates/newsletter/message.html:22
-#: templates/newsletter/messages.html:11
-msgid "compose message"
-msgstr "Nachricht erstellen"
+#: templates/newsletter/index.html:34
+msgid "view error mailbox"
+msgstr "gehe zu Error-Mailbox"
 
-#: templates/newsletter/index.html:38
+#: templates/newsletter/index.html:39
 msgid "Mailinglists"
 msgstr "Mailinglisten"
 
-#: templates/newsletter/index.html:42
-#: templates/newsletter/subscribers_add.html:10
+#: templates/newsletter/index.html:43
+#: templates/newsletter/subscribers_add.html:23
 msgid "view subscribers"
 msgstr "Abonnenten anzeigen"
 
-#: templates/newsletter/index.html:43 templates/newsletter/subscribers.html:25
-#: templates/newsletter/subscribers.html:35
+#: templates/newsletter/index.html:44 templates/newsletter/subscribers.html:32
+#: templates/newsletter/subscribers.html:42
 msgid "add subscribers"
 msgstr "Abonnenten hinzufügen"
 
-#: templates/newsletter/index.html:47
+#: templates/newsletter/index.html:48
 msgid "Latest Subscribers"
 msgstr "neue Abonnenten"
 
@@ -428,7 +521,7 @@ msgstr "e-Mail"
 msgid "Sent by"
 msgstr "Auftrag erstellt von"
 
-#: templates/newsletter/job.html:23 templates/newsletter/subscribers.html:42
+#: templates/newsletter/job.html:23 templates/newsletter/subscribers.html:49
 msgid "Date"
 msgstr "Datum"
 
@@ -437,7 +530,6 @@ msgid "e-mails sent"
 msgstr "e-mails versendet"
 
 #: templates/newsletter/job.html:29
-#, fuzzy
 msgid ""
 "\n"
 "\t%(sent)s of %(total)s already sent (%(percentage)s %)"
@@ -462,36 +554,48 @@ msgstr ""
 "mehr geändert werden und sie wird \\nsukzessive an die Personen auf der "
 "Mailingliste versendet."
 
-#: templates/newsletter/message.html:40
+#: templates/newsletter/message.html:36 templates/newsletter/message.html:44
+msgid "Preview"
+msgstr "Vorschau"
+
+#: templates/newsletter/message.html:37 templates/newsletter/message.html:61
+msgid "Edit"
+msgstr "Bearbeiten"
+
+#: templates/newsletter/message.html:38 templates/newsletter/message.html:90
+msgid "Send"
+msgstr "Sende"
+
+#: templates/newsletter/message.html:48
+msgid "Test-send"
+msgstr ""
+
+#: templates/newsletter/message.html:54
+msgid "send Preview"
+msgstr "Vorschau versenden"
+
+#: templates/newsletter/message.html:68
 #: templates/newsletter/message_preview.html:10
 msgid "Attachements"
 msgstr "Anhänge"
 
-#: templates/newsletter/message.html:55
+#: templates/newsletter/message.html:83
 msgid "save Message"
 msgstr "Nachricht speichern"
 
-#: templates/newsletter/message.html:61
-msgid "Preview"
-msgstr "Vorschau"
-
-#: templates/newsletter/message.html:70
-msgid "Jobs"
-msgstr "Aufträge"
-
-#: templates/newsletter/message.html:73
+#: templates/newsletter/message.html:94
 msgid "sent"
 msgstr "gesendet"
 
-#: templates/newsletter/message.html:76
+#: templates/newsletter/message.html:97
 msgid "finished "
 msgstr "abgeschlossen"
 
-#: templates/newsletter/message.html:81
+#: templates/newsletter/message.html:102
 msgid "Send Message"
 msgstr "Nachricht versenden"
 
-#: templates/newsletter/message.html:84
+#: templates/newsletter/message.html:105
 msgid "create Job"
 msgstr "Auftrag erstellen"
 
@@ -511,30 +615,21 @@ msgstr "Nachrichten-Archiv"
 msgid "Subscriber list"
 msgstr "Mailingliste"
 
-#: templates/newsletter/subscriber.html:26
-#: templates/newsletter/subscribers.html:44
-msgid "delete"
-msgstr "löschen"
-
 #: templates/newsletter/subscribers.html:6
-#: templates/newsletter/subscribers.html:34
+#: templates/newsletter/subscribers.html:41
 msgid "Subscribers"
 msgstr "Abonnenten"
 
-#: templates/newsletter/subscribers.html:19
-msgid "really?"
-msgstr "wirklich?"
-
-#: templates/newsletter/subscribers.html:36
+#: templates/newsletter/subscribers.html:43
 msgid "public subscription form"
 msgstr "öffentliches Abo-Formular"
 
-#: templates/newsletter/subscribers.html:37
+#: templates/newsletter/subscribers.html:44
 msgid "Filter"
 msgstr "Filter"
 
-#: templates/newsletter/subscribers.html:40
-#: templates/newsletter/subscribers_add.html:23
+#: templates/newsletter/subscribers.html:47
+#: templates/newsletter/subscribers_add.html:36
 msgid "e-mail"
 msgstr "e-Mail"
 
@@ -543,9 +638,13 @@ msgstr "e-Mail"
 msgid "Add subscribers to %(name)s"
 msgstr "Abonnenten zu %(name)s hinzufügen"
 
-#: templates/newsletter/subscribers_add.html:24
+#: templates/newsletter/subscribers_add.html:37
 msgid "Name (optional)"
 msgstr "Name (optional)"
+
+#: templates/newsletter/subscribers_add.html:37
+msgid "hide/show"
+msgstr "zeige/verstecke"
 
 #: templates/users/user.html:21
 msgid "No jobs yet..."
@@ -639,6 +738,12 @@ msgstr "Wiki-Link: <code>[[Titel_der_Seite]]</code>"
 #: wiki/models.py:26
 msgid "Category"
 msgstr "Kategorie"
+
+#~ msgid "Open Tasks"
+#~ msgstr "Dienste"
+
+#~ msgid "Jobs"
+#~ msgstr "Aufträge"
 
 #~ msgid "Unsent Messages"
 #~ msgstr "ungesendete Nachrichten"

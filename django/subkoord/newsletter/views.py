@@ -13,7 +13,7 @@ from django.utils import simplejson
 from datetime import date, datetime
 from models import *
 from forms import *
-
+from mailbox_utils import *
 
 @permission_required('newsletter.add_subscriber')
 def index(request):
@@ -180,6 +180,15 @@ def subscriber_delete(request, subscriber_id):
 		return HttpResponse(json, mimetype='application/json',)
 	return HttpResponseRedirect(reverse('subscribers_list', args=[list]))
 
+@permission_required('newsletter.delete_subscriber')
+def subscribers_delete(request, subscribers_ids):
+	ids = subscribers_ids.split(",")
+	subscribers = Subscriber.objects.filter(id__in=ids)
+	messages.success(request, _("Deleted %s subscribers" % (len(subscribers))))
+	for subscriber in subscribers:
+		subscriber.delete()
+	return HttpResponseRedirect(reverse('newsletter_index'))
+
 @permission_required('newsletter.add_subscriber')
 def subscribers_list(request, list_id):
 	list = get_object_or_404(List, pk=list_id)
@@ -203,4 +212,35 @@ def subscribers_add(request, list_id):
 	return render_to_response('newsletter/subscribers_add.html',
 		{'formset': formset,
 		'list': list, },
+		context_instance=RequestContext(request),)
+
+@permission_required('newsletter.delete_subscriber')
+def empty_error_mailbox(request):
+	server = get_server()
+	messagesInfo = server.list()[1]
+	for msg in messagesInfo:
+		msgNum = msg.split(" ")[0]
+		server.dele(msgNum)
+	server.quit()
+	messages.success(request, _("Removed all messages from error mailbox"))
+	return HttpResponseRedirect(reverse('newsletter_index'))
+
+@permission_required('newsletter.delete_subscriber')
+def error_mailbox(request):
+	server = get_server()
+	messagesInfo = server.list()[1]
+	mails = []
+	subscribers_ids = []
+	for msg in messagesInfo:
+		msgNum = msg.split(" ")[0]
+		full_message = "\n".join(server.retr(msgNum)[1])
+		mail = parse_email(full_message)
+		mail['subscriber'] = match_error_to_subscriber(mail)
+		if mail['subscriber']:
+			subscribers_ids.append(mail['subscriber'].id)
+		mails.append(mail)
+	server.quit()
+	return render_to_response('newsletter/error_mailbox.html',
+		{'mails': mails,
+		'all_subscribers_ids': ",".join(subscribers_ids), },
 		context_instance=RequestContext(request),)

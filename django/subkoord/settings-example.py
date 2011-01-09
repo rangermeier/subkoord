@@ -124,8 +124,9 @@ EVENT_REMINDER_FROM = "bar@example.com"
 # on each run it will send emails according to NEWSLETTER_QUOTA
 NEWSLETTER_QUOTA = 28
 
-#NEWSLETTER_FROM = 'foo@example.com'
-# Where error messaged caused by undeliverable e-mails should be send to
-#NEWSLETTER_RETURN_PATH = "noreply@example.com"
-# with how much recipients a list is still considered a "preview/testing"-list?
 NEWSLETTER_PREVIEW_LIST = 5
+# Host and credentials for error-mailbox (should be the "technical"-From address
+# uses POP3 over SSL at Port 995
+NEWSLETTER_ERROR_MAILBOX = 'mail.newsletter.yourhost.org'
+NEWSLETTER_ERROR_USER = 'catch-all@newsletter.yourhost.org'
+NEWSLETTER_ERROR_PASS = 'password'

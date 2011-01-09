@@ -148,7 +148,7 @@ class Letter(models.Model):
 		mail = EmailMultiAlternatives(
 			subject = u'%s %s' % (self.job.to.praefix, self.message.subject),
 			body = text_plain,
-			from_email = self.job.to.from_bounce_address,
+			from_email = u'sid_%s_%s' % (self.recipient.id, self.job.to.from_bounce_address),
 			to = [self.recipient.email],
 			headers = {'Reply-To': self.job.to.reply_to_address,
 				'From': self.job.to.from_address},
