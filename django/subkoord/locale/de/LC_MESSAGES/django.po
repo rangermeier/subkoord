@@ -427,7 +427,7 @@ msgstr "alle Abonnenten mit automatischen Fehlermeldungen löschen"
 
 #: templates/newsletter/error_mailbox.html:48
 msgid "(all matched subscriptions listed on this page)"
-msgstr "(alle Abonnentne die auf dieser Seite aufscheinen werden gelöscht)"
+msgstr "(alle Abonnenten die auf dieser Seite aufscheinen werden gelöscht)"
 
 #: templates/newsletter/error_mailbox.html:50
 msgid "empty error mailbox"

@@ -237,7 +237,7 @@ def error_mailbox(request):
 		mail = parse_email(full_message)
 		mail['subscriber'] = match_error_to_subscriber(mail)
 		if mail['subscriber']:
-			subscribers_ids.append(mail['subscriber'].id)
+			subscribers_ids.append(u'%s' % (mail['subscriber'].id))
 		mails.append(mail)
 	server.quit()
 	return render_to_response('newsletter/error_mailbox.html',
