@@ -51,6 +51,16 @@ def event(request, event_id):
 		'user_tasks': user_tasks, },
 		context_instance=RequestContext(request), )
 
+
+@login_required
+def event_delete(request, event_id):
+	event = get_object_or_404(Event, pk=event_id)
+	for job in event.jobs:
+		job.delete()
+	messages.success(request, _("Event %s deleted" % (event.title)))
+	event.delete()
+	return HttpResponseRedirect(reverse('event_index'))
+
 @login_required
 def event_edit(request, event_id):
 	event = get_object_or_404(Event, pk=event_id)

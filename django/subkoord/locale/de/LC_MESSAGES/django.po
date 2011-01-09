@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-09 14:43+0100\n"
+"POT-Creation-Date: 2011-01-09 15:56+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -41,23 +41,27 @@ msgstr "Information"
 msgid "You can use Textile to format your text."
 msgstr "Du kannst den Text mittels Textile formatieren."
 
-#: event/views.py:63
+#: event/views.py:60
+msgid "Event %s deleted"
+msgstr "Termin %s gelöscht"
+
+#: event/views.py:73
 msgid "Saved changes"
 msgstr "Änderungen gespeichert"
 
-#: event/views.py:82
+#: event/views.py:92
 msgid "Created new event"
 msgstr "neuer Termin gespeichert"
 
-#: event/views.py:105
+#: event/views.py:115
 msgid "Took job"
 msgstr "Dienst übernommen"
 
-#: event/views.py:115
+#: event/views.py:125
 msgid "Deleted job"
 msgstr "Dienst entfernt"
 
-#: event/views.py:126
+#: event/views.py:136
 msgid "Saved note"
 msgstr "Anmerkung gespeichert"
 
@@ -66,7 +70,7 @@ msgstr "Anmerkung gespeichert"
 msgid "Message"
 msgstr "Nachricht"
 
-#: newsletter/forms.py:32 newsletter/forms.py:39 newsletter/forms.py:47
+#: newsletter/forms.py:31 newsletter/forms.py:37 newsletter/forms.py:44
 #: templates/newsletter/job.html:21
 msgid "To list"
 msgstr "an Liste"
@@ -198,6 +202,7 @@ msgid "<h1>Couldn't cancel - token mismatch</h1>"
 msgstr ""
 
 #: newsletter/views.py:187
+#, python-format
 msgid "Deleted %s subscribers"
 msgstr "%s Abonnenten gelöscht"
 
@@ -214,7 +219,7 @@ msgid "Sub-Koordinator"
 msgstr "Sub-Koordinator"
 
 #: templates/base.html:44 templates/event/event.html:13
-#: templates/event/event_edit.html:11 templates/event/event_new.html:10
+#: templates/event/event_edit.html:18 templates/event/event_new.html:10
 #: templates/newsletter/error_mailbox.html:34
 #: templates/newsletter/index.html:63 templates/newsletter/job.html:12
 #: templates/newsletter/job_new.html:12 templates/newsletter/jobs.html:12
@@ -333,13 +338,22 @@ msgstr "Anmerkungen"
 msgid "add note"
 msgstr "Anmerkung hinzufügen"
 
-#: templates/event/event_edit.html:5
+#: templates/event/event_edit.html:6 templates/newsletter/error_mailbox.html:7
+#: templates/newsletter/subscribers.html:19
+msgid "really?"
+msgstr "wirklich?"
+
+#: templates/event/event_edit.html:11
 msgid "Edit event"
 msgstr "Termin bearbeiten"
 
-#: templates/event/event_edit.html:10 templates/wiki/edit.html:27
+#: templates/event/event_edit.html:16 templates/wiki/edit.html:27
 msgid "back"
 msgstr "zurück"
+
+#: templates/event/event_edit.html:17
+msgid "delete event"
+msgstr "Termin löschen"
 
 #: templates/event/event_form.html:35
 msgid "Help for Event Types"
@@ -397,11 +411,6 @@ msgstr "nächstes Monat"
 msgid "Help for Textile"
 msgstr "Hilfe zu Textile"
 
-#: templates/newsletter/error_mailbox.html:7
-#: templates/newsletter/subscribers.html:19
-msgid "really?"
-msgstr "wirklich?"
-
 #: templates/newsletter/error_mailbox.html:24
 msgid "Error Mailbox"
 msgstr "Error-Mailbox"
@@ -415,7 +424,8 @@ msgstr "Nachricht erstellen"
 
 #: templates/newsletter/error_mailbox.html:43
 msgid "hide/show messages which are not matched by a subscriber"
-msgstr "zeige/verstecke Nachrichten, die keinem Abonnenten zugeordnet werden können"
+msgstr ""
+"zeige/verstecke Nachrichten, die keinem Abonnenten zugeordnet werden können"
 
 #: templates/newsletter/error_mailbox.html:44
 msgid "hide/show message bodies"

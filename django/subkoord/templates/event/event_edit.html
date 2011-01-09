@@ -1,6 +1,12 @@
 {% extends "event/event_form.html" %}
 {% load i18n %}
 
+{% block jquery %}
+	$("a.event-delete").click(function() {
+		return confirm("{% trans "really?" %}");
+	});
+{% endblock jquery%}
+
 {% block heading %}
 {% trans "Edit event" %}
 {% endblock heading %}
@@ -8,6 +14,7 @@
 {% block navigation %}
 	<ul>
 		<li><a href="{% url event event.id %}">{% trans "back" %}</a></li>
+		<li><a href="{% url event_delete event.id %}" class="event-delete">{% trans "delete event" %}</a></li>
 		<li><a href="{% url event_index %}">{% trans "view events" %}</a></li>
 	</ul>
 {% endblock navigation %}
@@ -22,4 +29,5 @@
 
 <input type="submit" />
 </form>
+
 {% endblock content %}
