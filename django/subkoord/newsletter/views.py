@@ -142,7 +142,7 @@ def subscriber_add(request, list_id):
 			text = loader.render_to_string("email/newsletter_confirm.html",
 				{'subscriber': subscriber,
 				'site_url': settings.SITE_URL,})
-			send_mail(_('Confirm subscription'), text, settings.NEWSLETTER_FROM,
+			send_mail(_('Confirm subscription'), text, list.from_address,
 				[subscriber.email], fail_silently=False)
 			return HttpResponse(_('<h1>Thanks for subscribing</h1>An e-mail asking for confirmation willbe sent shortly to %s' % (subscriber.email)))
 	formset = SubscriberFormPublic()
