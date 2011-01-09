@@ -28,14 +28,12 @@ class JobForm(forms.Form):
 		label = _('Message'),
 	)
 	to = ModelChoiceField(queryset = List.objects.all(),
-		empty_label = None,
 		label = _('To list'),
 	)
 
 class JobMessageForm(forms.Form):
 	message = IntegerField(widget = forms.HiddenInput,)
 	to = ModelChoiceField(queryset = List.objects.all(),
-		empty_label = None,
 		label = _('To list'),
 	)
 
@@ -43,6 +41,5 @@ class PreviewMessageForm(forms.Form):
 	message = IntegerField(widget = forms.HiddenInput,)
 	to = ModelChoiceField(queryset =
 		List.objects.annotate(recipients_count=Count('recipients')).filter(recipients_count__lt=settings.NEWSLETTER_PREVIEW_LIST),
-		empty_label = None,
 		label = _('To list'),
 	)
