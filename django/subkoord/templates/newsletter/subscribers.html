@@ -30,16 +30,12 @@
 {% block navigation %}
 	<ul>
 		<li><a href="{% url subscribers_add list.id %}">{% trans "add subscribers"%}</a></li>
-		<li><a href="{% url newsletter_index %}">{% trans "Newsletter" %}</a></li>
-		<li><a href="{% url event_index %}">{% trans "view events" %}</a></li>
-		<li><a href="{% url wiki_index %}">{% trans "Wiki" %}</a></li>
 	</ul>
 {% endblock navigation %}
 
 {% block content %}
 <p>
 {{ subscribers|length }} {% trans "Subscribers" %}<br />
-<a href="{% url subscribers_add list.id %}">{% trans "add subscribers"%}</a><br />
 <a href="{% url subscriber_add list.id %}">{% trans "public subscription form" %}</a><br>
 {% trans "Filter" %}: <input type="text" id="filter" /></p>
 <table id="subscribers-table">

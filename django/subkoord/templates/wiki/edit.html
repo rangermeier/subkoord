@@ -26,8 +26,6 @@
 		{%if page.title %}
 		<li><a href="{% url wiki_page page.title %}">{% trans "back" %}</a></li>
 		{% endif %}
-		<li><a href="{% url wiki_index %}">{% trans "Wiki Index" %}</a></li>
-		<li><a href="{% url event_index %}">{% trans "view events" %}</a></li>
 	</ul>
 {% endblock navigation %}
 

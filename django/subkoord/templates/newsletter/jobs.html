@@ -6,13 +6,6 @@
 {% trans "Job Archive" %}
 {% endblock heading %}
 
-{% block navigation %}
-	<ul>
-		<li><a href="{% url newsletter_index %}">{% trans "Newsletter" %}</a></li>
-		<li><a href="{% url event_index %}">{% trans "view events" %}</a></li>
-	</ul>
-{% endblock navigation %}
-
 {% block content %}
 <ul>
 	{% for job in jobs %}

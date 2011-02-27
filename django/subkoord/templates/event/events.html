@@ -22,17 +22,11 @@
 {% block navigation %}
 	<ul>
 		<li><a href="{% url event_new %}">{% trans "add another event" %}</a></li>
-{% if archive %}
-		<li><a href="{% url event_index %}">{% trans "view upcomming events" %}</a></li>
-{% else %}
+{% if not archive %}
 	{% if month != date.month %}
 		<li><a href="{% url event_index %}">{% trans "view current month" %}</a></li>
 	{% endif %}
 		<li><a href="{% url event_archive %}">{% trans "view archive" %}</a></li>
-{% endif %}
-		<li><a href="{% url wiki_index %}">{% trans "Wiki" %}</a></li>
-{% if perms.newsletter.add_subscriber %}
-		<li><a href="{% url newsletter_index %}">{% trans "Newsletter" %}</a></li>
 {% endif%}
-</ul>
+	</ul>
 {% endblock navigation %}

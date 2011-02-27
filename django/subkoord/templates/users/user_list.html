@@ -25,6 +25,5 @@
 		<li><a href="{% url user_view user.id %}">{% trans "view my profile" %}</a></li>
 	{% endifnotequal %}
 		<li><a href="{% url user_change_password %}">{% trans "change my password" %}</a></li>
-		<li><a href="{% url event_index %}">{% trans "view events" %}</a></li>
 </ul>
 {% endblock navigation %}

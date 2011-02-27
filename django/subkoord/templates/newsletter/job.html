@@ -6,14 +6,6 @@
 {% trans "Sending" %} &quot;{{ job.message.subject }}&quot; {% trans "to" %} {{ job.to.name }}
 {% endblock heading %}
 
-{% block navigation %}
-	<ul>
-		<li><a href="{% url newsletter_index %}">{% trans "Newsletter" %}</a></li>
-		<li><a href="{% url event_index %}">{% trans "view events" %}</a></li>
-		<li><a href="{% url wiki_index %}">{% trans "Wiki" %}</a></li>
-	</ul>
-{% endblock navigation %}
-
 {% block content %}
 <div class="newsletter">
 <h3>{% trans "e-Mail" %}</h3>

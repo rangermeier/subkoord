@@ -8,8 +8,6 @@
 {% block navigation %}
 	<ul>
 		<li><a href="{% url subscribers_list subscriber.subscription.id %}">{% trans "Subscriber list" %}</a></li>
-		<li><a href="{% url newsletter_index %}">{% trans "Newsletter" %}</a></li>
-		<li><a href="{% url event_index %}">{% trans "view events" %}</a></li>
 	</ul>
 {% endblock navigation %}
 

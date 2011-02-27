@@ -25,17 +25,6 @@
 {% endblock heading %}
 
 
-{% block navigation %}
-	<ul>
-	{% if message %}
-		<li><a href="{% url message_new %}">{% trans "compose message" %}</a></li>
-	{% endif %}
-		<li><a href="{% url newsletter_index %}">{% trans "Newsletter" %}</a></li>
-		<li><a href="{% url event_index %}">{% trans "view events" %}</a></li>
-		<li><a href="{% url wiki_index %}">{% trans "Wiki" %}</a></li>
-	</ul>
-{% endblock navigation %}
-
 {% block content %}
 
 {%if mails %}

@@ -41,13 +41,21 @@
 
 	{% block navigation %}
 	<ul>
-		<li><a href="{% url event_index %}">{% trans "view events" %}</a></li>
-		<li><a href="{% url wiki_index %}">{% trans "Wiki" %}</a></li>
-{% if perms.newsletter.add_subscriber %}
-		<li><a href="{% url newsletter_index %}">{% trans "Newsletter" %}</a></li>
-{% endif%}
 	</ul>
 	{% endblock navigation %}
+
+{% if user.is_authenticated %}
+	<ul>
+		<li><a href="{% url event_index %}">{% trans "view events" %}</a></li>
+		<li><a href="{% url wiki_index %}">{% trans "Wiki" %}</a></li>
+	{% if perms.newsletter.add_subscriber %}
+		<li><a href="{% url newsletter_index %}">{% trans "Newsletter" %}</a></li>
+	{% endif%}
+	{% if user.is_staff %}
+		<li><a href="/admin">{% trans "admin" %}</a></li>
+	{% endif %}
+	</ul>
+{% endif %}
 
 	{% block message %}
 	{% if messages %}
@@ -58,7 +66,6 @@
 	</ul>
 	{% endif %}
 	{% endblock message %}
-
 </div><!-- /sidebar -->
 {% block contentcontainer %}
 <div id="content" class="span-18 last">
@@ -68,9 +75,7 @@
 <div id="footer" class="prepend-1 span-23 last">
 	{% block footer %}
 	<ul>
-		<li><a href="{% url home %}">{% trans "home" %}</a></li>
 		{% if user.is_authenticated %}
-		{% if perms.event and user.is_staff %}<li><a href="/admin">{% trans "admin" %}</a></li>{% endif %}
 		<li>{% trans "logged in as" %} <a href="{% url user_view user.id %}">{{ user }}</a> - <a href="{% url logout %}">{% trans "logout" %}</a></li>
 		{% else %}
 		<li><a href="{% url login %}">{% trans "login" %}</a></li>
