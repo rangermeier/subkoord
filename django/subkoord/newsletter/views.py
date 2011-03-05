@@ -144,7 +144,7 @@ def subscriber_add(request, list_id):
 				'site_url': settings.SITE_URL,})
 			send_mail(_('Confirm subscription'), text, list.from_address,
 				[subscriber.email], fail_silently=False)
-			return HttpResponse(_('<h1>Thanks for subscribing</h1>An e-mail asking for confirmation willbe sent shortly to %s' % (subscriber.email)))
+			return HttpResponse(_('<h1>Thanks for subscribing</h1>An e-mail asking for confirmation will be sent shortly to %s' % (subscriber.email)))
 	formset = SubscriberFormPublic()
 	return render_to_response('newsletter/subscriber_add.html',
 		{'form': formset,
@@ -229,18 +229,50 @@ def empty_error_mailbox(request):
 def error_mailbox(request):
 	server = get_server()
 	messagesInfo = server.list()[1]
-	mails = []
+	unassigned_mails = []
+	assigned_mails = []
 	subscribers_ids = []
 	for msg in messagesInfo:
 		msgNum = msg.split(" ")[0]
 		full_message = "\n".join(server.retr(msgNum)[1])
 		mail = parse_email(full_message)
+		mail['msg_num'] = msgNum
 		mail['subscriber'] = match_error_to_subscriber(mail)
 		if mail['subscriber']:
+			mail['subscriber_id'] = mail['subscriber'].id
 			subscribers_ids.append(u'%s' % (mail['subscriber'].id))
-		mails.append(mail)
+			assigned_mails.append(mail)
+		else: unassigned_mails.append(mail)
 	server.quit()
 	return render_to_response('newsletter/error_mailbox.html',
-		{'mails': mails,
+		{'unassigned_mails': unassigned_mails,
+		'assigned_mails': assigned_mails,
 		'all_subscribers_ids': ",".join(subscribers_ids), },
 		context_instance=RequestContext(request),)
+
+@permission_required('newsletter.delete_subscriber')
+def delete_error_mail(request, msg_id):
+	server = get_server()
+	messagesInfo = server.list()[1]
+	for msg in messagesInfo:
+		msgNum = msg.split(" ")[0]
+		if msgNum == msg_id:
+			server.dele(msgNum)
+	server.quit()
+	messages.success(request, _("Removed message from error mailbox"))
+	return HttpResponseRedirect(reverse('error_mailbox'))
+
+@permission_required('newsletter.delete_subscriber')
+def delete_unassigned_mails(request):
+	server = get_server()
+	messagesInfo = server.list()[1]
+	for msg in messagesInfo:
+		msgNum = msg.split(" ")[0]
+		full_message = "\n".join(server.retr(msgNum)[1])
+		mail = parse_email(full_message)
+		subscriber = match_error_to_subscriber(mail)
+		if not subscriber:
+			server.dele(msgNum)
+	server.quit()
+	messages.success(request, _("Removed unassigned messages from error mailbox"))
+	return HttpResponseRedirect(reverse('error_mailbox'))

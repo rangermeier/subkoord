@@ -18,4 +18,6 @@ urlpatterns = patterns('subkoord.newsletter.views',
 	url(r'^mailinglist/(?P<list_id>\d+)/$', 'subscribers_list', name="subscribers_list"),
 	url(r'^errors/$', 'error_mailbox', name="error_mailbox"),
 	url(r'^errors/empty/$', 'empty_error_mailbox', name="empty_error_mailbox"),
+	url(r'^errors/(?P<msg_id>\d+)/delete$', 'delete_error_mail', name="delete_error_mail"),
+	url(r'^errors/unassigned/delete$', 'delete_unassigned_mails', name="delete_unassigned_mails"),
 )

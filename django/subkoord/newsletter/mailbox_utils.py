@@ -36,6 +36,9 @@ def parse_email(message):
 	subject = message.get('subject', _('Created from e-mail'))
 	subject = decode_mail_headers(decodeUnknown(message.get_charset(), subject))
 
+	date = message.get('date', _('Date'))
+	date = decode_mail_headers(decodeUnknown(message.get_charset(), date))
+
 	sender = message.get('from', _('Unknown Sender'))
 	sender = decode_mail_headers(decodeUnknown(message.get_charset(), sender))
 	sender_email = parseaddr(sender)[1]
@@ -43,8 +46,8 @@ def parse_email(message):
 	recip = message.get('to', _('Unknown Sender'))
 	recip = decode_mail_headers(decodeUnknown(message.get_charset(), recip))
 	recip_email = parseaddr(recip)[1]
-	body = ""
 
+	body = ""
 	for part in message.walk():
 		#body = decodeUnknown(part.get_content_charset(), part.get_payload(decode=True))
 		#if part.get_content_maintype() == 'multipart':
@@ -53,7 +56,7 @@ def parse_email(message):
 			if part.get_content_subtype() == 'plain':
 				body += decodeUnknown(part.get_content_charset(), part.get_payload(decode=True))
 
-	return {'subject': subject, 'sender': sender_email, 'recipient': recip_email, 'body': body }
+	return {'subject': subject, 'date': date, 'sender': sender_email, 'recipient': recip_email, 'body': body }
 
 def match_error_to_subscriber(message):
 	to = message['recipient']

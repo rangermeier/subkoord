@@ -3,20 +3,35 @@
 {% load highlight_email %}
 
 {% block jquery %}
-	$("a.subscriber-delete").click(function() {
+	$("a.subscriber-delete").click(function(event) {
 		if(confirm("{% trans "really?" %}")) {
 			$.getJSON($(this).attr("href"), function(json) {
 				$("#subscriber-"+json.subscriber_id).remove();
 			});
 		}
-		return false;
+		event.preventDefault();
 	});
-	$("a.hide_unmatched").click(function() {
-		$("div.subscriber-unmatched").toggle();
+	$("a.hide_unmatched").click(function(event) {
+		$("#subscriber-unmatched").toggle();
+		event.preventDefault();
 	});
-	$("a.hide_bodies").click(function() {
+	$("a.hide_bodies").click(function(event) {
 		$("li.body").toggle();
+		event.preventDefault();
 	});
+	$(".subscriber-unmatched li.body pre").before(
+		$(document.createElement('a')).attr("href","").addClass("toggle").
+			append("{% trans "toggle" %}")).toggle();
+	$(".subscriber-unmatched li.body a.toggle").live('click', function(event) {
+		$(this).siblings("pre").toggle();
+		event.preventDefault();
+	});
+
+	$("a.email_details_toggle").click(function(event) {
+		$(this).parent().find("li.email-details").toggle();
+		event.preventDefault();
+	});
+	$("li.email-details").toggle();
 
 {% endblock jquery%}
 
@@ -27,34 +42,65 @@
 
 {% block content %}
 
-{%if mails %}
+{%if assigned_mails %}
+<h3>{% trans "How to use this page" %}</h3>
+<p>{% blocktrans %}This page shows list of e-mails which are returned or rejected by the mail-server of subscribers
+(e.g. mailbox is full, account is unknown to server, the e-mail is declared &quot;spam&quot; for some reason, etc.)
+or which can't be delivered in the first place (e.g. the server is offline, name is misspelled).
+Both can be temporary problems, so it's usually not advisable to delete an subscriber on the first returned e-mail.
+When a series of e-mails had been bounced by one subscribers it's safe to assume further sending of e-mails is useless
+and one can delete the subscriber.<br />
+Some e-mails can't be related to a subscriber. These e-mails will be shown in a separate list at the end of the page.
+{% endblocktrans %}</p>
+
 <ul>
-	<li><a href="#" class="hide_unmatched">{% trans "hide/show messages which are not matched by a subscriber"%}</li>
-	<li><a href="#" class="hide_bodies">{% trans "hide/show message bodies"%}</a></li>
+	<li><a href="" class="hide_unmatched">{% trans "hide/show messages which are not matched by a subscriber"%}</li>
+	<li><a href="" class="hide_bodies">{% trans "hide/show message bodies"%}</a></li>
 	{%if all_subscribers_ids %}
 	<li><a href="{% url subscribers_delete all_subscribers_ids %}">
 		{% trans "delete all subscribers with bounced messages" %}</a>
 		{% trans "(all matched subscriptions listed on this page)" %}
 	</li>{% endif %}
-	<li><a href="{% url empty_error_mailbox %}">{% trans "empty error mailbox" %}</a></li>
+	<li><a href="{% url empty_error_mailbox %}">{% trans "empty error mailbox" %}</a> {% trans "(deletes all emails)" %}</li>
+	<li><a href="{% url delete_unassigned_mails %}">{% trans "delete unassigned e-mails" %}</a></li>
+</ul>
+
+{% regroup assigned_mails|dictsort:"subscriber.id" by subscriber as subscriber_list %}
+<ul>
+{% for subscriber in subscriber_list %}
+	<li><strong>{{ subscriber.grouper.email }}</strong>,
+	<a href="{% url subscriber_delete subscriber.grouper.id %}" class="subscriber-delete">{% trans "delete Subscriber" %}</a>,
+	<a href="" class="email_details_toggle">{% trans "hide/show message details"%}</a>
+
+	{% for mail in subscriber.list %}
+	<ul>
+		<li class="email-subject">{{ mail.date }} - {{ mail.subject }}, <a href="{% url delete_error_mail mail.msg_num %}" class="email-delete">{% trans "delete e-Mail" %}</a></li>
+		<li class="email-details">{% trans "Recipient" %}: {{ mail.recipient }}</li>
+		<li class="email-details">{% trans "Sender" %}: {{ mail.sender }}</li>
+		<li class="email-details body">{% trans "Body" %}: <pre>{{ mail.body|highlight_email }}</pre></li>
+	</ul>
+	{% endfor %}
+	</li>
+{% endfor %}
 </ul>
 {% endif %}
 
-{% for mail in mails%}
-<div class="subscriber-{% if mail.subscriber %}matched{% else %}unmatched{% endif %}">
+{% if unassigned_mails %}
+<h3>{% trans "Mails not assigned to a subscriber" %}</h3>
+{% regroup unassigned_mails|dictsort:"recipient" by recipient as recipient_list %}
+<ul id="subscriber-unmatched">
+{% for recipient in recipient_list %}
+	<li class="subscriber-unmatched">{% trans "Recipient" %}: <strong>{{ recipient.grouper }}</strong>
+	{% for mail in recipient.list %}
 	<ul>
-		<li>{% trans "Subject" %}: {{ mail.subject }}</li>
+		<li>{% trans "Subject" %}: {{ mail.subject }}, <a href="{% url delete_error_mail mail.msg_num %}" class="email-delete">{% trans "delete e-Mail" %}</a></li>
 		<li>{% trans "Sender" %}: {{ mail.sender }}</li>
-		<li>{% trans "Recipient" %}: {{ mail.recipient }}</li>
-		{% if mail.subscriber %}<li id="subscriber-{{mail.subscriber.id}}">{% trans "Subscriber" %}: <a href="{% url subscriber mail.subscriber.id %}">{{ mail.subscriber }}</a>,
-		<a href="{% url subscriber_delete mail.subscriber.id %}" class="subscriber-delete" id="subscriber-delete-{{mail.subscriber.id}}">{% trans "delete" %}</a>
-		</li>{% endif %}
 		<li class="body">{% trans "Body" %}: <pre>{{ mail.body|highlight_email }}</pre></li>
 	</ul>
-	<hr />
-</div>
-{% empty %}
-<p>{% trans "nothing in error mailbox :)"%}</p>
+	{% endfor %}
+	</li>
 {% endfor %}
+</ul>
+{% endif %}
 
 {% endblock content %}
