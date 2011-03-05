@@ -7,12 +7,12 @@
 {{ event.title }}
 {% endblock heading %}
 
-{% block navigation %}{% cache 500 event_nav event.date.year event.date.month %}
+{% block navigation %}
 	<ul>
 		<li><a href="{% url event_edit event.id %}">{% trans "edit" %}</a></li>
 		<li><a href="{% url event_cal event.date.year event.date.month %}">{% trans "view events" %}</a></li>
 	</ul>
-{% endcache %}{% endblock navigation %}
+{% endblock navigation %}
 
 {% block content %}
 {% cache 500 event_info event.id %}
