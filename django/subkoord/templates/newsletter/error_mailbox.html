@@ -70,6 +70,7 @@ Some e-mails can't be related to a subscriber. These e-mails will be shown in a 
 {% for subscriber in subscriber_list %}
 	<li><strong>{{ subscriber.grouper.email }}</strong>,
 	<a href="{% url subscriber_delete subscriber.grouper.id %}" class="subscriber-delete">{% trans "delete Subscriber" %}</a>,
+	<a href="{% url subscriber subscriber.grouper.id %}">{% trans "edit" %}</a>,
 	<a href="" class="email_details_toggle">{% trans "hide/show message details"%}</a>
 
 	{% for mail in subscriber.list %}
