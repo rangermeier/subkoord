@@ -15,7 +15,7 @@
 		$.uiTableFilter( $("#subscribers-table"), this.value);
 		$("#subscribers-table th").parent("tr").show();
 	});
-	$("a.subscriber-delete").click(function() {
+	$("a.subscriber-delete").click(function(event) {
 		if(confirm("{% trans "really?" %}")) {
 			$.getJSON($(this).attr("href"), function(json) {
 				$("#subscriber-"+json.subscriber_id).remove();
@@ -23,7 +23,11 @@
 				$("#subscribers-table tr").show();
 			});
 		}
-		return false;
+		event.preventDefault();
+	});
+	$("a#filter_unconfirmed").click(function(event) {
+		$("tr.confirmed").toggleClass("hide");
+		event.preventDefault();
 	});
 {% endblock jquery%}
 
@@ -37,20 +41,23 @@
 <p>
 {{ subscribers|length }} {% trans "Subscribers" %}<br />
 <a href="{% url subscriber_add list.id %}">{% trans "public subscription form" %}</a><br>
+<a href="" id="filter_unconfirmed">{% trans "filter unconfirmed" %}</a><br>
 {% trans "Filter" %}: <input type="text" id="filter" /></p>
 <table id="subscribers-table">
 	<tr>
 		<th>{% trans "e-mail"%}</th>
 		<th>{% trans "Name"%}</th>
 		<th>{% trans "Date"%}</th>
+		<th>{% trans "unconfirmed"%}</th>
 		<th>{% trans "edit"%}</th>
 		<th>{% trans "delete"%}</th>
 	</tr>
 {% for subscriber in subscribers %}
-	<tr id="subscriber-{{ subscriber.id}}">
+	<tr id="subscriber-{{ subscriber.id}}" class="subscriber {% if not subscriber.confirmed %}un{% endif %}confirmed">
 		<td>{{ subscriber.email }}</td>
 		<td>{{ subscriber.name }}</td>
-		<td>{{ subscriber.date }}
+		<td>{{ subscriber.date }}</td>
+		<td>{% if not subscriber.confirmed %}x{% endif %}</td>
 		<td><a href="{% url subscriber subscriber.id %}">+</a></td>
 		<td><a href="{% url subscriber_delete subscriber.id %}" class="subscriber-delete" id="subscriber-delete-{{subscriber.id}}">-</a></td>
 	</tr>

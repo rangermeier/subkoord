@@ -31,7 +31,6 @@
 	<p>
 	<a href="{% url message_archive %}">{% trans "view all messages" %}</a><br />
 	<a href="{% url message_new %}">{% trans "compose message" %}</a><br />
-	<a href="{% url error_mailbox %}">{% trans "view error mailbox" %}</a>
 	</p>
 </div>
 
@@ -61,5 +60,6 @@
 	<ul>
 		<li><a href="{% url message_new %}">{% trans "compose message" %}</a></li>
 		<li><a href="{% url subscribers_add 1 %}">{% trans "add subscribers"%}</a></li>
+		<li><a href="{% url error_mailbox %}">{% trans "view error mailbox" %}</a></li>
 </ul>
 {% endblock navigation %}
