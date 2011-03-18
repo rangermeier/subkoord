@@ -2,6 +2,7 @@ from django.core.management.base import NoArgsCommand
 from django.template import loader
 from django.core.mail import send_mail
 from django.conf import settings
+from django.utils import translation
 from datetime import datetime, timedelta
 from event.models import Event
 
@@ -22,6 +23,7 @@ class Command(NoArgsCommand):
 			if event.all_tasks_satisfied:
 				events = events.exclude(id=event.id)
 		if events.count() > 0 and events_in_remind_window:
+			translation.activate(settings.LANGUAGE_CODE)
 			#addressbook = [u.email for u in User.objects.all()]
 			addressbook = settings.EVENT_REMINDER_ADDRESSBOOK
 			body = loader.render_to_string("email/open_tasks.html",
@@ -32,5 +34,6 @@ class Command(NoArgsCommand):
 			  event.cron = datetime.now()
 			  event.save()
 			return body
+			translation.deactivate()
 		else:
 			return "no open tasks"
