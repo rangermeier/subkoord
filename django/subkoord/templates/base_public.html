@@ -1,0 +1,54 @@
+{% load i18n %}
+{% load cache %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>{% block title %}Subterrarium{% endblock title %}</title>
+	<!-- Favicon -->
+	<link rel="shortcut icon" href="{{ MEDIA_URL }}favicon.ico" />
+
+	<!-- CSS -->
+	<link rel="stylesheet" type="text/css" media="screen" title="default" href="{{ MEDIA_URL }}style/blueprint/screen.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="{{ MEDIA_URL }}style/blueprint/screen.css" />
+	<!--[if lt IE 8]><link rel="stylesheet" href="{{ MEDIA_URL }}style/blueprint/ie.css" type="text/css" media="screen, projection"><![endif]-->
+	<link rel="stylesheet" type="text/css" media="screen" title="default" href="{{ MEDIA_URL }}style/style.css" />
+
+</head>
+
+<body>
+<div class="container">  <!-- showgrid -->
+<div id="headmast" class="prepend-6 span-18 last">
+	<h1>{% trans "Sub-Koordinator" %}</h1>
+</div>
+<div id="heading" class="prepend-6 span-18 last">
+	<h2>{% block heading %}{% endblock heading %}</h2>
+</div>
+
+<div id="sidebar" class="span-5 prepend-1">
+
+	{% block navigation %}
+	<ul>
+		<li><a href="http://subterrarium.at">Subterrarium-Webseite</a></li>
+	</ul>
+	{% endblock navigation %}
+
+	{% block message %}
+	{% if messages %}
+	<ul id="messages">
+		{% for message in messages %}
+		<li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+		{% endfor %}
+	</ul>
+	{% endif %}
+	{% endblock message %}
+</div><!-- /sidebar -->
+{% block contentcontainer %}
+<div id="content" class="span-18 last">
+	{% block content %}{% endblock content %}
+</div><!-- /content -->
+{% endblock contentcontainer %}
+</div> <!-- /container -->
+</body>
+</html>

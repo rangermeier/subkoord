@@ -5,15 +5,15 @@
 
 {% for event in events %}
 * {{ event.date|date:"D, j. n. Y, H:i" }} - {{ event.title }}
-	{{ site_url }}{% url event event.id %}
-	{% for task in event.tasks %}
-	- {{ task.name }}: {% for job in event.jobs %}{% if task == job.task %}{{ job.user }} {% endif %}{% endfor %}{% if task in event.open_tasks %}???{% endif %}{% endfor %}
-
-	{% trans "Info" %}:
-		{{ event.info|add_linefeed:2 }}
-	{% if event.notes %}
-	{% trans "Notes" %}:{% for note in event.notes.all %}
-		- {{ note.user }}: {{ note.note }}{% endfor %}{% endif %}
+  {{ site_url }}{% url event event.id %}
+  {% for task in event.tasks %}
+  - {{ task.name }}: {% for job in event.jobs %}{% if task == job.task %}{{ job.user }} {% endif %}{% endfor %}{% if task in event.open_tasks %}???{% endif %}{% endfor %}
+{% if event.info %}
+  {% trans "Info" %}:
+    {{ event.info|wordwrap:"72"|add_linefeed:2 }}{% endif %}
+{% if event.notes|length %}
+  {% trans "Notes" %}:{% for note in event.notes.all %}
+    - {{ note.user }}: {{ note.note }}{% endfor %}{% endif %}
 
 {% endfor %}
 

@@ -4,10 +4,12 @@ from django.core.urlresolvers import reverse
 from django.template import Context, Template
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext as _
+from django.utils.text import get_valid_filename
 from django.conf import settings
 from django.contrib.markup.templatetags.markup import textile
 from html2text import html2text
 import random, string
+import mimetypes
 from datetime import datetime
 
 class List(models.Model):
@@ -22,7 +24,7 @@ class List(models.Model):
 		return self.name
 
 class Subscriber(models.Model):
-	name = models.CharField(max_length=200,blank=True, verbose_name=_("Name"))
+	name = models.CharField(max_length=200,blank=True, verbose_name=_("Name"), help_text=_("(optional)"))
 	email = models.EmailField(unique=True, verbose_name=_("e-Mail Address"))
 	subscription = models.ForeignKey(List, default=1, related_name="recipients", verbose_name=_("Subscription"))
 	date = models.DateTimeField(auto_now_add=True, editable=False)
@@ -83,9 +85,19 @@ class Message(models.Model):
 	def __unicode__(self):
 		return self.subject
 
+def upload_to(instance, filename):
+	safename = get_valid_filename(filename).encode("ascii", "ignore")
+	return "%s/%s" % ("attachements", safename)
+
 class Attachement(models.Model):
-	file = models.FileField(upload_to="attachements", verbose_name=_("File"))
+	file = models.FileField(upload_to=upload_to, verbose_name=_("File"))
 	message = models.ForeignKey(Message, related_name="attachements", verbose_name=_("Message"))
+	@property
+	def mimetype(self):
+		return mimetypes.guess_type(self.file.name)[0]
+	@property
+	def is_image(self):
+		return (self.mimetype in ["image/jpg", "image/jpeg", "image/png", "image/gif"])
 	def __unicode__(self):
 		return self.file.name
 

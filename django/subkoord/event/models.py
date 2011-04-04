@@ -98,4 +98,4 @@ class EventForm(ModelForm):
 		model = Event
 
 class NoteForm(forms.Form):
-    note = forms.CharField()
+	note = forms.CharField()

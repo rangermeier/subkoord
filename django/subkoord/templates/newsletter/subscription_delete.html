@@ -1,0 +1,12 @@
+{% extends "base_public.html" %}
+{% load i18n %}
+
+{% block heading %}<h1>{% trans "Cancel Subscription " %}</h1>{% endblock heading %}
+
+{% block content %}
+<form action="{% url subscriber_public_delete subscriber.id token %}" method="post">
+{%  csrf_token  %}
+
+<input type="submit" value="{% trans "Yes, cancel my subscription!" %}"/>
+</form>
+{% endblock content %}

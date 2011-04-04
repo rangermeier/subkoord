@@ -9,7 +9,8 @@
 {% if message.attachements.all %}
 <dt>{% trans "Attachements" %}</dt> <dd>
 	{% for file in message.attachements.all %}
-	<a href="{{ MEDIA_URL }}{{ file }}"><img src="{{ file.file|thumbnail }}" alt="{{ file }}" title="{{ file }}"/></a>
+		<a href="{{ file.file.url }}">{% if file.is_image %}<img src="{{ file.file|thumbnail }}" alt="{{ file }}" title="{{ file }}"/>{% endif %}
+			{{ file }}</a>
 	{% endfor %}
 </dd>
 {% endif %}

@@ -1,11 +1,13 @@
-<html><head><title>Newsletter</title></head>
-<body>
-<h1>Newsletter {{list.name}}</h1>
+{% extends "base_public.html" %}
+{% load i18n %}
+
+{% block heading %}<h1>{% trans "subscribe to Newsletter" %} &quot;{{list.name}}&quot;</h1>{% endblock heading %}
+
+{% block content %}
 <form action="{% url subscriber_add list.id %}" method="post">
 {%  csrf_token  %}
 {{ form.as_p }}
 <input type="submit" />
 </form>
+{% endblock content %}
 
-</body>
-</html>

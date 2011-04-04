@@ -89,6 +89,8 @@ class NewsletterTest(TestCase):
 		subscriber = Subscriber.objects.get(email__exact="publicsubscriber@bar.org")
 		self.assertTrue(subscriber.confirmed)
 		r = self.client.get(reverse("subscriber_public_delete", args=[subscriber.id, subscriber.token]))
+		self.assertContains(r , "<input type=\"submit\"", 1, 200)
+		r = self.client.post(reverse("subscriber_public_delete", args=[subscriber.id, subscriber.token]))
 		self.assertContains(r , "Subscribtion cancelled", 1, 200)
 		subscriber_count = Subscriber.objects.filter(email__exact="publicsubscriber@bar.org").count()
 		self.assertEqual(subscriber_count, 0)

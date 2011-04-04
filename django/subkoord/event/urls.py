@@ -1,4 +1,4 @@
-from django.conf.urls.defaults import *
+from django.conf.urls.defaults import url, patterns
 
 urlpatterns = patterns('subkoord.event.views',
     url(r'^$', 'event_cal', name="event_index"),

@@ -21,7 +21,7 @@ class Command(NoArgsCommand):
 			if event.date <= now + remind_window:
 				events_in_remind_window = True
 			if event.all_tasks_satisfied:
-				events = events.exclude(id=event.id)
+				events = events.exclude(id = event.id)
 		if events.count() > 0 and events_in_remind_window:
 			translation.activate(settings.LANGUAGE_CODE)
 			#addressbook = [u.email for u in User.objects.all()]

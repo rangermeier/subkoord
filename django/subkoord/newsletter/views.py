@@ -144,30 +144,51 @@ def subscriber_add(request, list_id):
 				'site_url': settings.SITE_URL,})
 			send_mail(_('Confirm subscription'), text, list.from_address,
 				[subscriber.email], fail_silently=False)
-			return HttpResponse(_('<h1>Thanks for subscribing</h1>An e-mail asking for confirmation will be sent shortly to %s' % (subscriber.email)))
-	formset = SubscriberFormPublic()
+			heading = _('Thanks for subscribing!')
+			message = _('An e-mail asking for confirmation will be sent shortly to %s' % (subscriber.email))
+			return render_to_response('newsletter/subscriber_public_message.html',
+				{'heading': heading, 
+				'message': message, },
+				context_instance=RequestContext(request),)
+	else: form = SubscriberFormPublic()
 	return render_to_response('newsletter/subscriber_add.html',
-		{'form': formset,
+		{'form': form,
 		'list': list, },
 		context_instance=RequestContext(request),)
 
 def subscriber_confirm(request, subscriber_id, token):
 	subscriber = get_object_or_404(Subscriber, pk=subscriber_id)
-	if subscriber.token == token:
+	if subscriber.confirmed: 
+		heading = _('Already confirmed')
+	elif subscriber.token == token:
 		subscriber.confirmed = True
 		subscriber.save()
-		return HttpResponse(_('<h1>Subscribtion confirmed</h1>'))
-	return HttpResponse(_('<h1>Couldn\'t confirm - token mismatch</h1>'))
+		heading =_('Subscribtion confirmed')
+	else: heading = _('Couldn\'t confirm - token mismatch')
+	return render_to_response('newsletter/subscriber_public_message.html',
+		{'heading': heading,  },
+		context_instance=RequestContext(request),)
 
 def subscriber_public_delete(request, subscriber_id, token):
 	try:
 		subscriber = Subscriber.objects.get(pk=subscriber_id)
 	except Subscriber.DoesNotExist:
-		return HttpResponse(_('<h1>Subscribtion doesn\'t exist (anymore?)</h1>'))
-	if subscriber.token == token:
+		return render_to_response('newsletter/subscriber_public_message.html',
+			{'heading': _('Subscribtion doesn\'t exist (anymore?)'),  },
+			context_instance=RequestContext(request),)
+	if subscriber.token != token:
+		heading = _('Couldn\'t cancel - token mismatch')
+	elif request.method != "POST":
+		return render_to_response('newsletter/subscription_delete.html',
+			{'subscriber': subscriber,
+			'token': token, },
+			context_instance=RequestContext(request),)
+	else:
 		subscriber.delete()
-		return HttpResponse(_('<h1>Subscribtion cancelled</h1>'))
-	return HttpResponse(_('<h1>Couldn\'t cancel - token mismatch</h1>'))
+		heading = _('Subscribtion cancelled')
+	return render_to_response('newsletter/subscriber_public_message.html',
+		{'heading': heading,  },
+		context_instance=RequestContext(request),)
 
 @permission_required('newsletter.delete_subscriber')
 def subscriber_delete(request, subscriber_id):
