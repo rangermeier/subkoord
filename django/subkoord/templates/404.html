@@ -1,6 +1,19 @@
-{% extends "base.html" %}
+{% extends "base_public.html" %}
+{% load i18n %}
 
 {% block heading %}
 Error 404 - Site not found
 {% endblock heading %}
 {% block content %}sorry for the inconvinience&hellip;{% endblock content %} 
+
+{% block navigation %}
+<ul>
+	{% if user.is_authenticated %}
+		<li><a href="{% url event_index %}">{% trans "view events" %}</a></li>
+		<li><a href="{% url wiki_index %}">{% trans "Wiki" %}</a></li>
+		<li><a href="http://subterrarium.at">Subterrarium-Webseite</a></li>
+	{% else %}
+		<li><a href="http://subterrarium.at">Subterrarium-Webseite</a></li>
+	{% endif %}			
+</ul>
+{% endblock navigation %}
