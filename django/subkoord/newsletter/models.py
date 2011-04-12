@@ -25,7 +25,7 @@ class List(models.Model):
 
 class Subscriber(models.Model):
 	name = models.CharField(max_length=200,blank=True, verbose_name=_("Name"), help_text=_("(optional)"))
-	email = models.EmailField(unique=True, verbose_name=_("e-Mail Address"))
+	email = models.EmailField(verbose_name=_("e-Mail Address"))
 	subscription = models.ForeignKey(List, default=1, related_name="recipients", verbose_name=_("Subscription"))
 	date = models.DateTimeField(auto_now_add=True, editable=False)
 	confirmed = models.BooleanField(default=True, editable=True, verbose_name=_("confirmed"))
