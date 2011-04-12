@@ -183,12 +183,12 @@ a.new_page {
 }
 
 .newsletter-form input[type="text"] {
-	width: 424px;
+	width: 400px;
 }
 
 
 .newsletter-form textarea {
-	width: 424px;
+	width: 600px;
 	height: 360px;
 }
 
