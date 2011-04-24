@@ -33,6 +33,12 @@ class Task(models.Model):
 			else:
 				self._satisfied[event.id] = self.job_set.filter(event=event.id).count() >= self.min_persons
 		return self._satisfied[event.id]
+	def clear_buffer(self):
+		try:
+			self.__delattr__("_maxed_out")
+			self.__delattr__("_satisfied")
+		except AttributeError:
+			pass
 	def __unicode__(self):
 		return self.name
 
@@ -69,6 +75,12 @@ class Event(models.Model):
 				if not task.satisfied(self):
 					self._open_tasks.append(task)
 		return self._open_tasks
+	def clear_buffer(self):
+		try:
+			self.__delattr__("_tasks")
+			self.__delattr__("_open_tasks")
+		except AttributeError:
+			pass
 	@property
 	def all_tasks_satisfied(self):
 		return (len(self.open_tasks) == 0)
@@ -82,6 +94,14 @@ class Job(models.Model):
 	event = models.ForeignKey(Event)
 	task = models.ForeignKey(Task)
 	user = models.ForeignKey(User, related_name="jobs")
+	def delete(self, *args, **kwargs):
+		self.task.clear_buffer()
+		self.event.clear_buffer()
+		super(Job, self).delete(*args, **kwargs) # Call the "real" delete() method
+	def save(self, *args, **kwargs):
+		self.task.clear_buffer()
+		self.event.clear_buffer()
+		super(Job, self).save(*args, **kwargs) # Call the "real" save() method.
 	def __unicode__(self):
 		return u'%s - %s: %s' % (self.event.title, self.task.name, self.user.username)
 
