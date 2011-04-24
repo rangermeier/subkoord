@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-04-04 22:41+0200\n"
+"POT-Creation-Date: 2011-04-24 18:07+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,27 +16,27 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: event/models.py:48 wiki/models.py:19
+#: event/models.py:54 wiki/models.py:19
 msgid "Title"
 msgstr "Titel"
 
-#: event/models.py:49
+#: event/models.py:55
 msgid "Date and Time"
 msgstr "Datum und Zeit"
 
-#: event/models.py:50 templates/event/event.html:19
+#: event/models.py:56 templates/event/event.html:19
 msgid "Type"
 msgstr "Typ"
 
-#: event/models.py:51 templates/event/event_form.html:37
+#: event/models.py:57 templates/event/event_form.html:37
 msgid "Depending on the type of the event different tasks will be available."
 msgstr "Durch den Typ der Veranstaltung ergeben sich die Dienste."
 
-#: event/models.py:52
+#: event/models.py:58
 msgid "Information"
 msgstr "Information"
 
-#: event/models.py:53 wiki/models.py:22
+#: event/models.py:59 wiki/models.py:22
 msgid "You can use Textile to format your text."
 msgstr "Du kannst den Text mittels Textile formatieren."
 
@@ -86,19 +86,19 @@ msgstr "Datum"
 
 #: newsletter/mailbox_utils.py:42 newsletter/mailbox_utils.py:46
 msgid "Unknown Sender"
-msgstr ""
+msgstr "Unbekannter Sender"
 
 #: newsletter/models.py:17
 msgid "praefix for subject [...]"
-msgstr ""
+msgstr "Präfix für den Betreff  [...]"
 
 #: newsletter/models.py:18
 msgid "Footer plain text"
-msgstr ""
+msgstr "Signatur Reintext"
 
 #: newsletter/models.py:19
 msgid "Footer HTML"
-msgstr ""
+msgstr "Signatur HTML"
 
 #: newsletter/models.py:20
 msgid "From e-mail address"
@@ -106,7 +106,7 @@ msgstr "From-e-Mail Adresse"
 
 #: newsletter/models.py:21
 msgid "Technical From e-mail address (used for bounces)"
-msgstr ""
+msgstr "interne Absender-Adresse (für Bounces)"
 
 #: newsletter/models.py:22
 msgid "Reply-to e-mail address"
@@ -239,17 +239,19 @@ msgstr "Nachricht gelöscht"
 msgid "Removed unassigned messages from error mailbox"
 msgstr "Nicht zuordenbare Nachrichten gelöscht"
 
-#: templates/base.html:34
-msgid "Sub-Koordinator"
-msgstr "Sub-Koordinator"
-
-#: templates/base.html:49 templates/event/event.html:13
+#: templates/404.html:12 templates/500.html:12 templates/base.html:49
+#: templates/event/event.html:13
 msgid "view events"
 msgstr "Kalender"
 
-#: templates/base.html:50 templates/wiki/home.html:6
+#: templates/404.html:13 templates/500.html:13 templates/base.html:50
+#: templates/wiki/home.html:6
 msgid "Wiki"
 msgstr "Wiki"
+
+#: templates/base.html:34
+msgid "Sub-Koordinator"
+msgstr "Sub-Koordinator"
 
 #: templates/base.html:52 templates/newsletter/error_mailbox.html:44
 #: templates/newsletter/index.html:5
@@ -271,10 +273,6 @@ msgstr "abmelden"
 #: templates/base.html:81
 msgid "login"
 msgstr "anmelden"
-
-#: templates/base_public.html:23
-msgid "Subterrarium"
-msgstr "Subterrarium"
 
 #: templates/email/newsletter_confirm.html:3
 #, python-format
@@ -558,7 +556,7 @@ msgid "Latest Subscribers"
 msgstr "neue Abonnenten"
 
 #: templates/newsletter/index.html:63
-msgid "error mailbox"
+msgid "view error mailbox"
 msgstr "Error-Mailbox"
 
 #: templates/newsletter/job.html:6
@@ -811,6 +809,13 @@ msgstr "Wiki-Link: <code>[[Titel_der_Seite]]</code>"
 #: wiki/models.py:26
 msgid "Category"
 msgstr "Kategorie"
+
+#: wiki/views.py:62
+msgid "Deleted Wiki-Page %s."
+msgstr "Die Seite %s wurde gelöscht"
+
+#~ msgid "Subterrarium"
+#~ msgstr "Subterrarium"
 
 #~ msgid "home"
 #~ msgstr "start"

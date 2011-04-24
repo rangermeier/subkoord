@@ -1,11 +1,12 @@
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.markup.templatetags.markup import textile
+from django.contrib import messages
 from django.utils.translation import ugettext as _
 from subkoord.wiki.models import Wikipage, WikipageForm
 from subkoord.wiki.templatetags.wikitags import *
@@ -56,9 +57,7 @@ def edit(request, title = None):
 def delete(request, title):
 	"""Delete a page"""
 	if request.POST:
-		try:
-			page = Wikipage.objects.get(title__exact=title)
-		except Wikipage.DoesNotExist:
-			return HttpResponseRedirect("/wiki/DeleteFailed/")
+		page = get_object_or_404(Wikipage, title__exact=title)
 		page.delete()
+		messages.success(request, _("Deleted Wiki-Page %s." % (title)))
 	return HttpResponseRedirect(reverse('wiki_index'))
