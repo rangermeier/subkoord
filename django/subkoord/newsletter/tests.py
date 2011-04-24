@@ -25,7 +25,8 @@ class NewsletterTest(TestCase):
 	def test_client_index(self):
 		self.client.login(username=NEWSLETTER_USER , password='test')
 		r = self.client.get('/newsletter/', {})
-		#self.assertEqual(len(r.context['user_list']), 3)
+		self.assertEqual(len(r.context['subscribers']), 5)
+		self.assertContains(r, "<a href=\"/newsletter/compose/\">")
 		self.assertTemplateUsed(r,  "newsletter/index.html")
 
 	def test_client_message(self):
