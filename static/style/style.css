@@ -37,7 +37,7 @@ ul {
 form ul li, #sidebar ul li {
 	list-style-type: none;
 }
-.event-form .errorlist li, .wiki-form .errorlist li {
+.errorlist li {
 	color: #600;
 }
 .event-form ul li, .wiki-form ul li {
@@ -193,11 +193,11 @@ a.new_page {
 }
 
 .newsletter pre {
-white-space: pre-wrap; /* css-3 */
-white-space: -moz-pre-wrap !important; /* Mozilla, since 1999 */
-white-space: -pre-wrap; /* Opera 4-6 */
-white-space: -o-pre-wrap; /* Opera 7 */
-word-wrap: break-word; /* Internet Explorer 5.5+ */
+	white-space: pre-wrap; /* css-3 */
+	white-space: -moz-pre-wrap !important; /* Mozilla, since 1999 */
+	white-space: -pre-wrap; /* Opera 4-6 */
+	white-space: -o-pre-wrap; /* Opera 7 */
+	word-wrap: break-word; /* Internet Explorer 5.5+ */
 }
 
 .subscribers-form td, .subscribers-form th {
@@ -218,4 +218,25 @@ word-wrap: break-word; /* Internet Explorer 5.5+ */
 
 .hidden {
 	display: none;
+}
+
+/* Filebrowserintegration */
+fieldset.fb_form a.fb_show {
+	margin-left: 1em;
+}
+
+fieldset.fb_form img.preview {
+	float: right;
+	position: relative;
+	top: -4em;
+}
+
+fieldset.fb_form label {
+	display: inline;
+}
+fieldset.fb_form {
+	padding-bottom: 0;
+}
+fieldset.fb_form p {
+	margin-bottom: 0.4em;
 }

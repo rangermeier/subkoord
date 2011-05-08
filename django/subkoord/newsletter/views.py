@@ -13,6 +13,7 @@ from django.utils import simplejson
 from datetime import date, datetime
 from models import *
 from forms import *
+from attachment.forms import attachment_formset_handler
 from mailbox_utils import *
 
 @permission_required('newsletter.add_subscriber')
@@ -41,37 +42,25 @@ def message_new(request):
 
 @permission_required('newsletter.add_message')
 def message(request, message_id):
-	MessageFormSet = inlineformset_factory(Message, Attachement, extra=1)
 	message = get_object_or_404(Message, pk=message_id)
 	job_form = JobMessageForm(initial = {'message': message.id,})
 	preview_form = PreviewMessageForm(initial = {'message': message.id,})
+	attachment_formset = attachment_formset_handler(request, message)
 	if not message.locked and request.method == "POST":
 		message_form = MessageForm(request.POST, instance=message)
-		message_formset = MessageFormSet(request.POST, request.FILES, instance=message)
-		if message_form.is_valid() and message_formset.is_valid():
+		if message_form.is_valid() and attachment_formset.is_valid():
 			message_form.save()
-			message_formset.save()
 			return HttpResponseRedirect(reverse('message', args=[message.id]))
 	else:
 		message_form = MessageForm(instance=message)
-		message_formset = MessageFormSet(instance=message)
 	return render_to_response('newsletter/message.html',
 		{'message': message,
 		'preview_form': preview_form,
 		'message_form': message_form,
-		'message_formset': message_formset,
+		'attachment_formset': attachment_formset,
 		'job_form': job_form,},
 		context_instance=RequestContext(request),)
 
-#@permission_required('newsletter.add_message')
-#def message_preview(request, message_id):
-#	if request.method == "POST":
-#		message = get_object_or_404(Message, pk=message_id)
-#		form = PreviewMessageForm(request.POST)
-#		if form.is_valid():
-#			for recipient in form.cleaned_data["to"]:
-#				letter = Letter()
-#	return HttpResponseRedirect(reverse('message', args=[message_id]))
 
 @permission_required('newsletter.add_message')
 def message_archive(request):
@@ -147,7 +136,7 @@ def subscriber_add(request, list_id):
 			heading = _('Thanks for subscribing!')
 			message = _('An e-mail asking for confirmation will be sent shortly to %s' % (subscriber.email))
 			return render_to_response('newsletter/subscriber_public_message.html',
-				{'heading': heading, 
+				{'heading': heading,
 				'message': message, },
 				context_instance=RequestContext(request),)
 	else: form = SubscriberFormPublic()
@@ -158,7 +147,7 @@ def subscriber_add(request, list_id):
 
 def subscriber_confirm(request, subscriber_id, token):
 	subscriber = get_object_or_404(Subscriber, pk=subscriber_id)
-	if subscriber.confirmed: 
+	if subscriber.confirmed:
 		heading = _('Already confirmed')
 	elif subscriber.token == token:
 		subscriber.confirmed = True

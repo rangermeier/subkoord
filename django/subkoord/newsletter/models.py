@@ -7,6 +7,8 @@ from django.utils.translation import ugettext as _
 from django.utils.text import get_valid_filename
 from django.conf import settings
 from django.contrib.markup.templatetags.markup import textile
+from django.contrib.contenttypes import generic
+from attachment.models import Attachment
 from html2text import html2text
 import random, string
 import mimetypes
@@ -48,6 +50,7 @@ class Message(models.Model):
 	text_format = models.CharField(max_length=8, choices=TEXT_FORMATS, default="plain", verbose_name=_("Text format"))
 	date= models.DateField(auto_now_add=True, editable=False)
 	locked = models.BooleanField(default=False, verbose_name=_("locked"))
+	attachments = generic.GenericRelation(Attachment)
 	@property
 	def active_jobs(self):
 		try:
@@ -85,21 +88,7 @@ class Message(models.Model):
 	def __unicode__(self):
 		return self.subject
 
-def upload_to(instance, filename):
-	safename = get_valid_filename(filename).encode("ascii", "ignore")
-	return "%s/%s" % ("attachements", safename)
 
-class Attachement(models.Model):
-	file = models.FileField(upload_to=upload_to, verbose_name=_("File"))
-	message = models.ForeignKey(Message, related_name="attachements", verbose_name=_("Message"))
-	@property
-	def mimetype(self):
-		return mimetypes.guess_type(self.file.name)[0]
-	@property
-	def is_image(self):
-		return (self.mimetype in ["image/jpg", "image/jpeg", "image/png", "image/gif"])
-	def __unicode__(self):
-		return self.file.name
 
 class Job(models.Model):
 	message = models.ForeignKey(Message, related_name="jobs", verbose_name=_("Message"))

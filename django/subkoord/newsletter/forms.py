@@ -1,7 +1,7 @@
 from django import forms
 from django.forms import ModelForm
 from django.forms.models import ModelChoiceField
-from django.forms.fields import IntegerField
+from django.forms.fields import IntegerField, FileField
 from django.db.models import Count
 from django.conf import settings
 from django.utils.translation import ugettext as _
