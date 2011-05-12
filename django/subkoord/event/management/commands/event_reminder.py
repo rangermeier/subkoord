@@ -35,5 +35,3 @@ class Command(NoArgsCommand):
 			  event.save()
 			return body
 			translation.deactivate()
-		else:
-			return "no open tasks"

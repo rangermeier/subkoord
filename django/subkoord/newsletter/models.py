@@ -154,8 +154,8 @@ class Letter(models.Model):
 			headers = {'Reply-To': self.job.to.reply_to_address,
 				'From': self.job.to.from_address},
 		)
-		for attachement in self.message.attachements.all():
-			mail.attach_file(attachement.file.file.name)
+		for attachment in self.message.attachments.all():
+			mail.attach_file(attachment.file.filename)
 		if self.message.text_format != "plain":
 			mail.attach_alternative(text_html, "text/html")
 		mail.send()
