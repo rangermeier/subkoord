@@ -43,9 +43,11 @@ def attachment_formset_handler(request, object):
 					else:
 						form.save()
 				elif form.cleaned_data.has_key("file") and form.cleaned_data["file"]:
+					if not object.id:
+						object.save()
 					attachment = Attachment(file = form.cleaned_data["file"],
 						content_type = ContentType.objects.get_for_model(object),
-						object_id = object.pk, )
+						object_id = object.id, )
 					attachment.save()
 	else:
 		attachment_formset = AttachmentFormSet(queryset = object.attachments.all(),
