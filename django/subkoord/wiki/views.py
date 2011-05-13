@@ -8,8 +8,9 @@ from django.contrib import messages
 from django.contrib.markup.templatetags.markup import textile
 from django.contrib import messages
 from django.utils.translation import ugettext as _
-from subkoord.wiki.models import Wikipage, WikipageForm
-from subkoord.wiki.templatetags.wikitags import *
+from models import Wikipage, WikipageForm
+from templatetags.wikitags import *
+from attachment.forms import attachment_formset_handler
 
 @login_required
 def index(request):
@@ -39,6 +40,7 @@ def edit(request, title = None):
 	except Wikipage.DoesNotExist:
 		# Must be a new one; let's create it
 		page = Wikipage(title=title, author=request.user)
+	attachment_formset = attachment_formset_handler(request, page)
 	if request.POST:
 		form = WikipageForm(request.POST, instance=page)
 		if form.is_valid():
@@ -50,6 +52,7 @@ def edit(request, title = None):
 		form = WikipageForm(instance=page)
 	return render_to_response('wiki/edit.html',
 		{'form': form,
+    'attachment_formset': attachment_formset,
 		'page': page},
 		context_instance=RequestContext(request),)
 

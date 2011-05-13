@@ -6,6 +6,8 @@ from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.core.validators import RegexValidator
 from django.utils.translation import ugettext as _
+from django.contrib.contenttypes import generic
+from attachment.models import Attachment
 
 class Wikicategory(models.Model):
 	"""Category for pages"""
@@ -24,6 +26,7 @@ class Wikipage(models.Model):
 	last_changed = models.DateTimeField(auto_now=True, editable=False)
 	author = models.ForeignKey(User, editable=False)
 	category = models.ForeignKey(Wikicategory, null=True, name=_("Category"), verbose_name=_("Category"))
+	attachments = generic.GenericRelation(Attachment)
 
 	def __unicode__(self):
 		return self.title

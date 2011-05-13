@@ -33,7 +33,7 @@ Parameter: ein RequestObject und das Objekt zu dem die Attachments gehören
 Rückgabe: ein Formset
 """
 def attachment_formset_handler(request, object):
-	if request.method == "POST":
+	if request.method == "POST" and request.POST.has_key("attachments-TOTAL_FORMS"):
 		attachment_formset = AttachmentFormSet(request.POST, prefix = "attachments" )
 		if attachment_formset.is_valid():
 			for form in attachment_formset:

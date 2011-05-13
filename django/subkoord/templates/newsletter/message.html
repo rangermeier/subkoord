@@ -1,6 +1,5 @@
 {% extends "base.html" %}
 {% load i18n %}
-{% load thumbnail %}
 
 {% block heading %}
 {% if message %}
@@ -74,7 +73,7 @@ fieldset.fb_form a.fb_show:after {
 	</ul>
 
 	<div>
-		<h4>{% trans "Attachements"%}</h4>
+		<h4>{% trans "Attachments"%}</h4>
 		{{ attachment_formset.management_form.as_p }}
 		{% for form in attachment_formset %}
 		<fieldset class="fb_form">

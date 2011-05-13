@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load wikitags %}
 {% load i18n %}
+{% load fb_versions %}
 
 {% block heading %}
 {{ page.title|wikifytitle }}
@@ -22,7 +23,16 @@
 			last edited by {{ author }}, <br /> {{ last_changed }}.
 			{% endblocktrans %}</p>
 			<p>{% blocktrans with page.title as title%}Wiki-link to this page: <code>[[{{ title }}]]</code>{% endblocktrans %}</p>
-			<p><a href="{% url wiki_edit page.title %}">{% trans "edit" %}</a></p>
+			<p><a href="{% url wiki_edit page.title %}">{% trans "edit page" %}</a></p>
+			{% if page.attachments.all %}
+			<h3>{% trans "Attachments" %}</h3>
+			<p>
+				{% for attachment in page.attachments.all %}<div>
+				{% if attachment.is_image  %}<img src="{% version attachment.file 'small' %}" alt="{{ attachment }}" title="{{ attachment }}"/><br />{% endif %}
+				<a target="_blank" href="{{ attachment.file.url }}">{{ attachment }}</a></div>
+				{% endfor %}
+			</p>
+			{% endif %}
 		</div>
 	</div>
 

@@ -29,7 +29,12 @@ class WikiTest(TestCase):
 		self.assertContains(r, "<form action=\"/wiki/bar/edit/\"", 1, 200)
 		r = self.client.post("/wiki/bar/edit/", {'title': 'bar',
 			'content': 'this is a new [[wiki]] article on [[bar]]',
-			'category': 1})
+			'category': 1,
+			#'attachments-TOTAL_FORMS': 1,
+			#'attachments-INITIAL_FORMS': 1,
+			#'attachments-0-id': 1,
+			#'attachments-0-file': "",
+			})
 		r = self.client.get('/wiki/bar/', {})
 		self.assertContains(r, "this is a new <a href=\"/wiki/wiki/\" class=\"new_page\">wiki</a> article on <a href=\"/wiki/bar/\" class=\"\">bar</a>",
 			1, 200)

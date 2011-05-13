@@ -18,8 +18,18 @@
 				return false;
 			}
 		});
+	$(".fb_form:last p:last").hide();
 {% include "help/jquery.html" %}
 {%endblock jquery %}
+
+{% block css %}
+fieldset.fb_form a.fb_show:after {
+	content: "{% trans "choose" %}";
+}
+{% endblock css %}
+{%block javascript %}
+<script type="text/javascript" src="{{ STATIC_URL }}filebrowser/js/AddFileBrowser.js"></script>
+{%endblock javascript %}
 
 {% block navigation %}
 	<ul>
@@ -35,6 +45,15 @@
 		<ul>
 		{{ form.as_ul }}
 		</ul>
+		<div>
+		<h4>{% trans "Attachments"%}</h4>
+		{{ attachment_formset.management_form.as_p }}
+		{% for form in attachment_formset %}
+		<fieldset class="fb_form">
+		{{ form.as_p  }}
+		</fieldset>
+		{% endfor %}
+		</div>
 		{% csrf_token %}
 		<input type="submit" value="{% trans "Save" %}" />
 	</form>
