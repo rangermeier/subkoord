@@ -20,7 +20,7 @@
 		<h3>{{ category.grouper }}</h3>
 		<ul>
 			{% for page in category.list %}
-			<li><a href="{% url wiki_page page.title %}">{{ page.title|wikifytitle }}</a> <span class="wiki-last-changed">({{ page.last_changed|date:"j. n. Y" }})</span></li>
+			<li><a href="{% url wiki_page page.title %}">{{ page.title|wikifytitle }}</a> <span class="wiki-last-changed" title="{{ page.author }}">({{ page.last_changed|date:"j. n. Y" }})</span></li>
 			{% endfor %}
 		</ul>
 	</div>
