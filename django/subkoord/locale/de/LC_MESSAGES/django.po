@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-05-13 10:39+0200\n"
+"POT-Creation-Date: 2011-11-01 19:58+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -53,28 +53,28 @@ msgstr "Information"
 msgid "You can use Textile to format your text."
 msgstr "Du kannst den Text mittels Textile formatieren."
 
-#: event/views.py:60
+#: event/views.py:83
 #, python-format
 msgid "Event %s deleted"
 msgstr "Termin %s gelöscht"
 
-#: event/views.py:73
+#: event/views.py:96
 msgid "Saved changes"
 msgstr "Änderungen gespeichert"
 
-#: event/views.py:92
+#: event/views.py:115
 msgid "Created new event"
 msgstr "neuer Termin gespeichert"
 
-#: event/views.py:115
+#: event/views.py:138
 msgid "Took job"
 msgstr "Dienst übernommen"
 
-#: event/views.py:125
+#: event/views.py:148
 msgid "Deleted job"
 msgstr "Dienst entfernt"
 
-#: event/views.py:136
+#: event/views.py:159
 msgid "Saved note"
 msgstr "Anmerkung gespeichert"
 
@@ -657,6 +657,7 @@ msgid "Clear selection"
 msgstr ""
 
 #: grappelli/templates/admin/app_index.html:13
+#, python-format
 msgid "%(name)s"
 msgstr "%(name)s!"
 
@@ -686,6 +687,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: grappelli/templates/admin/change_list.html:100
+#, python-format
 msgid "Add %(name)s"
 msgstr ""
 
@@ -1426,6 +1428,10 @@ msgstr "zum aktuellen Datum"
 msgid "view archive"
 msgstr "Termin-Archiv"
 
+#: templates/event/events.html:31
+msgid "calendar as ical"
+msgstr "Kalender abonieren (ical)"
+
 #: templates/event/month_cal.html:16
 msgid "add event with this date"
 msgstr "Veranstaltung für dieses Datum anlegen"
@@ -1616,6 +1622,7 @@ msgid "e-mails sent"
 msgstr "e-mails versendet"
 
 #: templates/newsletter/job.html:21
+#, fuzzy, python-format
 msgid ""
 "\n"
 "\t%(sent)s of %(total)s already sent (%(percentage)s %%)"
