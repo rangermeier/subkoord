@@ -119,6 +119,9 @@ EVENT_REMINDER_SUBJECT = "there's something to do"
 EVENT_REMINDER_ADDRESSBOOK = ["mailinglist@example.com",]
 # From:
 EVENT_REMINDER_FROM = "bar@example.com"
+# Timezone (a tzinfo subclass) used in ical-export
+from pytz import timezone
+EVENT_TIMEZONE = timezone(TIME_ZONE)
 
 # the newsletter should be invoked regularly by a cronjob
 # on each run it will send emails according to NEWSLETTER_QUOTA

@@ -1,12 +1,14 @@
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
+from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.utils.translation import ugettext as _
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
+import vobject
 from models import Event, EventForm, EventType, Job, Task, Note, NoteForm
 from django.db.models.signals import post_save, post_delete
 
@@ -39,6 +41,27 @@ def event_cal(request, year = False, month = False):
 		'month': int(month),
 		'date': datetime.today(), },
 		context_instance=RequestContext(request),)
+
+def event_ical(request):
+	event_list = Event.objects.filter(date__gte=datetime.now()-timedelta(weeks=4)).order_by('date')
+	cal = vobject.iCalendar()
+	cal.add('method').value = 'PUBLISH'  # IE/Outlook needs this
+	cal.add('x-wr-calname').value = "Subterrarium intern"
+	for event in event_list:
+		url = settings.SITE_URL + reverse('event', args=[event.id])
+		date = event.date - settings.EVENT_TIMEZONE.utcoffset(event.date)
+		vevent = cal.add('vevent')
+		vevent.add('dtstart').value = date
+		vevent.add('dtend').value = date + timedelta(hours = 2)
+		vevent.add('dtstamp').value = datetime.now()
+		vevent.add('summary').value = event.title
+		vevent.add('url').value = url
+		vevent.add('description').value = url + "\n" + event.info
+	icalstream = cal.serialize()
+	response = HttpResponse(icalstream, mimetype='text/calendar; charset=utf-8')
+	response['Filename'] = 'subkoordinator.ics'  # IE needs this
+	response['Content-Disposition'] = 'attachment; filename=subkoordinator.ics'
+	return response
 
 @login_required
 def event(request, event_id):
