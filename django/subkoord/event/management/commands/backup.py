@@ -24,4 +24,3 @@ class Command(NoArgsCommand):
 		mysqldump = "mysqldump --add-drop-table " + " ".join([user, password, host, dbname]) + " >  backup.sql"
 		subprocess.call(args=mysqldump, shell=True, cwd=settings.BACKUP_DIR)
 		subprocess.Popen(args="gzip -c backup.sql > backup.gz", shell=True, cwd=settings.BACKUP_DIR)
-		return "ceated DB backup"

@@ -33,5 +33,4 @@ class Command(NoArgsCommand):
 			for event in events:
 			  event.cron = datetime.now()
 			  event.save()
-			return body
 			translation.deactivate()
