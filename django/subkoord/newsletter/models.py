@@ -155,7 +155,7 @@ class Letter(models.Model):
 				'From': self.job.to.from_address},
 		)
 		for attachment in self.message.attachments.all():
-			mail.attach_file(attachment.file.filename)
+			mail.attach_file(attachment.file.path)
 		if self.message.text_format != "plain":
 			mail.attach_alternative(text_html, "text/html")
 		mail.send()
