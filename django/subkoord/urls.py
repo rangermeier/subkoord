@@ -1,7 +1,7 @@
 from django.conf.urls.defaults import *
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.conf import settings
-# Uncomment the next two lines to enable the admin:
+from filebrowser.sites import site
 from django.contrib import admin
 admin.autodiscover()
 
@@ -11,7 +11,7 @@ urlpatterns = patterns('',
 	(r'^wiki/', include('subkoord.wiki.urls')),
 	(r'^grappelli/', include('grappelli.urls')),
 	(r'^newsletter/', include('subkoord.newsletter.urls')),
-	(r'^admin/filebrowser/', include('filebrowser.urls')),
+	(r'^admin/filebrowser/', include(site.urls)),
 	(r'^admin/', include(admin.site.urls)),
 	url(r'^$', 'subkoord.event.views.event_cal', name="home"),
 	url(r'^accounts/$',
