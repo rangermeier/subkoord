@@ -51,8 +51,13 @@ def event_ical(request):
 		url = settings.SITE_URL + reverse('event', args=[event.id])
 		date = event.date - settings.EVENT_TIMEZONE.utcoffset(event.date)
 		vevent = cal.add('vevent')
-		vevent.add('dtstart').value = date
-		vevent.add('dtend').value = date + timedelta(hours = 2)
+		if event.date.hour == 0 and event.date.minute == 0:
+			vevent.add('X-FUNAMBOL-ALLDAY').value = '1'
+			vevent.add('dtstart').value = datetime.date(event.date)
+			vevent.add('dtend').value = datetime.date(event.date) + timedelta(days=1)
+		else:
+			vevent.add('dtstart').value = date
+			vevent.add('dtend').value = date + timedelta(hours = 2)
 		vevent.add('dtstamp').value = datetime.now()
 		vevent.add('summary').value = event.title
 		vevent.add('url').value = url
