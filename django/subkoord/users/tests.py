@@ -2,7 +2,7 @@ from django.test import TestCase
 from django.test import Client
 
 class UserTest(TestCase):
-	fixtures = ['test.json']
+	fixtures = ['test.yaml']
 	def setUp(self):
 		self.client = Client()
 

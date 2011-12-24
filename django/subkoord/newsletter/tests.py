@@ -3,10 +3,10 @@ from django.test import Client
 from django.core.urlresolvers import reverse
 from models import *
 
-NEWSLETTER_USER = "letterman"
+NEWSLETTER_USER = 'letterman'
 
 class NewsletterTest(TestCase):
-	fixtures = ['test.json']
+	fixtures = ['test.yaml']
 	def setUp(self):
 		self.client = Client()
 
@@ -16,6 +16,7 @@ class NewsletterTest(TestCase):
 		self.client.login(username='test', password='test')
 		r = self.client.get('/newsletter/', {})
 		self.assertEqual(r.status_code, 302)
+		self.client.logout()
 		self.client.login(username=NEWSLETTER_USER , password='test')
 		r = self.client.get('/newsletter/', {})
 		self.assertEqual(r.status_code, 200)
