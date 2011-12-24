@@ -6,7 +6,7 @@ from models import *
 
 
 class WikiTest(TestCase):
-	fixtures = ['test.json']
+	fixtures = ['test.yaml']
 	def setUp(self):
 		self.client = Client()
 
