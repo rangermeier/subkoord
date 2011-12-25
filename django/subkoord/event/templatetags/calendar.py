@@ -8,74 +8,74 @@ register = template.Library()
 
 
 def get_last_day_of_month(year, month):
-	if (month == 12):
-		year += 1
-		month = 1
-	else:
-		month += 1
-	return date(year, month, 1) - timedelta(1)
+    if (month == 12):
+        year += 1
+        month = 1
+    else:
+        month += 1
+    return date(year, month, 1) - timedelta(1)
 
 
 def month_cal(year, month):
 
-	first_day_of_month = date(year, month, 1)
-	last_day_of_month = get_last_day_of_month(year, month)
-	first_day_of_calendar = first_day_of_month - timedelta(first_day_of_month.weekday())
-	last_day_of_calendar = last_day_of_month + timedelta(7 - last_day_of_month.weekday())
+    first_day_of_month = date(year, month, 1)
+    last_day_of_month = get_last_day_of_month(year, month)
+    first_day_of_calendar = first_day_of_month - timedelta(first_day_of_month.weekday())
+    last_day_of_calendar = last_day_of_month + timedelta(7 - last_day_of_month.weekday())
 
-	event_list = Event.objects.filter(date__gte = first_day_of_calendar,
-		date__lte = last_day_of_calendar)
+    event_list = Event.objects.filter(date__gte = first_day_of_calendar,
+        date__lte = last_day_of_calendar)
 
-	month_cal = []
-	week = []
-	week_headers = []
+    month_cal = []
+    week = []
+    week_headers = []
 
-	i = 0
-	day = first_day_of_calendar
-	while day <= last_day_of_calendar:
-		if i < 7:
-			week_headers.append(day)
-		cal_day = {}
-		cal_day['day'] = day
-		cal_day['event'] = False
-		cal_day['events'] = []
-		for event in event_list:
-			if day == event.date.date():
-				cal_day['event'] = True
-				cal_day['events'].append(event)
-		if day.month == month:
-			cal_day['in_month'] = True
-		else:
-			cal_day['in_month'] = False
-		cal_day['today'] = day == date.today()
-		cal_day['future'] = day >= date.today()
-		week.append(cal_day)
-		if day.weekday() == 6:
-			month_cal.append(week)
-			week = []
-		i += 1
-		day += timedelta(1)
+    i = 0
+    day = first_day_of_calendar
+    while day <= last_day_of_calendar:
+        if i < 7:
+            week_headers.append(day)
+        cal_day = {}
+        cal_day['day'] = day
+        cal_day['event'] = False
+        cal_day['events'] = []
+        for event in event_list:
+            if day == event.date.date():
+                cal_day['event'] = True
+                cal_day['events'].append(event)
+        if day.month == month:
+            cal_day['in_month'] = True
+        else:
+            cal_day['in_month'] = False
+        cal_day['today'] = day == date.today()
+        cal_day['future'] = day >= date.today()
+        week.append(cal_day)
+        if day.weekday() == 6:
+            month_cal.append(week)
+            week = []
+        i += 1
+        day += timedelta(1)
 
-	controls = {}
-	previous = first_day_of_month - timedelta(days=1)
-	controls['previous_year'] = previous.year
-	controls['previous_month'] = previous.month
-	next = last_day_of_month + timedelta(days=1)
-	controls['next_year'] = next.year
-	controls['next_month'] = next.month
-	controls['this_month'] = first_day_of_month
-	today = date.today()
-	jumpto_year = today.year
-	controls['jumpto'] = []
-	for m in range(0,6):
-		jumpto_month = today.month + m
-		if jumpto_month > 12:
-			jumpto_month -= 12
-			jumpto_year = today.year + 1
-		controls['jumpto'].append({
-			'year': jumpto_year,
-			'month': jumpto_month})
-	return {'calendar': month_cal, 'headers': week_headers, 'controls': controls}
+    controls = {}
+    previous = first_day_of_month - timedelta(days=1)
+    controls['previous_year'] = previous.year
+    controls['previous_month'] = previous.month
+    next = last_day_of_month + timedelta(days=1)
+    controls['next_year'] = next.year
+    controls['next_month'] = next.month
+    controls['this_month'] = first_day_of_month
+    today = date.today()
+    jumpto_year = today.year
+    controls['jumpto'] = []
+    for m in range(0,6):
+        jumpto_month = today.month + m
+        if jumpto_month > 12:
+            jumpto_month -= 12
+            jumpto_year = today.year + 1
+        controls['jumpto'].append({
+            'year': jumpto_year,
+            'month': jumpto_month})
+    return {'calendar': month_cal, 'headers': week_headers, 'controls': controls}
 
 register.inclusion_tag('event/month_cal.html')(month_cal)
 

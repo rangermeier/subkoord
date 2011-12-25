@@ -9,37 +9,37 @@ from extraformfields import *
 from models import Subscriber, Message, List
 
 class SubscriberForm(ModelForm):
-	class Meta:
-		model = Subscriber
+    class Meta:
+        model = Subscriber
 
 class SubscriberFormPublic(ModelForm):
-	class Meta:
-		model = Subscriber
-		fields = ('name', 'email')
+    class Meta:
+        model = Subscriber
+        fields = ('name', 'email')
 
 class MessageForm(ModelForm):
-	class Meta:
-		model = Message
-		fields = ('subject', 'text', 'text_format')
+    class Meta:
+        model = Message
+        fields = ('subject', 'text', 'text_format')
 
 class JobForm(forms.Form):
-	message = FeaturedModelChoiceField(queryset = Message.objects.all(),
-		featured_queryset = Message.objects.filter(locked=False),
-		label = _('Message'),
-	)
-	to = ModelChoiceField(queryset = List.objects.all(),
-		label = _('To list'),
-	)
+    message = FeaturedModelChoiceField(queryset = Message.objects.all(),
+        featured_queryset = Message.objects.filter(locked=False),
+        label = _('Message'),
+    )
+    to = ModelChoiceField(queryset = List.objects.all(),
+        label = _('To list'),
+    )
 
 class JobMessageForm(forms.Form):
-	message = IntegerField(widget = forms.HiddenInput,)
-	to = ModelChoiceField(queryset = List.objects.all(),
-		label = _('To list'),
-	)
+    message = IntegerField(widget = forms.HiddenInput,)
+    to = ModelChoiceField(queryset = List.objects.all(),
+        label = _('To list'),
+    )
 
 class PreviewMessageForm(forms.Form):
-	message = IntegerField(widget = forms.HiddenInput,)
-	to = ModelChoiceField(queryset =
-		List.objects.annotate(recipients_count=Count('recipients')).filter(recipients_count__lt=settings.NEWSLETTER_PREVIEW_LIST),
-		label = _('To list'),
-	)
+    message = IntegerField(widget = forms.HiddenInput,)
+    to = ModelChoiceField(queryset =
+        List.objects.annotate(recipients_count=Count('recipients')).filter(recipients_count__lt=settings.NEWSLETTER_PREVIEW_LIST),
+        label = _('To list'),
+    )
