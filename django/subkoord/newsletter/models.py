@@ -8,7 +8,7 @@ from django.utils.text import get_valid_filename
 from django.conf import settings
 from django.contrib.markup.templatetags.markup import textile
 from django.contrib.contenttypes import generic
-from attachment.models import Attachment
+from subkoord.attachment.models import Attachment
 from html2text import html2text
 import random, string
 import mimetypes
