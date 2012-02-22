@@ -10,7 +10,7 @@ from django.contrib import messages
 from django.utils.translation import ugettext as _
 from models import Wikipage, WikipageForm
 from templatetags.wikitags import *
-from attachment.forms import attachment_formset_handler
+from subkoord.attachment.forms import attachment_formset_handler
 
 @login_required
 def index(request):

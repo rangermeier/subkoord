@@ -13,7 +13,7 @@ from django.utils import simplejson
 from datetime import date, datetime
 from models import *
 from forms import *
-from attachment.forms import attachment_formset_handler
+from subkoord.attachment.forms import attachment_formset_handler
 from mailbox_utils import *
 
 @permission_required('newsletter.add_subscriber')
