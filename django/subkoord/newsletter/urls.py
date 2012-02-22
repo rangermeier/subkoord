@@ -1,4 +1,4 @@
-from django.conf.urls.defaults import *
+from django.conf.urls import *
 
 urlpatterns = patterns('subkoord.newsletter.views',
     url(r'^$', 'index', name="newsletter_index"),
