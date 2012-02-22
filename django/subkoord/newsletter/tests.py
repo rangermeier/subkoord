@@ -1,12 +1,13 @@
 from django.test import TestCase
 from django.test import Client
 from django.core.urlresolvers import reverse
+from django.utils.translation import ugettext as _
 from models import *
 
 NEWSLETTER_USER = 'letterman'
 
 class NewsletterTest(TestCase):
-    fixtures = ['test.yaml']
+    fixtures = ['test_auth.json', 'test_newsletter.json', ]
     def setUp(self):
         self.client = Client()
 
@@ -78,21 +79,20 @@ class NewsletterTest(TestCase):
         self.assertTrue(subscriber.confirmed)
 
         r = self.client.post(reverse("subscriber_add", args=[1]), {'email':"publicsubscriber@bar.org", 'name':"Puh Bar"})
-        self.assertContains(r, "Thanks for subscribing", 1, 200)
+        self.assertContains(r, _("Thanks for subscribing!"), 1, 200)
         subscriber = Subscriber.objects.get(email__exact="publicsubscriber@bar.org")
         self.assertFalse(subscriber.confirmed)
         r = self.client.get('newsletter/confirm/%s/abcd/' % (subscriber.id))
         self.assertEqual(r.status_code, 404)
         r = self.client.get(reverse("subscriber_confirm", args=[subscriber.id, "1234567890ab"]))
-        self.assertContains(r, "token mismatch", 1, 200)
-        confirm_url = reverse("subscriber_confirm", args=[subscriber.id, subscriber.token])
+        self.assertContains(r, _("Couldn't confirm - token mismatch"), 1, 200)
         r = self.client.get(reverse("subscriber_confirm", args=[subscriber.id, subscriber.token]))
-        self.assertContains(r, "Subscribtion confirmed", 1, 200)
+        self.assertContains(r, _("Subscribtion confirmed"), 1, 200)
         subscriber = Subscriber.objects.get(email__exact="publicsubscriber@bar.org")
         self.assertTrue(subscriber.confirmed)
         r = self.client.get(reverse("subscriber_public_delete", args=[subscriber.id, subscriber.token]))
         self.assertContains(r , "<input type=\"submit\"", 1, 200)
         r = self.client.post(reverse("subscriber_public_delete", args=[subscriber.id, subscriber.token]))
-        self.assertContains(r , "Subscribtion cancelled", 1, 200)
+        self.assertContains(r , _("Subscribtion cancelled"), 1, 200)
         subscriber_count = Subscriber.objects.filter(email__exact="publicsubscriber@bar.org").count()
         self.assertEqual(subscriber_count, 0)

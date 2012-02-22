@@ -1,0 +1,238 @@
+[
+{
+    "pk": 1,
+    "model": "auth.group",
+    "fields": {
+      "name": "Newsletter",
+      "permissions": [
+        [
+          "add_job",
+          "newsletter",
+          "job"
+        ],
+        [
+          "change_job",
+          "newsletter",
+          "job"
+        ],
+        [
+          "delete_job",
+          "newsletter",
+          "job"
+        ],
+        [
+          "add_letter",
+          "newsletter",
+          "letter"
+        ],
+        [
+          "change_letter",
+          "newsletter",
+          "letter"
+        ],
+        [
+          "delete_letter",
+          "newsletter",
+          "letter"
+        ],
+        [
+          "add_list",
+          "newsletter",
+          "list"
+        ],
+        [
+          "change_list",
+          "newsletter",
+          "list"
+        ],
+        [
+          "delete_list",
+          "newsletter",
+          "list"
+        ],
+        [
+          "add_message",
+          "newsletter",
+          "message"
+        ],
+        [
+          "change_message",
+          "newsletter",
+          "message"
+        ],
+        [
+          "delete_message",
+          "newsletter",
+          "message"
+        ],
+        [
+          "add_subscriber",
+          "newsletter",
+          "subscriber"
+        ],
+        [
+          "change_subscriber",
+          "newsletter",
+          "subscriber"
+        ],
+        [
+          "delete_subscriber",
+          "newsletter",
+          "subscriber"
+        ]
+      ]
+    }
+  },
+  {
+    "pk": 4,
+    "model": "auth.user",
+    "fields": {
+      "username": "letterman",
+      "first_name": "",
+      "last_name": "",
+      "is_active": true,
+      "is_superuser": false,
+      "is_staff": false,
+      "last_login": "2012-02-22T11:27:02",
+      "groups": [
+        [
+          "Newsletter"
+        ]
+      ],
+      "user_permissions": [],
+      "password": "pbkdf2_sha256$10000$iCn2i9u0CUhG$x2ii1G9TWRu66OChI+vRoIGwXh7CmcXpcy6Kn2DOOQY=",
+      "email": "",
+      "date_joined": "2010-12-19T16:42:31"
+    }
+  },
+  {
+    "pk": 1,
+    "model": "newsletter.list",
+    "fields": {
+      "footer_html": "",
+      "name": "Subterrarium",
+      "reply_to_address": "",
+      "from_bounce_address": "",
+      "footer_text": "",
+      "praefix": "[subt]",
+      "from_address": ""
+    }
+  },
+  {
+    "pk": 2,
+    "model": "newsletter.list",
+    "fields": {
+      "footer_html": "",
+      "name": "Test",
+      "reply_to_address": "",
+      "from_bounce_address": "",
+      "footer_text": "",
+      "praefix": "[test]",
+      "from_address": ""
+    }
+  },
+  {
+    "pk": 1,
+    "model": "newsletter.subscriber",
+    "fields": {
+      "confirmed": true,
+      "name": "Tester",
+      "token": "a4b3e44f0701",
+      "date": "2010-12-19T17:00:50",
+      "email": "test@example.com",
+      "subscription": 1
+    }
+  },
+  {
+    "pk": 2,
+    "model": "newsletter.subscriber",
+    "fields": {
+      "confirmed": true,
+      "name": "",
+      "token": "df3c72b3703c",
+      "date": "2010-12-19T17:00:50",
+      "email": "foo@example.org",
+      "subscription": 1
+    }
+  },
+  {
+    "pk": 3,
+    "model": "newsletter.subscriber",
+    "fields": {
+      "confirmed": true,
+      "name": "",
+      "token": "a3805ca62d7e",
+      "date": "2010-12-19T17:00:50",
+      "email": "bar@example.org",
+      "subscription": 1
+    }
+  },
+  {
+    "pk": 4,
+    "model": "newsletter.subscriber",
+    "fields": {
+      "confirmed": true,
+      "name": "",
+      "token": "0d2d1e0c8a24",
+      "date": "2010-12-19T17:00:50",
+      "email": "baz@example.org",
+      "subscription": 1
+    }
+  },
+  {
+    "pk": 5,
+    "model": "newsletter.subscriber",
+    "fields": {
+      "confirmed": true,
+      "name": "",
+      "token": "4f1aa36d592f",
+      "date": "2010-12-19T17:01:11",
+      "email": "test@powidl.org",
+      "subscription": 2
+    }
+  },
+  {
+    "pk": 1,
+    "model": "newsletter.message",
+    "fields": {
+      "date": "2010-12-19",
+      "text": "Liebe Leute,\r\n\r\nblabla blabl ",
+      "text_format": "plain",
+      "locked": true,
+      "subject": "Testmail"
+    }
+  },
+  {
+    "pk": 2,
+    "model": "newsletter.message",
+    "fields": {
+      "date": "2010-12-19",
+      "text": "ladadadi ladadada\r\n\r\n* erstens\r\n* zweitens\r\n* drittens",
+      "text_format": "textile",
+      "locked": false,
+      "subject": "Testmail 2"
+    }
+  },
+  {
+    "pk": 1,
+    "model": "newsletter.job",
+    "fields": {
+      "sender": [
+        "letterman"
+      ],
+      "to": 2,
+      "last_delivery": null,
+      "date": "2010-12-19T17:03:58",
+      "message": 1,
+      "letters_sent": 0
+    }
+  },
+  {
+    "pk": 1,
+    "model": "newsletter.letter",
+    "fields": {
+      "job": 1,
+      "recipient": 5
+    }
+  }
+]

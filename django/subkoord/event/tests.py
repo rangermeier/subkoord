@@ -7,7 +7,7 @@ from models import *
 EVENT_USER = "partyman"
 
 class EventTest(TestCase):
-    fixtures = ['test.yaml']
+    fixtures = ['test_auth.json', 'test_event.json', ]
     def setUp(self):
         self.client = Client()
 
@@ -26,7 +26,7 @@ class EventTest(TestCase):
         self.assertContains(r, "<a href=\"/event/\">", 1, 200)
 
 
-    def test_cliebnt_urls(self):
+    def test_client_urls(self):
         self.client.login(username=EVENT_USER , password='test')
         r = self.client.get('/event/1/', {})
         self.assertContains(r, "schwer experimentell!", 1, 200)
