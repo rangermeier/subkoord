@@ -26,6 +26,18 @@ class List(models.Model):
         return self.name
 
 class Subscriber(models.Model):
+    """
+    >>> list = List(name="Test")
+    >>> list.save()
+    >>> sub1 = Subscriber(name="Bert", email="bert@foomail.com", subscription=list)
+    >>> sub1.save()
+    >>> list.recipients.all()
+    [<Subscriber: bert@foomail.com>]
+    >>> sub2 = Subscriber(name="Sue", email="sue@foomail.com", subscription=list)
+    >>> sub2.save()
+    >>> list.recipients.all()
+    [<Subscriber: bert@foomail.com>, <Subscriber: sue@foomail.com>]
+    """
     name = models.CharField(max_length=200,blank=True, verbose_name=_("Name"), help_text=_("(optional)"))
     email = models.EmailField(verbose_name=_("e-Mail Address"))
     subscription = models.ForeignKey(List, default=1, related_name="recipients", verbose_name=_("Subscription"))
@@ -91,6 +103,24 @@ class Message(models.Model):
 
 
 class Job(models.Model):
+    """
+    >>> message = Message(subject="Concert!", text="Hi, it's gonna be great")
+    >>> message.save()
+    >>> list = List(name="Test")
+    >>> list.save()
+    >>> sub1 = Subscriber(name="Bert", email="bert@foomail.com", subscription=list)
+    >>> sub1.save()
+    >>> sub2 = Subscriber(name="Sue", email="sue@foomail.com", subscription=list)
+    >>> sub2.save()
+    >>> hugo = User(username="hugo")
+    >>> hugo.save()
+    >>> job = Job(message=message, to=list, sender=hugo)
+    >>> job.save()
+    >>> job.letters_total
+    2
+    >>> job.active
+    True
+    """
     message = models.ForeignKey(Message, related_name="jobs", verbose_name=_("Message"))
     to = models.ForeignKey(List, verbose_name=_("to List"))
     date = models.DateTimeField(auto_now_add=True, editable=False)
@@ -124,9 +154,10 @@ class Job(models.Model):
         create_letters = not bool(self.__getattribute__('id'))
         super(Job, self).save(*args, **kwargs) # Call the "real" save() method.
         if create_letters:
+            letters = []
             for recipient in self.to.recipients.filter(confirmed=True):
-                letter = Letter(job=self, recipient=recipient)
-                letter.save()
+                letters.append(Letter(job=self, recipient=recipient))
+            Letter.objects.bulk_create(letters)
             self.message.locked = True
             self.message.save()
     def __unicode__(self):

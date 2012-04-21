@@ -2,6 +2,7 @@ from django.test import TestCase
 from django.test import Client
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext as _
+from django.utils.html import escape
 from models import *
 
 NEWSLETTER_USER = 'letterman'
@@ -85,7 +86,7 @@ class NewsletterTest(TestCase):
         r = self.client.get('newsletter/confirm/%s/abcd/' % (subscriber.id))
         self.assertEqual(r.status_code, 404)
         r = self.client.get(reverse("subscriber_confirm", args=[subscriber.id, "1234567890ab"]))
-        self.assertContains(r, _("Couldn't confirm - token mismatch"), 1, 200)
+        self.assertContains(r, escape(_("Couldn't confirm - token mismatch")), 1, 200)
         r = self.client.get(reverse("subscriber_confirm", args=[subscriber.id, subscriber.token]))
         self.assertContains(r, _("Subscribtion confirmed"), 1, 200)
         subscriber = Subscriber.objects.get(email__exact="publicsubscriber@bar.org")
