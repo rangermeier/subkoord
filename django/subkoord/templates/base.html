@@ -55,7 +55,7 @@
 	{% if perms.newsletter.add_subscriber %}
 		<li><a href="{% url newsletter_index %}">{% trans "Newsletter" %}</a></li>
 	{% endif%}
-	{% if user.is_staff %}
+	{% if user.is_superuser %}
 		<li><a href="/admin">{% trans "admin" %}</a></li>
 	{% endif %}
 	</ul>
