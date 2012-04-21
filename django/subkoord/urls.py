@@ -3,15 +3,8 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.conf import settings
 from filebrowser.sites import site
 from django.contrib import admin
-from tastypie.api import Api
-from subkoord.event.api import *
 admin.autodiscover()
 
-v1_api = Api(api_name='v1')
-v1_api.register(UserResource())
-v1_api.register(EventResource())
-#v1_api.register(TaskResource())
-#v1_api.register(JobResource())
 
 urlpatterns = patterns('',
     (r'^event/', include('subkoord.event.urls')),
@@ -21,7 +14,6 @@ urlpatterns = patterns('',
     (r'^newsletter/', include('subkoord.newsletter.urls')),
     (r'^admin/filebrowser/', include(site.urls)),
     (r'^admin/', include(admin.site.urls)),
-    (r'^api/', include(v1_api.urls)),
     url(r'^$', 'subkoord.event.views.event_cal', name="home"),
     url(r'^accounts/$',
         'django.contrib.auth.views.login', ),
