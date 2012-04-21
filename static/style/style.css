@@ -216,6 +216,10 @@ a.new_page {
     border: 1px solid #000;
 }
 
+.subscriber label {
+    display: inline;
+}
+
 .inline-right {
     float: right;
 }

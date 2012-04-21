@@ -197,6 +197,9 @@ def subscribers_delete(request, subscribers_ids):
     messages.success(request, _("Deleted %s subscribers" % (len(subscribers))))
     for subscriber in subscribers:
         subscriber.delete()
+    if request.is_ajax():
+        json = simplejson.dumps({'subscriber_ids':ids,})
+        return HttpResponse(json, mimetype='application/json',)
     return HttpResponseRedirect(reverse('newsletter_index'))
 
 @permission_required('newsletter.add_subscriber')
