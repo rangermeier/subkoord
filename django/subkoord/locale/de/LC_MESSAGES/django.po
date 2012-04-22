@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-04-21 14:45+0200\n"
+"POT-Creation-Date: 2012-04-22 12:31+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -89,14 +89,19 @@ msgstr "an Liste"
 msgid "Created from e-mail"
 msgstr ""
 
-#: newsletter/mailbox_utils.py:39 templates/newsletter/job.html:15
-#: templates/newsletter/subscribers.html:50
+#: newsletter/mailbox_utils.py:39 templates/newsletter/error_mailbox.html:140
+#: templates/newsletter/job.html:15 templates/newsletter/subscribers.html:50
 msgid "Date"
 msgstr "Datum"
 
 #: newsletter/mailbox_utils.py:42 newsletter/mailbox_utils.py:46
 msgid "Unknown Sender"
 msgstr "Unbekannter Sender"
+
+#: newsletter/mailbox_utils.py:50
+#, fuzzy
+msgid "Message-Id"
+msgstr "Nachricht"
 
 #: newsletter/models.py:19
 msgid "praefix for subject [...]"
@@ -154,7 +159,7 @@ msgstr "HTML"
 msgid "Textile"
 msgstr "Textile"
 
-#: newsletter/models.py:60 templates/newsletter/error_mailbox.html:104
+#: newsletter/models.py:60 templates/newsletter/error_mailbox.html:139
 #: templates/newsletter/message_preview.html:5
 msgid "Subject"
 msgstr "Betreff"
@@ -229,21 +234,18 @@ msgstr "Abmeldevorgang fehlgeschlagen - Schlüssel falsch"
 msgid "Deleted %s subscribers"
 msgstr "%s Abonnenten gelöscht"
 
-#: newsletter/views.py:219
+#: newsletter/views.py:222
 msgid "Saved new subscribers"
 msgstr "Neue Abonnenten gespeichert"
 
-#: newsletter/views.py:235
-msgid "Removed all messages from error mailbox"
-msgstr "Alle Nachrichten gelöscht"
-
-#: newsletter/views.py:272
+#: newsletter/views.py:265
 msgid "Removed message from error mailbox"
 msgstr "Nachricht gelöscht"
 
-#: newsletter/views.py:287
-msgid "Removed unassigned messages from error mailbox"
-msgstr "Nicht zuordenbare Nachrichten gelöscht"
+#: newsletter/views.py:282
+#, fuzzy, python-format
+msgid "Removed %s messages from error mailbox"
+msgstr "Nachricht gelöscht"
 
 #: templates/404.html:12 templates/500.html:12 templates/base.html:53
 #: templates/event/event.html:13
@@ -259,7 +261,7 @@ msgstr "Wiki"
 msgid "Sub-Koordinator"
 msgstr "Sub-Koordinator"
 
-#: templates/base.html:56 templates/newsletter/error_mailbox.html:44
+#: templates/base.html:56 templates/newsletter/error_mailbox.html:94
 #: templates/newsletter/index.html:5
 msgid "Newsletter"
 msgstr "Newsletter"
@@ -317,7 +319,7 @@ msgstr "Anmerkungen"
 msgid "Thanks for your kind attention :)"
 msgstr "Vielen Dank für Deine Aufmerksamkeit :)"
 
-#: templates/event/event.html:12 templates/newsletter/error_mailbox.html:80
+#: templates/event/event.html:12 templates/newsletter/error_mailbox.html:151
 #: templates/newsletter/subscribers.html:52 templates/wiki/page.html:12
 msgid "edit"
 msgstr "bearbeiten"
@@ -342,7 +344,10 @@ msgstr "Keine Dienste"
 msgid "add note"
 msgstr "Anmerkung hinzufügen"
 
-#: templates/event/event_edit.html:6 templates/newsletter/error_mailbox.html:7
+#: templates/event/event_edit.html:6
+#: templates/newsletter/error_mailbox.html:33
+#: templates/newsletter/error_mailbox.html:41
+#: templates/newsletter/error_mailbox.html:75
 #: templates/newsletter/subscribers.html:19
 msgid "really?"
 msgstr "wirklich?"
@@ -415,19 +420,15 @@ msgstr "nächstes Monat"
 msgid "Help for Textile"
 msgstr "Hilfe zu Textile"
 
-#: templates/newsletter/error_mailbox.html:24
-msgid "toggle"
-msgstr "zeige/verstecke"
-
-#: templates/newsletter/error_mailbox.html:39
+#: templates/newsletter/error_mailbox.html:89
 msgid "Error Mailbox"
 msgstr "Error-Mailbox"
 
-#: templates/newsletter/error_mailbox.html:53
+#: templates/newsletter/error_mailbox.html:105
 msgid "How to use this page"
 msgstr "Erklärungen"
 
-#: templates/newsletter/error_mailbox.html:54
+#: templates/newsletter/error_mailbox.html:106
 msgid ""
 "This page shows list of e-mails which are returned or rejected by the mail-"
 "server of subscribers\n"
@@ -440,8 +441,8 @@ msgid ""
 "When a series of e-mails had been bounced by one subscribers it's safe to "
 "assume further sending of e-mails is useless\n"
 "and one can delete the subscriber.<br />\n"
-"Some e-mails can't be related to a subscriber. These e-mails will be shown "
-"in a separate list at the end of the page.\n"
+"Some e-mails <a href=\"#unassigned\">can't be related to a subscriber</a>. "
+"These e-mails will be shown in a separate list at the end of the page.\n"
 msgstr ""
 "Auf dieser Seite werden e-Mails gezeigt, welche vom Mail-Server eines "
 "Abonnenten retourniert oder zurückgewiesen wurden (z.B. e-Mail-Adresse "
@@ -452,69 +453,86 @@ msgstr ""
 "nicht ratsam einen Abonnenten bereits nach dem ersten missglückten "
 "Zustellversuch zu löschen. Wenn bereits mehrere Fehlermeldungen zu einem "
 "Abonnenten vorliegen ist es jedoch sinnvoll diesen zu löschen.<br />\n"
-"Am Ende der Seite werden e-Mails gelistet, die keinem Abonnenten zugeordnet "
-"werden können.\n"
+"Am Ende der Seite werden e-Mails gelistet, die <a href=\"#unassigned\">"
+"keinem Abonnenten zugeordnet</a> werden können.\n"
 
-#: templates/newsletter/error_mailbox.html:64
-msgid "hide/show messages which are not matched by a subscriber"
-msgstr ""
-"zeige/verstecke Nachrichten, die keinem Abonnenten zugeordnet werden können"
+#: templates/newsletter/error_mailbox.html:116
+#: templates/newsletter/subscribers.html:45
+msgid "Filter"
+msgstr "Filter"
 
-#: templates/newsletter/error_mailbox.html:65
-msgid "hide/show message bodies"
-msgstr "zeige/verstecke Nachrichten-Texte"
+#: templates/newsletter/error_mailbox.html:118
+msgid "invert"
+msgstr "invertieren"
 
-#: templates/newsletter/error_mailbox.html:68
-msgid "delete all subscribers with bounced messages"
-msgstr "alle Abonnenten mit automatischen Fehlermeldungen löschen"
+#: templates/newsletter/error_mailbox.html:119
+msgid "clear"
+msgstr "löschen"
 
-#: templates/newsletter/error_mailbox.html:69
-msgid "(all matched subscriptions listed on this page)"
-msgstr "(alle Abonnenten die auf dieser Seite aufscheinen werden gelöscht)"
+#: templates/newsletter/error_mailbox.html:122
+#: templates/newsletter/subscribers.html:6
+#: templates/newsletter/subscribers.html:42
+msgid "Subscribers"
+msgstr "Abonnenten"
 
-#: templates/newsletter/error_mailbox.html:71
-msgid "empty error mailbox"
-msgstr "Error-Mailbox leeren"
+#: templates/newsletter/error_mailbox.html:123
+#: templates/newsletter/error_mailbox.html:129
+msgid "select all"
+msgstr "alle auswählen"
 
-#: templates/newsletter/error_mailbox.html:71
-msgid "(deletes all emails)"
-msgstr "(löscht alle e-Mails)"
+#: templates/newsletter/error_mailbox.html:124
+#: templates/newsletter/error_mailbox.html:130
+msgid "invert selection"
+msgstr "Auswahl invertieren"
 
-#: templates/newsletter/error_mailbox.html:72
-msgid "delete unassigned e-mails"
-msgstr "lösche nicht zugeordnete e-Mails"
+#: templates/newsletter/error_mailbox.html:125
+#: templates/newsletter/error_mailbox.html:131
+#: templates/newsletter/error_mailbox.html:180
+msgid "delete selected"
+msgstr "Ausgewählte löschen"
 
-#: templates/newsletter/error_mailbox.html:79
+#: templates/newsletter/error_mailbox.html:128
+#: templates/newsletter/error_mailbox.html:178
+msgid "Emails"
+msgstr "e-Mails"
+
+#: templates/newsletter/error_mailbox.html:138
+msgid "Subscriber"
+msgstr "Abonnent"
+
+#: templates/newsletter/error_mailbox.html:150
 msgid "delete Subscriber"
 msgstr "Abonnenten löschen"
 
-#: templates/newsletter/error_mailbox.html:81
-msgid "hide/show message details"
-msgstr "zeige/verstecke Nachrichten-Texte"
+#: templates/newsletter/error_mailbox.html:158
+#: templates/newsletter/error_mailbox.html:195
+#: templates/newsletter/subscriber.html:24
+#: templates/newsletter/subscribers.html:53
+msgid "delete"
+msgstr "löschen"
 
-#: templates/newsletter/error_mailbox.html:85
-#: templates/newsletter/error_mailbox.html:104
-msgid "delete e-Mail"
-msgstr "e-Mail löschen"
-
-#: templates/newsletter/error_mailbox.html:86
-#: templates/newsletter/error_mailbox.html:101
+#: templates/newsletter/error_mailbox.html:162
+#: templates/newsletter/error_mailbox.html:199
 msgid "Recipient"
 msgstr "Empfänger"
 
-#: templates/newsletter/error_mailbox.html:87
-#: templates/newsletter/error_mailbox.html:105
+#: templates/newsletter/error_mailbox.html:163
+#: templates/newsletter/error_mailbox.html:200
 msgid "Sender"
 msgstr "Sender"
 
-#: templates/newsletter/error_mailbox.html:88
-#: templates/newsletter/error_mailbox.html:106
+#: templates/newsletter/error_mailbox.html:164
+#: templates/newsletter/error_mailbox.html:201
 msgid "Body"
 msgstr "Text"
 
-#: templates/newsletter/error_mailbox.html:97
+#: templates/newsletter/error_mailbox.html:176
 msgid "Mails not assigned to a subscriber"
 msgstr "e-Mails die keinem Abonnenten zugeordnet werdne können"
+
+#: templates/newsletter/error_mailbox.html:179
+msgid "select all unassigned"
+msgstr "alle nicht zugeordneten auswählen"
 
 #: templates/newsletter/index.html:10
 msgid "Messages"
@@ -594,7 +612,7 @@ msgid ""
 "\t%(sent)s of %(total)s already sent (%(percentage)s %%)"
 msgstr ""
 "\n"
-"%(sent)s von %(total)s versendet (%(percentage)s %)"
+"%(sent)s von %(total)s versendet (%(percentage)s %%)"
 
 #: templates/newsletter/jobs.html:6
 msgid "Job Archive"
@@ -679,19 +697,9 @@ msgstr "Nachrichten-Archiv"
 msgid "Subscriber list"
 msgstr "Mailingliste"
 
-#: templates/newsletter/subscriber.html:24
-#: templates/newsletter/subscribers.html:53
-msgid "delete"
-msgstr "löschen"
-
 #: templates/newsletter/subscriber_add.html:4
 msgid "subscribe to Newsletter"
 msgstr "Newsletter abonieren"
-
-#: templates/newsletter/subscribers.html:6
-#: templates/newsletter/subscribers.html:42
-msgid "Subscribers"
-msgstr "Abonnenten"
 
 #: templates/newsletter/subscribers.html:43
 msgid "public subscription form"
@@ -700,10 +708,6 @@ msgstr "öffentliches Abo-Formular"
 #: templates/newsletter/subscribers.html:44
 msgid "filter unconfirmed"
 msgstr "nur unbestätigte anzeigen"
-
-#: templates/newsletter/subscribers.html:45
-msgid "Filter"
-msgstr "Filter"
 
 #: templates/newsletter/subscribers.html:48
 #: templates/newsletter/subscribers_add.html:33
@@ -833,6 +837,41 @@ msgstr "Kategorie"
 msgid "Deleted Wiki-Page %s."
 msgstr "Die Seite %s wurde gelöscht"
 
+#~ msgid "Removed all messages from error mailbox"
+#~ msgstr "Alle Nachrichten gelöscht"
+
+#~ msgid "Removed unassigned messages from error mailbox"
+#~ msgstr "Nicht zuordenbare Nachrichten gelöscht"
+
+#~ msgid "toggle"
+#~ msgstr "zeige/verstecke"
+
+#~ msgid "hide/show messages which are not matched by a subscriber"
+#~ msgstr ""
+#~ "zeige/verstecke Nachrichten, die keinem Abonnenten zugeordnet werden "
+#~ "können"
+
+#~ msgid "hide/show message bodies"
+#~ msgstr "zeige/verstecke Nachrichten-Texte"
+
+#~ msgid "delete all subscribers with bounced messages"
+#~ msgstr "alle Abonnenten mit automatischen Fehlermeldungen löschen"
+
+#~ msgid "(all matched subscriptions listed on this page)"
+#~ msgstr "(alle Abonnenten die auf dieser Seite aufscheinen werden gelöscht)"
+
+#~ msgid "empty error mailbox"
+#~ msgstr "Error-Mailbox leeren"
+
+#~ msgid "(deletes all emails)"
+#~ msgstr "(löscht alle e-Mails)"
+
+#~ msgid "hide/show message details"
+#~ msgstr "zeige/verstecke Nachrichten-Texte"
+
+#~ msgid "delete e-Mail"
+#~ msgstr "e-Mail löschen"
+
 #~ msgid "Only letters, numbers, underscores, spaces and hyphens are allowed."
 #~ msgstr "Nur Buchstaben, Zahlen, Leerzeichen, Binde- und Unterstrich"
 
@@ -961,9 +1000,6 @@ msgstr "Die Seite %s wurde gelöscht"
 
 #~ msgid "view upcomming events"
 #~ msgstr "aktuelle Termine"
-
-#~ msgid "Subscriber"
-#~ msgstr "Abonnent"
 
 #~ msgid "nothing in error mailbox :)"
 #~ msgstr "nichts in der Error-Mailbox :)"

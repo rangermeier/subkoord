@@ -228,17 +228,6 @@ def subscribers_add(request, list_id):
         context_instance=RequestContext(request),)
 
 @permission_required('newsletter.delete_subscriber')
-def empty_error_mailbox(request):
-    server = get_server()
-    messagesInfo = server.list()[1]
-    for msg in messagesInfo:
-        msgNum = msg.split(" ")[0]
-        server.dele(msgNum)
-    server.quit()
-    messages.success(request, _("Removed all messages from error mailbox"))
-    return HttpResponseRedirect(reverse('newsletter_index'))
-
-@permission_required('newsletter.delete_subscriber')
 def error_mailbox(request):
     server = get_server()
     messagesInfo = server.list()[1]
@@ -265,6 +254,7 @@ def error_mailbox(request):
 
 @permission_required('newsletter.delete_subscriber')
 def delete_error_mail(request, msg_id):
+    """Delete a single mail by index-number"""
     server = get_server()
     messagesInfo = server.list()[1]
     for msg in messagesInfo:
@@ -276,16 +266,18 @@ def delete_error_mail(request, msg_id):
     return HttpResponseRedirect(reverse('error_mailbox'))
 
 @permission_required('newsletter.delete_subscriber')
-def delete_unassigned_mails(request):
-    server = get_server()
-    messagesInfo = server.list()[1]
-    for msg in messagesInfo:
-        msgNum = msg.split(" ")[0]
-        full_message = "\n".join(server.retr(msgNum)[1])
-        mail = parse_email(full_message)
-        subscriber = match_error_to_subscriber(mail)
-        if not subscriber:
-            server.dele(msgNum)
-    server.quit()
-    messages.success(request, _("Removed unassigned messages from error mailbox"))
+def delete_error_mails(request):
+    """Delete multiple mails by Message-Id"""
+    if request.method == "POST":
+        msg_ids = request.POST.getlist("message_id");
+        server = get_server()
+        messagesInfo = server.list()[1]
+        for msg in messagesInfo:
+            msgNum = msg.split(" ")[0]
+            full_message = "\n".join(server.retr(msgNum)[1])
+            mail = parse_email(full_message)
+            if mail['message_id'] in msg_ids:
+                server.dele(msgNum)
+        server.quit()
+        messages.success(request, _("Removed %s messages from error mailbox" % len(msg_ids)))
     return HttpResponseRedirect(reverse('error_mailbox'))

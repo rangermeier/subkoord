@@ -3,6 +3,32 @@
 {% load highlight_email %}
 
 {% block jquery %}
+    $("input.filter").keyup(function() {
+        if($(this).val().length >= 2) {
+            if($("#filter-invert").prop("checked")) {
+                $(".subscriber-entity").show().filter(":contains('"+$(this).val()+"')").hide();
+            } else {
+                $(".subscriber-entity").hide().filter(":contains('"+$(this).val()+"')").show();
+            }
+        }
+    });
+
+    $("a.email_details_toggle").click(function(event) {
+        $(this).parents(".mail").find("div.email-details").toggle();
+        event.preventDefault();
+    });
+    $("div.email-details").toggle();
+
+    $("a.select-subscribers-all").click(function(ev) {
+        $("input[name='subscriber']:visible").prop("checked", true);
+        ev.preventDefault();
+    });
+    $("a.select-subscribers-invert").click(function(ev) {
+        $("input[name='subscriber']:visible").each(function() {
+            $(this).prop("checked", ! $(this).prop("checked"));
+        });
+        ev.preventDefault();
+    });
     $("a.subscriber-delete").click(function(event) {
         if(confirm("{% trans "really?" %}")) {
             $.getJSON($(this).attr("href"), function(json) {
@@ -11,7 +37,7 @@
         }
         event.preventDefault();
     });
-    $("a#delete-selected-subscribers").click(function(event) {
+    $("a.delete-selected-subscribers").click(function(event) {
         if(confirm("{% trans "really?" %}")) {
             var ids = [];
             $("input[name='subscriber']:checked").each(function() {
@@ -26,29 +52,38 @@
         }
         event.preventDefault();
     });
-    $("a.hide_unmatched").click(function(event) {
-        $("#subscriber-unmatched").toggle();
-        event.preventDefault();
+    $("a.filter-clear").click(function(ev) {
+        $("input.filter").val("");
+        $(".subscriber-entity").show();
+        ev.preventDefault();
     });
-    $("a.hide_bodies").click(function(event) {
-        $("li.body").toggle();
-        event.preventDefault();
+    $("a.select-emails-all").click(function(ev) {
+        $("input[name='message_id']:visible").prop("checked", true);
+        ev.preventDefault();
     });
-    $(".subscriber-unmatched li.body pre").before(
-        $(document.createElement('a')).attr("href","").addClass("toggle").
-            append("{% trans "toggle" %}")).toggle();
-    $(".subscriber-unmatched li.body a.toggle").live('click', function(event) {
-        $(this).siblings("pre").toggle();
-        event.preventDefault();
+    $("a.select-emails-unassigned").click(function(ev) {
+        $("#unassigned input[name='message_id']:visible").prop("checked", true);
+        ev.preventDefault();
     });
+    $("a.select-emails-invert").click(function(ev) {
+        $("input[name='message_id']:visible").each(function() {
+            $(this).prop("checked", ! $(this).prop("checked"));
+        });
+        ev.preventDefault();
+    });
+    $("a.delete-selected-mails").click(function(ev) {
+        if(confirm("{% trans "really?" %}")) {
+            $("form").submit()
+        }
+        ev.preventDefault();
+    });
+{% endblock jquery %}
 
-    $("a.email_details_toggle").click(function(event) {
-        $(this).parents(".mail").find("div.email-details").toggle();
-        event.preventDefault();
-    });
-    $("div.email-details").toggle();
-
-{% endblock jquery%}
+{% block css %}
+label {
+    display: inline;
+}
+{% endblock css %}
 
 {% block heading %}
     {% trans "Error Mailbox" %}
@@ -64,6 +99,8 @@
 
 {% block content %}
 
+<form action="{% url delete_error_mails %}" method="POST">{% csrf_token %}
+
 {%if assigned_mails %}
 <h3>{% trans "How to use this page" %}</h3>
 <p>{% blocktrans %}This page shows list of e-mails which are returned or rejected by the mail-server of subscribers
@@ -72,21 +109,28 @@ or which can't be delivered in the first place (e.g. the server is offline, name
 Both can be temporary problems, so it's usually not advisable to delete an subscriber on the first returned e-mail.
 When a series of e-mails had been bounced by one subscribers it's safe to assume further sending of e-mails is useless
 and one can delete the subscriber.<br />
-Some e-mails can't be related to a subscriber. These e-mails will be shown in a separate list at the end of the page.
+Some e-mails <a href="#unassigned">can't be related to a subscriber</a>. These e-mails will be shown in a separate list at the end of the page.
 {% endblocktrans %}</p>
 
-<ul>
-    <li><a href="" class="hide_unmatched">{% trans "hide/show messages which are not matched by a subscriber"%}</li>
-    <li><a href="" class="hide_bodies">{% trans "hide/show message bodies"%}</a></li>
-    {%if all_subscribers_ids %}
-    <li><a href="{% url subscribers_delete all_subscribers_ids %}">
-        {% trans "delete all subscribers with bounced messages" %}</a>
-        {% trans "(all matched subscriptions listed on this page)" %}
-    </li>{% endif %}
-    <li><a href="#" id="delete-selected-subscribers">{% trans "delete selected subscribers" %}</a></li>
-    <li><a href="{% url empty_error_mailbox %}">{% trans "empty error mailbox" %}</a> {% trans "(deletes all emails)" %}</li>
-    <li><a href="{% url delete_unassigned_mails %}">{% trans "delete unassigned e-mails" %}</a></li>
-</ul>
+<div>
+<p><strong>{% trans "Filter" %}</strong>
+    <input type="text" class="filter" /> <input type="checkbox" id="filter-invert" />
+    <label for="filter-invert">{% trans "invert" %}</label>
+    <a href="#" class="filter-clear">{% trans "clear" %}</a>
+</p>
+
+<p><strong>{% trans "Subscribers" %}</strong>
+    <a href="#" class="select-subscribers-all">{% trans "select all" %}</a>,
+    <a href="#" class="select-subscribers-invert">{% trans "invert selection" %}</a>,
+    <a href="#" class="delete-selected-subscribers">{% trans "delete selected" %}</a>
+</p>
+
+<p><strong>{% trans "Emails" %}</strong>
+    <a href="#" class="select-emails-all">{% trans "select all" %}</a>,
+    <a href="#" class="select-emails-invert">{% trans "invert selection" %}</a>,
+    <a href="#" class="delete-selected-mails">{% trans "delete selected" %}</a>
+</p>
+</div>
 
 {% regroup assigned_mails|dictsort:"subscriber.id" by subscriber as subscriber_list %}
 <div class="span-18 last clear">
@@ -98,18 +142,19 @@ Some e-mails can't be related to a subscriber. These e-mails will be shown in a 
 </div>
 
 {% for subscriber in subscriber_list %}
-<div id="subscriber-{{ subscriber.grouper.id }}">
+<div id="subscriber-{{ subscriber.grouper.id }}" class="subscriber-entity">
     <div class="span-6 subscriber">
         <input type="checkbox" name="subscriber" value="{{ subscriber.grouper.id }}" id="checkbox-{{ subscriber.grouper.id }}"/>
         <label for="checkbox-{{ subscriber.grouper.id }}">{{ subscriber.grouper.email }}</label><br />
         {{ subscriber.grouper.date|date:"j. n. Y"}}<br />
         <a href="{% url subscriber_delete subscriber.grouper.id %}" class="subscriber-delete">{% trans "delete Subscriber" %}</a>,
-        <a href="{% url subscriber subscriber.grouper.id %}">{% trans "edit" %}</a>,
+        <a href="{% url subscriber subscriber.grouper.id %}">{% trans "edit" %}</a>
     </div>
     <div class="mails span-12 last">
     {% for mail in subscriber.list %}
         <div class="mail">
-            <div class="span-8 email-subject"><a href="#" class="email_details_toggle">{{ mail.subject }}</a>,
+            <div class="span-8 email-subject"><input type="checkbox" name="message_id" value="{{ mail.message_id }}" />
+                <a href="#" class="email_details_toggle">{{ mail.subject }}</a>,
                 <a href="{% url delete_error_mail mail.msg_num %}" class="email-delete">{% trans "delete" %}</a></div>
             <div class="span-4 last email-date">{{ mail.date }}</div>
 
@@ -127,21 +172,43 @@ Some e-mails can't be related to a subscriber. These e-mails will be shown in a 
 {% endif %}
 
 {% if unassigned_mails %}
+<div id="unassigned"><a name="unassigned"></a>
 <h3>{% trans "Mails not assigned to a subscriber" %}</h3>
+
+<p><strong>{% trans "Emails" %}</strong>
+    <a href="#" class="select-emails-unassigned">{% trans "select all unassigned" %}</a>,
+    <a href="#" class="select-emails-invert">{% trans "invert selection" %}</a>,
+    <a href="#" class="delete-selected-mails">{% trans "delete selected" %}</a>
+</p>
+
 {% regroup unassigned_mails|dictsort:"recipient" by recipient as recipient_list %}
-<ul id="subscriber-unmatched">
+
 {% for recipient in recipient_list %}
-    <li class="subscriber-unmatched">{% trans "Recipient" %}: <strong>{{ recipient.grouper }}</strong>
+<div class="subscriber-entity">
+    <div class="span-6 subscriber">
+        <strong>{{ recipient.grouper }}</strong><br />
+    </div>
+    <div class="mails span-12 last">
     {% for mail in recipient.list %}
-    <ul>
-        <li>{% trans "Subject" %}: {{ mail.subject }}, <a href="{% url delete_error_mail mail.msg_num %}" class="email-delete">{% trans "delete e-Mail" %}</a></li>
-        <li>{% trans "Sender" %}: {{ mail.sender }}</li>
-        <li class="body">{% trans "Body" %}: <pre>{{ mail.body|highlight_email }}</pre></li>
-    </ul>
+        <div class="mail">
+            <div class="span-8 email-subject"><input type="checkbox" name="message_id" value="{{ mail.message_id }}" />
+                <a href="#" class="email_details_toggle">{{ mail.subject }}</a>,
+                <a href="{% url delete_error_mail mail.msg_num %}" class="email-delete">{% trans "delete" %}</a></div>
+            <div class="span-4 last email-date">{{ mail.date }}</div>
+
+            <div class="span-12 last email-details">
+                {% trans "Recipient" %}: {{ mail.recipient }}<br />
+                {% trans "Sender" %}: {{ mail.sender }}<br />
+                {% trans "Body" %}: <pre>{{ mail.body|highlight_email }}</pre>
+            </div>
+        </div>
     {% endfor %}
-    </li>
+    </div>
+    <hr/>
+</div>
 {% endfor %}
-</ul>
+</div>
 {% endif %}
 
+</form>
 {% endblock content %}
