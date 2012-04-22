@@ -8,7 +8,7 @@
 {% endblock heading %}
 
 {% block content %}
-{#% cache 500 users %#}
+{% cache 500 users %}
 <table cellspacing="0"  >
     <thead>
     <tr>
@@ -35,7 +35,7 @@
     {% endfor %}
     </tbody>
 </table>
-{#% endcache %#}
+{% endcache %}
 {% endblock content %}
 
 

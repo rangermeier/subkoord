@@ -27,9 +27,10 @@
 {% block navigation %}
 	<ul>
 		<li><a href="{% url user_list %}">{% trans "list all users" %}</a></li>
-	{% ifnotequal usr.id user.id %}
+		<li><a href="{% url user_statistics %}">{% trans "statistics" %}</a></li>
+	{% if usr.id != user.id %}
 		<li><a href="{% url user_view user.id %}">{% trans "view my profile" %}</a></li>
-	{% endifnotequal %}
+	{% endif %}
 		<li><a href="{% url user_change_password %}">{% trans "change my password" %}</a></li>
 </ul>
 {% endblock navigation %}

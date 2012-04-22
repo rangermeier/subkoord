@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-04-22 12:31+0200\n"
+"POT-Creation-Date: 2012-04-22 13:50+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -453,8 +453,8 @@ msgstr ""
 "nicht ratsam einen Abonnenten bereits nach dem ersten missglückten "
 "Zustellversuch zu löschen. Wenn bereits mehrere Fehlermeldungen zu einem "
 "Abonnenten vorliegen ist es jedoch sinnvoll diesen zu löschen.<br />\n"
-"Am Ende der Seite werden e-Mails gelistet, die <a href=\"#unassigned\">"
-"keinem Abonnenten zugeordnet</a> werden können.\n"
+"Am Ende der Seite werden e-Mails gelistet, die <a href=\"#unassigned"
+"\">keinem Abonnenten zugeordnet</a> werden können.\n"
 
 #: templates/newsletter/error_mailbox.html:116
 #: templates/newsletter/subscribers.html:45
@@ -482,12 +482,13 @@ msgstr "alle auswählen"
 
 #: templates/newsletter/error_mailbox.html:124
 #: templates/newsletter/error_mailbox.html:130
+#: templates/newsletter/error_mailbox.html:180
 msgid "invert selection"
 msgstr "Auswahl invertieren"
 
 #: templates/newsletter/error_mailbox.html:125
 #: templates/newsletter/error_mailbox.html:131
-#: templates/newsletter/error_mailbox.html:180
+#: templates/newsletter/error_mailbox.html:181
 msgid "delete selected"
 msgstr "Ausgewählte löschen"
 
@@ -505,24 +506,24 @@ msgid "delete Subscriber"
 msgstr "Abonnenten löschen"
 
 #: templates/newsletter/error_mailbox.html:158
-#: templates/newsletter/error_mailbox.html:195
+#: templates/newsletter/error_mailbox.html:196
 #: templates/newsletter/subscriber.html:24
 #: templates/newsletter/subscribers.html:53
 msgid "delete"
 msgstr "löschen"
 
 #: templates/newsletter/error_mailbox.html:162
-#: templates/newsletter/error_mailbox.html:199
+#: templates/newsletter/error_mailbox.html:200
 msgid "Recipient"
 msgstr "Empfänger"
 
 #: templates/newsletter/error_mailbox.html:163
-#: templates/newsletter/error_mailbox.html:200
+#: templates/newsletter/error_mailbox.html:201
 msgid "Sender"
 msgstr "Sender"
 
 #: templates/newsletter/error_mailbox.html:164
-#: templates/newsletter/error_mailbox.html:201
+#: templates/newsletter/error_mailbox.html:202
 msgid "Body"
 msgstr "Text"
 
@@ -607,6 +608,7 @@ msgid "e-mails sent"
 msgstr "e-mails versendet"
 
 #: templates/newsletter/job.html:21
+#, python-format
 msgid ""
 "\n"
 "\t%(sent)s of %(total)s already sent (%(percentage)s %%)"
@@ -744,15 +746,22 @@ msgid "No jobs yet..."
 msgstr "Bislang noch keine Dienste..."
 
 #: templates/users/user.html:29 templates/users/user_edit.html:20
+#: templates/users/user_statistics.html:43
 msgid "list all users"
 msgstr "Alle NutzerInnen anzeigen"
 
-#: templates/users/user.html:31 templates/users/user_edit.html:21
-#: templates/users/user_list.html:25
+#: templates/users/user.html:30 templates/users/user_list.html:28
+#: templates/users/user_statistics.html:6
+msgid "statistics"
+msgstr "Statistik"
+
+#: templates/users/user.html:32 templates/users/user_edit.html:21
+#: templates/users/user_list.html:25 templates/users/user_statistics.html:45
 msgid "view my profile"
 msgstr "mein Profil anzeigen"
 
-#: templates/users/user.html:33 templates/users/user_list.html:27
+#: templates/users/user.html:34 templates/users/user_list.html:27
+#: templates/users/user_statistics.html:47
 msgid "change my password"
 msgstr "mein Passwort ändern"
 
@@ -763,6 +772,14 @@ msgstr "Passwort ändern"
 #: templates/users/user_list.html:6
 msgid "Users"
 msgstr "NutzerInnen"
+
+#: templates/users/user_statistics.html:14
+msgid "user"
+msgstr "NutzerIn"
+
+#: templates/users/user_statistics.html:18
+msgid "sum"
+msgstr "Summe"
 
 #: templates/wiki/edit.html:7
 msgid "Editing"
