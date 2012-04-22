@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load cache %}
+
+{% block heading %}
+{% trans "statistics" %}
+{% if year %}{{ year }}{% endif %}
+{% endblock heading %}
+
+{% block content %}
+{#% cache 500 users %#}
+<table cellspacing="0"  >
+    <thead>
+    <tr>
+        <th>{% trans "user"%}</th>
+        {% for task in tasks %}
+            <th>{{ task.name }}</th>
+        {% endfor %}
+        <th>{% trans "sum"%}</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for usr in user_list %}
+    <tr>
+        <td><a href="{% url user_view usr.id %}">{{ usr.username }}</a></td>
+        {% for task in tasks %}
+            {% for stat in usr.stats %}
+                {% if stat.name == task.name %}
+                    <td>{{ stat.count }}</td>
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
+        <th>{{ usr.stats.sum }}</th>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{#% endcache %#}
+{% endblock content %}
+
+
+{% block navigation %}
+    <ul>
+    {% for y in years %}
+        <li><a href="{% url user_statistics_year y%}">{% trans "statistics" %} {{ y }}</a></li>
+    {% endfor %}
+    {% if usr.id != user.id %}
+        <li><a href="{% url user_view user.id %}">{% trans "view my profile" %}</a></li>
+    {% endif %}
+        <li><a href="{% url user_change_password %}">{% trans "change my password" %}</a></li>
+    </ul>
+{% endblock navigation %}
