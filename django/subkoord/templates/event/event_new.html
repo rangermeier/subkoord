@@ -5,14 +5,15 @@
 {% trans "New event" %}
 {% endblock heading %}
 
-{% block content %}
-<form action="{% url event_new %}" method="post" class="event-form">
-{% csrf_token %}
-<ul>
-{{ form.as_ul }}
-</ul>
 
-<input type="submit" />
+{% block content %}
+<form action="{% url event_new %}" method="post" class="event-form form-horizontal">
+    {{ form }}
+
+    <div class="form-actions">
+        <button type="submit" class="btn btn-primary">{% trans "save" %}</button>
+    </div>
+</form>
 </form>
 
 {% endblock content %}

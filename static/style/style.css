@@ -1,66 +1,38 @@
-em {
-    font-style:oblique; /* nur kursiv, nicht fett! */
+@media (min-width: 979px) {
+  body {
+    padding-top: 60px;
+    }
 }
 
-pre, code {
-    background-color: #eee;
-    font-size: 0.8em;
-    line-height: 1.5em;
-    padding-top: 0.25em;
-    padding-bottom: 0.25em;
+.subnav {
+    /*border: 1px solid #E5E5E5;*/
+    background: #efefef;
+    border-radius: 4px;
+    margin-bottom: 1em;
 }
-
-#container {
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 3em;
+.subnav .nav {
+    margin-bottom: 0;
 }
-
-#footer ul {
-    border-top: 1px solid #444;
-    margin-top: 1em;
-    padding-top: 1em;
+.subnav .nav > li > a {
+    margin: 0;
+    padding-top:    11px;
+    padding-bottom: 11px;
+    border-left: 1px solid #f5f5f5;
+    border-right: 1px solid #e5e5e5;
+    border-radius: 0;
 }
-#footer ul li {
-    display: inline;
+.cal_month_calendar td {
+    width: 14.2857142857143%; /* = 100/7 */
+    height: 4em;
 }
-ul {
-    padding-left: 1em;
-    list-style-type: circle;
+a.day_new_event {
+    width: 100%;
+    display: block;
 }
-#sidebar ul, form ul, #footer ul  {
-    padding-left: 0;
-}
-#sidebar ul li {
-    padding-bottom: 1.5em;
-}
-form ul li, #sidebar ul li {
-    list-style-type: none;
-}
-.errorlist li {
-    color: #600;
-}
-.event-form ul li, .wiki-form ul li {
+.cal_not_in_month {
     color: #888;
 }
-label {
-    display: block;
-    color: #000;
-    clear: left;
-}
-textarea {
-    height: 8em;
-}
-#messages {
-    padding: 1.5em;
-    padding-bottom: 0;
-}
-#messages li {
-    padding-left: 1.5em;
-}
-#messages .info {
-    background-color: #ffffcc;
-}
+
 #id_date {
     width: 88px;
     margin-right: 10px;
@@ -91,137 +63,50 @@ textarea {
 #help > div > div > p {
     margin-bottom: 0;
 }
-.event-form textarea, .event-form select {
-    display: block;
-}
 .not-satisfied {
     color: #600;
 }
 
-.meta {
-    color: #888;
-}
+/* Newsletter */
 
-#event_cal table {
-    table-layout: fixed;
+#compose h3 {
+    padding: 0.5em;
 }
-
-#event_cal td, #event_cal th {
-    border-bottom: 1px solid #444;
-    height: 4.5em;
-    vertical-align: top;
-    text-align: center;
-    overflow: hidden;
+#compose .collapse.in {
+    border-top: 1px solid #ccc;
+    padding-top: 1em;
 }
-#event_cal th {
-    border-bottom-width: 2px;
-    height: 1.5em;
-}
-#event_cal td:hover {
-    overflow: visible !important;
-}
-#event_cal td:hover a {
-    background: #fff;
-    position: relative;
-}
-.cal_not_in_month {
-    color: #888;
-}
-a.day_new_event {
-    color: #000;
-    text-decoration:none;
-    width: 100%;
-}
-#event_cal tfoot {
-    font-weight: normal;
-    font-style: normal;
-}
-#event_cal tfoot td {
-    border-top: 1px solid #444;
-    border-bottom: 0;
-}
-.cal_nav a.previous {
-    float: left;
-}
-.cal_nav a.next {
-    float: right;
-}
-#event_cal .today {
-  color: #600;
-  font-weight: bold;
-}
-
-
-#wiki-index {
-    padding-left: 0px;
-}
-#wiki-index > li {
-    margin-top: 1em;
-    list-style-type: none;
-}
-a.new_page {
-    color: #600;
-}
-
-#ask-delete label {
-    display:inline;
-}
-.wiki-form ul li {
-    color: #888;
-}
-.wiki-form textarea {
-    height: 300px;
-    width: 400px;
-}
-
-.wiki-last-changed {
-  color: #888;
-}
-
-.newsletter ul.messages li, .newsletter ul.subscribers li, .newsletter ul.lists li {
-    margin-top: .5em;
+#compose .collapse .form-actions, #compose .collapse .form-horizontal {
+    margin-bottom: 0;
 }
 
 .newsletter .active {
     font-weight: bold;
 }
 
-.newsletter-form input[type="text"] {
-    width: 400px;
-}
-
-
 .newsletter-form textarea {
     width: 600px;
     height: 360px;
 }
 
-.newsletter pre {
-    white-space: pre-wrap; /* css-3 */
-    white-space: -moz-pre-wrap !important; /* Mozilla, since 1999 */
-    white-space: -pre-wrap; /* Opera 4-6 */
-    white-space: -o-pre-wrap; /* Opera 7 */
-    word-wrap: break-word; /* Internet Explorer 5.5+ */
-}
-
-.subscribers-form td, .subscribers-form th {
-    margin: 0;
-    border-bottom: 1px solid #888;
-}
-.subscribers-form input[type="text"] {
-    width: 90%;
-}
-
-.subscribers-form .required input {
-    border: 1px solid #000;
-}
-
 .inline-right {
     float: right;
 }
+.subscriber-entity {
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 1em;
+}
 
-.hidden {
-    display: none;
+/* WIKI */
+
+input#id_title {
+    font-size: 2em;
+    height: 1.2em;
+    font-weight: bold;
+    width: 400px;
+}
+#id_content_html {
+    width: 600px;
 }
 
 /* Filebrowserintegration */
@@ -229,18 +114,9 @@ fieldset.fb_form a.fb_show {
     margin-left: 1em;
 }
 
-fieldset.fb_form img.preview {
-    float: right;
-    position: relative;
-    top: -4em;
-}
+fieldset.fb_form p.preview {
+    display: inline-block;
+    margin-left: 1em;
+    position: absolute;
 
-fieldset.fb_form label {
-    display: inline;
-}
-fieldset.fb_form {
-    padding-bottom: 0;
-}
-fieldset.fb_form p {
-    margin-bottom: 0.4em;
 }

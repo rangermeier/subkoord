@@ -1,32 +1,25 @@
 {% extends "event/event_form.html" %}
 {% load i18n %}
 
-{% block jquery %}
-	$("a.event-delete").click(function() {
-		return confirm("{% trans "really?" %}");
-	});
-{% endblock jquery%}
-
 {% block heading %}
 {% trans "Edit event" %}
 {% endblock heading %}
 
 {% block navigation %}
-	<ul>
-		<li><a href="{% url event event.id %}">{% trans "back" %}</a></li>
-		<li><a href="{% url event_delete event.id %}" class="event-delete">{% trans "delete event" %}</a></li>
-	</ul>
+    <li><a href="{% url event event.id %}">{% trans "back" %}</a></li>
+    <li><a href="{% url event_delete event.id %}" class="event-delete">{% trans "delete event" %}</a></li>
+    <li><a href="{% url event_new %}">{% trans "add another event" %}</a></li>
 {% endblock navigation %}
 
 {% block content %}
-<form action="{% url event_edit event.id%}" method="post" class="event-form">
+<form action="{% url event_edit event.id%}" method="post" class="event-form form-horizontal">
 {%  csrf_token  %}
-<ul>
-{{ form.as_ul }}
-</ul>
 
+    {{ form }}
 
-<input type="submit" />
+    <div class="form-actions">
+        <button type="submit" class="btn btn-primary">{% trans "save" %}</button>
+    </div>
 </form>
 
 {% endblock content %}

@@ -3,6 +3,8 @@ from django.contrib.auth.models import User
 from django import forms
 from django.utils.translation import ugettext as _
 from django.forms import ModelForm
+from bootstrap.forms import BootstrapMixin, Fieldset, BootstrapForm
+from tinymce.widgets import TinyMCE
 
 class Task(models.Model):
     name = models.CharField(max_length=200)
@@ -55,8 +57,7 @@ class Event(models.Model):
     date = models.DateTimeField(verbose_name=_("Date and Time"))
     type = models.ForeignKey(EventType, verbose_name=_("Type"),
         help_text=_("Depending on the type of the event different tasks will be available."))
-    info = models.TextField(verbose_name=_("Information"), blank=True,
-        help_text=_("You can use Textile to format your text."))
+    info = models.TextField(verbose_name=_("Information"), blank=True)
     cron = models.DateTimeField(blank=True, null=True, editable=False)
     @property
     def tasks(self):
@@ -113,9 +114,12 @@ class Note(models.Model):
     def __unicode__(self):
         return self.note[:25] + "..."
 
-class EventForm(ModelForm):
+class EventForm(BootstrapMixin, ModelForm):
     class Meta:
         model = Event
+        widgets = {
+            'info': TinyMCE(),
+        }
 
-class NoteForm(forms.Form):
+class NoteForm(BootstrapForm):
     note = forms.CharField()

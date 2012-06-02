@@ -8,29 +8,27 @@
 
 {% block content %}
 {% cache 500 users usr.id %}
-	<ul>
-	{% regroup usr.jobs.all|dictsortreversed:"event.date" by event as job_list %}
-	{% for event in job_list %}
-		<li>{{ event.grouper.date|date:"D, j. n. Y" }}
-		<a href="{% url event event.grouper.id %}">{{ event.grouper.title }}</a>:
-		{% for job in event.list %}
-			{{ job.task }}{% if not forloop.last %},{% endif %}
-		{% endfor %}
-		</li>
-	{% empty %}
-		<li>{%trans "No jobs yet..." %}</li>
-	{% endfor %}
-	</ul>
+    <ul>
+    {% regroup usr.jobs.all|dictsortreversed:"event.date" by event as job_list %}
+    {% for event in job_list %}
+        <li>{{ event.grouper.date|date:"D, j. n. Y" }}
+        <a href="{% url event event.grouper.id %}">{{ event.grouper.title }}</a>:
+        {% for job in event.list %}
+            {{ job.task }}{% if not forloop.last %},{% endif %}
+        {% endfor %}
+        </li>
+    {% empty %}
+        <li>{%trans "No jobs yet..." %}</li>
+    {% endfor %}
+    </ul>
 {% endcache %}
 {% endblock content %}
 
 {% block navigation %}
-	<ul>
-		<li><a href="{% url user_list %}">{% trans "list all users" %}</a></li>
-		<li><a href="{% url user_statistics %}">{% trans "statistics" %}</a></li>
-	{% if usr.id != user.id %}
-		<li><a href="{% url user_view user.id %}">{% trans "view my profile" %}</a></li>
-	{% endif %}
-		<li><a href="{% url user_change_password %}">{% trans "change my password" %}</a></li>
-</ul>
+    <li><a href="{% url user_list %}">{% trans "list all users" %}</a></li>
+    <li><a href="{% url user_statistics %}">{% trans "statistics" %}</a></li>
+    {% if usr.id != user.id %}
+    <li><a href="{% url user_view user.id %}">{% trans "view my profile" %}</a></li>
+    {% endif %}
+    <li><a href="{% url user_change_password %}">{% trans "change my password" %}</a></li>
 {% endblock navigation %}

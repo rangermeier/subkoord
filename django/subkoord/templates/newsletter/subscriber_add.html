@@ -4,10 +4,13 @@
 {% block heading %}<h1>{% trans "subscribe to Newsletter" %} &quot;{{list.name}}&quot;</h1>{% endblock heading %}
 
 {% block content %}
-<form action="{% url subscriber_add list.id %}" method="post">
+<form action="{% url subscriber_add list.id %}" method="post" class="form-horizontal">
 {%  csrf_token  %}
-{{ form.as_p }}
-<input type="submit" />
+    {{ form }}
+
+    <div class="form-actions">
+        <button type="submit" class="btn btn-primary">{% trans "subscribe" %}</button>
+    </div>
 </form>
 {% endblock content %}
 

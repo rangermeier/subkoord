@@ -6,46 +6,47 @@
 {% endblock heading %}
 
 {% block jquery %}
-	var name_input_visible = true;
-	$('#hide-name-column').click(function() {
-		if(name_input_visible){
-			$("td.name input").css("visibility", "hidden");
-		} else {
-			$("td.name input").css("visibility", "visible");
-		}
-		name_input_visible = !name_input_visible;
-		return false;
-	});
+    var name_input_visible = true;
+    $('#hide-name-column').click(function() {
+        if(name_input_visible){
+            $("td.name input").css("visibility", "hidden");
+        } else {
+            $("td.name input").css("visibility", "visible");
+        }
+        name_input_visible = !name_input_visible;
+        return false;
+    });
 {% endblock jquery %}
 
 {% block navigation %}
-	<ul>
-		<li><a href="{% url subscribers_list list.id %}">{% trans "view subscribers" %}</a></li>
-	</ul>
+    <li><a href="{% url subscribers_list list.id %}">{% trans "view subscribers" %}</a></li>
+    <li><a href="{% url subscriber_add list.id %}">{% trans "public subscription form" %}</a></li>
+    <li><a href="{% url error_mailbox %}">{% trans "view error mailbox" %}</a></li>
 {% endblock navigation %}
 
 {% block content %}
 <form action="{% url subscribers_add list.id %}" method="post" class="subscribers-form">
 {%  csrf_token  %}
 {{ formset.management_form }}
-<table>
-	<tr>
-		<th class="span-5">{% trans "e-mail" %}</th>
-		<td class="span-5">{% trans "Name (optional)" %} <a href="" id="hide-name-column">{% trans "hide/show" %}</a></td>
-	</tr>
+<table class="table">
+    <tr>
+        <th class="">{% trans "e-mail" %}</th>
+        <th class="">{% trans "Name (optional)" %} <a href="" id="hide-name-column">{% trans "hide/show" %}</a></th>
+    </tr>
 {% for form in formset.forms %}
-	<tr>
-		<td class="span-5 required">
-		{% if form.email.errors %}<div class="error">{{ form.email.errors }}</div>{% endif %}
-		{{ form.email }}</td>
-		<td class="span-5 name">{{ form.name }}
-		<div class="hidden">{{ form.confirmed }}</div>
-		</td>
-	</tr>
+    <tr>
+        <td class="required">
+        {% if form.email.errors %}<div class="error">{{ form.email.errors }}</div>{% endif %}
+        {{ form.email }}</td>
+        <td class="name">{{ form.name }}
+        <div class="hidden">{{ form.confirmed }}</div>
+        </td>
+    </tr>
 {% endfor %}
 </table>
 
-
-<input type="submit" />
+<div class="form-actions">
+    <button class="btn btn-primary" type="submit">{% trans "save" %}</button>
+</div>
 </form>
 {% endblock content %}

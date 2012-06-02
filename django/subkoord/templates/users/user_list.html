@@ -8,23 +8,22 @@
 
 {% block content %}
 {% cache 500 users %}
-	<ul>
-	{% for usr in user_list %}
-		<li>
-		<a href="{% url user_view usr.id %}">{{ usr.username }}</a>
-		</li>
-	{% endfor %}
-	</ul>
+    <ul>
+    {% for usr in user_list %}
+        <li>
+        <a href="{% url user_view usr.id %}">{{ usr.username }}</a>
+        </li>
+    {% endfor %}
+    </ul>
 {% endcache %}
 {% endblock content %}
 
 
 {% block navigation %}
-	<ul>
-	{% if usr.id != user.id %}
-		<li><a href="{% url user_view user.id %}">{% trans "view my profile" %}</a></li>
-	{% endif %}
-		<li><a href="{% url user_change_password %}">{% trans "change my password" %}</a></li>
-		<li><a href="{% url user_statistics %}">{% trans "statistics" %}</a></li>
-</ul>
+    {% if usr.id != user.id %}
+        <li><a href="{% url user_view user.id %}">{% trans "view my profile" %}</a></li>
+    {% endif %}
+        <li><a href="{% url user_change_password %}">{% trans "change my password" %}</a></li>
+        <li><a href="{% url user_statistics %}">{% trans "statistics" %}</a></li>
 {% endblock navigation %}
+S

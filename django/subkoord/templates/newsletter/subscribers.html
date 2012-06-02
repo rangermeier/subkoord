@@ -3,64 +3,71 @@
 
 
 {% block heading %}
-{{ list.name }} - {% trans "Subscribers" %}
+{{ list.name }} - {{ subscribers|length }} {% trans "Subscribers" %}
 {% endblock heading %}
 
 {% block javascript %}
-	<script type="text/javascript" src="{{ STATIC_URL }}js/jquery/jquery.uitablefilter.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery/jquery.uitablefilter.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}bootstrap/js/bootstrap.min.js"></script>
 {% endblock javascript %}
 
 {% block jquery %}
-	$("#filter").keyup(function() {
-		$.uiTableFilter( $("#subscribers-table"), this.value);
-		$("#subscribers-table th").parent("tr").show();
-	});
-	$("a.subscriber-delete").click(function(event) {
-		if(confirm("{% trans "really?" %}")) {
-			$.getJSON($(this).attr("href"), function(json) {
-				$("#subscriber-"+json.subscriber_id).remove();
-				$("#filter").val("").focus();
-				$("#subscribers-table tr").show();
-			});
-		}
-		event.preventDefault();
-	});
-	$("a#filter_unconfirmed").click(function(event) {
-		$("tr.confirmed").toggleClass("hide");
-		event.preventDefault();
-	});
+    $("#filter").keyup(function() {
+        $.uiTableFilter( $("#subscribers-table"), this.value);
+        $("#subscribers-table th").parent("tr").show();
+    });
+    $("a.subscriber-delete").click(function(event) {
+        if(confirm("{% trans "really?" %}")) {
+            $.getJSON($(this).attr("href"), function(json) {
+                $("#subscriber-"+json.subscriber_id).remove();
+                $("#filter").val("").focus();
+                $("#subscribers-table tr").show();
+            });
+        }
+        event.preventDefault();
+    });
+    $("a#filter_unconfirmed").click(function(event) {
+        $("tr.confirmed").toggleClass("hide");
+        event.preventDefault();
+    });
 {% endblock jquery%}
 
 {% block navigation %}
-	<ul>
-		<li><a href="{% url subscribers_add list.id %}">{% trans "add subscribers"%}</a></li>
-	</ul>
+    <li><a href="{% url subscribers_add list.id %}">{% trans "add subscribers"%}</a></li>
+    <li><a href="{% url subscriber_add list.id %}">{% trans "public subscription form" %}</a></li>
+    <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">{% trans "Mailinglists" %} <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+            {% for list in lists %}
+                <li><a href="{% url subscribers_list list.id %}">{{ list.name }}</a></li>
+            {% endfor %}
+        </ul>
+    </li>
+    <li><a href="{% url error_mailbox %}">{% trans "view error mailbox" %}</a></li>
 {% endblock navigation %}
 
 {% block content %}
-<p>
-{{ subscribers|length }} {% trans "Subscribers" %}<br />
-<a href="{% url subscriber_add list.id %}">{% trans "public subscription form" %}</a><br>
-<a href="" id="filter_unconfirmed">{% trans "filter unconfirmed" %}</a><br>
-{% trans "Filter" %}: <input type="text" id="filter" /></p>
-<table id="subscribers-table">
-	<tr>
-		<th>{% trans "e-mail"%}</th>
-		<th>{% trans "Name"%}</th>
-		<th>{% trans "Date"%}</th>
-		<th>{% trans "unconfirmed"%}</th>
-		<th>{% trans "edit"%}</th>
-		<th>{% trans "delete"%}</th>
-	</tr>
+<p class="form-inline">
+{% trans "Filter" %}: <input type="text" id="filter" />
+<a href="" class="btn" id="filter_unconfirmed">{% trans "filter unconfirmed" %}</a></p>
+<table id="subscribers-table" class="table">
+    <tr>
+        <th>{% trans "e-mail"%}</th>
+        <th>{% trans "Name"%}</th>
+        <th>{% trans "Date"%}</th>
+        <th></th>
+        <th></th>
+        <th></th>
+    </tr>
 {% for subscriber in subscribers %}
-	<tr id="subscriber-{{ subscriber.id}}" class="subscriber {% if not subscriber.confirmed %}un{% endif %}confirmed">
-		<td>{{ subscriber.email }}</td>
-		<td>{{ subscriber.name }}</td>
-		<td>{{ subscriber.date }}</td>
-		<td>{% if not subscriber.confirmed %}x{% endif %}</td>
-		<td><a href="{% url subscriber subscriber.id %}">+</a></td>
-		<td><a href="{% url subscriber_delete subscriber.id %}" class="subscriber-delete" id="subscriber-delete-{{subscriber.id}}">-</a></td>
-	</tr>
+    <tr id="subscriber-{{ subscriber.id}}" class="subscriber {% if not subscriber.confirmed %}un{% endif %}confirmed">
+        <td>{{ subscriber.email }}</td>
+        <td>{{ subscriber.name }}</td>
+        <td>{{ subscriber.date }}</td>
+        <td>{% if not subscriber.confirmed %}<i class="icon-question-sign" title="{% trans "unconfirmed"%}"></i>{% endif %}</td>
+        <td><a href="{% url subscriber subscriber.id %}"><i class="icon-edit" title="{% trans "edit"%}"></i></a></td>
+        <td><a href="{% url subscriber_delete subscriber.id %}" class="subscriber-delete" id="subscriber-delete-{{subscriber.id}}"><i class="icon-remove" title="{% trans "delete"%}"></i></a></td>
+    </tr>
 {% endfor %}
 </table>
 

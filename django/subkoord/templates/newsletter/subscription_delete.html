@@ -7,6 +7,10 @@
 <form action="{% url subscriber_public_delete subscriber.id token %}" method="post">
 {%  csrf_token  %}
 
-<input type="submit" value="{% trans "Yes, cancel my subscription!" %}"/>
+<p>{% blocktrans with email=subscriber.email_safe subscription=subscriber.subscription.name %}
+Do you want to remove address {{ email }}@&hellip; from mailing list <em>{{ subscription }}</em>?
+{% endblocktrans %}</p>
+
+<input class="btn btn-primary btn-large" type="submit" value="{% trans "Yes, cancel my subscription!" %}"/>
 </form>
 {% endblock content %}

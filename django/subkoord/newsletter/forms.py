@@ -7,22 +7,32 @@ from django.conf import settings
 from django.utils.translation import ugettext as _
 from extraformfields import *
 from models import Subscriber, Message, List
+from bootstrap.forms import BootstrapMixin, BootstrapForm
+from tinymce.widgets import TinyMCE
 
-class SubscriberForm(ModelForm):
+class SubscriberForm(BootstrapMixin, ModelForm):
     class Meta:
         model = Subscriber
 
-class SubscriberFormPublic(ModelForm):
+class SubscriberFormPublic(BootstrapMixin, ModelForm):
     class Meta:
         model = Subscriber
         fields = ('name', 'email')
 
-class MessageForm(ModelForm):
+class MessageForm(BootstrapMixin, ModelForm):
     class Meta:
         model = Message
-        fields = ('subject', 'text', 'text_format')
+        fields = ('subject', 'text')
+        widgets = {
+            'text': TinyMCE(mce_attrs={
+                    'plugins': "paste",
+                    'theme_advanced_buttons1' : "cut,copy,paste,pastetext,pasteword,|,undo,redo,|,link,unlink|,code,cleanup,removeformat",
+                    'theme_advanced_buttons2' : "bold,italic,underline,strikethrough,|,bullist,numlist,|,outdent,indent,blockquote,|,hr",
+                    'theme_advanced_buttons3' : None,
+            }),
+        }
 
-class JobForm(forms.Form):
+class JobForm(BootstrapMixin, forms.Form):
     message = FeaturedModelChoiceField(queryset = Message.objects.all(),
         featured_queryset = Message.objects.filter(locked=False),
         label = _('Message'),
@@ -31,13 +41,13 @@ class JobForm(forms.Form):
         label = _('To list'),
     )
 
-class JobMessageForm(forms.Form):
+class JobMessageForm(BootstrapForm):
     message = IntegerField(widget = forms.HiddenInput,)
     to = ModelChoiceField(queryset = List.objects.all(),
         label = _('To list'),
     )
 
-class PreviewMessageForm(forms.Form):
+class PreviewMessageForm(BootstrapForm):
     message = IntegerField(widget = forms.HiddenInput,)
     to = ModelChoiceField(queryset =
         List.objects.annotate(recipients_count=Count('recipients')).filter(recipients_count__lt=settings.NEWSLETTER_PREVIEW_LIST),

@@ -45,8 +45,6 @@ def edit(request, title = None):
         form = WikipageForm(request.POST, instance=page)
         if form.is_valid():
             form.save()
-            page.content_html = textile(wikify(page.content))
-            page.save()
             return HttpResponseRedirect(reverse('wiki_page', args=[page.title]))
     else:
         form = WikipageForm(instance=page)

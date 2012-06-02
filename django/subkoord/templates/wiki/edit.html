@@ -2,73 +2,51 @@
 {% load wikitags %}
 {% load i18n %}
 
-{% block heading %}
-{%if page.title %}
-	{% trans "Editing" %} {{ page.title|wikifytitle }}
-{% else %}
-	{% trans "new page" %}
-{% endif %}
-{% endblock heading %}
+
 
 {%block jquery %}
-		$('#ask-delete').hide();
-		$('#wiki-delete').submit(function() {
-			if($('input[name="really_sure"]').is(':checked')) {} else {
-				$('#ask-delete').show();
-				return false;
-			}
-		});
-	$(".fb_form:last p:last").hide();
-{% include "help/jquery.html" %}
+    $("fieldset.fb_form:last .control-group:last").hide();
+    $("fieldset.fb_form input[name*='DELETE']").change(function(){
+        var opacity = $(this).is(":checked") ? 0.3 : 1;
+        $(this).closest(".control-group").prev().css("opacity", opacity);
+    });
 {%endblock jquery %}
 
 {% block css %}
 fieldset.fb_form a.fb_show:after {
-	content: "{% trans "choose" %}";
+    content: "{% trans "choose" %}";
 }
 {% endblock css %}
 {%block javascript %}
 <script type="text/javascript" src="{{ STATIC_URL }}filebrowser/js/AddFileBrowser.js"></script>
-{%endblock javascript %}
+{{ form.media }}
+{% endblock javascript %}
 
 {% block navigation %}
-	<ul>
-		{%if page.title %}
-		<li><a href="{% url wiki_page page.title %}">{% trans "back" %}</a></li>
-		{% endif %}
-	</ul>
+    {%if page.title %}
+    <li><a href="{% url wiki_page page.title %}">{% trans "back" %}</a></li>
+    <li><a href="{% url wiki_delete page.title %}" class="wiki-delete">{% trans "Delete" %}</a></li>
+    {% endif %}
 {% endblock navigation %}
 
 {% block contentcontainer %}
-<div id="content" class="span-11">
-	<form action="{% url wiki_edit page.title %}" class="wiki-form" method="POST">
-		<ul>
-		{{ form.as_ul }}
-		</ul>
-		<div>
-		<h4>{% trans "Attachments"%}</h4>
-		{{ attachment_formset.management_form.as_p }}
-		{% for form in attachment_formset %}
-		<fieldset class="fb_form">
-		{{ form.as_p  }}
-		</fieldset>
-		{% endfor %}
-		</div>
-		{% csrf_token %}
-		<input type="submit" value="{% trans "Save" %}" />
-	</form>
-</div>
+<form action="{% url wiki_edit page.title %}" class="wiki-form form-horizontal" method="POST">
 
-<div id="help" class="span-7 last">
-	{% include "help/textile.html" %}
+    {{ form }}
 
-	<h4>{% trans "Delete this Page" %}</h4>
-	<div id="help-event-textile">
-	<form action="{% url wiki_delete page.title %}" method="POST" id="wiki-delete">
-		{% csrf_token %}
-		<input type="submit" value="{% trans "Delete" %}" />
-		<span id="ask-delete">{% trans "Are you really sure?"%} <input type="checkbox" value="yes" name="really_sure" id="really_sure"/><label for="really_sure">{% trans "Yes!"%}</label></span>
-	</form>
-	</div>
-</div>
+    <div class="attachments">
+        <h4>{% trans "Attachments"%}</h4>
+        {{ attachment_formset.management_form.as_p }}
+        {% for form in attachment_formset %}
+            <fieldset class="fb_form">
+            {{ form  }}
+            </fieldset>
+        {% endfor %}
+    </div>
+
+    {% csrf_token %}
+    <div class="form-actions">
+        <button type="submit" class="btn btn-primary">{% trans "save" %}</button>
+    </div>
+</form>
 {% endblock %}

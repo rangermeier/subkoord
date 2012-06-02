@@ -7,15 +7,14 @@
 {% endblock heading %}
 
 {% block navigation %}
-	<ul>
-		<li><a href="{% url message_new %}">{% trans "compose message" %}</a></li>
-	</ul>
+    <li><a href="{% url message_new %}">{% trans "compose message" %}</a></li>
+    <li><a href="{% url error_mailbox %}">{% trans "view error mailbox" %}</a></li>
 {% endblock navigation %}
 
 {% block content %}
 <ul>
-	{% for message in message_list %}
-	<li><a href="{% url message message.id %}">{{ message }}</a> {{ message.date }}</li>
-	{% endfor %}
+    {% for message in message_list %}
+    <li><a href="{% url message message.id %}">{{ message }}</a> {{ message.date }}</li>
+    {% endfor %}
 </ul>
 {% endblock content %}

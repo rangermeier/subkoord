@@ -7,9 +7,13 @@
 {% if year %}{{ year }}{% endif %}
 {% endblock heading %}
 
+{% block javascript %}
+    <script type="text/javascript" src="{{ STATIC_URL }}bootstrap/js/bootstrap.min.js"></script>
+{% endblock javascript %}
+
 {% block content %}
 {% cache 500 users %}
-<table cellspacing="0"  >
+<table class="table"  >
     <thead>
     <tr>
         <th>{% trans "user"%}</th>
@@ -40,13 +44,16 @@
 
 
 {% block navigation %}
-    <ul>
-    {% for y in years %}
-        <li><a href="{% url user_statistics_year y%}">{% trans "statistics" %} {{ y }}</a></li>
-    {% endfor %}
+    <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">{% trans "year" %} <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+            {% for y in years %}
+                <li><a href="{% url user_statistics_year y%}">{{ y }}</a></li>
+            {% endfor %}
+        </ul>
+    </li>
     {% if usr.id != user.id %}
         <li><a href="{% url user_view user.id %}">{% trans "view my profile" %}</a></li>
     {% endif %}
         <li><a href="{% url user_change_password %}">{% trans "change my password" %}</a></li>
-    </ul>
 {% endblock navigation %}

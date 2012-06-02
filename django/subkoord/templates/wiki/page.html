@@ -8,32 +8,33 @@
 {% endblock heading %}
 
 {% block navigation %}
-	<ul>
-		<li><a href="{% url wiki_edit page.title %}">{% trans "edit" %}</a></li>
-	</ul>
+    <li><a href="{% url wiki_edit page.title %}">{% trans "edit" %}</a></li>
+    <li><a href="{% url wiki_new %}">{% trans "new page" %}</a></li>
 {% endblock navigation %}
 
 {% block content %}
-	<div id="wiki">
-		<div id="wiki-content" class="span-12">
-		{{ page.content_html|safe }}
-		</div>
-		<div id="wiki-meta" class="span-6 last">
-			<p>{% blocktrans with page.author as author and page.last_changed|date:"D, j. n. Y, H:i" as last_changed%}
-			last edited by {{ author }}, <br /> {{ last_changed }}.
-			{% endblocktrans %}</p>
-			<p>{% blocktrans with page.title as title%}Wiki-link to this page: <code>[[{{ title }}]]</code>{% endblocktrans %}</p>
-			<p><a href="{% url wiki_edit page.title %}">{% trans "edit page" %}</a></p>
-			{% if page.attachments.all %}
-			<h3>{% trans "Attachments" %}</h3>
-			<p>
-				{% for attachment in page.attachments.all %}<div>
-				{% if attachment.is_image  %}<img src="{% version attachment.file 'small' %}" alt="{{ attachment }}" title="{{ attachment }}"/><br />{% endif %}
-				<a target="_blank" href="{{ attachment.file.url }}">{{ attachment }}</a></div>
-				{% endfor %}
-			</p>
-			{% endif %}
-		</div>
-	</div>
+<div id="wiki" class="row-fluid">
+    <div id="wiki-content" class="span8">
+    {{ page.content_html|safe }}
+    </div>
+    <div id="wiki-meta" class="span4">
+        <div class="well">
+            <p>{% blocktrans with page.author as author and page.last_changed|date:"D, j. n. Y, H:i" as last_changed%}
+            last edited by {{ author }}, <br /> {{ last_changed }}.
+            {% endblocktrans %}</p>
+            <p>{% blocktrans with page.title as title%}Wiki-link to this page: <code>[[{{ title }}]]</code>{% endblocktrans %}</p>
+            <p><a href="{% url wiki_edit page.title %}">{% trans "edit page" %}</a></p>
+            {% if page.attachments.all %}
+        </div>
+        <h3>{% trans "Attachments" %}</h3>
+        <p>
+            {% for attachment in page.attachments.all %}<div>
+            {% if attachment.is_image  %}<img src="{% version attachment.file 'small' %}" alt="{{ attachment }}" title="{{ attachment }}"/><br />{% endif %}
+            <a target="_blank" href="{{ attachment.file.url }}">{{ attachment }}</a></div>
+            {% endfor %}
+        </p>
+        {% endif %}
+    </div>
+</div>
 
 {% endblock %}
