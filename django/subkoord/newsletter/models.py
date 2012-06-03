@@ -160,7 +160,7 @@ class Letter(models.Model):
             'unsubscribe_url': settings.SITE_URL+reverse('subscriber_public_delete', args=[self.recipient.id, self.recipient.token]),
         })
         text_plain = "\n".join([self.message.text_as_plain, footer_text.render(c)])
-        text_html = "\n<br>\n".join([self.message.text_as_html, footer_html.render(c)])
+        text_html = "\n<br>\n".join([self.message.text, footer_html.render(c)])
         mail = EmailMultiAlternatives(
             subject = u'%s %s' % (self.job.to.praefix, self.message.subject),
             body = text_plain,
@@ -171,8 +171,7 @@ class Letter(models.Model):
         )
         for attachment in self.message.attachments.all():
             mail.attach_file(attachment.file.path)
-        if self.message.text_format != "plain":
-            mail.attach_alternative(text_html, "text/html")
+        mail.attach_alternative(text_html, "text/html")
         mail.send()
         self.job.letters_sent += 1
         self.job.last_delivery = datetime.now()
