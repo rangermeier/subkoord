@@ -25,7 +25,7 @@ class WikiTest(TestCase):
         return self.client.post(
             "/wiki/%s/edit/" % title, {
                 'title': title,
-                'content': "this is a new [[wiki]] article on [[%s]]" % title,
+                'content_html': "this is a new [[wiki]] article on [[%s]]" % title,
                 'category': 1, })
                 #'attachments-TOTAL_FORMS': 1,
                 #'attachments-INITIAL_FORMS': 1,
