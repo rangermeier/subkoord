@@ -50,7 +50,7 @@ class WikiTest(TestCase):
         # renaming the article
         r = self.create_article("bar")
         r = self.client.post("/wiki/bar/edit/", {'title': 'foo',
-            'content': 'this is a new [[wiki]] article on [[bar]]',
+            'content_html': 'this is a new [[wiki]] article on [[bar]]',
             'category': 1})
         r = self.client.get('/wiki/foo/', {})
         self.assertEquals(r.status_code, 200)

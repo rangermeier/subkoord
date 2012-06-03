@@ -197,7 +197,6 @@
     "fields": {
       "date": "2010-12-19",
       "text": "Liebe Leute,\r\n\r\nblabla blabl ",
-      "text_format": "plain",
       "locked": true,
       "subject": "Testmail"
     }
@@ -208,7 +207,6 @@
     "fields": {
       "date": "2010-12-19",
       "text": "ladadadi ladadada\r\n\r\n* erstens\r\n* zweitens\r\n* drittens",
-      "text_format": "textile",
       "locked": false,
       "subject": "Testmail 2"
     }

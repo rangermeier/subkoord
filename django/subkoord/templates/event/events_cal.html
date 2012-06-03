@@ -4,19 +4,19 @@
 {% load calendar %}
 
 {%block javascript %}
-	<script type="text/javascript">
-	$(document).ready(function() {
-		$("#jumptomonth").change(function() {
-			window.location = $(this).val();
-		});
-	});
-	</script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $("#jumptomonth").change(function() {
+            window.location = $(this).val();
+        });
+    });
+    </script>
 {%endblock javascript %}
 
 {% block content %}
 {% cache 500 calendar year month %}
-	<div id="event_cal" class="span-16">
-	{% month_cal year month%}
-	</div>
+    <div id="event_cal">
+        {% month_cal year month%}
+    </div>
 {% endcache %}
 {% endblock content %}

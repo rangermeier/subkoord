@@ -168,6 +168,7 @@ def subscriber_public_delete(request, subscriber_id, token):
     if subscriber.token != token:
         heading = _('Couldn\'t cancel - token mismatch')
     elif request.method != "POST":
+        subscriber.email_safe = subscriber.email.split("@")[0]
         return render_to_response('newsletter/subscription_delete.html',
             {'subscriber': subscriber,
             'token': token, },
@@ -204,10 +205,12 @@ def subscribers_delete(request, subscribers_ids):
 
 @permission_required('newsletter.add_subscriber')
 def subscribers_list(request, list_id):
-    list = get_object_or_404(List, pk=list_id)
+    lists = List.objects.all()
+    list = lists.get(pk=list_id)
     subscribers = Subscriber.objects.filter(subscription=list).order_by('email')
     return render_to_response('newsletter/subscribers.html',
         {'list': list,
+        'lists': lists,
         'subscribers': subscribers, },
         context_instance=RequestContext(request),)
 
@@ -229,6 +232,7 @@ def subscribers_add(request, list_id):
 
 @permission_required('newsletter.delete_subscriber')
 def error_mailbox(request):
+    lists = List.objects.all()
     server = get_server()
     messagesInfo = server.list()[1]
     unassigned_mails = []
@@ -249,7 +253,8 @@ def error_mailbox(request):
     return render_to_response('newsletter/error_mailbox.html',
         {'unassigned_mails': unassigned_mails,
         'assigned_mails': assigned_mails,
-        'all_subscribers_ids': ",".join(subscribers_ids), },
+        'all_subscribers_ids': ",".join(subscribers_ids),
+        'lists': lists, },
         context_instance=RequestContext(request),)
 
 @permission_required('newsletter.delete_subscriber')

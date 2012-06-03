@@ -1,6 +1,6 @@
 # Django settings for subkoord project.
 
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
@@ -20,6 +20,7 @@ DATABASES = {
         'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
     }
 }
+
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -46,17 +47,29 @@ USE_L10N = True
 
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"
-MEDIA_ROOT = '/home/.../stuff/'
+MEDIA_ROOT = '/home/.../media/'
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash if there is a path component (optional in other cases).
 # Examples: "http://media.lawrence.com", "http://example.com/media/"
-MEDIA_URL = 'http://domain.com/stuff/'
+MEDIA_URL = 'http://domain.com/media/'
+
+
+SITE_URL = 'http://domain.com'
+
+# Static File configuration
+STATICFILES_DIRS = (
+    '/home/.../static/',
+)
+
+STATIC_URL = 'http://domain.com/static/'
+
+STATIC_ROOT = '/home/.../public_html/media/'
 
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
 # Examples: "http://foo.com/media/", "/media/".
-ADMIN_MEDIA_PREFIX = '/media/'
+ADMIN_MEDIA_PREFIX = '/static/media/'
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = ''
@@ -94,11 +107,19 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.markup',
     'django.contrib.flatpages',
+    'django.contrib.staticfiles',
+    'south',
+    'bootstrap',
+    'tinymce',
+    'grappelli',
+    'filebrowser',
     'django.contrib.admin',
     'django.contrib.messages',
     'subkoord.event',
     'subkoord.users',
+    'subkoord.wiki',
     'subkoord.newsletter',
+    'subkoord.attachment',
 )
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
@@ -123,13 +144,51 @@ EVENT_REMINDER_FROM = "bar@example.com"
 from pytz import timezone
 EVENT_TIMEZONE = timezone(TIME_ZONE)
 
+# Caching
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
+    }
+}
+
+# Directory for DB dumps
+BACKUP_DIR = '/home/.../private/backup/subkoord'
+
 # the newsletter should be invoked regularly by a cronjob
 # on each run it will send emails according to NEWSLETTER_QUOTA
 NEWSLETTER_QUOTA = 28
 
+# Mailing with less subscribers are offered for preview mailing
+# after sending a preview newsletter the message won't be locked
 NEWSLETTER_PREVIEW_LIST = 5
+
 # Host and credentials for error-mailbox (should be the "technical"-From address
 # uses POP3 over SSL at Port 995
 NEWSLETTER_ERROR_MAILBOX = 'mail.newsletter.yourhost.org'
 NEWSLETTER_ERROR_USER = 'catch-all@newsletter.yourhost.org'
 NEWSLETTER_ERROR_PASS = 'password'
+
+# Filebrowser Settings
+FILEBROWSER_MEDIA_ROOT = MEDIA_ROOT
+FILEBROWSER_MEDIA_URL = MEDIA_URL
+FILEBROWSER_DIRECTORY = ""
+
+# Grapelli
+ADMIN_MEDIA_PREFIX = STATIC_URL + "grappelli/"
+GRAPPELLI_ADMIN_TITLE = "Admin"
+
+# TinyMCE
+TINYMCE_JS_URL = STATIC_URL+'/tiny_mce/tiny_mce_src.js'
+TINYMCE_JS_ROOT = STATIC_ROOT+'/tiny_mce'
+TINYMCE_DEFAULT_CONFIG = {
+    'plugins': "table,paste",
+    'theme': "advanced",
+    'mode' : "textareas",
+    'theme_advanced_buttons1' : "cut,copy,paste,pastetext,pasteword,|,undo,redo,|,link,unlink,anchor,image,charmap,|,code,cleanup,removeformat,visualaid",
+    'theme_advanced_buttons2' : "bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull|,bullist,numlist,|,outdent,indent,blockquote,|,hr",
+    'theme_advanced_buttons3' : "tablecontrols",
+    'theme_advanced_toolbar_location' : "top",
+    'theme_advanced_toolbar_align' : "left",
+    'theme_advanced_resizing' : 'true',
+}
+TINYMCE_COMPRESSOR = True

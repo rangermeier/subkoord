@@ -4,14 +4,14 @@
 
 <dt>{% trans "Subject" %}</dt> <dd>{{ message.subject }}</dd>
 {% if message.text_format != "plain" %}
-<dt>{% trans "Text (HTML)" %}</dt> <dd>{{ message.text_as_html }}</dd>
+<dt>{% trans "Text (HTML)" %}</dt> <dd>{{ message.text|safe }}</dd>
 {% endif %}
 <dt>{% trans "Text plain" %}</dt> <dd><pre>{{ message.text_as_plain }}</pre></dd>
 {% if message.attachments.all %}
 <dt>{% trans "Attachments" %}</dt> <dd>
-	{% for attachment in message.attachments.all %}
-		<a target="_blank" href="{{ attachment.file.url }}">{% if attachment.is_image  %}<img src="{% version attachment.file 'small' %}" alt="{{ attachment }}" title="{{ attachment }}"/>{% endif %}
-			{{ attachment }}</a>
-	{% endfor %}
+    {% for attachment in message.attachments.all %}
+        <a target="_blank" href="{{ attachment.file.url }}">{% if attachment.is_image  %}<img src="{% version attachment.file 'small' %}" alt="{{ attachment }}" title="{{ attachment }}"/>{% endif %}
+            {{ attachment }}</a>
+    {% endfor %}
 </dd>
 {% endif %}

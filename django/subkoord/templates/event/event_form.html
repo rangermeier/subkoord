@@ -2,72 +2,78 @@
 {% load i18n %}
 
 {% block javascript %}
-	<script type="text/javascript" src="{{ STATIC_URL }}js/jquery/jquery-ui-1.8.7.custom.min.js"></script>
-	<script type="text/javascript">
-	$(document).ready(function() {
-		if($("#id_date").length > 0) {
-			$("#id_date").datepicker({ dateFormat: 'yy-mm-dd' });
-			$("#id_date").after('<input id="time" type="text" />');
-			$("#time").parent().append('<div class="form-help"><span id="date-help">JJJJ-MM-JJ</span> <span id="time-help">hh:mm</span></div>');
-			if($("#id_date").val().match(/\s/)) {
-				var date_time = $("#id_date").val().split(" ");
-				$("#id_date").val(date_time[0]);
-				var time = date_time[1].split(":");
-				$("#time").val(time[0] + ":" + time[1]);
-			}
-			$("#time").closest("form").submit(function() {
-				var time = $("#time").val();
-				if(time == "") { time = "00:00"; }
-				$("#id_date").val($("#id_date").val() + " " + time).css("width", "150px");
-				$("#time").remove();
-			});
-		}
-{% include "help/jquery.html" %}
-	});
-	</script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery/jquery-ui-1.8.7.custom.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        if($("#id_date").length > 0) {
+            $("#id_date").datepicker({ dateFormat: 'yy-mm-dd' });
+            $("#id_date").after('<input id="time" type="text" />');
+            $("#time").parent().append('<div class="form-help"><span id="date-help">JJJJ-MM-JJ</span> <span id="time-help">hh:mm</span></div>');
+            if($("#id_date").val().match(/\s/)) {
+                var date_time = $("#id_date").val().split(" ");
+                $("#id_date").val(date_time[0]);
+                var time = date_time[1].split(":");
+                $("#time").val(time[0] + ":" + time[1]);
+            }
+            $("#time").closest("form").submit(function() {
+                var time = $("#time").val();
+                if(time == "") { time = "00:00"; }
+                $("#id_date").val($("#id_date").val() + " " + time).css("width", "150px");
+                $("#time").remove();
+            });
+            $("#id_type").change(function(){
+                var id = $(this).find(":selected").val();
+                $(this).siblings(".help-block").html(
+                    $("#help-event-type-"+id+" .description").html()
+                );
+            });
+        }
+        $("#help-event-type").hide();
+        $("#id_type").trigger("change");
+    });
+    </script>
+    {{ form.media }}
 {% endblock javascript %}
 
 {% block contentcontainer %}
-<div id="content" class="span-11">
-	{% block content %}{% endblock content %}
+<div id="content">
+    {% block content %}{% endblock content %}
 </div>
-<div id="help" class="span-7 last">
-	<h4>{% trans "Help for Event Types" %}</h4>
-	<div id="help-event-types">
-	<p>{% trans "Depending on the type of the event different tasks will be available." %}</p>
-	{% for type in event_types %}
-		<h5>{{ type.name }}</h5>
-		<div class="help-event-type">
-		{% if type.info %}<p>{{ type.info }}</p>{% endif %}
-		{% if type.tasks %}
-		<ul>
-		{% for task in type.tasks.all %}
-			<li><em>{{ task.name }}:</em>
-				{% if task.info %}{{ task.info }}{% endif %}
-				{% if not task.min_persons and not task.max_persons %}
-					<br />{% trans "no staff requirements" %}
-				{% else %}
-					{% if task.min_persons == task.max_persons %}
-						<br />
-						{% blocktrans count task.min_persons as persons %}one person{% plural %}{{ persons }} persons{% endblocktrans %}
-					{% else %}
-						{% if task.min_persons %}<br />min.
-							{% blocktrans count task.min_persons as persons %}one person{% plural %}{{ persons }} persons{% endblocktrans %}
-						{% endif %}
-						{% if task.max_persons %}<br />max.
-							{% blocktrans count task.max_persons as persons %}one person{% plural %}{{ persons }} persons{% endblocktrans %}
-						{% endif %}
-					{% endif %}
-				{% endif %}
-			</li>
-		{% endfor %}
-		</ul>
-		{% endif %}
-		</div>
-	{% endfor %}
-	</div>
 
-{% include "help/textile.html" %}
+<div id="help-event-type">
+    {% for type in event_types %}
+    <div id="help-event-type-{{ type.id }}">
+        <h3>{{ type.name }}</h3>
+        <div class="description">
+        {% if type.info %}<p>{{ type.info }}</p>{% endif %}
+        {% if type.tasks %}
+        <ul>
+        {% for task in type.tasks.all %}
+            <li><em>{{ task.name }}:</em>
+                {% if task.info %}{{ task.info }}{% endif %}
+                {% if not task.min_persons and not task.max_persons %}
+                    <br />{% trans "no staff requirements" %}
+                {% else %}
+                    {% if task.min_persons == task.max_persons %}
+                        <br />
+                        {% blocktrans count task.min_persons as persons %}one person{% plural %}{{ persons }} persons{% endblocktrans %}
+                    {% else %}
+                        {% if task.min_persons %}<br />min.
+                            {% blocktrans count task.min_persons as persons %}one person{% plural %}{{ persons }} persons{% endblocktrans %}
+                        {% endif %}
+                        {% if task.max_persons %}<br />max.
+                            {% blocktrans count task.max_persons as persons %}one person{% plural %}{{ persons }} persons{% endblocktrans %}
+                        {% endif %}
+                    {% endif %}
+                {% endif %}
+            </li>
+        {% endfor %}
+        </ul>
+        {% endif %}
+        </div>
+    </div>
+    {% endfor %}
+    </div>
 
 </div><!-- /content -->
 {% endblock contentcontainer %}

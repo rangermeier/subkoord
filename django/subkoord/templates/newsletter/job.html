@@ -10,17 +10,20 @@
 <div class="newsletter">
 <h3>{% trans "e-Mail" %}</h3>
 <dl>
-	<dt>{% trans "To list" %}</dt> <dd>{{ job.to.name }}</dd>
-	<dt>{% trans "Sent by" %}</dt> <dd>{{ job.sender }}</dd>
-	<dt>{% trans "Date" %}</dt> <dd>{{ job.date }}</dd>
-	<dt>Status</dt><dd>
-	{% if not job.active %}
-		Delivery finished {{ job.last_delivery }}<br />
-		{{ job.letters_sent }} {% trans "e-mails sent" %}<br />
-	{% else %}
-		{% blocktrans with job.letters_total as total and job.letters_sent as sent and job.percent_sent as percentage %}
-	{{ sent }} of {{ total }} already sent ({{ percentage }} %){% endblocktrans %}
-	{% endif %}</dd>
+    <dt>{% trans "To list" %}</dt> <dd>{{ job.to.name }}</dd>
+    <dt>{% trans "Sent by" %}</dt> <dd>{{ job.sender }}</dd>
+    <dt>{% trans "Date" %}</dt> <dd>{{ job.date }}</dd>
+    <dt>Status</dt><dd>
+    {% if not job.active %}
+        Delivery finished {{ job.last_delivery }}<br />
+        {{ job.letters_sent }} {% trans "e-mails sent" %}<br />
+    {% else %}
+        {% blocktrans with job.letters_total as total and job.letters_sent as sent and job.percent_sent as percentage %}
+    {{ sent }} of {{ total }} already sent ({{ percentage }} %){% endblocktrans %}
+    <div class="progress" style="width:25%">
+          <div class="bar" style="width: {{ percentage }}%;"></div>
+    </div>
+    {% endif %}</dd>
 </dl>
 </div>
 

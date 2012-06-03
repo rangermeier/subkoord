@@ -6,7 +6,6 @@ from django.contrib.auth.models import User
 from django.utils.translation import ugettext as _
 from django.utils.text import get_valid_filename
 from django.conf import settings
-from django.contrib.markup.templatetags.markup import textile
 from django.contrib.contenttypes import generic
 from subkoord.attachment.models import Attachment
 from html2text import html2text
@@ -52,14 +51,8 @@ class Subscriber(models.Model):
         return self.email
 
 class Message(models.Model):
-    TEXT_FORMATS = (
-        ('plain', _('Plain Text')),
-        ('html', _('HTML')),
-        ('textile', _('Textile')),
-    )
     subject = models.CharField(max_length=200,blank=True, verbose_name=_("Subject"))
     text = models.TextField(verbose_name=_("Text"))
-    text_format = models.CharField(max_length=8, choices=TEXT_FORMATS, default="plain", verbose_name=_("Text format"))
     date= models.DateField(auto_now_add=True, editable=False)
     locked = models.BooleanField(default=False, verbose_name=_("locked"))
     attachments = generic.GenericRelation(Attachment)
@@ -86,17 +79,8 @@ class Message(models.Model):
                 return True
         return False
     @property
-    def text_as_html(self):
-        if self.text_format == 'plain':
-            return u'<pre>%s</pre>' % self.text
-        if self.text_format == 'textile':
-            return textile(self.text)
-        return self.text
-    @property
     def text_as_plain(self):
-        if self.text_format == 'html':
-            return html2text(self.text)
-        return self.text
+        return html2text(self.text)
     def __unicode__(self):
         return self.subject
 

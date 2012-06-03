@@ -79,6 +79,11 @@
     });
 {% endblock jquery %}
 
+
+{%block javascript %}
+    <script type="text/javascript" src="{{ STATIC_URL }}bootstrap/js/bootstrap.min.js"></script>
+{%endblock javascript %}
+
 {% block css %}
 label {
     display: inline;
@@ -90,10 +95,16 @@ label {
 {% endblock heading %}
 
 {% block navigation %}
-    <ul>
-        <li><a href="{% url newsletter_index %}">{% trans "Newsletter" %}</a></li>
-        <li><a href="{% url subscribers_list 1%}">Liste Subterrarium</a></li>
-</ul>
+    <li><a href="{% url message_new %}">{% trans "compose message" %}</a></li>
+    <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">{% trans "Mailinglists" %} <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+            {% for list in lists %}
+                <li><a href="{% url subscribers_list list.id %}">{{ list.name }}</a></li>
+            {% endfor %}
+        </ul>
+    </li>
+
 {% endblock navigation %}
 
 
@@ -102,6 +113,7 @@ label {
 <form action="{% url delete_error_mails %}" method="POST">{% csrf_token %}
 
 {%if assigned_mails %}
+<div class="well">
 <h3>{% trans "How to use this page" %}</h3>
 <p>{% blocktrans %}This page shows list of e-mails which are returned or rejected by the mail-server of subscribers
 (e.g. mailbox is full, account is unknown to server, the e-mail is declared &quot;spam&quot; for some reason, etc.)
@@ -111,54 +123,54 @@ When a series of e-mails had been bounced by one subscribers it's safe to assume
 and one can delete the subscriber.<br />
 Some e-mails <a href="#unassigned">can't be related to a subscriber</a>. These e-mails will be shown in a separate list at the end of the page.
 {% endblocktrans %}</p>
+</div>
 
 <div>
-<p><strong>{% trans "Filter" %}</strong>
+<p class="form-inline"><strong>{% trans "Filter" %}</strong>
     <input type="text" class="filter" /> <input type="checkbox" id="filter-invert" />
     <label for="filter-invert">{% trans "invert" %}</label>
-    <a href="#" class="filter-clear">{% trans "clear" %}</a>
+    <a href="#" class="filter-clear btn btn-small">{% trans "clear" %}</a>
 </p>
 
 <p><strong>{% trans "Subscribers" %}</strong>
-    <a href="#" class="select-subscribers-all">{% trans "select all" %}</a>,
-    <a href="#" class="select-subscribers-invert">{% trans "invert selection" %}</a>,
-    <a href="#" class="delete-selected-subscribers">{% trans "delete selected" %}</a>
+    <a href="#" class="select-subscribers-all btn btn-small">{% trans "select all" %}</a>
+    <a href="#" class="select-subscribers-invert btn btn-small">{% trans "invert selection" %}</a>
+    <a href="#" class="delete-selected-subscribers btn btn-small">{% trans "delete selected" %}</a>
 </p>
 
 <p><strong>{% trans "Emails" %}</strong>
-    <a href="#" class="select-emails-all">{% trans "select all" %}</a>,
-    <a href="#" class="select-emails-invert">{% trans "invert selection" %}</a>,
-    <a href="#" class="delete-selected-mails">{% trans "delete selected" %}</a>
+    <a href="#" class="select-emails-all btn btn-small">{% trans "select all" %}</a>
+    <a href="#" class="select-emails-invert btn btn-small">{% trans "invert selection" %}</a>
+    <a href="#" class="delete-selected-mails btn btn-small">{% trans "delete selected" %}</a>
 </p>
 </div>
 
-{% regroup assigned_mails|dictsort:"subscriber.id" by subscriber as subscriber_list %}
-<div class="span-18 last clear">
-
-        <div class="span-6"><strong>{% trans "Subscriber" %}</strong></div>
-        <div class="span-8"><strong>{% trans "Subject" %}</strong></div>
-        <div class="span-4 last"><strong>{% trans "Date" %}</strong></div>
+<div class="row-fluid">
+        <div class="span4"><strong>{% trans "Subscriber" %}</strong></div>
+        <div class="span5"><strong>{% trans "Subject" %}</strong></div>
+        <div class="span3"><strong>{% trans "Date" %}</strong></div>
         <hr/>
 </div>
 
+{% regroup assigned_mails|dictsort:"subscriber.id" by subscriber as subscriber_list %}
 {% for subscriber in subscriber_list %}
-<div id="subscriber-{{ subscriber.grouper.id }}" class="subscriber-entity">
-    <div class="span-6 subscriber">
+<div id="subscriber-{{ subscriber.grouper.id }}" class="subscriber-entity row-fluid">
+    <div class="span4 subscriber">
         <input type="checkbox" name="subscriber" value="{{ subscriber.grouper.id }}" id="checkbox-{{ subscriber.grouper.id }}"/>
         <label for="checkbox-{{ subscriber.grouper.id }}">{{ subscriber.grouper.email }}</label><br />
         {{ subscriber.grouper.date|date:"j. n. Y"}}<br />
         <a href="{% url subscriber_delete subscriber.grouper.id %}" class="subscriber-delete">{% trans "delete Subscriber" %}</a>,
         <a href="{% url subscriber subscriber.grouper.id %}">{% trans "edit" %}</a>
     </div>
-    <div class="mails span-12 last">
+    <div class="mails span8">
     {% for mail in subscriber.list %}
-        <div class="mail">
-            <div class="span-8 email-subject"><input type="checkbox" name="message_id" value="{{ mail.message_id }}" />
+        <div class="mail row-fluid">
+            <div class="span7 email-subject"><input type="checkbox" name="message_id" value="{{ mail.message_id }}" />
                 <a href="#" class="email_details_toggle">{{ mail.subject }}</a>,
                 <a href="{% url delete_error_mail mail.msg_num %}" class="email-delete">{% trans "delete" %}</a></div>
-            <div class="span-4 last email-date">{{ mail.date }}</div>
+            <div class="span5 last email-date">{{ mail.date }}</div>
 
-            <div class="span-12 last email-details">
+            <div class="span12 last email-details">
                 {% trans "Recipient" %}: {{ mail.recipient }}<br />
                 {% trans "Sender" %}: {{ mail.sender }}<br />
                 {% trans "Body" %}: <pre>{{ mail.body|highlight_email }}</pre>
@@ -176,27 +188,27 @@ Some e-mails <a href="#unassigned">can't be related to a subscriber</a>. These e
 <h3>{% trans "Mails not assigned to a subscriber" %}</h3>
 
 <p><strong>{% trans "Emails" %}</strong>
-    <a href="#" class="select-emails-unassigned">{% trans "select all unassigned" %}</a>,
-    <a href="#" class="select-emails-invert">{% trans "invert selection" %}</a>,
-    <a href="#" class="delete-selected-mails">{% trans "delete selected" %}</a>
+    <a href="#" class="select-emails-unassigned btn btn-small">{% trans "select all unassigned" %}</a>
+    <a href="#" class="select-emails-invert btn btn-small">{% trans "invert selection" %}</a>
+    <a href="#" class="delete-selected-mails btn btn-small">{% trans "delete selected" %}</a>
 </p>
 
 {% regroup unassigned_mails|dictsort:"recipient" by recipient as recipient_list %}
 
 {% for recipient in recipient_list %}
-<div class="subscriber-entity">
-    <div class="span-6 subscriber">
+<div class="subscriber-entity row-fluid">
+    <div class="span4 subscriber">
         <strong>{{ recipient.grouper }}</strong><br />
     </div>
-    <div class="mails span-12 last">
+    <div class="mails span8 last">
     {% for mail in recipient.list %}
-        <div class="mail">
-            <div class="span-8 email-subject"><input type="checkbox" name="message_id" value="{{ mail.message_id }}" />
+        <div class="mail row-fluid">
+            <div class="span7 email-subject"><input type="checkbox" name="message_id" value="{{ mail.message_id }}" />
                 <a href="#" class="email_details_toggle">{{ mail.subject }}</a>,
                 <a href="{% url delete_error_mail mail.msg_num %}" class="email-delete">{% trans "delete" %}</a></div>
-            <div class="span-4 last email-date">{{ mail.date }}</div>
+            <div class="span5 last email-date">{{ mail.date }}</div>
 
-            <div class="span-12 last email-details">
+            <div class="span12 last email-details">
                 {% trans "Recipient" %}: {{ mail.recipient }}<br />
                 {% trans "Sender" %}: {{ mail.sender }}<br />
                 {% trans "Body" %}: <pre>{{ mail.body|highlight_email }}</pre>

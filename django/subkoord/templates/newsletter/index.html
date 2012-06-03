@@ -6,60 +6,59 @@
 {% endblock heading %}
 
 {% block content %}
-<div class="span-10 newsletter">
-	<h3>{% trans "Messages" %}</h3>
-	<ul class="messages">
-	{% for message in message_list %}
-		<li class="{% if not message.locked %}active{% endif %}">{{ message.date|date:"D, j. N" }}
-		<a href="{% url message message.id %}">{{ message.subject }}</a>
-		{% if message.in_delivery %}
-			<br />{% trans "now sending to" %}
-			{% for job in message.active_jobs %}
-				{% if forloop.last and not forloop.first %}&nbsp;{% trans "and" %} {% else %}{% if not forloop.first %}, {% endif %}{% endif %}{{ job.to.name }}
-				(<a href="{% url job job.id %}">{% trans "status" %}</a>)
-			{% endfor %}
-		{% endif %}
-		{% if message.locked  and message.finished_jobs%}
-			<br />{% trans "already send to" %}
-			{% for job in message.finished_jobs %}{% spaceless %}
-				{% if forloop.last and not forloop.first %}&nbsp;{% trans "and" %} {% else %}{% if not forloop.first %}, {% endif %}{% endif %}{{ job.to.name }}
-			{% endspaceless %}{% endfor %}
-		{% endif %}
-		</li>
-	{% endfor %}
-	</ul>
-	<p>
-	<a href="{% url message_archive %}">{% trans "view all messages" %}</a><br />
-	<a href="{% url message_new %}">{% trans "compose message" %}</a><br />
-	</p>
+<div class="row-fluid">
+<div class="span8 newsletter">
+    <h3>{% trans "Messages" %}</h3>
+    <ul class="messages">
+    {% for message in message_list %}
+        <li class="{% if not message.locked %}active{% endif %}">{{ message.date|date:"D, j. N" }}
+        <a href="{% url message message.id %}">{{ message.subject }}</a>
+        {% if message.in_delivery %}
+            <br />{% trans "now sending to" %}
+            {% for job in message.active_jobs %}
+                {% if forloop.last and not forloop.first %}&nbsp;{% trans "and" %} {% else %}{% if not forloop.first %}, {% endif %}{% endif %}{{ job.to.name }}
+                <a href="{% url job job.id %}"><i class="icon-envelope" title="{% trans "status" %}"></i></a>
+            {% endfor %}
+        {% endif %}
+        {% if message.locked  and message.finished_jobs%}
+            <br />{% trans "already send to" %}
+            {% for job in message.finished_jobs %}{% spaceless %}
+                {% if forloop.last and not forloop.first %}&nbsp;{% trans "and" %} {% else %}{% if not forloop.first %}, {% endif %}{% endif %}{{ job.to.name }}
+            {% endspaceless %}{% endfor %}
+        {% endif %}
+        </li>
+    {% endfor %}
+    </ul>
+    <p>
+    <a href="{% url message_archive %}">{% trans "view all messages" %}</a><br />
+    </p>
 </div>
 
-<div class="span-8 last newsletter">
-	<h3>{% trans "Mailinglists" %}</h3>
-	<ul class="lists">
-	{% for list in lists %}
-		<li>{{ list.name }}:
-		<a href="{% url subscribers_list list.id %}">{% trans "view subscribers" %}</a>,
-		<a href="{% url subscribers_add list.id %}">{% trans "add subscribers" %}</a>
-		</li>
-	{% endfor %}
-	</ul>
-	<h3>{% trans "Latest Subscribers" %}</h3>
-	<ul class="subscribers">
-	{% for subscriber in subscribers %}
-		<li class="clear">{% if subscriber.name %}{{ subscriber.name }},{% endif %}
-		<a href="{% url subscriber subscriber.id %}">{{ subscriber.email }}</a>
-		<span class="inline-right">{{ subscriber.date|date:"j. N, H:i" }}</span>
-		</li>
-	{% endfor %}
-	</ul>
+<div class="span4 last newsletter">
+    <h3>{% trans "Mailinglists" %}</h3>
+    <ul class="lists">
+    {% for list in lists %}
+        <li>
+        <a href="{% url subscribers_list list.id %}" title="{% trans "view subscribers" %}">{{ list.name }}</a>
+        <a href="{% url subscribers_add list.id %}"><i class="icon-plus" title="{% trans "add subscribers" %}"></i></a>
+        </li>
+    {% endfor %}
+    </ul>
+    <h3>{% trans "Latest Subscribers" %}</h3>
+    <ul class="subscribers">
+    {% for subscriber in subscribers %}
+        <li class="clear">{% if subscriber.name %}{{ subscriber.name }},{% endif %}
+        <a href="{% url subscriber subscriber.id %}">{{ subscriber.email }}</a>
+        <span class="inline-right">{{ subscriber.date|date:"j. N, H:i" }}</span>
+        </li>
+    {% endfor %}
+    </ul>
+</div>
+
 </div>
 {% endblock content %}
 
 {% block navigation %}
-	<ul>
-		<li><a href="{% url message_new %}">{% trans "compose message" %}</a></li>
-		<li><a href="{% url subscribers_add 1 %}">{% trans "add subscribers"%}</a></li>
-		<li><a href="{% url error_mailbox %}">{% trans "view error mailbox" %}</a></li>
-</ul>
+    <li><a href="{% url message_new %}">{% trans "compose message" %}</a></li>
+    <li><a href="{% url error_mailbox %}">{% trans "view error mailbox" %}</a></li>
 {% endblock navigation %}
