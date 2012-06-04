@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 {% load i18n %}
 {% load cache %}
-{% load markup %}
 
 {% block heading %}
 {{ event.title }}
@@ -20,7 +19,7 @@
         <p>{{ event.date|date:"D, j. n. Y, H:i" }}</p>
         {% if event.info %}
         <h3>{% trans "Info" %}</h3>
-        <p>{{ event.info|urlize|textile }}</p>
+        <p>{{ event.info|safe }}</p>
         {% endif %}
     </div>
     {% endcache %}
