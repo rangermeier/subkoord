@@ -15,7 +15,7 @@
 {% block content %}
 <div id="wiki" class="row-fluid">
     <div id="wiki-content" class="span8">
-    {{ page.content_html|safe }}
+    {{ page.content_html|wikify|safe }}
     </div>
     <div id="wiki-meta" class="span4">
         <div class="well">

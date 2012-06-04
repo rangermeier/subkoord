@@ -40,7 +40,6 @@ class WikiTest(TestCase):
 
     def test_wiki_create(self):
         # creating an article
-        self.assertContains(r, "<form action=\"/wiki/bar/edit/\"", 1, 200)
         r = self.create_article("bar")
         r = self.client.get('/wiki/bar/', {})
         self.assertContains(r, "this is a new <a href=\"/wiki/wiki/\" class=\"new_page\">wiki</a> article on <a href=\"/wiki/bar/\" class=\"\">bar</a>",
@@ -63,14 +62,14 @@ class WikiTest(TestCase):
         r = self.client.get('/wiki/', {})
         self.assertContains(r, "<a href=\"/wiki/bar/\">")
 
-    def test_wiki_create(self):
+    def test_wiki_delete(self):
         # deleting the article
         r = self.create_article("foo")
         r = self.client.post("/wiki/foo/delete/", {'really_sure': 'yes'})
         r = self.client.get('/wiki/foo/', {})
         self.assertEquals(r.status_code, 302)
 
-    def test_wiki_create(self):
+    def test_wiki_delete2(self):
         # deleting an non-existant article
         r = self.client.post("/wiki/bar/delete/", {'really_sure': 'yes'})
         self.assertEquals(r.status_code, 404)
