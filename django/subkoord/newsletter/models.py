@@ -170,7 +170,7 @@ class Letter(models.Model):
                 'From': self.job.to.from_address},
         )
         for attachment in self.message.attachments.all():
-            mail.attach_file(attachment.file.path)
+            mail.attach_file(settings.FILEBROWSER_MEDIA_ROOT + "/" + attachment.file.path)
         mail.attach_alternative(text_html, "text/html")
         mail.send()
         self.job.letters_sent += 1
