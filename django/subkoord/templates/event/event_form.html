@@ -6,9 +6,8 @@
     <script type="text/javascript">
     $(document).ready(function() {
         if($("#id_date").length > 0) {
-            $("#id_date").datepicker({ dateFormat: 'yy-mm-dd' });
-            $("#id_date").after('<input id="time" type="text" />');
-            $("#time").parent().append('<div class="form-help"><span id="date-help">JJJJ-MM-JJ</span> <span id="time-help">hh:mm</span></div>');
+            $("#id_date").datepicker({ dateFormat: 'yy-mm-dd' }).attr('placeholder', 'JJJJ-MM-DD');
+            $("#id_date").after('<input id="time" type="text" placeholder="hh:mm"/>');
             if($("#id_date").val().match(/\s/)) {
                 var date_time = $("#id_date").val().split(" ");
                 $("#id_date").val(date_time[0]);

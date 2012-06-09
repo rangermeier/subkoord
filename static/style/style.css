@@ -21,15 +21,28 @@
     border-right: 1px solid #e5e5e5;
     border-radius: 0;
 }
+
+/* Event */
+
 .cal_month_calendar td {
     width: 14.2857142857143%; /* = 100/7 */
     height: 4em;
+}
+.cal_month_calendar td.today a {
+    color: #eee;
 }
 a.day_new_event {
     width: 100%;
     display: block;
 }
-.cal_not_in_month {
+.today {
+    background-color: #eee;
+}
+a.day_new_event.label {
+    width: auto;
+    display: inline;
+}
+.cal_not_in_month, .cal_not_in_month a.day_new_event {
     color: #888;
 }
 
@@ -40,31 +53,17 @@ a.day_new_event {
 #time {
     width: 48px;
 }
-#date-help {
-    /*float: left;*/
-    position: absolute;
-}
-#time-help {
-    position: absolute;
-    margin-left: 100px;
-}
-.form-help {
-    height: 1.5em;
-}
-#help h4 {
-    cursor: help;
-}
-#help h5 {
-    margin-bottom: 0;
-}
-#help > div {
-    padding-left: 1em;
-}
-#help > div > div > p {
-    margin-bottom: 0;
-}
+
 .not-satisfied {
     color: #600;
+}
+
+.tasks .task {
+    border-left: 1px solid #ccc;
+    padding-left: 10px;
+}
+.tasks:first-child {
+    border-left: none;
 }
 
 /* Newsletter */

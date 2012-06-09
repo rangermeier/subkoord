@@ -14,13 +14,13 @@
             {% for week in calendar %}
                 <tr>
                 {% for day in week %}
-                    <td class="{% if not day.in_month %}cal_not_in_month {% endif %}{% if day.today%}label label-info{% endif %}">
-                        {% if day.future %}<a href="{% url event_new %}?date={{ day.day|date:"Y-m-d" }}" class="day_new_event" title="{% trans "add event with this date" %}">{{ day.day|date:"j" }}</a>
+                    <td class="{% if not day.in_month %}cal_not_in_month{% endif %}{% if day.today%} today{% endif %}">
+                        {% if day.future %}<a href="{% url event_new %}?date={{ day.day|date:"Y-m-d" }}" class="day_new_event {% if day.today%}label label-info{% endif %}" title="{% trans "add event with this date" %}">{{ day.day|date:"j" }}</a>
                         {% else %}{{ day.day|date:"j" }}
                         {% endif %}
                         {% if day.event %}
                         {% for event in day.events %}
-                            <a class="label" href="{% url event event.id %}" title="{{ event.title }}" class="{% if day.future %}{% if event.all_tasks_satisfied %}{% else %}not-satisfied{% endif %}{% endif %}">{{ event.title }}</a>
+                            <a class="label{% if not event.all_tasks_satisfied and day.future %} label-warning{% elif event.all_tasks_satisfied and day.future%} label-success{% endif %}" href="{% url event event.id %}" title="{{ event.title }}" class="{% if day.future %}{% if event.all_tasks_satisfied %}{% else %}not-satisfied{% endif %}{% endif %}">{{ event.title }}</a>
                         {% endfor %}
                         {% endif %}
                     </td>

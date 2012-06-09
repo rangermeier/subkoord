@@ -61,6 +61,7 @@ def event_ical(request):
         vevent.add('dtstamp').value = datetime.now()
         vevent.add('summary').value = event.title
         vevent.add('url').value = url
+        vevent.add('uid').value = "%s-%s" % (event.id, settings.EVENT_REMINDER_FROM)
         vevent.add('description').value = url + "\n" + event.info
     icalstream = cal.serialize()
     response = HttpResponse(icalstream, mimetype='text/calendar; charset=utf-8')

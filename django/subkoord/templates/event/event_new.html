@@ -9,7 +9,7 @@
 {% block content %}
 <form action="{% url event_new %}" method="post" class="event-form form-horizontal">
     {{ form }}
-
+    {% csrf_token %}
     <div class="form-actions">
         <button type="submit" class="btn btn-primary">{% trans "save" %}</button>
     </div>
