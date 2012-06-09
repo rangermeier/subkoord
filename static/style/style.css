@@ -45,6 +45,11 @@ a.day_new_event.label {
 .cal_not_in_month, .cal_not_in_month a.day_new_event {
     color: #888;
 }
+.cal_month_calendar .label {
+    white-space: normal;
+    display: block;
+    margin-bottom: 2px;
+}
 
 #id_date {
     width: 88px;
