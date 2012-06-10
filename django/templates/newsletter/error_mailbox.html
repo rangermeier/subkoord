@@ -29,7 +29,7 @@
         });
         ev.preventDefault();
     });
-    $("a.subscriber-delete").click(function(event) {
+    $("a.subscriber_delete").click(function(event) {
         if(confirm("{% trans "really?" %}")) {
             $.getJSON($(this).attr("href"), function(json) {
                 $("#subscriber-"+json.subscriber_id).remove();
@@ -155,7 +155,7 @@ Some e-mails <a href="#unassigned">can't be related to a subscriber</a>. These e
         <input type="checkbox" name="subscriber" value="{{ subscriber.grouper.id }}" id="checkbox-{{ subscriber.grouper.id }}"/>
         <label for="checkbox-{{ subscriber.grouper.id }}">{{ subscriber.grouper.email }}</label><br />
         {{ subscriber.grouper.date|date:"j. n. Y"}}<br />
-        <a href="{% url subscriber_delete subscriber.grouper.id %}" class="subscriber-delete">{% trans "delete Subscriber" %}</a>,
+        <a href="{% url subscriber_delete subscriber.grouper.id %}" class="subscriber_delete">{% trans "delete Subscriber" %}</a>,
         <a href="{% url subscriber subscriber.grouper.id %}">{% trans "edit" %}</a>
     </div>
     <div class="mails span8">
@@ -163,7 +163,7 @@ Some e-mails <a href="#unassigned">can't be related to a subscriber</a>. These e
         <div class="mail row-fluid">
             <div class="span7 email-subject"><input type="checkbox" name="message_id" value="{{ mail.message_id }}" />
                 <a href="#" class="email_details_toggle">{{ mail.subject }}</a>,
-                <a href="{% url delete_error_mail mail.msg_num %}" class="email-delete">{% trans "delete" %}</a></div>
+                <a href="{% url delete_error_mail mail.msg_num %}" class="email_delete">{% trans "delete" %}</a></div>
             <div class="span5 last email-date">{{ mail.date }}</div>
 
             <div class="span12 last email-details">
@@ -201,7 +201,7 @@ Some e-mails <a href="#unassigned">can't be related to a subscriber</a>. These e
         <div class="mail row-fluid">
             <div class="span7 email-subject"><input type="checkbox" name="message_id" value="{{ mail.message_id }}" />
                 <a href="#" class="email_details_toggle">{{ mail.subject }}</a>,
-                <a href="{% url delete_error_mail mail.msg_num %}" class="email-delete">{% trans "delete" %}</a></div>
+                <a href="{% url delete_error_mail mail.msg_num %}" class="email_delete">{% trans "delete" %}</a></div>
             <div class="span5 last email-date">{{ mail.date }}</div>
 
             <div class="span12 last email-details">
