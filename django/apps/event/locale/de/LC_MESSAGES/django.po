@@ -1,0 +1,62 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-06-10 15:36+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: models.py:56
+msgid "Title"
+msgstr "Titel"
+
+#: models.py:57
+msgid "Date and Time"
+msgstr "Datum und Zeit"
+
+#: models.py:58
+msgid "Type"
+msgstr "Typ"
+
+#: models.py:59
+msgid "Depending on the type of the event different tasks will be available."
+msgstr "Durch den Typ der Veranstaltung ergeben sich die Dienste."
+
+#: models.py:60
+msgid "Information"
+msgstr "Information"
+
+#: views.py:89
+#, python-format
+msgid "Event %s deleted"
+msgstr "Termin %s gelöscht"
+
+#: views.py:102
+msgid "Saved changes"
+msgstr "Änderungen gespeichert"
+
+#: views.py:121
+msgid "Created new event"
+msgstr "neuer Termin gespeichert"
+
+#: views.py:144
+msgid "Took job"
+msgstr "Dienst übernommen"
+
+#: views.py:154
+msgid "Deleted job"
+msgstr "Dienst entfernt"
+
+#: views.py:165
+msgid "Saved note"
+msgstr "Anmerkung gespeichert"

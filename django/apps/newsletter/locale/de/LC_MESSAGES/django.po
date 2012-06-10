@@ -1,0 +1,168 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-06-10 15:36+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: forms.py:38 models.py:108
+msgid "Message"
+msgstr "Nachricht"
+
+#: forms.py:41 forms.py:47 forms.py:54
+msgid "To list"
+msgstr "an Liste"
+
+#: mailbox_utils.py:36
+msgid "Created from e-mail"
+msgstr ""
+
+#: mailbox_utils.py:39
+msgid "Date"
+msgstr "Datum"
+
+#: mailbox_utils.py:42 mailbox_utils.py:46
+msgid "Unknown Sender"
+msgstr "Unbekannter Sender"
+
+#: mailbox_utils.py:50
+msgid "Message-Id"
+msgstr "Nachricht-ID"
+
+#: models.py:18
+msgid "praefix for subject [...]"
+msgstr "Präfix für den Betreff  [...]"
+
+#: models.py:19
+msgid "Footer plain text"
+msgstr "Signatur Reintext"
+
+#: models.py:20
+msgid "Footer HTML"
+msgstr "Signatur HTML"
+
+#: models.py:21
+msgid "From e-mail address"
+msgstr "From-e-Mail Adresse"
+
+#: models.py:22
+msgid "Technical From e-mail address (used for bounces)"
+msgstr "interne Absender-Adresse (für Bounces)"
+
+#: models.py:23
+msgid "Reply-to e-mail address"
+msgstr "Reply-e-Mail Adresse"
+
+#: models.py:40
+msgid "Name"
+msgstr "Name"
+
+#: models.py:40
+msgid "(optional)"
+msgstr "(optional)"
+
+#: models.py:41
+msgid "e-Mail Address"
+msgstr "e-Mail Adresse"
+
+#: models.py:42
+msgid "Subscription"
+msgstr "Abo"
+
+#: models.py:44
+msgid "confirmed"
+msgstr "bestätigt"
+
+#: models.py:54
+msgid "Subject"
+msgstr "Betreff"
+
+#: models.py:55
+msgid "Text"
+msgstr "Text"
+
+#: models.py:57
+msgid "locked"
+msgstr "gesperrt"
+
+#: models.py:109
+msgid "to List"
+msgstr "an Liste"
+
+#: tests.py:83 views.py:136
+msgid "Thanks for subscribing!"
+msgstr "Danke für Dein Interesse!"
+
+#: tests.py:89 views.py:156
+msgid "Couldn't confirm - token mismatch"
+msgstr "Bestätigung fehlgeschlagen - Schlüssel falsch"
+
+#: tests.py:91 views.py:155
+msgid "Subscribtion confirmed"
+msgstr "Newsletter-Abo bestätigt"
+
+#: tests.py:99 views.py:178
+msgid "Subscribtion cancelled"
+msgstr "Abo gelöscht"
+
+#: views.py:96
+#, python-format
+msgid "Sent Preview to list %s."
+msgstr "Vorschau an die Liste %s geschickt"
+
+#: views.py:99
+#, python-format
+msgid "Queued %s Newsletters for delivery."
+msgstr "%s e-mails warten auf den Versand"
+
+#: views.py:134
+msgid "Confirm subscription"
+msgstr "Newsletter-Abo bestätigen"
+
+#: views.py:137
+#, python-format
+msgid "An e-mail asking for confirmation will be sent shortly to %s"
+msgstr ""
+"Du solltest umgehend ein e-Mail mit Bestätigungslink an die Adresse %s "
+"erhalten."
+
+#: views.py:151
+msgid "Already confirmed"
+msgstr "bereits bestätigt"
+
+#: views.py:166
+msgid "Subscribtion doesn't exist (anymore?)"
+msgstr "Abo existiert nicht (mehr?)"
+
+#: views.py:169
+msgid "Couldn't cancel - token mismatch"
+msgstr "Abmeldevorgang fehlgeschlagen - Schlüssel falsch"
+
+#: views.py:198
+#, python-format
+msgid "Deleted %s subscribers"
+msgstr "%s Abonnenten gelöscht"
+
+#: views.py:225
+msgid "Saved new subscribers"
+msgstr "Neue Abonnenten gespeichert"
+
+#: views.py:270
+msgid "Removed message from error mailbox"
+msgstr "Nachricht gelöscht"
+
+#: views.py:287
+#, python-format
+msgid "Removed %s messages from error mailbox"
+msgstr "%s Nachrichten aus Error-Mailbox gelöscht"

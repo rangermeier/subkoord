@@ -1,4 +1,8 @@
 # Django settings for subkoord project.
+import os
+import sys
+PROJECT_ROOT = os.path.join(os.path.dirname(__file__), "..")
+sys.path.insert(0, os.path.join(PROJECT_ROOT, "apps"))
 
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
@@ -9,7 +13,7 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
-# Django 1.2
+# Django 1.4
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
@@ -45,6 +49,11 @@ USE_I18N = True
 # calendars according to the current locale
 USE_L10N = True
 
+
+LOCALE_PATHS = (
+    os.path.join(PROJECT_ROOT, "locale"),
+)
+
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"
 MEDIA_ROOT = '/home/.../media/'
@@ -59,7 +68,7 @@ SITE_URL = 'http://domain.com'
 
 # Static File configuration
 STATICFILES_DIRS = (
-    '/home/.../static/',
+    os.path.join(PROJECT_ROOT, "static/"),
 )
 
 STATIC_URL = 'http://domain.com/static/'
@@ -97,7 +106,7 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    "/home/.../subkoord/templates"
+    os.path.join(PROJECT_ROOT, "templates"),
 )
 
 INSTALLED_APPS = (
@@ -123,8 +132,6 @@ INSTALLED_APPS = (
 )
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
-CACHE_BACKEND = 'file:///var/.../cache'
 
 BACKUP_DIR = '/home/.../backup/'
 

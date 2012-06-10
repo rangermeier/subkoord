@@ -1,0 +1,611 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-06-10 15:36+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: templates/404.html:12 templates/500.html:12 templates/base.html:52
+msgid "view events"
+msgstr "Kalender"
+
+#: templates/404.html:13 templates/500.html:13 templates/base.html:53
+#: templates/wiki/home.html:6
+msgid "Wiki"
+msgstr "Wiki"
+
+#: templates/base.html:25 templates/newsletter/error_mailbox.html:33
+#: templates/newsletter/error_mailbox.html:41
+#: templates/newsletter/error_mailbox.html:75
+#: templates/newsletter/subscribers.html:19
+msgid "really?"
+msgstr "wirklich?"
+
+#: templates/base.html:50
+msgid "Sub-Koordinator"
+msgstr "Sub-Koordinator"
+
+#: templates/base.html:55 templates/newsletter/index.html:5
+msgid "Newsletter"
+msgstr "Newsletter"
+
+#: templates/base.html:70
+msgid "admin"
+msgstr "admin"
+
+#: templates/base.html:74
+msgid "logout"
+msgstr "abmelden"
+
+#: templates/email/newsletter_confirm.html:3
+#, python-format
+msgid "Hello %(name)s!"
+msgstr "Hallo %(name)s!"
+
+#: templates/email/newsletter_confirm.html:4 templates/email/open_tasks.html:3
+msgid "Hello!"
+msgstr "Hallo!"
+
+#: templates/email/newsletter_confirm.html:5
+msgid "Please click the following link to confirm your subscription:"
+msgstr ""
+"Bitte den folgenden Link anklicken, um das Newsletter-Abo zu bestätigen:"
+
+#: templates/email/newsletter_confirm.html:8
+msgid "Thanks for subscribing"
+msgstr ""
+"Danke für Dein Interesse!\n"
+"\n"
+"Ergebenst, das Subterrarium-Kompetenzteam"
+
+#: templates/email/open_tasks.html:4
+msgid "There are open tasks:"
+msgstr "Es gibt offene Dienste:"
+
+#: templates/email/open_tasks.html:12 templates/event/event.html:21
+msgid "Info"
+msgstr "Info"
+
+#: templates/email/open_tasks.html:15 templates/event/event.html:59
+msgid "Notes"
+msgstr "Anmerkungen"
+
+#: templates/email/open_tasks.html:20
+msgid "Thanks for your kind attention :)"
+msgstr "Vielen Dank für Deine Aufmerksamkeit :)"
+
+#: templates/event/event.html:10 templates/newsletter/error_mailbox.html:159
+#: templates/newsletter/subscribers.html:67 templates/wiki/page.html:11
+msgid "edit"
+msgstr "bearbeiten"
+
+#: templates/event/event.html:11 templates/event/event_edit.html:10
+msgid "delete event"
+msgstr "Termin löschen"
+
+#: templates/event/event.html:12 templates/event/event_edit.html:11
+#: templates/event/events.html:23
+msgid "add another event"
+msgstr "neuen Termin anlegen"
+
+#: templates/event/event.html:18
+msgid "Type"
+msgstr "Typ"
+
+#: templates/event/event.html:31
+msgid "Tasks"
+msgstr "Dienste"
+
+#: templates/event/event.html:40
+msgid "remove me"
+msgstr "mich entfernen"
+
+#: templates/event/event.html:47
+msgid "add me"
+msgstr "mich hinzufügen"
+
+#: templates/event/event.html:72
+msgid "add note"
+msgstr "Anmerkung hinzufügen"
+
+#: templates/event/event_edit.html:5
+msgid "Edit event"
+msgstr "Termin bearbeiten"
+
+#: templates/event/event_edit.html:9 templates/wiki/edit.html:27
+msgid "back"
+msgstr "zurück"
+
+#: templates/event/event_edit.html:21 templates/event/event_new.html:14
+#: templates/newsletter/subscriber.html:21
+#: templates/newsletter/subscribers_add.html:49
+#: templates/users/user_edit.html:11 templates/wiki/edit.html:49
+msgid "save"
+msgstr "speichern"
+
+#: templates/event/event_form.html:54
+msgid "no staff requirements"
+msgstr "keine Dienste"
+
+#: templates/event/event_form.html:58 templates/event/event_form.html.py:61
+#: templates/event/event_form.html:64
+#, python-format
+msgid "one person"
+msgid_plural "%(persons)s persons"
+msgstr[0] "eine Person"
+msgstr[1] " %(persons)s Personen"
+
+#: templates/event/event_new.html:5
+msgid "New event"
+msgstr "Neuer Termin"
+
+#: templates/event/events.html:7
+msgid "Events"
+msgstr "Termine"
+
+#: templates/event/events.html:26
+msgid "view current month"
+msgstr "zum aktuellen Datum"
+
+#: templates/event/events.html:28
+msgid "view archive"
+msgstr "Termin-Archiv"
+
+#: templates/event/events.html:30
+msgid "calendar as ical"
+msgstr "Kalender abonieren (ical)"
+
+#: templates/event/month_cal.html:18
+msgid "add event with this date"
+msgstr "Veranstaltung für dieses Datum anlegen"
+
+#: templates/event/month_cal.html:35
+msgid "previous month"
+msgstr "voriges Monat"
+
+#: templates/event/month_cal.html:45
+msgid "next month"
+msgstr "nächstes Monat"
+
+#: templates/newsletter/error_mailbox.html:90
+msgid "Error Mailbox"
+msgstr "Error-Mailbox"
+
+#: templates/newsletter/error_mailbox.html:94
+#: templates/newsletter/index.html:62 templates/newsletter/job_new.html:10
+#: templates/newsletter/message.html:37 templates/newsletter/messages.html:10
+msgid "compose message"
+msgstr "Nachricht erstellen"
+
+#: templates/newsletter/error_mailbox.html:96
+#: templates/newsletter/index.html:38 templates/newsletter/subscribers.html:38
+msgid "Mailinglists"
+msgstr "Mailinglisten"
+
+#: templates/newsletter/error_mailbox.html:113
+msgid "How to use this page"
+msgstr "Erklärungen"
+
+#: templates/newsletter/error_mailbox.html:114
+msgid ""
+"This page shows list of e-mails which are returned or rejected by the mail-"
+"server of subscribers\n"
+"(e.g. mailbox is full, account is unknown to server, the e-mail is declared "
+"&quot;spam&quot; for some reason, etc.)\n"
+"or which can't be delivered in the first place (e.g. the server is offline, "
+"name is misspelled).\n"
+"Both can be temporary problems, so it's usually not advisable to delete an "
+"subscriber on the first returned e-mail.\n"
+"When a series of e-mails had been bounced by one subscribers it's safe to "
+"assume further sending of e-mails is useless\n"
+"and one can delete the subscriber.<br />\n"
+"Some e-mails <a href=\"#unassigned\">can't be related to a subscriber</a>. "
+"These e-mails will be shown in a separate list at the end of the page.\n"
+msgstr ""
+"Auf dieser Seite werden e-Mails gezeigt, welche vom Mail-Server eines "
+"Abonnenten retourniert oder zurückgewiesen wurden (z.B. e-Mail-Adresse "
+"unbekannt, Mailbox voll, e-Mail wurde als Spam eingestuft) oder die gar "
+"nicht an einen fremden Mailserver verschickt werden konnten (Server offline, "
+"Domain-Name falsch, etc.).\n"
+"In beiden Fällen kann es sich um temporäre Probleme handeln. Daher wäre es "
+"nicht ratsam einen Abonnenten bereits nach dem ersten missglückten "
+"Zustellversuch zu löschen. Wenn bereits mehrere Fehlermeldungen zu einem "
+"Abonnenten vorliegen ist es jedoch sinnvoll diesen zu löschen.<br />\n"
+"Am Ende der Seite werden e-Mails gelistet, die <a href=\"#unassigned"
+"\">keinem Abonnenten zugeordnet</a> werden können.\n"
+
+#: templates/newsletter/error_mailbox.html:125
+#: templates/newsletter/subscribers.html:50
+msgid "Filter"
+msgstr "Filter"
+
+#: templates/newsletter/error_mailbox.html:127
+msgid "invert"
+msgstr "invertieren"
+
+#: templates/newsletter/error_mailbox.html:128
+msgid "clear"
+msgstr "löschen"
+
+#: templates/newsletter/error_mailbox.html:131
+#: templates/newsletter/subscribers.html:6
+msgid "Subscribers"
+msgstr "Abonnenten"
+
+#: templates/newsletter/error_mailbox.html:132
+#: templates/newsletter/error_mailbox.html:138
+msgid "select all"
+msgstr "alle auswählen"
+
+#: templates/newsletter/error_mailbox.html:133
+#: templates/newsletter/error_mailbox.html:139
+#: templates/newsletter/error_mailbox.html:188
+msgid "invert selection"
+msgstr "Auswahl invertieren"
+
+#: templates/newsletter/error_mailbox.html:134
+#: templates/newsletter/error_mailbox.html:140
+#: templates/newsletter/error_mailbox.html:189
+msgid "delete selected"
+msgstr "Ausgewählte löschen"
+
+#: templates/newsletter/error_mailbox.html:137
+#: templates/newsletter/error_mailbox.html:186
+msgid "Emails"
+msgstr "e-Mails"
+
+#: templates/newsletter/error_mailbox.html:145
+msgid "Subscriber"
+msgstr "Abonnent"
+
+#: templates/newsletter/error_mailbox.html:146
+#: templates/newsletter/message_preview.html:5
+msgid "Subject"
+msgstr "Betreff"
+
+#: templates/newsletter/error_mailbox.html:147
+#: templates/newsletter/job.html:15 templates/newsletter/subscribers.html:56
+msgid "Date"
+msgstr "Datum"
+
+#: templates/newsletter/error_mailbox.html:158
+msgid "delete Subscriber"
+msgstr "Abonnenten löschen"
+
+#: templates/newsletter/error_mailbox.html:166
+#: templates/newsletter/error_mailbox.html:204
+#: templates/newsletter/subscriber.html:20
+#: templates/newsletter/subscribers.html:68
+msgid "delete"
+msgstr "löschen"
+
+#: templates/newsletter/error_mailbox.html:170
+#: templates/newsletter/error_mailbox.html:208
+msgid "Recipient"
+msgstr "Empfänger"
+
+#: templates/newsletter/error_mailbox.html:171
+#: templates/newsletter/error_mailbox.html:209
+msgid "Sender"
+msgstr "Sender"
+
+#: templates/newsletter/error_mailbox.html:172
+#: templates/newsletter/error_mailbox.html:210
+msgid "Body"
+msgstr "Text"
+
+#: templates/newsletter/error_mailbox.html:184
+msgid "Mails not assigned to a subscriber"
+msgstr "e-Mails die keinem Abonnenten zugeordnet werden können"
+
+#: templates/newsletter/error_mailbox.html:187
+msgid "select all unassigned"
+msgstr "alle nicht zugeordneten auswählen"
+
+#: templates/newsletter/index.html:11
+msgid "Messages"
+msgstr "Nachrichten"
+
+#: templates/newsletter/index.html:17
+msgid "now sending to"
+msgstr "wird momentan gesendet an"
+
+#: templates/newsletter/index.html:19 templates/newsletter/index.html.py:26
+msgid "and"
+msgstr "und"
+
+#: templates/newsletter/index.html:20 templates/newsletter/message.html:106
+msgid "status"
+msgstr "Status"
+
+#: templates/newsletter/index.html:24
+msgid "already send to"
+msgstr "bereits gesendet an"
+
+#: templates/newsletter/index.html:33
+msgid "view all messages"
+msgstr "alle Nachrichten anzeigen"
+
+#: templates/newsletter/index.html:42
+#: templates/newsletter/subscribers_add.html:22
+msgid "view subscribers"
+msgstr "Abonnenten anzeigen"
+
+#: templates/newsletter/index.html:43 templates/newsletter/subscribers.html:35
+msgid "add subscribers"
+msgstr "Abonnenten hinzufügen"
+
+#: templates/newsletter/index.html:47
+msgid "Latest Subscribers"
+msgstr "neue Abonnenten"
+
+#: templates/newsletter/index.html:63 templates/newsletter/message.html:39
+#: templates/newsletter/messages.html:11
+#: templates/newsletter/subscribers.html:45
+#: templates/newsletter/subscribers_add.html:24
+msgid "view error mailbox"
+msgstr "Error-Mailbox"
+
+#: templates/newsletter/job.html:6
+msgid "Sending"
+msgstr "Sende"
+
+#: templates/newsletter/job.html:6
+msgid "to"
+msgstr "an"
+
+#: templates/newsletter/job.html:11
+msgid "e-Mail"
+msgstr "e-Mail"
+
+#: templates/newsletter/job.html:13
+msgid "To list"
+msgstr "an Liste"
+
+#: templates/newsletter/job.html:14
+msgid "Sent by"
+msgstr "Auftrag erstellt von"
+
+#: templates/newsletter/job.html:19
+msgid "e-mails sent"
+msgstr "e-mails versendet"
+
+#: templates/newsletter/job.html:21
+#, python-format
+msgid ""
+"\n"
+"    %(sent)s of %(total)s already sent (%(percentage)s %%)"
+msgstr ""
+"\n"
+"%(sent)s von %(total)s versendet (%(percentage)s %%)"
+
+#: templates/newsletter/jobs.html:6
+msgid "Job Archive"
+msgstr "Auftrags-Archiv"
+
+#: templates/newsletter/message.html:6
+msgid "Message"
+msgstr "Nachricht"
+
+#: templates/newsletter/message.html:8
+msgid "Compose a Message"
+msgstr "Nachricht erstellen"
+
+#: templates/newsletter/message.html:14
+msgid ""
+"Once you create a job for a message, \\nyou can't change the message anymore "
+"and it will be send \\nout to everybody on the selected mailinglist."
+msgstr ""
+"Nachdem der Sendeauftrag erstellt wurde, kann an der \\nNachricht nichts "
+"mehr geändert werden und sie wird \\nsukzessive an die Personen auf der "
+"Mailingliste versendet."
+
+#: templates/newsletter/message.html:25 templates/wiki/edit.html:17
+msgid "choose"
+msgstr "auswählen"
+
+#: templates/newsletter/message.html:48
+msgid "Preview"
+msgstr "Vorschau"
+
+#: templates/newsletter/message.html:54
+msgid "Test-send"
+msgstr "Test-Versand"
+
+#: templates/newsletter/message.html:60
+msgid "send Preview"
+msgstr "Vorschau versenden"
+
+#: templates/newsletter/message.html:70
+msgid "Edit"
+msgstr "Bearbeiten"
+
+#: templates/newsletter/message.html:78
+#: templates/newsletter/message_preview.html:11 templates/wiki/edit.html:38
+#: templates/wiki/page.html:29
+msgid "Attachments"
+msgstr "Anhänge"
+
+#: templates/newsletter/message.html:88
+msgid "save Message"
+msgstr "Nachricht speichern"
+
+#: templates/newsletter/message.html:98
+msgid "Send"
+msgstr "Senden"
+
+#: templates/newsletter/message.html:104
+msgid "sent"
+msgstr "gesendet"
+
+#: templates/newsletter/message.html:107
+msgid "finished "
+msgstr "abgeschlossen"
+
+#: templates/newsletter/message.html:112
+msgid "Send Message"
+msgstr "Nachricht versenden"
+
+#: templates/newsletter/message.html:118
+msgid "create Job"
+msgstr "Auftrag erstellen"
+
+#: templates/newsletter/message_preview.html:7
+msgid "Text (HTML)"
+msgstr "HTML-Ansicht"
+
+#: templates/newsletter/message_preview.html:9
+msgid "Text plain"
+msgstr "einfacher Text"
+
+#: templates/newsletter/messages.html:6
+msgid "Message Archive"
+msgstr "Nachrichten-Archiv"
+
+#: templates/newsletter/subscriber.html:6
+msgid "Subscriber list"
+msgstr "Mailingliste"
+
+#: templates/newsletter/subscriber_add.html:4
+msgid "subscribe to Newsletter"
+msgstr "Newsletter abonieren"
+
+#: templates/newsletter/subscriber_add.html:12
+msgid "subscribe"
+msgstr "abonnieren"
+
+#: templates/newsletter/subscribers.html:36
+#: templates/newsletter/subscribers_add.html:23
+msgid "public subscription form"
+msgstr "öffentliches Abo-Formular"
+
+#: templates/newsletter/subscribers.html:51
+msgid "filter unconfirmed"
+msgstr "nur unbestätigte anzeigen"
+
+#: templates/newsletter/subscribers.html:54
+#: templates/newsletter/subscribers_add.html:33
+msgid "e-mail"
+msgstr "e-Mail"
+
+#: templates/newsletter/subscribers.html:55
+msgid "Name"
+msgstr "Name"
+
+#: templates/newsletter/subscribers.html:66
+msgid "unconfirmed"
+msgstr "unbestätigt"
+
+#: templates/newsletter/subscribers_add.html:5
+#, python-format
+msgid "Add subscribers to %(name)s"
+msgstr "Abonnenten zu %(name)s hinzufügen"
+
+#: templates/newsletter/subscribers_add.html:34
+msgid "Name (optional)"
+msgstr "Name (optional)"
+
+#: templates/newsletter/subscribers_add.html:34
+msgid "hide/show"
+msgstr "zeige/verstecke"
+
+#: templates/newsletter/subscription_delete.html:4
+msgid "Cancel Subscription "
+msgstr "Abo beenden"
+
+#: templates/newsletter/subscription_delete.html:10
+#, python-format
+msgid ""
+"\n"
+"Do you want to remove address %(email)s@&hellip; from mailing list <em>"
+"%(subscription)s</em>?\n"
+msgstr ""
+"\n"
+"Möchtest du die Adresse %(email)s@&hellip; aus dem Verteiler <em>"
+"%(subscription)s</em> entfernen?\n"
+
+#: templates/newsletter/subscription_delete.html:14
+msgid "Yes, cancel my subscription!"
+msgstr "Ja, Abo beenden!"
+
+#: templates/registration/login.html:17
+msgid "login"
+msgstr "anmelden"
+
+#: templates/users/user.html:21
+msgid "No jobs yet..."
+msgstr "Bislang noch keine Dienste..."
+
+#: templates/users/user.html:28 templates/users/user_edit.html:17
+msgid "list all users"
+msgstr "Alle NutzerInnen anzeigen"
+
+#: templates/users/user.html:29 templates/users/user_list.html:27
+#: templates/users/user_statistics.html:6
+msgid "statistics"
+msgstr "Statistik"
+
+#: templates/users/user.html:31 templates/users/user_edit.html:18
+#: templates/users/user_list.html:24 templates/users/user_statistics.html:56
+msgid "view my profile"
+msgstr "mein Profil anzeigen"
+
+#: templates/users/user.html:33 templates/users/user_list.html:26
+#: templates/users/user_statistics.html:58
+msgid "change my password"
+msgstr "mein Passwort ändern"
+
+#: templates/users/user_list.html:6
+msgid "Users"
+msgstr "NutzerInnen"
+
+#: templates/users/user_statistics.html:19
+msgid "user"
+msgstr "NutzerIn"
+
+#: templates/users/user_statistics.html:23
+msgid "sum"
+msgstr "Summe"
+
+#: templates/users/user_statistics.html:48
+msgid "year"
+msgstr "Jahr"
+
+#: templates/wiki/edit.html:28
+msgid "Delete"
+msgstr "Löschen"
+
+#: templates/wiki/home.html:10 templates/wiki/page.html:12
+msgid "new page"
+msgstr "neue Seite"
+
+#: templates/wiki/page.html:22
+#, python-format
+msgid ""
+"\n"
+"            last edited by %(author)s, <br /> %(last_changed)s.\n"
+"            "
+msgstr ""
+"\n"
+"\t\tzuletzt bearbeitet von %(author)s, <br /> %(last_changed)s.\n"
+"\t\t"
+
+#: templates/wiki/page.html:25
+#, python-format
+msgid "Wiki-link to this page: <code>[[%(title)s]]</code>"
+msgstr "Wiki-Link zu dieser Seite: <code>[[%(title)s]]</code>"
+
+#: templates/wiki/page.html:26
+msgid "edit page"
+msgstr "Seite bearbeiten"

@@ -7,22 +7,22 @@ admin.autodiscover()
 
 
 urlpatterns = patterns('',
-    (r'^event/', include('subkoord.event.urls')),
-    (r'^user/', include('subkoord.users.urls')),
-    (r'^wiki/', include('subkoord.wiki.urls')),
+    (r'^event/', include('event.urls')),
+    (r'^user/', include('users.urls')),
+    (r'^wiki/', include('wiki.urls')),
     (r'^grappelli/', include('grappelli.urls')),
-    (r'^newsletter/', include('subkoord.newsletter.urls')),
+    (r'^newsletter/', include('newsletter.urls')),
     (r'^admin/filebrowser/', include(site.urls)),
     (r'^admin/', include(admin.site.urls)),
     (r'^tinymce/', include('tinymce.urls')),
-    url(r'^$', 'subkoord.event.views.event_cal', name="home"),
+    url(r'^$', 'event.views.event_cal', name="home"),
     url(r'^accounts/$',
         'django.contrib.auth.views.login', ),
     url(r'^accounts/login/$',
         'django.contrib.auth.views.login',
         name='login', ),
     url(r'^accounts/logout/$',
-        'subkoord.users.views.logout_view',
+        'users.views.logout_view',
         name='logout', ),
 )
 
