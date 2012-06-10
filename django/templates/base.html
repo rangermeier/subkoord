@@ -21,7 +21,7 @@
     <script type="text/javascript">
     $(document).ready(function() {
         $("#messages").delay(5000).fadeOut("slow");
-        $("a[class*='delete']").click(function(){
+        $("a[class*='-delete']").click(function(){
             return confirm("{% trans "really?" %}");
         });
         var app = window.location.pathname.split("/")[1];
