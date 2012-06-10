@@ -10,6 +10,12 @@
         var opacity = $(this).is(":checked") ? 0.3 : 1;
         $(this).closest(".control-group").prev().css("opacity", opacity);
     });
+    $("a.wiki-delete").click(function(ev){
+        ev.preventDefault();
+        if(confirm("{% trans "really?" %}")) {
+            $(this).siblings("form").submit();
+        }
+    })
 {%endblock jquery %}
 
 {% block css %}
@@ -25,7 +31,12 @@ fieldset.fb_form a.fb_show:after {
 {% block navigation %}
     {%if page.title %}
     <li><a href="{% url wiki_page page.title %}">{% trans "back" %}</a></li>
-    <li><a href="{% url wiki_delete page.title %}" class="wiki-delete">{% trans "Delete" %}</a></li>
+    <li>
+        <a href="#" class="wiki-delete">{% trans "Delete" %}</a>
+        <form action="{% url wiki_delete page.title %}" method="POST" class="hidden">
+        {% csrf_token %}
+        </form>
+    </li>
     {% endif %}
 {% endblock navigation %}
 
