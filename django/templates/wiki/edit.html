@@ -32,7 +32,7 @@ fieldset.fb_form a.fb_show:after {
     {%if page.title %}
     <li><a href="{% url wiki_page page.title %}">{% trans "back" %}</a></li>
     <li>
-        <a href="#" class="wiki-_delete">{% trans "Delete" %}</a>
+        <a href="#" class="wiki_delete">{% trans "Delete" %}</a>
         <form action="{% url wiki_delete page.title %}" method="POST" class="hidden">
         {% csrf_token %}
         </form>
