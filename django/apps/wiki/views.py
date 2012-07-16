@@ -61,4 +61,6 @@ def delete(request, title):
         page = get_object_or_404(Wikipage, title__exact=title)
         page.delete()
         messages.success(request, _("Deleted Wiki-Page %s." % (title)))
+    else:
+        messages.error(request, _("Couldn't delete Wiki-Page %s." % (title)))
     return HttpResponseRedirect(reverse('wiki_index'))

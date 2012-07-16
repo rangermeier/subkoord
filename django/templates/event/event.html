@@ -31,8 +31,10 @@
         <h3>{% trans "Tasks" %}</h3>
         <div class="row-fluid tasks">
         {% for task in event.tasks %}
-            <div class="span2 task">
-                <p><span class="label label-{% if task in event.open_tasks %}warning{% else %}info{% endif %}">{{ task.name }}</span></p>
+            <div class="span3 task">
+                <h4>{% if task in event.open_tasks %}<i class="icon-warning-sign"></i>{% endif %}
+                    {{ task.name }}
+                </h4>
             {% for job in event.jobs %}
                 {% if task == job.task %}
                     <p><a href="{% url user_view job.user.id %}">{{ job.user }}</a>
