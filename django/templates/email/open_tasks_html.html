@@ -1,0 +1,39 @@
+{% load i18n %}
+
+<p>{% trans "Hello!" %}<br />
+{% trans "There are open tasks:" %}</p>
+
+
+{% for event in events %}
+<h3>{{ event.date|date:"D, j. n. Y, H:i" }} -
+    <a href="{{ site_url }}{% url event event.id %}">{{ event.title }}</a>
+</h3>
+<ul>
+    {% for task in event.tasks %}
+    <li>{{ task.name }}: {% for job in event.jobs %}
+            {% if task == job.task %}{{ job.user }}, {% endif %}
+        {% endfor %}
+        {% if task in event.open_tasks %}<b>???</b>{% endif %}
+    </li>
+    {% endfor %}
+</ul>
+{% if event.info %}
+    <h4>{% trans "Info" %}:</h4>
+    <div>{{ event.info|safe }}</div>
+{% endif %}
+{% if event.notes|length %}
+    <h4>{% trans "Notes" %}:</h4>
+    <ul>
+    {% for note in event.notes.all %}
+        <li><em>{{ note.user }}:</em> {{ note.note }}</li>
+    {% endfor %}
+    </ul>
+{% endif %}
+<p>URL:<a href="{{ site_url }}{% url event event.id %}">{{ site_url }}{% url event event.id %}</a></p>
+
+<hr />
+{% endfor %}
+
+<p>
+{% trans "Thanks for your kind attention :)" %}
+</p>

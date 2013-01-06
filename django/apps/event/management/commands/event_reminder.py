@@ -1,6 +1,6 @@
 from django.core.management.base import NoArgsCommand
 from django.template import loader
-from django.core.mail import send_mail
+from django.core.mail import EmailMultiAlternatives
 from django.conf import settings
 from django.utils import translation
 from datetime import datetime, timedelta
@@ -24,12 +24,19 @@ class Command(NoArgsCommand):
                 events = events.exclude(id = event.id)
         if events.count() > 0 and events_in_remind_window:
             translation.activate(settings.LANGUAGE_CODE)
-            #addressbook = [u.email for u in User.objects.all()]
-            addressbook = settings.EVENT_REMINDER_ADDRESSBOOK
-            body = loader.render_to_string("email/open_tasks.html",
+            text_plain = loader.render_to_string("email/open_tasks.html",
                 {'events': events, 'site_url': settings.SITE_URL,})
-            send_mail( settings.EVENT_REMINDER_SUBJECT, body,
-                settings.EVENT_REMINDER_FROM, addressbook, )
+            text_html = loader.render_to_string("email/open_tasks_html.html",
+                {'events': events, 'site_url': settings.SITE_URL,})
+            mail = EmailMultiAlternatives(
+                subject = settings.EVENT_REMINDER_SUBJECT,
+                body = text_plain,
+                from_email = settings.EVENT_REMINDER_FROM,
+                to = settings.EVENT_REMINDER_ADDRESSBOOK,
+                headers = {'From': settings.EVENT_REMINDER_FROM },
+            )
+            mail.attach_alternative(text_html, "text/html")
+            mail.send()
             for event in events:
               event.cron = datetime.now()
               event.save()
