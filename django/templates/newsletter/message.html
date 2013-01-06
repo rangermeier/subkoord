@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load i18n %}
+{% load crispy_forms_tags %}
 
 {% block heading %}
 {% if message %}
@@ -45,7 +46,10 @@ fieldset.fb_form a.fb_show:after {
 {% if message %}
     <div class="accordion-group">
         <div class="accordion-head">
-            <h3 id="preview" data-toggle="collapse" data-target="#preview-collapsible" data-parent="#compose">{% trans "Preview" %}</h3>
+            <h3 id="preview" data-toggle="collapse" data-target="#preview-collapsible" data-parent="#compose">
+                <i class="icon-chevron-right"></i><i class="icon-chevron-down"></i>
+                {% trans "Preview" %}
+            </h3>
         </div>
         <div id="preview-collapsible" class="collapse accordion-body">
             <dl>
@@ -54,7 +58,7 @@ fieldset.fb_form a.fb_show:after {
             <h4>{% trans "Test-send" %}</h4>
             <form action="{% url message_preview message.id %}" method="post" id="preview-form" class="form-horizontal">
                 {%  csrf_token  %}
-                {{ preview_form }}
+                {{ preview_form|crispy }}
 
                 <div class="form-actions">
                     <button type="submit" class="btn btn-primary">{% trans "send Preview" %}</button>
@@ -67,21 +71,28 @@ fieldset.fb_form a.fb_show:after {
 {% if not message.locked %}
     <div class="accordion-group">
         <div class="accordion-head">
-            <h3 id="edit" data-toggle="collapse" data-target="#edit-collapsible" data-parent="#compose">{% trans "Edit" %}</h3>
+            <h3 id="edit" data-toggle="collapse" data-target="#edit-collapsible" data-parent="#compose">
+                <i class="icon-chevron-right"></i><i class="icon-chevron-down"></i>
+                {% trans "Edit" %}
+            </h3>
         </div>
         <div id="edit-collapsible" class="collapse {% if message %}in {% endif %}accordion-body">
             <form action={% if message %}"{% url message message.id%}" enctype="multipart/form-data"{% else %}"{% url message_new %}"{% endif %} method="post" class="newsletter-form form-horizontal" id="message-form">
             {%  csrf_token  %}
-                {{ message_form }}
+                {{ message_form|crispy }}
 
                 <div>
+                {% if message %}
                     <h4>{% trans "Attachments"%}</h4>
                     {{ attachment_formset.management_form }}
                     {% for form in attachment_formset %}
                         <fieldset class="fb_form">
-                        {{ form  }}
+                        {{ form|crispy  }}
                         </fieldset>
                     {% endfor %}
+                {% else %}
+                    <div class="alert alert-info">{% trans "Attachments can be added after the message is saved." %}</div>
+                {% endif %}
                 </div>
 
                 <div class="form-actions">
@@ -95,7 +106,10 @@ fieldset.fb_form a.fb_show:after {
 {% if message %}
     <div class="accordion-group">
         <div class="accordion-head">
-            <h3 id="send"data-toggle="collapse" data-target="#send-collapsible" data-parent="#compose">{% trans "Send" %}</h3>
+            <h3 id="send"data-toggle="collapse" data-target="#send-collapsible" data-parent="#compose">
+                <i class="icon-chevron-right"></i><i class="icon-chevron-down"></i>
+                {% trans "Send" %}
+            </h3>
         </div>
         <div id="send-collapsible" class="collapse in accordion-body">
             {% if message.jobs.all %}
@@ -111,7 +125,7 @@ fieldset.fb_form a.fb_show:after {
             {% endif %}
             <h4>{% trans "Send Message" %}</h4>
             <form action="{% url job_new %}" method="POST" id="job-form" class="form-horizontal">
-                {{ job_form}}
+                {{ job_form|crispy }}
                 {% csrf_token %}
 
             <div class="form-actions">

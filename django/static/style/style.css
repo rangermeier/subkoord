@@ -78,14 +78,33 @@ a.day_new_event.label {
 /* Newsletter */
 
 #compose h3 {
-    padding: 0.5em;
+    padding: 0 0.5em;
 }
 #compose .collapse.in {
     border-top: 1px solid #ccc;
-    padding-top: 1em;
+    padding: 1em 1em 0;
 }
 #compose .collapse .form-actions, #compose .collapse .form-horizontal {
     margin-bottom: 0;
+}
+#compose .collapse .form-actions {
+    margin: 0 -1em;
+}
+#compose .collapse .form-actions > * {
+    margin-left: 1em;
+}
+/* toggle chevron in header */
+.accordion-head i[class^='icon-']{
+    vertical-align: initial;
+}
+.accordion-head .icon-chevron-down {
+    display: none;
+}
+.accordion-head .collapsed .icon-chevron-right{
+    display: none;
+}
+.accordion-head .collapsed .icon-chevron-down {
+    display: inline-block;
 }
 
 .newsletter .active {

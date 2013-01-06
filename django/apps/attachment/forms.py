@@ -6,10 +6,9 @@ from django.contrib.contenttypes.models import ContentType
 from django.utils.translation import ugettext as _
 from django.conf import settings
 from models import Attachment
-from bootstrap.forms import BootstrapMixin
 
 
-class AttachmentForm(BootstrapMixin, ModelForm):
+class AttachmentForm(ModelForm):
     def clean_file(self):
         file = self.cleaned_data['file']
         if len(file) == 0:

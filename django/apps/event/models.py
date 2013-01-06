@@ -3,7 +3,6 @@ from django.contrib.auth.models import User
 from django import forms
 from django.utils.translation import ugettext as _
 from django.forms import ModelForm
-from bootstrap.forms import BootstrapMixin, Fieldset, BootstrapForm
 from tinymce.widgets import TinyMCE
 
 class Task(models.Model):
@@ -114,12 +113,12 @@ class Note(models.Model):
     def __unicode__(self):
         return self.note[:25] + "..."
 
-class EventForm(BootstrapMixin, ModelForm):
+class EventForm(ModelForm):
     class Meta:
         model = Event
         widgets = {
             'info': TinyMCE(),
         }
 
-class NoteForm(BootstrapForm):
+class NoteForm(ModelForm):
     note = forms.CharField()

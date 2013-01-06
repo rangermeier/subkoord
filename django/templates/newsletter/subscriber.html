@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load i18n %}
+{% load crispy_forms_tags %}
 
 
 {% block navigation %}
@@ -9,7 +10,7 @@
 {% block content %}
 <form action="{% url subscriber subscriber.id %}" method="post" class="event-form form-horizontal">
 {%  csrf_token  %}
-    {{ form }}
+    {{ form|crispy }}
 
     <div class="control-group">
         <div class="control-label">Token</div>

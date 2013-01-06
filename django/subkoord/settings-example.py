@@ -118,7 +118,7 @@ INSTALLED_APPS = (
     'django.contrib.flatpages',
     'django.contrib.staticfiles',
     'south',
-    'bootstrap',
+    'crispy_forms',
     'tinymce',
     'grappelli',
     'filebrowser',

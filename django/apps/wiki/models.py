@@ -8,7 +8,6 @@ from django.core.validators import RegexValidator
 from django.utils.translation import ugettext as _
 from django.contrib.contenttypes import generic
 from attachment.models import Attachment
-from bootstrap.forms import BootstrapMixin
 from tinymce.widgets import TinyMCE
 
 class Wikicategory(models.Model):
@@ -31,7 +30,7 @@ class Wikipage(models.Model):
     def __unicode__(self):
         return self.title
 
-class WikipageForm(BootstrapMixin, ModelForm):
+class WikipageForm(ModelForm):
     class Meta:
         model = Wikipage
         widgets = {

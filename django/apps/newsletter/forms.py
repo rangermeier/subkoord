@@ -7,19 +7,18 @@ from django.conf import settings
 from django.utils.translation import ugettext as _
 from extraformfields import *
 from models import Subscriber, Message, List
-from bootstrap.forms import BootstrapMixin, BootstrapForm
 from tinymce.widgets import TinyMCE
 
-class SubscriberForm(BootstrapMixin, ModelForm):
+class SubscriberForm(ModelForm):
     class Meta:
         model = Subscriber
 
-class SubscriberFormPublic(BootstrapMixin, ModelForm):
+class SubscriberFormPublic(ModelForm):
     class Meta:
         model = Subscriber
         fields = ('name', 'email')
 
-class MessageForm(BootstrapMixin, ModelForm):
+class MessageForm(ModelForm):
     class Meta:
         model = Message
         fields = ('subject', 'text')
@@ -32,7 +31,7 @@ class MessageForm(BootstrapMixin, ModelForm):
             }),
         }
 
-class JobForm(BootstrapMixin, forms.Form):
+class JobForm(forms.Form):
     message = FeaturedModelChoiceField(queryset = Message.objects.all(),
         featured_queryset = Message.objects.filter(locked=False),
         label = _('Message'),
@@ -41,13 +40,13 @@ class JobForm(BootstrapMixin, forms.Form):
         label = _('To list'),
     )
 
-class JobMessageForm(BootstrapForm):
+class JobMessageForm(forms.Form):
     message = IntegerField(widget = forms.HiddenInput,)
     to = ModelChoiceField(queryset = List.objects.all(),
         label = _('To list'),
     )
 
-class PreviewMessageForm(BootstrapForm):
+class PreviewMessageForm(forms.Form):
     message = IntegerField(widget = forms.HiddenInput,)
     to = ModelChoiceField(queryset =
         List.objects.annotate(recipients_count=Count('recipients')).filter(recipients_count__lt=settings.NEWSLETTER_PREVIEW_LIST),

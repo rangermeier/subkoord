@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load wikitags %}
 {% load i18n %}
-
+{% load crispy_forms_tags %}
 
 
 {%block jquery %}
@@ -43,14 +43,14 @@ fieldset.fb_form a.fb_show:after {
 {% block contentcontainer %}
 <form action="{% url wiki_edit page.title %}" class="wiki-form form-horizontal" method="POST">
 
-    {{ form }}
+    {{ form|crispy }}
 
     <div class="attachments">
         <h4>{% trans "Attachments"%}</h4>
         {{ attachment_formset.management_form.as_p }}
         {% for form in attachment_formset %}
             <fieldset class="fb_form">
-            {{ form  }}
+            {{ form|crispy  }}
             </fieldset>
         {% endfor %}
     </div>

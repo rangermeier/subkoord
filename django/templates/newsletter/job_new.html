@@ -1,24 +1,19 @@
 {% extends "base.html" %}
 {% load i18n %}
+{% load crispy_forms_tags %}
 
 {% block heading %}
 {{ subscriber.email }}
 {% endblock heading %}
 
-{% block navigation %}
-	<ul>
-		<li><a href="{% url message_new %}">{% trans "compose message" %}</a></li>
-	</ul>
-{% endblock navigation %}
-
 {% block content %}
-<form action="{% url job_new %}" method="post" class="event-form">
-{%  csrf_token  %}
-<ul>
-	{{ form.as_ul }}
-</ul>
+<form action="{% url job_new %}" method="post" class="event-form form-horizontal">
+    {%  csrf_token  %}
+    {{ form|crispy }}
 
-<input type="submit" />
+    <div class="form-actions">
+        <button type="submit" class="btn btn-primary">{% trans "Send" %}</button>
+    </div>
 </form>
 
 
