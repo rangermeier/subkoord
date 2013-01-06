@@ -22,6 +22,10 @@
     border-radius: 0;
 }
 
+.centered {
+    text-align: center;
+}
+
 /* Event */
 
 .cal_month_calendar td {
