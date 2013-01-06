@@ -76,6 +76,8 @@ def match_error_to_subscriber(message):
         return False
     except TypeError:
         return False
+    except ValueError:
+        return False
     try:
         subscriber = Subscriber.objects.get(pk=subscriber_id)
     except ObjectDoesNotExist:
