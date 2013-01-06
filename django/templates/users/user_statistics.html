@@ -7,10 +7,6 @@
 {% if year %}{{ year }}{% endif %}
 {% endblock heading %}
 
-{% block javascript %}
-    <script type="text/javascript" src="{{ STATIC_URL }}bootstrap/js/bootstrap.min.js"></script>
-{% endblock javascript %}
-
 {% block content %}
 {% cache 500 users %}
 <table class="table"  >
