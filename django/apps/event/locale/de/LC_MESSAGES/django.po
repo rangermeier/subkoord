@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-06-10 15:36+0200\n"
+"POT-Creation-Date: 2013-01-06 15:59+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,23 +16,23 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: models.py:56
+#: models.py:55
 msgid "Title"
 msgstr "Titel"
 
-#: models.py:57
+#: models.py:56
 msgid "Date and Time"
 msgstr "Datum und Zeit"
 
-#: models.py:58
+#: models.py:57
 msgid "Type"
 msgstr "Typ"
 
-#: models.py:59
+#: models.py:58
 msgid "Depending on the type of the event different tasks will be available."
 msgstr "Durch den Typ der Veranstaltung ergeben sich die Dienste."
 
-#: models.py:60
+#: models.py:59
 msgid "Information"
 msgstr "Information"
 
