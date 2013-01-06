@@ -198,4 +198,4 @@ TINYMCE_DEFAULT_CONFIG = {
     'theme_advanced_toolbar_align' : "left",
     'theme_advanced_resizing' : 'true',
 }
-TINYMCE_COMPRESSOR = True
+TINYMCE_COMPRESSOR = False

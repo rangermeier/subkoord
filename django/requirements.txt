@@ -1,16 +1,16 @@
 DateUtils==0.5.2
-Django==1.4.1
+Django==1.4.3
 MySQL-python==1.2.3
 PIL==1.1.7
-South==0.7.5
+South==0.7.6
 -e git://github.com/earle/django-bootstrap.git@7761e0f03c4eae81efc350a5e06c973f2c7b704d#egg=bootstrap-dev
 distribute==0.6.24
 django-debug-toolbar==0.9.4
-django-filebrowser==3.5.0
-django-grappelli==2.4.0
-django-tinymce==1.5.1b2
+django-filebrowser==3.5.1
+django-grappelli==2.4.3
+django-tinymce==1.5.1b4
 python-dateutil==2.1
 pytz==2012c
-six==1.1.0
+six==1.2.0
 vobject==0.8.1c
 wsgiref==0.1.2
