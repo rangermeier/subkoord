@@ -67,7 +67,7 @@ class NewsletterTest(TestCase):
         self.assertTemplateUsed(r, "newsletter/subscribers_add.html")
 
         r = self.client.get('/newsletter/subscriber/1/', {})
-        self.assertContains(r, "<input id=\"id_email\" type=\"text\" name=\"email\"", 1, 200)
+        self.assertContains(r, "<input name=\"email\" ", 1, 200)
         self.assertTemplateUsed(r, "newsletter/subscriber.html")
 
     def test_model_subscriber(self):
