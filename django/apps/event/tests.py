@@ -46,6 +46,13 @@ class EventTest(TestCase):
         r = self.client.get('/event/1/', {})
         self.assertEqual(len(r.context["event"].jobs), 0)
 
+    def test_client_note(self):
+        self.client.login(username=EVENT_USER , password='test')
+        r = self.client.post('/event/1/note', {"note": "a remark"})
+        self.assertRedirects(r, "/event/1/")
+        r = self.client.get('/event/1/', {})
+        self.assertContains(r, "a remark", 1, 200)
+
     def test_model_properties(self):
         # event properties
         e = Event.objects.get(pk = 1)

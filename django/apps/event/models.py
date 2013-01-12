@@ -121,4 +121,6 @@ class EventForm(ModelForm):
         }
 
 class NoteForm(ModelForm):
-    note = forms.CharField()
+    class Meta:
+        model = Note
+        fields = ("note",)
