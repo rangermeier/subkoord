@@ -1,6 +1,6 @@
 from django.core.management.base import NoArgsCommand
 from django.conf import settings
-from subkoord.newsletter.models import Letter
+from newsletter.models import Letter
 
 class Command(NoArgsCommand):
     help = 'Send the newsletter queued in Letters'
