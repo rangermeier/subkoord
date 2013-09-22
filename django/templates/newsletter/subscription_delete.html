@@ -4,7 +4,7 @@
 {% block heading %}<h1>{% trans "Cancel Subscription " %}</h1>{% endblock heading %}
 
 {% block content %}
-<form action="{% url subscriber_public_delete subscriber.id token %}" method="post">
+<form action="{% url "subscriber_public_delete" subscriber.id token %}" method="post">
 {%  csrf_token  %}
 
 <p>{% blocktrans with email=subscriber.email_safe subscription=subscriber.subscription.name %}

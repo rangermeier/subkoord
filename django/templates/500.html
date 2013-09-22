@@ -9,8 +9,8 @@ Error 500 - Server error or misconfiguration
 {% block navigation %}
 <ul>
 	{% if user.is_authenticated %}
-		<li><a href="{% url event_index %}">{% trans "view events" %}</a></li>
-		<li><a href="{% url wiki_index %}">{% trans "Wiki" %}</a></li>
+		<li><a href="{% url "event_index" %}">{% trans "view events" %}</a></li>
+		<li><a href="{% url "wiki_index" %}">{% trans "Wiki" %}</a></li>
 		<li><a href="http://subterrarium.at">Subterrarium-Webseite</a></li>
 	{% else %}
 		<li><a href="http://subterrarium.at">Subterrarium-Webseite</a></li>

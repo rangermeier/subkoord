@@ -8,8 +8,8 @@
 {% endblock heading %}
 
 {% block navigation %}
-    <li><a href="{% url wiki_edit page.title %}">{% trans "edit" %}</a></li>
-    <li><a href="{% url wiki_new %}">{% trans "new page" %}</a></li>
+    <li><a href="{% url "wiki_edit" page.title %}">{% trans "edit" %}</a></li>
+    <li><a href="{% url "wiki_new" %}">{% trans "new page" %}</a></li>
 {% endblock navigation %}
 
 {% block content %}
@@ -23,7 +23,7 @@
             last edited by {{ author }}, <br /> {{ last_changed }}.
             {% endblocktrans %}</p>
             <p>{% blocktrans with page.title as title%}Wiki-link to this page: <code>[[{{ title }}]]</code>{% endblocktrans %}</p>
-            <p><a href="{% url wiki_edit page.title %}">{% trans "edit page" %}</a></p>
+            <p><a href="{% url "wiki_edit" page.title %}">{% trans "edit page" %}</a></p>
             {% if page.attachments.all %}
         </div>
         <h3>{% trans "Attachments" %}</h3>

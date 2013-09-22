@@ -1,9 +1,10 @@
 {% extends "base.html" %}
 {% load i18n %}
+{% load staticfiles %}
 
 {% block javascript %}
-    <link rel="stylesheet" type="text/css" media="screen" href="{{ STATIC_URL }}js/jquery/smoothness/jquery-ui-1.9.2.custom.min.css">
-    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery/jquery-ui-1.9.2.custom.min.js"></script>
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static "js/jquery/smoothness/jquery-ui-1.9.2.custom.min.css" %}">
+    <script type="text/javascript" src="{% static "js/jquery/jquery-ui-1.9.2.custom.min.js" %}"></script>
     <script type="text/javascript">
     $(document).ready(function() {
         if($("#id_date").length > 0) {

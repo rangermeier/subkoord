@@ -91,12 +91,12 @@ label {
 {% endblock heading %}
 
 {% block navigation %}
-    <li><a href="{% url message_new %}">{% trans "compose message" %}</a></li>
+    <li><a href="{% url "message_new" %}">{% trans "compose message" %}</a></li>
     <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">{% trans "Mailinglists" %} <b class="caret"></b></a>
         <ul class="dropdown-menu">
             {% for list in lists %}
-                <li><a href="{% url subscribers_list list.id %}">{{ list.name }}</a></li>
+                <li><a href="{% url "subscribers_list" list.id %}">{{ list.name }}</a></li>
             {% endfor %}
         </ul>
     </li>
@@ -106,7 +106,7 @@ label {
 
 {% block content %}
 
-<form action="{% url delete_error_mails %}" method="POST">{% csrf_token %}
+<form action="{% url "delete_error_mails" %}" method="POST">{% csrf_token %}
 
 {%if assigned_mails %}
 <div class="well">
@@ -155,15 +155,15 @@ Some e-mails <a href="#unassigned">can't be related to a subscriber</a>. These e
         <input type="checkbox" name="subscriber" value="{{ subscriber.grouper.id }}" id="checkbox-{{ subscriber.grouper.id }}"/>
         <label for="checkbox-{{ subscriber.grouper.id }}">{{ subscriber.grouper.email }}</label><br />
         {{ subscriber.grouper.date|date:"j. n. Y"}}<br />
-        <a href="{% url subscriber_delete subscriber.grouper.id %}" class="subscriber_delete">{% trans "delete Subscriber" %}</a>,
-        <a href="{% url subscriber subscriber.grouper.id %}">{% trans "edit" %}</a>
+        <a href="{% url "subscriber_delete" subscriber.grouper.id %}" class="subscriber_delete">{% trans "delete Subscriber" %}</a>,
+        <a href="{% url "subscriber" subscriber.grouper.id %}">{% trans "edit" %}</a>
     </div>
     <div class="mails span8">
     {% for mail in subscriber.list %}
         <div class="mail row-fluid">
             <div class="span7 email-subject"><input type="checkbox" name="message_id" value="{{ mail.message_id }}" />
                 <a href="#" class="email_details_toggle">{{ mail.subject }}</a>,
-                <a href="{% url delete_error_mail mail.msg_num %}" class="email_delete">{% trans "delete" %}</a></div>
+                <a href="{% url "delete_error_mail" mail.msg_num %}" class="email_delete">{% trans "delete" %}</a></div>
             <div class="span5 last email-date">{{ mail.date }}</div>
 
             <div class="span12 last email-details">
@@ -201,7 +201,7 @@ Some e-mails <a href="#unassigned">can't be related to a subscriber</a>. These e
         <div class="mail row-fluid">
             <div class="span7 email-subject"><input type="checkbox" name="message_id" value="{{ mail.message_id }}" />
                 <a href="#" class="email_details_toggle">{{ mail.subject }}</a>,
-                <a href="{% url delete_error_mail mail.msg_num %}" class="email_delete">{% trans "delete" %}</a></div>
+                <a href="{% url "delete_error_mail" mail.msg_num %}" class="email_delete">{% trans "delete" %}</a></div>
             <div class="span5 last email-date">{{ mail.date }}</div>
 
             <div class="span12 last email-details">

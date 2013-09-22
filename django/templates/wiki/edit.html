@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load wikitags %}
 {% load i18n %}
+{% load staticfiles %}
 {% load crispy_forms_tags %}
 
 
@@ -24,16 +25,16 @@ fieldset.fb_form a.fb_show:after {
 }
 {% endblock css %}
 {%block javascript %}
-<script type="text/javascript" src="{{ STATIC_URL }}filebrowser/js/AddFileBrowser.js"></script>
+<script type="text/javascript" src="{% static "filebrowser/js/AddFileBrowser.js" %}"></script>
 {{ form.media }}
 {% endblock javascript %}
 
 {% block navigation %}
     {%if page.title %}
-    <li><a href="{% url wiki_page page.title %}">{% trans "back" %}</a></li>
+    <li><a href="{% url "wiki_page" page.title %}">{% trans "back" %}</a></li>
     <li>
         <a href="#" class="wiki_delete">{% trans "Delete" %}</a>
-        <form action="{% url wiki_delete page.title %}" method="POST" class="hidden">
+        <form action="{% url "wiki_delete" page.title %}" method="POST" class="hidden">
         {% csrf_token %}
         </form>
     </li>
@@ -41,7 +42,7 @@ fieldset.fb_form a.fb_show:after {
 {% endblock navigation %}
 
 {% block contentcontainer %}
-<form action="{% url wiki_edit page.title %}" class="wiki-form form-horizontal" method="POST">
+<form action="{% url "wiki_edit" page.title %}" class="wiki-form form-horizontal" method="POST">
 
     {{ form|crispy }}
 

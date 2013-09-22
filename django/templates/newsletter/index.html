@@ -12,12 +12,12 @@
     <ul class="messages">
     {% for message in message_list %}
         <li class="{% if not message.locked %}active{% endif %}">{{ message.date|date:"D, j. N" }}
-        <a href="{% url message message.id %}">{{ message.subject }}</a>
+        <a href="{% url "message" message.id %}">{{ message.subject }}</a>
         {% if message.in_delivery %}
             <br />{% trans "now sending to" %}
             {% for job in message.active_jobs %}
                 {% if forloop.last and not forloop.first %}&nbsp;{% trans "and" %} {% else %}{% if not forloop.first %}, {% endif %}{% endif %}{{ job.to.name }}
-                <a href="{% url job job.id %}"><i class="icon-envelope" title="{% trans "status" %}"></i></a>
+                <a href="{% url "job" job.id %}"><i class="icon-envelope" title="{% trans "status" %}"></i></a>
             {% endfor %}
         {% endif %}
         {% if message.locked  and message.finished_jobs%}
@@ -30,7 +30,7 @@
     {% endfor %}
     </ul>
     <p>
-    <a href="{% url message_archive %}">{% trans "view all messages" %}</a><br />
+    <a href="{% url "message_archive" %}">{% trans "view all messages" %}</a><br />
     </p>
 </div>
 
@@ -39,8 +39,8 @@
     <ul class="lists">
     {% for list in lists %}
         <li>
-        <a href="{% url subscribers_list list.id %}" title="{% trans "view subscribers" %}">{{ list.name }}</a>
-        <a href="{% url subscribers_add list.id %}"><i class="icon-plus" title="{% trans "add subscribers" %}"></i></a>
+        <a href="{% url "subscribers_list" list.id %}" title="{% trans "view subscribers" %}">{{ list.name }}</a>
+        <a href="{% url "subscribers_add" list.id %}"><i class="icon-plus" title="{% trans "add subscribers" %}"></i></a>
         </li>
     {% endfor %}
     </ul>
@@ -48,7 +48,7 @@
     <ul class="subscribers">
     {% for subscriber in subscribers %}
         <li class="clear">{% if subscriber.name %}{{ subscriber.name }},{% endif %}
-        <a href="{% url subscriber subscriber.id %}">{{ subscriber.email }}</a>
+        <a href="{% url "subscriber" subscriber.id %}">{{ subscriber.email }}</a>
         <span class="inline-right">{{ subscriber.date|date:"j. N, H:i" }}</span>
         </li>
     {% endfor %}
@@ -59,6 +59,6 @@
 {% endblock content %}
 
 {% block navigation %}
-    <li><a href="{% url message_new %}">{% trans "compose message" %}</a></li>
-    <li><a href="{% url error_mailbox %}">{% trans "view error mailbox" %}</a></li>
+    <li><a href="{% url "message_new" %}">{% trans "compose message" %}</a></li>
+    <li><a href="{% url "error_mailbox" %}">{% trans "view error mailbox" %}</a></li>
 {% endblock navigation %}

@@ -22,7 +22,7 @@
     <tbody>
     {% for usr in user_list %}
     <tr>
-        <td><a href="{% url user_view usr.id %}">{{ usr.username }}</a></td>
+        <td><a href="{% url "user_view" usr.id %}">{{ usr.username }}</a></td>
         {% for task in tasks %}
             {% for stat in usr.stats %}
                 {% if stat.name == task.name %}
@@ -44,12 +44,12 @@
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">{% trans "year" %} <b class="caret"></b></a>
         <ul class="dropdown-menu">
             {% for y in years %}
-                <li><a href="{% url user_statistics_year y%}">{{ y }}</a></li>
+                <li><a href="{% url "user_statistics_year" y%}">{{ y }}</a></li>
             {% endfor %}
         </ul>
     </li>
     {% if usr.id != user.id %}
-        <li><a href="{% url user_view user.id %}">{% trans "view my profile" %}</a></li>
+        <li><a href="{% url "user_view" user.id %}">{% trans "view my profile" %}</a></li>
     {% endif %}
-        <li><a href="{% url user_change_password %}">{% trans "change my password" %}</a></li>
+        <li><a href="{% url "user_change_password" %}">{% trans "change my password" %}</a></li>
 {% endblock navigation %}

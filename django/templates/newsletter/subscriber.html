@@ -4,11 +4,11 @@
 
 
 {% block navigation %}
-    <li><a href="{% url subscribers_list subscriber.subscription.id %}">{% trans "Subscriber list" %}</a></li>
+    <li><a href="{% url "subscribers_list" subscriber.subscription.id %}">{% trans "Subscriber list" %}</a></li>
 {% endblock navigation %}
 
 {% block content %}
-<form action="{% url subscriber subscriber.id %}" method="post" class="event-form form-horizontal">
+<form action="{% url "subscriber" subscriber.id %}" method="post" class="event-form form-horizontal">
 {%  csrf_token  %}
     {{ form|crispy }}
 
@@ -18,7 +18,7 @@
     </div>
 
     <div class="form-actions">
-        <a class="btn subscriber-delete" href="{% url subscriber_delete subscriber.id %}">{% trans "delete" %}</a>
+        <a class="btn subscriber-delete" href="{% url "subscriber_delete" subscriber.id %}">{% trans "delete" %}</a>
         <button type="submit" class="btn btn-primary">{% trans "save" %}</button>
     </div>
 </form>

@@ -6,7 +6,7 @@
 
 {% for event in events %}
 <h3>{{ event.date|date:"D, j. n. Y, H:i" }} -
-    <a href="{{ site_url }}{% url event event.id %}">{{ event.title }}</a>
+    <a href="{{ site_url }}{% url "event" event.id %}">{{ event.title }}</a>
 </h3>
 <ul>
     {% for task in event.tasks %}
@@ -29,7 +29,7 @@
     {% endfor %}
     </ul>
 {% endif %}
-<p>URL:<a href="{{ site_url }}{% url event event.id %}">{{ site_url }}{% url event event.id %}</a></p>
+<p>URL:<a href="{{ site_url }}{% url "event" event.id %}">{{ site_url }}{% url "event" event.id %}</a></p>
 
 <hr />
 {% endfor %}

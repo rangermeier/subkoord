@@ -61,19 +61,17 @@ MEDIA_ROOT = '/home/.../media/'
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash if there is a path component (optional in other cases).
 # Examples: "http://media.lawrence.com", "http://example.com/media/"
-MEDIA_URL = 'http://domain.com/media/'
+MEDIA_URL = '/media/'
 
 
 SITE_URL = 'http://domain.com'
 
 # Static File configuration
 STATICFILES_DIRS = (
-    os.path.join(PROJECT_ROOT, "static/"),
+    os.path.join(PROJECT_ROOT, 'static/'),
 )
 
-STATIC_URL = 'http://domain.com/static/'
-
-STATIC_ROOT = '/home/.../public_html/media/'
+STATIC_URL = '/static/'
 
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
@@ -106,7 +104,7 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    os.path.join(PROJECT_ROOT, "templates"),
+    os.path.join(PROJECT_ROOT, 'templates'),
 )
 
 INSTALLED_APPS = (
@@ -124,16 +122,14 @@ INSTALLED_APPS = (
     'filebrowser',
     'django.contrib.admin',
     'django.contrib.messages',
-    'subkoord.event',
-    'subkoord.users',
-    'subkoord.wiki',
-    'subkoord.newsletter',
-    'subkoord.attachment',
+    'event',
+    'users',
+    'wiki',
+    'newsletter',
+    'attachment',
 )
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
-BACKUP_DIR = '/home/.../backup/'
 
 SITE_URL = 'http://127.0.0.1:8000'
 
@@ -186,7 +182,7 @@ GRAPPELLI_ADMIN_TITLE = "Admin"
 
 # TinyMCE
 TINYMCE_JS_URL = STATIC_URL+'/tiny_mce/tiny_mce_src.js'
-TINYMCE_JS_ROOT = STATIC_ROOT+'/tiny_mce'
+TINYMCE_JS_ROOT = os.path.join(PROJECT_ROOT, 'static/tiny_mce')
 TINYMCE_DEFAULT_CONFIG = {
     'plugins': "table,paste",
     'theme': "advanced",

@@ -19,13 +19,13 @@
 {% endblock jquery %}
 
 {% block navigation %}
-    <li><a href="{% url subscribers_list list.id %}">{% trans "view subscribers" %}</a></li>
-    <li><a href="{% url subscriber_add list.id %}">{% trans "public subscription form" %}</a></li>
-    <li><a href="{% url error_mailbox %}">{% trans "view error mailbox" %}</a></li>
+    <li><a href="{% url "subscribers_list" list.id %}">{% trans "view subscribers" %}</a></li>
+    <li><a href="{% url "subscriber_add" list.id %}">{% trans "public subscription form" %}</a></li>
+    <li><a href="{% url "error_mailbox" %}">{% trans "view error mailbox" %}</a></li>
 {% endblock navigation %}
 
 {% block content %}
-<form action="{% url subscribers_add list.id %}" method="post" class="subscribers-form">
+<form action="{% url "subscribers_add" list.id %}" method="post" class="subscribers-form">
 {%  csrf_token  %}
 {{ formset.management_form }}
 <table class="table">

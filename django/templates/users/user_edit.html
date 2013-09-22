@@ -2,7 +2,7 @@
 {% load i18n %}
 
 {% block content %}
-    <form action="{% url user_change_password %}" method="POST">
+    <form action="{% url "user_change_password" %}" method="POST">
     {%  csrf_token  %}
 
     {{ form }}
@@ -14,6 +14,6 @@
 {% endblock content %}
 
 {% block navigation %}
-    <li><a href="{% url user_list %}">{% trans "list all users" %}</a></li>
-    <li><a href="{% url user_view user.id %}">{% trans "view my profile" %}</a></li>
+    <li><a href="{% url "user_list" %}">{% trans "list all users" %}</a></li>
+    <li><a href="{% url "user_view" user.id %}">{% trans "view my profile" %}</a></li>
 {% endblock navigation %}

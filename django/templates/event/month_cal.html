@@ -13,12 +13,12 @@
         <tr>
         {% for day in week %}
             <td class="{% if not day.in_month %}cal_not_in_month{% endif %}{% if day.today%} today{% endif %}">
-                {% if day.future %}<a href="{% url event_new %}?date={{ day.day|date:"Y-m-d" }}" class="day_new_event {% if day.today%}label label-info{% endif %}" title="{% trans "add event with this date" %}">{{ day.day|date:"j" }}</a>
+                {% if day.future %}<a href="{% url "event_new" %}?date={{ day.day|date:"Y-m-d" }}" class="day_new_event {% if day.today%}label label-info{% endif %}" title="{% trans "add event with this date" %}">{{ day.day|date:"j" }}</a>
                 {% else %}{{ day.day|date:"j" }}
                 {% endif %}
                 {% if day.event %}
                 {% for event in day.events %}
-                    <a class="label{% if not event.all_tasks_satisfied and day.future %} label-warning{% elif event.all_tasks_satisfied and day.future%} label-success{% endif %}" href="{% url event event.id %}" title="{{ event.title }}" class="{% if day.future %}{% if event.all_tasks_satisfied %}{% else %}not-satisfied{% endif %}{% endif %}">{{ event.title }}</a>
+                    <a class="label{% if not event.all_tasks_satisfied and day.future %} label-warning{% elif event.all_tasks_satisfied and day.future%} label-success{% endif %}" href="{% url "event" event.id %}" title="{{ event.title }}" class="{% if day.future %}{% if event.all_tasks_satisfied %}{% else %}not-satisfied{% endif %}{% endif %}">{{ event.title }}</a>
                 {% endfor %}
                 {% endif %}
             </td>
@@ -29,16 +29,16 @@
 </table>
 <div class="row-fluid">
     <div class="span4">
-        <a href="{% url event_cal controls.previous_year, controls.previous_month %}">{% trans "previous month" %}</a>
+        <a href="{% url "event_cal" controls.previous_year controls.previous_month %}">{% trans "previous month" %}</a>
     </div>
     <div class="span4 centered">
         <select id="jumptomonth">
         {% for jt in controls.jumpto %}
-            <option value="{% url event_cal jt.year, jt.month %}"{% if controls.this_month.month == jt.month %} selected="selected"{% endif %}>{{ jt.year }} - {{ jt.month }}</option>
+            <option value="{% url "event_cal" jt.year jt.month %}"{% if controls.this_month.month == jt.month %} selected="selected"{% endif %}>{{ jt.year }} - {{ jt.month }}</option>
         {% endfor %}
         </select>
     </div>
     <div class="span4">
-        <a class="pull-right" href="{% url event_cal controls.next_year, controls.next_month %}">{% trans "next month" %}</a>
+        <a class="pull-right" href="{% url "event_cal" controls.next_year controls.next_month %}">{% trans "next month" %}</a>
     </div>
 </div>

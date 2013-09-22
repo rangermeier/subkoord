@@ -7,13 +7,13 @@
 {% endblock heading %}
 
 {% block navigation %}
-    <li><a href="{% url event event.id %}">{% trans "back" %}</a></li>
-    <li><a href="{% url event_delete event.id %}" class="event-delete">{% trans "delete event" %}</a></li>
-    <li><a href="{% url event_new %}">{% trans "add another event" %}</a></li>
+    <li><a href="{% url "event" event.id %}">{% trans "back" %}</a></li>
+    <li><a href="{% url "event_delete" event.id %}" class="event-delete">{% trans "delete event" %}</a></li>
+    <li><a href="{% url "event_new" %}">{% trans "add another event" %}</a></li>
 {% endblock navigation %}
 
 {% block content %}
-<form action="{% url event_edit event.id%}" method="post" class="event-form form-horizontal">
+<form action="{% url "event_edit" event.id%}" method="post" class="event-form form-horizontal">
 {%  csrf_token  %}
 
     {{ form|crispy }}

@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load i18n %}
+{% load staticfiles %}
 
 
 {% block heading %}
@@ -7,7 +8,7 @@
 {% endblock heading %}
 
 {% block javascript %}
-    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery/jquery.uitablefilter.js"></script>
+    <script type="text/javascript" src="{% static "js/jquery/jquery.uitablefilter.js" %}"></script>
 {% endblock javascript %}
 
 {% block jquery %}
@@ -32,17 +33,17 @@
 {% endblock jquery%}
 
 {% block navigation %}
-    <li><a href="{% url subscribers_add list.id %}">{% trans "add subscribers"%}</a></li>
-    <li><a href="{% url subscriber_add list.id %}">{% trans "public subscription form" %}</a></li>
+    <li><a href="{% url "subscribers_add" list.id %}">{% trans "add subscribers"%}</a></li>
+    <li><a href="{% url "subscriber_add" list.id %}">{% trans "public subscription form" %}</a></li>
     <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">{% trans "Mailinglists" %} <b class="caret"></b></a>
         <ul class="dropdown-menu">
             {% for list in lists %}
-                <li><a href="{% url subscribers_list list.id %}">{{ list.name }}</a></li>
+                <li><a href="{% url "subscribers_list" list.id %}">{{ list.name }}</a></li>
             {% endfor %}
         </ul>
     </li>
-    <li><a href="{% url error_mailbox %}">{% trans "view error mailbox" %}</a></li>
+    <li><a href="{% url "error_mailbox" %}">{% trans "view error mailbox" %}</a></li>
 {% endblock navigation %}
 
 {% block content %}
@@ -64,8 +65,8 @@
         <td>{{ subscriber.name }}</td>
         <td>{{ subscriber.date }}</td>
         <td>{% if not subscriber.confirmed %}<i class="icon-question-sign" title="{% trans "unconfirmed"%}"></i>{% endif %}</td>
-        <td><a href="{% url subscriber subscriber.id %}"><i class="icon-edit" title="{% trans "edit"%}"></i></a></td>
-        <td><a href="{% url subscriber_delete subscriber.id %}" class="subscriber-delete" id="subscriber-delete-{{subscriber.id}}"><i class="icon-remove" title="{% trans "delete"%}"></i></a></td>
+        <td><a href="{% url "subscriber" subscriber.id %}"><i class="icon-edit" title="{% trans "edit"%}"></i></a></td>
+        <td><a href="{% url "subscriber_delete" subscriber.id %}" class="subscriber-delete" id="subscriber-delete-{{subscriber.id}}"><i class="icon-remove" title="{% trans "delete"%}"></i></a></td>
     </tr>
 {% endfor %}
 </table>

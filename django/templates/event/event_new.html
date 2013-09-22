@@ -8,7 +8,7 @@
 
 
 {% block content %}
-<form action="{% url event_new %}" method="post" class="event-form form-horizontal">
+<form action="{% url "event_new" %}" method="post" class="event-form form-horizontal">
     {{ form|crispy }}
     {% csrf_token %}
     <div class="form-actions">

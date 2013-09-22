@@ -11,7 +11,7 @@
     <ul>
     {% for usr in user_list %}
         <li>
-        <a href="{% url user_view usr.id %}">{{ usr.username }}</a>
+        <a href="{% url "user_view" usr.id %}">{{ usr.username }}</a>
         </li>
     {% endfor %}
     </ul>
@@ -21,9 +21,9 @@
 
 {% block navigation %}
     {% if usr.id != user.id %}
-        <li><a href="{% url user_view user.id %}">{% trans "view my profile" %}</a></li>
+        <li><a href="{% url "user_view" user.id %}">{% trans "view my profile" %}</a></li>
     {% endif %}
-        <li><a href="{% url user_change_password %}">{% trans "change my password" %}</a></li>
-        <li><a href="{% url user_statistics %}">{% trans "statistics" %}</a></li>
+        <li><a href="{% url "user_change_password" %}">{% trans "change my password" %}</a></li>
+        <li><a href="{% url "user_statistics" %}">{% trans "statistics" %}</a></li>
 {% endblock navigation %}
 S

@@ -1,4 +1,5 @@
 # coding=utf-8
+import os
 from django import forms
 from django.forms import ModelForm
 from django.forms.models import modelformset_factory
@@ -14,7 +15,7 @@ class AttachmentForm(ModelForm):
         if len(file) == 0:
             return file
         try:
-            f = open("/".join([settings.MEDIA_ROOT, file]))
+            f = open(os.path.join(settings.MEDIA_ROOT, file))
             return file
         except IOError:
             raise forms.ValidationError(_(u'%s does not exist. Please choose another file or delete attachment.' % file))
