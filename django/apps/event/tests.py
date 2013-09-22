@@ -36,6 +36,7 @@ class EventTest(TestCase):
     def test_client_jobs(self):
         self.client.login(username=EVENT_USER , password='test')
         r = self.client.get('/event/1/', {})
+        self.assertEqual(r.status_code, 200)
         self.assertEqual(len(r.context["event"].jobs), 0)
         # take job
         r = self.client.get('/event/1/task/1/', {})
@@ -64,7 +65,7 @@ class EventTest(TestCase):
         self.assertTrue(not t.satisfied(e))
         self.assertTrue(not t.maxed_out(e))
 
-        u = User.objects.get(username = 'partyman')
+        u = User.objects.get(username = EVENT_USER)
         j1 = Job(event=e, user=u, task=t)
         self.assertEqual(len(e.jobs), 0)
         j1.save()
@@ -86,7 +87,3 @@ class EventTest(TestCase):
         self.assertEqual(len(e.jobs), 5)
         j2.delete()
         self.assertTrue(not e.all_tasks_satisfied)
-
-
-#__test__ = {"doctest": """
-#"""}

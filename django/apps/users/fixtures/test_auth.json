@@ -1,0 +1,180 @@
+[
+{
+    "pk": 1,
+    "model": "auth.group",
+    "fields": {
+      "name": "Newsletter",
+      "permissions": [
+        [
+          "add_job",
+          "newsletter",
+          "job"
+        ],
+        [
+          "change_job",
+          "newsletter",
+          "job"
+        ],
+        [
+          "delete_job",
+          "newsletter",
+          "job"
+        ],
+        [
+          "add_letter",
+          "newsletter",
+          "letter"
+        ],
+        [
+          "change_letter",
+          "newsletter",
+          "letter"
+        ],
+        [
+          "delete_letter",
+          "newsletter",
+          "letter"
+        ],
+        [
+          "add_list",
+          "newsletter",
+          "list"
+        ],
+        [
+          "change_list",
+          "newsletter",
+          "list"
+        ],
+        [
+          "delete_list",
+          "newsletter",
+          "list"
+        ],
+        [
+          "add_message",
+          "newsletter",
+          "message"
+        ],
+        [
+          "change_message",
+          "newsletter",
+          "message"
+        ],
+        [
+          "delete_message",
+          "newsletter",
+          "message"
+        ],
+        [
+          "add_subscriber",
+          "newsletter",
+          "subscriber"
+        ],
+        [
+          "change_subscriber",
+          "newsletter",
+          "subscriber"
+        ],
+        [
+          "delete_subscriber",
+          "newsletter",
+          "subscriber"
+        ]
+      ]
+    }
+  },
+  {
+    "pk": 1,
+    "model": "auth.user",
+    "fields": {
+      "username": "admin",
+      "first_name": "",
+      "last_name": "",
+      "is_active": true,
+      "is_superuser": true,
+      "is_staff": true,
+      "last_login": "2011-04-22T12:11:38",
+      "groups": [],
+      "user_permissions": [],
+      "password": "sha1$9def7$ac62b33d174d6ba716fa7d5fdf3b097be8fcd0fd",
+      "email": "",
+      "date_joined": "2010-12-19T15:53:23"
+    }
+  },
+  {
+    "pk": 2,
+    "model": "auth.user",
+    "fields": {
+      "username": "test",
+      "first_name": "",
+      "last_name": "",
+      "is_active": true,
+      "is_superuser": false,
+      "is_staff": false,
+      "last_login": "2011-04-24T16:08:49",
+      "groups": [],
+      "user_permissions": [],
+      "password": "sha1$0224f$7bf7d73be0eb1abf79b640104a3abca5d4e0e467",
+      "email": "",
+      "date_joined": "2010-12-19T15:53:23"
+    }
+  },
+  {
+    "pk": 3,
+    "model": "auth.user",
+    "fields": {
+      "username": "susi",
+      "first_name": "",
+      "last_name": "",
+      "is_active": true,
+      "is_superuser": false,
+      "is_staff": false,
+      "last_login": "2010-12-19T16:07:41",
+      "groups": [],
+      "user_permissions": [],
+      "password": "sha1$27175$502f09eaa9cd497adbaf0a1c82c7d83fa635ac59",
+      "email": "",
+      "date_joined": "2010-12-19T16:07:41"
+    }
+  },
+  {
+    "pk": 4,
+    "model": "auth.user",
+    "fields": {
+      "username": "letterman",
+      "first_name": "",
+      "last_name": "",
+      "is_active": true,
+      "is_superuser": false,
+      "is_staff": false,
+      "last_login": "2012-02-22T11:27:02",
+      "groups": [
+        [
+          "Newsletter"
+        ]
+      ],
+      "user_permissions": [],
+      "password": "pbkdf2_sha256$10000$iCn2i9u0CUhG$x2ii1G9TWRu66OChI+vRoIGwXh7CmcXpcy6Kn2DOOQY=",
+      "email": "",
+      "date_joined": "2010-12-19T16:42:31"
+    }
+  },
+  {
+    "pk": 5,
+    "model": "auth.user",
+    "fields": {
+      "username": "partyman",
+      "first_name": "",
+      "last_name": "",
+      "is_active": true,
+      "is_superuser": false,
+      "is_staff": false,
+      "last_login": "2011-12-24T10:05:03",
+      "groups": [],
+      "user_permissions": [],
+      "password": "sha1$9dfa3$f6283db0c0bdaf5efa7544a449e6fad4509cb150",
+      "email": "",
+      "date_joined": "2011-04-22T12:11:59"
+    }
+  }
+]

@@ -17,7 +17,7 @@ class UserTest(TestCase):
 
     def test_client_user_list(self):
         r = self.client.get('/user/', {})
-        self.assertEqual(len(r.context['user_list']), 4)
+        self.assertEqual(len(r.context['user_list']), 6)
         self.assertTemplateUsed(r,  "users/user_list.html")
 
     def test_client_user_single(self):
