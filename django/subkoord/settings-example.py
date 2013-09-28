@@ -66,6 +66,8 @@ MEDIA_URL = '/media/'
 
 SITE_URL = 'http://domain.com'
 
+ALLOWED_HOSTS = ["domain.com"]
+
 # Static File configuration
 STATICFILES_DIRS = (
     os.path.join(PROJECT_ROOT, 'static/'),
@@ -106,6 +108,8 @@ TEMPLATE_DIRS = (
     # Don't forget to use absolute paths, not relative paths.
     os.path.join(PROJECT_ROOT, 'templates'),
 )
+
+WSGI_APPLICATION = 'subkoord.wsgi.application'
 
 INSTALLED_APPS = (
     'django.contrib.auth',
