@@ -10,6 +10,7 @@ django-debug-toolbar==0.9.4
 django-filebrowser==3.5.2
 django-grappelli==2.4.6
 django-tinymce==1.5.1
+newrelic==2.0.0.1
 python-dateutil==2.1
 pytz==2013d
 six==1.4.1

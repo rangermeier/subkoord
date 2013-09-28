@@ -4,3 +4,4 @@
 settings.py
 fabfile.py
 venv
+newrelic.ini
