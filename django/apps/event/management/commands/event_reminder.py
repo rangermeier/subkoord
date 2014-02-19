@@ -10,7 +10,7 @@ class Command(NoArgsCommand):
     help = 'Check for open tasks and send e-mail if necessary'
     def handle_noargs(self, **options):
         remind_window = timedelta(hours=settings.EVENT_REMINDER_WINDOW)
-        remind_pause = timedelta(hours=settings.EVENT_REMINDER_WINDOW)
+        remind_pause = timedelta(hours=settings.EVENT_REMINDER_PAUSE)
         now = datetime.now()
         events = Event.objects.select_related(
             ).filter(date__gte = now
